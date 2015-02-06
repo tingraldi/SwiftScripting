@@ -1,68 +1,97 @@
 __author__ = 'tingraldi'
 
 import sys
-import os
+
+from clang.cindex import Index
+from clang.cindex import CursorKind
+from clang.cindex import Config
+
+
+Config.set_library_path("/Applications/Xcode.app//Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib")
+
+keywords = ['class', 'deinit', 'enum', 'extension', 'func', 'import', 'init', 'internal', 'let', 'operator', 'private',
+            'protocol', 'public', 'static', 'struct', 'subscript', 'typealias', 'var', 'break', 'case', 'continue',
+            'default', 'do', 'else', 'fallthrough', 'for', 'if', 'in', 'return', 'switch', 'where', 'while', 'as',
+            'dynamicType', 'false', 'is', 'nil', 'self', 'Self', 'super', 'true', 'associativity', 'convenience',
+            'dynamic', 'didSet', 'final', 'get', 'infix', 'inout', 'lazy', 'left', 'mutating', 'none', 'nonmutating',
+            'optional', 'override', 'postfix', 'precedence', 'prefix', 'Protocol', 'required', 'right', 'set', 'Type',
+            'unowned', 'weak', 'willSet']
 
 type_dict = {
-             "BOOL": "Bool",
-             "double": "Double",
-             "NSInteger": "Int",
-             "NSString *": "String"
+             'BOOL': 'Bool',
+             'double': 'Double',
+             'NSInteger': 'Int',
+             'NSString': 'String',
+             'id': 'AnyObject',
+             'NSArray': '[AnyObject]',
+             'NSDictionary': '[NSObject : AnyObject]'
             }
 
+
+def safe_name(name):
+    return '`{}`'.format(name) if name in keywords else name
+
 def type_for_type(objc_type):
-    parts = objc_type.split(" ")
-    if parts[0] == 'id':
-        mapped_type = 'Object!'
-    else:
-        mapped_type = type_dict.get(objc_type, parts[0])
-        if len(parts) > 1 and parts[1] == '*':
-            mapped_type += '!'
+    obj_type_string = objc_type.spelling.split(" ")[0]
+    mapped_type = type_dict.get(obj_type_string, obj_type_string)
+    if repr(objc_type.kind).startswith('TypeKind.OBJC'):
+        mapped_type += '!'
     return mapped_type
-
-from clang.cindex import Index, CursorKind
-
-print os.environ['LD_LIBRARY_PATH']
 
 class SBHeaderTranslator(object):
     def __init__(self, file_path):
         self.file_path = file_path
+        index = Index.create()
+        self.translation_unit = index.parse(self.file_path, args=['-ObjC'])
+
+    def emit_property(self, cursor):
+        tokens = self.translation_unit.get_tokens(extent=cursor.extent)
+        get_set = 'get set'
+        for word in (x.spelling for x in tokens):
+            if word == 'readonly':
+                get_set = 'get'
+        swift_type = type_for_type(cursor.type)
+        print('    optional var {}: {} {{ {} }}'.format(cursor.spelling, swift_type, get_set))
+
+    def emit_function(self, cursor, accessors):
+        if cursor.spelling not in accessors:
+            func_name = cursor.spelling.split(':')[0]
+            parameters = ['{}: {}'.format(safe_name(child.spelling), type_for_type(child.type)) for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
+            return_type = [child.type for child in cursor.get_children() if child.kind != CursorKind.PARM_DECL]
+            if return_type:
+                return_string = ' -> {}'.format(type_for_type(return_type[0]))
+            else:
+                return_string = ''
+            print('    optional func {}({}){}'.format(func_name, ", ".join(parameters), return_string))
 
     def emit_protocol(self, cursor):
         print('@objc protocol {} {{'.format(cursor.spelling))
         superclass = 'SBObject'
+        property_accessors = [child.spelling for child in cursor.get_children() if child.kind == CursorKind.OBJC_PROPERTY_DECL]
+        property_setters = ['set{}{}:'.format(getter[0].capitalize(), getter[1:]) for getter in property_accessors]
+        property_accessors += property_setters
         for child in cursor.get_children():
             if child.kind == CursorKind.OBJC_PROPERTY_DECL:
-                tokens = self.translation_unit.get_tokens(extent=child.extent)
-                get_set = 'get set'
-                for spelling in (x.spelling for x in tokens):
-                    if spelling == 'readonly':
-                        get_set = 'get'
-                swift_type = type_for_type(child.type.spelling)
-                print('optional var {}: {} {{ {} }}'.format(child.spelling, swift_type, get_set))
+                self.emit_property(child)
             elif child.kind == CursorKind.OBJC_INSTANCE_METHOD_DECL:
-                print('// optional func {} ->'.format(child.spelling))
-            elif child.kind == CursorKind.OBJC_SUPER_CLASS_REF and child.spelling.startswith("SB"):
+                self.emit_function(child, property_accessors)
+            elif child.kind == CursorKind.OBJC_SUPER_CLASS_REF and child.spelling.startswith('SB'):
                 superclass = child.spelling
-        print("}")
+        print('}')
         print('extension {} : {} {{}}\n'.format(superclass, cursor.spelling))
 
     def walk(self, cursor):
-        for child in cursor.get_children():
-            if child.location.file and child.location.file.name == self.file_path:
-                if child.kind in (CursorKind.OBJC_INTERFACE_DECL, CursorKind.OBJC_CATEGORY_DECL):
-                    self.emit_protocol(child)
-                else:
-                    self.walk(child)
+        local_children = [child for child in cursor.get_children() if child.location.file and child.location.file.name == self.file_path]
+        for child in local_children:
+            if child.kind in (CursorKind.OBJC_INTERFACE_DECL, CursorKind.OBJC_CATEGORY_DECL):
+                self.emit_protocol(child)
 
     def translate(self):
-        index = Index.create()
-        self.translation_unit = index.parse(self.file_path, args=["-ObjC"])
         for inclusion in self.translation_unit.get_includes():
             if inclusion.depth == 1:
                 include = inclusion.include.name
                 file_name = include.split("/")[-1]
-                print("import {}".format(file_name.split(".")[0]))
+                print('import {}'.format(file_name.split('.')[0]))
         print("")
         cursor = self.translation_unit.cursor
         self.walk(cursor)
