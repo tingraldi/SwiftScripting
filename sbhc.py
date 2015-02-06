@@ -2,7 +2,7 @@ __author__ = 'tingraldi'
 
 import sys
 
-from clang.cindex import Index
+from clang.cindex import TranslationUnit
 from clang.cindex import CursorKind
 from clang.cindex import Config
 
@@ -38,11 +38,19 @@ def type_for_type(objc_type):
         mapped_type += '!'
     return mapped_type
 
+
 class SBHeaderTranslator(object):
     def __init__(self, file_path):
         self.file_path = file_path
-        index = Index.create()
-        self.translation_unit = index.parse(self.file_path, args=['-ObjC'])
+        id = open(file_path)
+        self.lines = id.readlines()
+        id.close()
+        self.translation_unit = TranslationUnit.from_source(file_path, args=["-ObjC"])
+
+    def line_comment(self, cursor):
+        line = self.lines[cursor.location.line - 1]
+        parts = line.strip().split('//')
+        return ' //{}'.format(parts[1]) if len(parts) == 2 else ''
 
     def emit_property(self, cursor):
         tokens = self.translation_unit.get_tokens(extent=cursor.extent)
@@ -51,7 +59,7 @@ class SBHeaderTranslator(object):
             if word == 'readonly':
                 get_set = 'get'
         swift_type = type_for_type(cursor.type)
-        print('    optional var {}: {} {{ {} }}'.format(cursor.spelling, swift_type, get_set))
+        print('    optional var {}: {} {{ {} }}{}'.format(cursor.spelling, swift_type, get_set, self.line_comment(cursor)))
 
     def emit_function(self, cursor, accessors):
         if cursor.spelling not in accessors:
@@ -62,7 +70,7 @@ class SBHeaderTranslator(object):
                 return_string = ' -> {}'.format(type_for_type(return_type[0]))
             else:
                 return_string = ''
-            print('    optional func {}({}){}'.format(func_name, ", ".join(parameters), return_string))
+            print('    optional func {}({}){}{}'.format(func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
         print('@objc protocol {} {{'.format(cursor.spelling))
