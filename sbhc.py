@@ -38,28 +38,47 @@ def type_for_type(objc_type):
         mapped_type += '!'
     return mapped_type
 
+def name_from_path(path):
+    last_part = path.split("/")[-1]
+    return last_part.split('.')[0]
 
-class SBHeaderTranslator(object):
+
+class SBHeaderProcessor(object):
+    swift_file = None
+
     def __init__(self, file_path):
         self.file_path = file_path
-        id = open(file_path)
-        self.lines = id.readlines()
-        id.close()
-        self.translation_unit = TranslationUnit.from_source(file_path, args=["-ObjC"])
+        fid = open(file_path)
+        self.lines = fid.readlines()
+        fid.close()
+        self.app_name = name_from_path(file_path)
 
     def line_comment(self, cursor):
         line = self.lines[cursor.location.line - 1]
         parts = line.strip().split('//')
         return ' //{}'.format(parts[1]) if len(parts) == 2 else ''
 
+    def emit_enums(self):
+        enum_file = open('{}Enums.h'.format(self.app_name), 'w')
+        typedefs = [line for line in self.lines if line.startswith('typedef')]
+        class_lines = [line for line in self.lines if line.startswith(('@class'))]
+        start_line_index = self.lines.index(class_lines[-1]) + 1
+        last_typedef_line_index = self.lines.index(typedefs[-1]) + 1
+        for index in xrange(start_line_index, last_typedef_line_index):
+            enum_file.write(self.lines[index])
+        enum_file.close()
+
+    def emit_line(self, line):
+        self.swift_file.write(line + '\n')
+
     def emit_property(self, cursor):
-        tokens = self.translation_unit.get_tokens(extent=cursor.extent)
+        tokens = cursor.translation_unit.get_tokens(extent=cursor.extent)
         get_set = 'get set'
         for word in (x.spelling for x in tokens):
             if word == 'readonly':
                 get_set = 'get'
         swift_type = type_for_type(cursor.type)
-        print('    optional var {}: {} {{ {} }}{}'.format(cursor.spelling, swift_type, get_set, self.line_comment(cursor)))
+        self.emit_line('    optional var {}: {} {{ {} }}{}'.format(cursor.spelling, swift_type, get_set, self.line_comment(cursor)))
 
     def emit_function(self, cursor, accessors):
         if cursor.spelling not in accessors:
@@ -70,10 +89,10 @@ class SBHeaderTranslator(object):
                 return_string = ' -> {}'.format(type_for_type(return_type[0]))
             else:
                 return_string = ''
-            print('    optional func {}({}){}{}'.format(func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
+            self.emit_line('    optional func {}({}){}{}'.format(func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
-        print('@objc protocol {} {{'.format(cursor.spelling))
+        self.emit_line('@objc protocol {} {{'.format(cursor.spelling))
         superclass = 'SBObject'
         property_accessors = [child.spelling for child in cursor.get_children() if child.kind == CursorKind.OBJC_PROPERTY_DECL]
         property_setters = ['set{}{}:'.format(getter[0].capitalize(), getter[1:]) for getter in property_accessors]
@@ -85,8 +104,8 @@ class SBHeaderTranslator(object):
                 self.emit_function(child, property_accessors)
             elif child.kind == CursorKind.OBJC_SUPER_CLASS_REF and child.spelling.startswith('SB'):
                 superclass = child.spelling
-        print('}')
-        print('extension {} : {} {{}}\n'.format(superclass, cursor.spelling))
+        self.emit_line('}')
+        self.emit_line('extension {} : {} {{}}\n'.format(superclass, cursor.spelling))
 
     def walk(self, cursor):
         local_children = [child for child in cursor.get_children() if child.location.file and child.location.file.name == self.file_path]
@@ -94,20 +113,23 @@ class SBHeaderTranslator(object):
             if child.kind in (CursorKind.OBJC_INTERFACE_DECL, CursorKind.OBJC_CATEGORY_DECL):
                 self.emit_protocol(child)
 
-    def translate(self):
-        for inclusion in self.translation_unit.get_includes():
+    def emit_swift(self):
+        translation_unit = TranslationUnit.from_source(self.file_path, args=["-ObjC"])
+        self.swift_file = open('{}.swift'.format(self.app_name), 'w')
+        for inclusion in translation_unit.get_includes():
             if inclusion.depth == 1:
                 include = inclusion.include.name
-                file_name = include.split("/")[-1]
-                print('import {}'.format(file_name.split('.')[0]))
-        print("")
-        cursor = self.translation_unit.cursor
+                self.emit_line('import {}'.format(name_from_path(include)))
+        self.emit_line("")
+        cursor = translation_unit.cursor
         self.walk(cursor)
+        self.swift_file.close()
 
 
 def main(file_path):
-    header_translator = SBHeaderTranslator(file_path)
-    header_translator.translate()
+    header_processor = SBHeaderProcessor(file_path)
+    header_processor.emit_swift()
+    header_processor.emit_enums()
 
 
 if __name__ == '__main__':
