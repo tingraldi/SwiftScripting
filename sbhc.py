@@ -32,10 +32,7 @@ def safe_name(name):
 
 def type_for_type(objc_type):
     obj_type_string = objc_type.spelling.split(" ")[0]
-    mapped_type = type_dict.get(obj_type_string, obj_type_string)
-    if repr(objc_type.kind).startswith('TypeKind.OBJC'):
-        mapped_type += '!'
-    return mapped_type
+    return type_dict.get(obj_type_string, obj_type_string)
 
 
 def name_from_path(path):
@@ -95,7 +92,7 @@ class SBHeaderProcessor(object):
                 func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
-        self.emit_line('@objc protocol {} {{'.format(cursor.spelling))
+        self.emit_line('@objc public protocol {} {{'.format(cursor.spelling))
         superclass = 'SBObject'
         property_accessors = [child.spelling for child in cursor.get_children()
                               if child.kind == CursorKind.OBJC_PROPERTY_DECL]
