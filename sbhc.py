@@ -19,11 +19,14 @@ keywords = ['class', 'deinit', 'enum', 'extension', 'func', 'import', 'init', 'i
 
 type_dict = {'BOOL': 'Bool',
              'double': 'Double',
+             'long': 'Int64',
+             'int': 'Int',
              'NSInteger': 'Int',
              'NSString': 'String',
              'id': 'AnyObject',
              'NSArray': '[AnyObject]',
-             'NSDictionary': '[NSObject : AnyObject]'}
+             'NSDictionary': '[NSObject : AnyObject]',
+             'SEL': 'Selector'}
 
 
 def safe_name(name):
