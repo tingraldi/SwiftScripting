@@ -33,9 +33,12 @@ def safe_name(name):
     return '`{}`'.format(name) if name in keywords else name
 
 
-def type_for_type(objc_type):
+def type_for_type(objc_type, as_arg=False):
     obj_type_string = objc_type.spelling.split(" ")[0]
-    return type_dict.get(obj_type_string, obj_type_string)
+    mapped_type = type_dict.get(obj_type_string, obj_type_string)
+    if as_arg and repr(objc_type.kind).startswith('TypeKind.OBJC'):
+        mapped_type += '!'
+    return mapped_type
 
 
 def name_from_path(path):
@@ -84,7 +87,7 @@ class SBHeaderProcessor(object):
     def emit_function(self, cursor, accessors):
         if cursor.spelling not in accessors:
             func_name = cursor.spelling.split(':')[0]
-            parameters = ['{}: {}'.format(safe_name(child.spelling), type_for_type(child.type))
+            parameters = ['{}: {}'.format(safe_name(child.spelling), type_for_type(child.type, as_arg=True))
                           for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
             return_type = [child.type for child in cursor.get_children() if child.kind != CursorKind.PARM_DECL]
             if return_type:
@@ -95,6 +98,7 @@ class SBHeaderProcessor(object):
                 func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
+        self.emit_line('// MARK: {}'.format(cursor.spelling))
         self.emit_line('@objc public protocol {} {{'.format(cursor.spelling))
         superclass = 'SBObject'
         property_accessors = [child.spelling for child in cursor.get_children()
