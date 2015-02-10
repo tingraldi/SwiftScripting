@@ -2,6 +2,8 @@
 
 import sys
 
+from itertools import chain
+
 from clang.cindex import TranslationUnit
 from clang.cindex import CursorKind
 from clang.cindex import Config
@@ -58,6 +60,7 @@ class SBHeaderProcessor(object):
         self.lines = fid.readlines()
         fid.close()
         self.app_name = name_from_path(file_path)
+        self.category_dict = {}
 
     def line_comment(self, cursor):
         line = self.lines[cursor.location.line - 1]
@@ -87,43 +90,46 @@ class SBHeaderProcessor(object):
         self.emit_line('    optional var {}: {} {{ {} }}{}'.format(cursor.spelling, swift_type, get_set,
                                                                    self.line_comment(cursor)))
 
-    def emit_function(self, cursor, accessors):
-        if cursor.spelling not in accessors:
-            func_name = cursor.spelling.split(':')[0]
-            parameters = ['{}: {}'.format(safe_name(child.spelling), type_for_type(child.type, as_arg=True))
-                          for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
-            return_type = [child.type for child in cursor.get_children() if child.kind != CursorKind.PARM_DECL]
-            if return_type:
-                return_string = ' -> {}'.format(type_for_type(return_type[0]))
-            else:
-                return_string = ''
-            self.emit_line('    optional func {}({}){}{}'.format(
-                func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
+    def emit_function(self, cursor):
+        func_name = cursor.spelling.split(':')[0]
+        parameters = ['{}: {}'.format(safe_name(child.spelling), type_for_type(child.type, as_arg=True))
+                      for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
+        return_type = [child.type for child in cursor.get_children() if child.kind != CursorKind.PARM_DECL]
+        if return_type:
+            return_string = ' -> {}'.format(type_for_type(return_type[0]))
+        else:
+            return_string = ''
+        self.emit_line('    optional func {}({}){}{}'.format(
+            func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
         self.emit_line('// MARK: {}'.format(cursor.spelling))
         self.emit_line('@objc public protocol {} {{'.format(cursor.spelling))
         superclass = 'SBObject'
-        property_accessors = [child.spelling for child in cursor.get_children()
+        property_getters = [child.spelling for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, []))
                               if child.kind == CursorKind.OBJC_PROPERTY_DECL]
-        property_setters = ['set{}{}:'.format(getter[0].capitalize(), getter[1:]) for getter in property_accessors]
-        property_accessors += property_setters
-        for child in cursor.get_children():
-            if child.kind == CursorKind.OBJC_PROPERTY_DECL:
+        property_setters = ['set{}{}:'.format(getter[0].capitalize(), getter[1:]) for getter in property_getters]
+        function_list = property_getters + property_setters
+        emitted_properties = []
+        for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, [])):
+            if child.kind == CursorKind.OBJC_PROPERTY_DECL and child.spelling not in emitted_properties:
                 self.emit_property(child)
-            elif child.kind == CursorKind.OBJC_INSTANCE_METHOD_DECL:
-                self.emit_function(child, property_accessors)
+                emitted_properties.append(child.spelling)
+            elif child.kind == CursorKind.OBJC_INSTANCE_METHOD_DECL and child.spelling not in function_list:
+                self.emit_function(child)
+                function_list.append(child.spelling)
             elif child.kind == CursorKind.OBJC_SUPER_CLASS_REF and child.spelling.startswith('SB'):
                 superclass = child.spelling
         self.emit_line('}')
         self.emit_line('extension {} : {} {{}}\n'.format(superclass, cursor.spelling))
 
-    def walk(self, cursor):
-        local_children = [child for child in cursor.get_children()
-                          if child.location.file and child.location.file.name == self.file_path]
-        for child in local_children:
-            if child.kind in (CursorKind.OBJC_INTERFACE_DECL, CursorKind.OBJC_CATEGORY_DECL):
-                self.emit_protocol(child)
+    def gather_categories(self, categories):
+        for category in categories:
+            children = [child for child in category.get_children() if child.kind != CursorKind.OBJC_CLASS_REF]
+            class_item = [child for child in category.get_children() if child.kind == CursorKind.OBJC_CLASS_REF][0]
+            key = class_item.spelling
+            category_items = self.category_dict.get(key, [])
+            self.category_dict[key] = category_items + children
 
     def emit_swift(self):
         translation_unit = TranslationUnit.from_source(self.file_path, args=["-ObjC"])
@@ -134,7 +140,12 @@ class SBHeaderProcessor(object):
                 self.emit_line('import {}'.format(name_from_path(include)))
         self.emit_line("")
         cursor = translation_unit.cursor
-        self.walk(cursor)
+        local_children = [child for child in cursor.get_children()
+                  if child.location.file and child.location.file.name == self.file_path]
+        categories = [child for child in local_children if child.kind == CursorKind.OBJC_CATEGORY_DECL]
+        self.gather_categories(categories)
+        for child in [child for child in local_children if child.kind == CursorKind.OBJC_INTERFACE_DECL]:
+            self.emit_protocol(child)
         self.swift_file.close()
 
 
