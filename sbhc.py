@@ -5,6 +5,7 @@ import sys
 from clang.cindex import TranslationUnit
 from clang.cindex import CursorKind
 from clang.cindex import Config
+from clang.cindex import TypeKind
 
 
 Config.set_library_path("/Applications/Xcode.app//Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib")
@@ -28,6 +29,8 @@ type_dict = {'BOOL': 'Bool',
              'NSDictionary': '[NSObject : AnyObject]',
              'SEL': 'Selector'}
 
+object_kinds = [TypeKind.OBJCID, TypeKind.OBJCOBJECTPOINTER]
+
 
 def safe_name(name):
     return '`{}`'.format(name) if name in keywords else name
@@ -36,7 +39,7 @@ def safe_name(name):
 def type_for_type(objc_type, as_arg=False):
     obj_type_string = objc_type.spelling.split(" ")[0]
     mapped_type = type_dict.get(obj_type_string, obj_type_string)
-    if as_arg and repr(objc_type.kind).startswith('TypeKind.OBJC'):
+    if as_arg and objc_type.kind in object_kinds:
         mapped_type += '!'
     return mapped_type
 
