@@ -33,6 +33,17 @@ type_dict = {'BOOL': 'Bool',
 
 object_kinds = [TypeKind.OBJCID, TypeKind.OBJCOBJECTPOINTER]
 
+base_protocols = """
+@objc public protocol SBObjectProtocol: NSObjectProtocol {
+    func get() -> AnyObject!
+}
+
+@objc public protocol SBApplicationProtocol: SBObjectProtocol {
+    func activate()
+    var delegate: SBApplicationDelegate! { get set }
+}
+"""
+
 
 def safe_name(name):
     name = name.rstrip('_')
@@ -106,7 +117,7 @@ class SBHeaderProcessor(object):
     def emit_protocol(self, cursor):
         superclass = [child.spelling for child in cursor.get_children() if child.kind == CursorKind.OBJC_SUPER_CLASS_REF][0]
         extension_class = superclass if superclass.startswith('SB') else 'SBObject'
-        super_protocol = superclass if not superclass.startswith('SB') else 'NSOBjectProtocol'
+        super_protocol = superclass if not superclass.startswith('SB') else '{}Protocol'.format(superclass)
         protocol_name = cursor.spelling
         self.emit_line('// MARK: {}'.format(cursor.spelling))
         self.emit_line('@objc public protocol {}: {} {{'.format(protocol_name, super_protocol))
@@ -140,7 +151,7 @@ class SBHeaderProcessor(object):
             if inclusion.depth == 1:
                 include = inclusion.include.name
                 self.emit_line('import {}'.format(name_from_path(include)))
-        self.emit_line("")
+        self.emit_line(base_protocols)
         cursor = translation_unit.cursor
         local_children = [child for child in cursor.get_children()
                   if child.location.file and child.location.file.name == self.file_path]
