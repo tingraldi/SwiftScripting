@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="Acorn Terminology">
+	<suite name="Standard Suite" code="????" description="Common classes and commands for all applications.">
+		<enumeration name="save options" code="savo">
+			<enumerator name="yes" code="yes " description="Save the file."/>
+			<enumerator name="no" code="no  " description="Do not save the file."/>
+			<enumerator name="ask" code="ask " description="Ask the user whether or not to save the file."/>
+		</enumeration>
+		<enumeration name="printing error handling" code="enum">
+			<enumerator name="standard" code="lwst" description="Standard PostScript error handling">
+				<cocoa boolean-value="NO"/>
+			</enumerator>
+			<enumerator name="detailed" code="lwdt" description="print a detailed report of PostScript errors">
+				<cocoa boolean-value="YES"/>
+			</enumerator>
+		</enumeration>
+		<record-type name="print settings" code="pset">
+			<property name="copies" code="lwcp" description="The number of copies of a document to be printed" type="integer">
+				<cocoa key="NSCopies"/>
+			</property>
+			<property name="collating" code="lwcl" description="Should printed copies be collated?" type="boolean">
+				<cocoa key="NSMustCollate"/>
+			</property>
+			<property name="starting page" code="lwfp" description="The first page of the document to be printed" type="integer">
+				<cocoa key="NSFirstPage"/>
+			</property>
+			<property name="ending page" code="lwlp" description="The last page of the document to be printed" type="integer">
+				<cocoa key="NSLastPage"/>
+			</property>
+			<property name="pages across" code="lwla" description="Number of logical pages laid across a physical page" type="integer">
+				<cocoa key="NSPagesAcross"/>
+			</property>
+			<property name="pages down" code="lwld" description="Number of logical pages laid out down a physical page" type="integer">
+				<cocoa key="NSPagesDown"/>
+			</property>
+			<property name="requested print time" code="lwqt" description="The time at which the desktop printer should print the document" type="date">
+				<cocoa key="NSPrintTime"/>
+			</property>
+			<property name="error handling" code="lweh" description="How errors are handled" type="printing error handling">
+				<cocoa key="NSDetailedErrorReporting"/>
+			</property>
+			<property name="fax number" code="faxn" description="For fax number" type="text">
+				<cocoa key="NSFaxNumber"/>
+			</property>
+			<property name="target printer" code="trpr" description="For target printer" type="text">
+				<cocoa key="NSPrinterName"/>
+			</property>
+		</record-type>
+		<class name="application" code="capp" description="The application&apos;s top-level scripting object.">
+			<cocoa class="NSApplication"/>
+			<element type="document">
+				<cocoa key="orderedDocuments"/>
+			</element>
+			<element type="window" access="r">
+				<cocoa key="orderedWindows"/>
+			</element>
+			<property name="name" code="pnam" description="The name of the application." type="text" access="r"/>
+			<property name="frontmost" code="pisf" description="Is this the active application?" type="boolean" access="r">
+				<cocoa key="isActive"/>
+			</property>
+			<property name="version" code="vers" description="The version number of the application." type="text" access="r"/>
+			<responds-to command="open">
+				<cocoa method="handleOpenScriptCommand:"/>
+			</responds-to>
+			<responds-to command="print">
+				<cocoa method="handlePrintScriptCommand:"/>
+			</responds-to>
+			<responds-to command="quit">
+				<cocoa method="handleQuitScriptCommand:"/>
+			</responds-to>
+			<responds-to command="taunt">
+				<cocoa method="handleTauntScriptCommand:"/>
+			</responds-to>
+			<responds-to command="do JavaScript">
+				<cocoa method="scriptingDoJavaScript:"/>
+			</responds-to>
+			<responds-to command="set preference">
+				<cocoa method="scriptingSetPref:"/>
+			</responds-to>
+		</class>
+		<class name="window" code="cwin" description="A window.">
+			<cocoa class="NSWindow"/>
+			<property name="name" code="pnam" description="The title of the window." type="text" access="r">
+				<cocoa key="title"/>
+			</property>
+			<property name="id" code="ID  " description="The unique identifier of the window." type="integer" access="r">
+				<cocoa key="uniqueID"/>
+			</property>
+			<property name="index" code="pidx" description="The index of the window, ordered front to back." type="integer">
+				<cocoa key="orderedIndex"/>
+			</property>
+			<property name="closeable" code="hclb" description="Does the window have a close button?" type="boolean" access="r">
+				<cocoa key="hasCloseBox"/>
+			</property>
+			<property name="miniaturizable" code="ismn" description="Does the window have a minimize button?" type="boolean" access="r">
+				<cocoa key="isMiniaturizable"/>
+			</property>
+			<property name="miniaturized" code="pmnd" description="Is the window minimized right now?" type="boolean">
+				<cocoa key="isMiniaturized"/>
+			</property>
+			<property name="resizable" code="prsz" description="Can the window be resized?" type="boolean" access="r">
+				<cocoa key="isResizable"/>
+			</property>
+			<property name="visible" code="pvis" description="Is the window visible right now?" type="boolean">
+				<cocoa key="isVisible"/>
+			</property>
+			<property name="zoomable" code="iszm" description="Does the window have a zoom button?" type="boolean" access="r">
+				<cocoa key="isZoomable"/>
+			</property>
+			<property name="zoomed" code="pzum" description="Is the window zoomed right now?" type="boolean">
+				<cocoa key="isZoomed"/>
+			</property>
+			<property name="document" code="docu" description="The document whose contents are displayed in the window." type="document" access="r"/>
+			<responds-to command="close">
+				<cocoa method="handleCloseScriptCommand:"/>
+			</responds-to>
+			<responds-to command="print">
+				<cocoa method="handlePrintScriptCommand:"/>
+			</responds-to>
+			<responds-to command="save">
+				<cocoa method="handleSaveScriptCommand:"/>
+			</responds-to>
+		</class>
+		<command name="open" code="aevtodoc" description="Open a document.">
+			<direct-parameter description="The file(s) to be opened, as a file Alias or String">
+				<type type="file" list="yes"/>
+			</direct-parameter>
+		</command>
+		<command name="close" code="coreclos" description="Close a document.">
+			<cocoa class="NSCloseCommand"/>
+			<direct-parameter description="the document(s) or window(s) to close." type="specifier"/>
+			<parameter name="saving" code="savo" description="Should changes be saved before closing?" type="save options" optional="yes">
+				<cocoa key="SaveOptions"/>
+			</parameter>
+			<parameter name="saving in" code="kfil" description="The file in which to save the document, if so." type="file" optional="yes">
+				<cocoa key="File"/>
+			</parameter>
+		</command>
+		<command name="save" code="coresave" description="Save a document.  You can use this to rename a document as well.">
+			<direct-parameter description="The document(s) or window(s) to save." type="specifier"/>
+			<parameter name="in" code="kfil" description="The file in which to save the document as a file alias or posix path." type="file" optional="yes">
+				<cocoa key="File"/>
+			</parameter>
+			<parameter name="as" code="fltp" description="The file format to use." type="saveable file format" optional="yes">
+				<cocoa key="FileType"/>
+			</parameter>
+		</command>
+		<command name="print" code="aevtpdoc" description="Print a document.">
+			<direct-parameter description="The file(s), document(s), or window(s) to be printed.">
+				<type type="file" list="yes"/>
+				<type type="specifier"/>
+			</direct-parameter>
+			<parameter name="with properties" code="prdt" description="The print settings to use." type="print settings" optional="yes">
+				<cocoa key="PrintSettings"/>
+			</parameter>
+			<parameter name="print dialog" code="pdlg" description="Should the application show the print dialog?" type="boolean" optional="yes">
+				<cocoa key="ShowPrintDialog"/>
+			</parameter>
+		</command>
+		<command name="quit" code="aevtquit" description="Quit the application.">
+			<cocoa class="NSQuitCommand"/>
+			<parameter name="saving" code="savo" description="Should changes be saved before quitting?" type="save options" optional="yes">
+				<cocoa key="SaveOptions"/>
+			</parameter>
+		</command>
+		<command name="count" code="corecnte" description="Return the number of elements of a particular class within an object.">
+			<cocoa class="NSCountCommand"/>
+			<direct-parameter description="The objects to be counted." type="specifier"/>
+			<parameter hidden="yes" name="each" code="kocl" description="The class of objects to be counted." type="type" optional="yes">
+				<cocoa key="ObjectClass"/>
+			</parameter>
+			<result description="The count." type="integer"/>
+		</command>
+		<command name="delete" code="coredelo" description="Delete an object.">
+			<cocoa class="NSDeleteCommand"/>
+			<direct-parameter description="The object(s) to delete." type="specifier"/>
+		</command>
+		<command name="duplicate" code="coreclon" description="Copy an object.">
+			<cocoa class="NSCloneCommand"/>
+			<direct-parameter description="The object(s) to copy." type="specifier"/>
+			<parameter name="to" code="insh" description="The location for the new copy or copies." type="location specifier" optional="yes">
+				<cocoa key="ToLocation"/>
+			</parameter>
+			<parameter name="with properties" code="prdt" description="Properties to set in the new copy or copies right away." type="record" optional="yes">
+				<cocoa key="WithProperties"/>
+			</parameter>
+		</command>
+		<command name="exists" code="coredoex" description="Verify that an object exists.">
+			<cocoa class="NSExistsCommand"/>
+			<direct-parameter description="The object(s) to check." type="any"/>
+			<result description="Did the object(s) exist?" type="boolean"/>
+		</command>
+		<command name="make" code="corecrel" description="Create a new object.">
+			<cocoa class="NSCreateCommand"/>
+			<parameter name="new" code="kocl" description="The class of the new object." type="type">
+				<cocoa key="ObjectClass"/>
+			</parameter>
+			<parameter name="at" code="insh" description="The location at which to insert the object." type="location specifier" optional="yes">
+				<cocoa key="Location"/>
+			</parameter>
+			<parameter name="with data" code="data" description="The initial contents of the object." type="any" optional="yes">
+				<cocoa key="ObjectData"/>
+			</parameter>
+			<parameter name="with properties" code="prdt" description="The initial values for properties of the object." type="record" optional="yes">
+				<cocoa key="KeyDictionary"/>
+			</parameter>
+			<result description="The new object." type="specifier"/>
+		</command>
+		<command name="move" code="coremove" description="Move an object to a new location.">
+			<cocoa class="NSMoveCommand"/>
+			<direct-parameter description="The object(s) to move." type="specifier"/>
+			<parameter name="to" code="insh" description="The new location for the object(s)." type="location specifier">
+				<cocoa key="ToLocation"/>
+			</parameter>
+		</command>
+	</suite>
+	<suite name="Text Suite" code="????" description="Common text classes for all applications.">
+		<value-type name="RGB color" code="cRGB">
+			<cocoa class="NSColor"/>
+		</value-type>
+		<class name="rich text" code="ctxt" description="Rich (styled) text." plural="rich text">
+			<cocoa class="NSTextStorage"/>
+			<element type="character"/>
+			<element type="paragraph"/>
+			<element type="word"/>
+			<element type="attribute run"/>
+			<element type="attachment"/>
+			<property name="color" code="colr" description="The color of the text&apos;s first character." type="RGB color">
+				<cocoa key="foregroundColor"/>
+			</property>
+			<property name="font" code="font" description="The name of the font of the text&apos;s first character." type="text">
+				<cocoa key="fontName"/>
+			</property>
+			<property name="size" code="ptsz" description="The size in points of the text&apos;s first character." type="integer">
+				<cocoa key="fontSize"/>
+			</property>
+			<type type="text"/>
+		</class>
+		<class name="character" code="cha " description="One of some text&apos;s characters.">
+			<cocoa class="NSTextStorage"/>
+			<element type="character"/>
+			<element type="paragraph"/>
+			<element type="word"/>
+			<element type="attribute run"/>
+			<element type="attachment"/>
+			<property name="color" code="colr" description="Its color." type="RGB color">
+				<cocoa key="foregroundColor"/>
+			</property>
+			<property name="font" code="font" description="The name of its font." type="text">
+				<cocoa key="fontName"/>
+			</property>
+			<property name="size" code="ptsz" description="Its size, in points." type="integer">
+				<cocoa key="fontSize"/>
+			</property>
+			<type type="text"/>
+		</class>
+		<class name="paragraph" code="cpar" description="One of some text&apos;s paragraphs.">
+			<cocoa class="NSTextStorage"/>
+			<element type="character"/>
+			<element type="paragraph"/>
+			<element type="word"/>
+			<element type="attribute run"/>
+			<element type="attachment"/>
+			<property name="color" code="colr" description="The color of the paragraph&apos;s first character." type="RGB color">
+				<cocoa key="foregroundColor"/>
+			</property>
+			<property name="font" code="font" description="The name of the font of the paragraph&apos;s first character." type="text">
+				<cocoa key="fontName"/>
+			</property>
+			<property name="size" code="ptsz" description="The size in points of the paragraph&apos;s first character." type="integer">
+				<cocoa key="fontSize"/>
+			</property>
+			<type type="text"/>
+		</class>
+		<class name="word" code="cwor" description="One of some text&apos;s words.">
+			<cocoa class="NSTextStorage"/>
+			<element type="character"/>
+			<element type="paragraph"/>
+			<element type="word"/>
+			<element type="attribute run"/>
+			<element type="attachment"/>
+			<property name="color" code="colr" description="The color of the word&apos;s first character." type="RGB color">
+				<cocoa key="foregroundColor"/>
+			</property>
+			<property name="font" code="font" description="The name of the font of the word&apos;s first character." type="text">
+				<cocoa key="fontName"/>
+			</property>
+			<property name="size" code="ptsz" description="The size in points of the word&apos;s first character." type="integer">
+				<cocoa key="fontSize"/>
+			</property>
+			<type type="text"/>
+		</class>
+		<class name="attribute run" code="catr" description="A chunk of text that all has the same attributes.">
+			<cocoa class="NSTextStorage"/>
+			<element type="character"/>
+			<element type="paragraph"/>
+			<element type="word"/>
+			<element type="attribute run"/>
+			<element type="attachment"/>
+			<property name="color" code="colr" description="Its color." type="RGB color">
+				<cocoa key="foregroundColor"/>
+			</property>
+			<property name="font" code="font" description="The name of its font." type="text">
+				<cocoa key="fontName"/>
+			</property>
+			<property name="size" code="ptsz" description="Its size, in points." type="integer">
+				<cocoa key="fontSize"/>
+			</property>
+			<type type="text"/>
+		</class>
+		<class name="attachment" code="atts" description="A file embedded in text. This is just for use when embedding a file using the make command." inherits="rich text">
+			<cocoa class="NSAttachmentTextStorage"/>
+			<property name="file name" code="atfn" description="The path to the embedded file." type="text">
+				<cocoa key="filename"/>
+			</property>
+		</class>
+	</suite>
+	<suite name="Acorn Suite" code="AcRN" description="Classes just for the Acorn application.">
+		<enumeration name="saveable file format" code="savf" description="The types that a file may be saved as.">
+			<enumerator name="Acorn" code="AcRN" description="The native Acorn file format">
+				<cocoa string-value="com.flyingmeat.acorn"/>
+			</enumerator>
+			<enumerator name="PDF" code="PDF " description="Portable Document Format">
+				<cocoa string-value="com.adobe.pdf"/>
+			</enumerator>
+			<enumerator name="PNG" code="PNG " description="Portable Network Graphic">
+				<cocoa string-value="public.png"/>
+			</enumerator>
+			<enumerator name="JPEG" code="JPEG" description="JPEG">
+				<cocoa string-value="public.jpeg"/>
+			</enumerator>
+			<enumerator name="TIFF" code="TIFF" description="Tagged Image File Format">
+				<cocoa string-value="public.tiff"/>
+			</enumerator>
+			<enumerator name="JPEG 2000" code="JPE2" description="JPEG 2000">
+				<cocoa string-value="public.jpeg-2000"/>
+			</enumerator>
+			<enumerator name="GIF" code="GIFF" description="GIF">
+				<cocoa string-value="com.compuserve.gif"/>
+			</enumerator>
+			<enumerator name="WebP" code="WEBP" description="Google&apos;s WebP image format">
+				<cocoa string-value="public.webp"/>
+			</enumerator>
+		</enumeration>
+		<enumeration name="anchor position" code="anch" description="The edges of an image.  This is used for the crop command">
+			<enumerator name="top left" code="antl">
+				<cocoa integer-value="1"/>
+			</enumerator>
+			<enumerator name="top center" code="antc">
+				<cocoa integer-value="2"/>
+			</enumerator>
+			<enumerator name="top right" code="antr">
+				<cocoa integer-value="3"/>
+			</enumerator>
+			<enumerator name="middle left" code="anml">
+				<cocoa integer-value="4"/>
+			</enumerator>
+			<enumerator name="middle right" code="anmr">
+				<cocoa integer-value="5"/>
+			</enumerator>
+			<enumerator name="bottom left" code="anbl">
+				<cocoa integer-value="6"/>
+			</enumerator>
+			<enumerator name="bottom center" code="anbc">
+				<cocoa integer-value="7"/>
+			</enumerator>
+			<enumerator name="bottom right" code="anbr">
+				<cocoa integer-value="8"/>
+			</enumerator>
+			<enumerator name="middle center" code="anmc">
+				<cocoa integer-value="0"/>
+			</enumerator>
+		</enumeration>
+		<enumeration name="blend mode" code="blnd" description="The blend (compositing) mode of a layer.">
+			<enumerator name="normal" code="bmno">
+				<cocoa integer-value="0"/>
+			</enumerator>
+			<enumerator name="multiply" code="bmmo">
+				<cocoa integer-value="1"/>
+			</enumerator>
+			<enumerator name="screen" code="bmsc">
+				<cocoa integer-value="2"/>
+			</enumerator>
+			<enumerator name="overlay" code="bmov">
+				<cocoa integer-value="3"/>
+			</enumerator>
+			<enumerator name="darken" code="bmdr">
+				<cocoa integer-value="4"/>
+			</enumerator>
+			<enumerator name="lighten" code="bmli">
+				<cocoa integer-value="5"/>
+			</enumerator>
+			<enumerator name="color dodge" code="bmcd">
+				<cocoa integer-value="6"/>
+			</enumerator>
+			<enumerator name="color burn" code="bmcb">
+				<cocoa integer-value="7"/>
+			</enumerator>
+			<enumerator name="soft light" code="bmsl">
+				<cocoa integer-value="8"/>
+			</enumerator>
+			<enumerator name="hard light" code="bmhl">
+				<cocoa integer-value="9"/>
+			</enumerator>
+			<enumerator name="difference" code="bmdi">
+				<cocoa integer-value="10"/>
+			</enumerator>
+			<enumerator name="exclusion" code="bmex">
+				<cocoa integer-value="11"/>
+			</enumerator>
+			<enumerator name="hue" code="bmhu">
+				<cocoa integer-value="12"/>
+			</enumerator>
+			<enumerator name="saturation" code="bmsa">
+				<cocoa integer-value="13"/>
+			</enumerator>
+			<enumerator name="color blend" code="bmco">
+				<cocoa integer-value="14"/>
+			</enumerator>
+			<enumerator name="luminosity" code="bmlu">
+				<cocoa integer-value="15"/>
+			</enumerator>
+			<enumerator name="clear" code="bmcl">
+				<cocoa integer-value="16"/>
+			</enumerator>
+			<enumerator name="copy" code="bmcp">
+				<cocoa integer-value="17"/>
+			</enumerator>
+			<enumerator name="source in" code="bmsi">
+				<cocoa integer-value="18"/>
+			</enumerator>
+			<enumerator name="source out" code="bmso">
+				<cocoa integer-value="19"/>
+			</enumerator>
+			<enumerator name="source atop" code="bmst">
+				<cocoa integer-value="20"/>
+			</enumerator>
+			<enumerator name="destination over" code="bmdo">
+				<cocoa integer-value="21"/>
+			</enumerator>
+			<enumerator name="destination in" code="bmdi">
+				<cocoa integer-value="22"/>
+			</enumerator>
+			<enumerator name="destination out" code="bmdt">
+				<cocoa integer-value="23"/>
+			</enumerator>
+			<enumerator name="destination atop" code="bmda">
+				<cocoa integer-value="24"/>
+			</enumerator>
+			<enumerator name="xor" code="bmxr">
+				<cocoa integer-value="25"/>
+			</enumerator>
+			<enumerator name="plus darker" code="bmpd">
+				<cocoa integer-value="26"/>
+			</enumerator>
+			<enumerator name="plus lighter" code="bmpl">
+				<cocoa integer-value="27"/>
+			</enumerator>
+			<enumerator name="pass through" code="bmpt">
+				<cocoa integer-value="-1"/>
+			</enumerator>
+		</enumeration>
+		<enumeration name="direction" code="dire">
+			<enumerator name="horizontal" code="horz">
+				<cocoa string-value="horz"/>
+			</enumerator>
+			<enumerator name="vertical" code="vert">
+				<cocoa string-value="vert"/>
+			</enumerator>
+		</enumeration>
+		<class name="document" code="docu" description="An Acorn document, representing one or more layers and groups to make up a single image.">
+			<cocoa class="TSDocument"/>
+			<element description="A collection of all the top level layers, combining all the bitmap, group, and shape layers into one list." type="layer">
+				<cocoa key="scriptingLayers"/>
+			</element>
+			<element description="A collection of all the top bitmap level layers." type="bitmap layer">
+				<cocoa key="scriptingBitmapLayers"/>
+			</element>
+			<element description="A collection of all the top level group layers.  Group layers may contain other layers." type="group layer">
+				<cocoa key="scriptingGroupLayers"/>
+			</element>
+			<element description="A collection of all the top level shape (including text) layers." type="shape layer">
+				<cocoa key="scriptingShapeLayers"/>
+			</element>
+			<property name="name" code="pnam" description="Its name." type="text" access="r">
+				<cocoa key="displayName"/>
+			</property>
+			<property name="modified" code="imod" description="Has it been modified since the last save?" type="boolean" access="r">
+				<cocoa key="isDocumentEdited"/>
+			</property>
+			<property name="file" code="file" description="Its location on disk, if it has one." type="file" access="r">
+				<cocoa key="fileURL"/>
+			</property>
+			<!-- This is just here for compatibility with old scripts. New scripts should use the more user-friendly file property. -->
+			<property hidden="yes" name="path" code="ppth" description="Its location on disk, if it has one, as a POSIX path string." type="text" access="r">
+				<cocoa key="fileName"/>
+			</property>
+			<property name="height" code="heig" description="The height of the image in pixels." type="real">
+				<cocoa key="scriptingHeight"/>
+			</property>
+			<property name="width" code="widt" description="The width of the image in pixels." type="real">
+				<cocoa key="scriptingWidth"/>
+			</property>
+            
+            
+			<property name="current layer" code="clyr" description="The Current layer" type="layer">
+				<cocoa key="scriptingCurrentLayer"/>
+			</property>
+            
+            
+            
+            
+			<responds-to command="close">
+				<cocoa method="handleCloseScriptCommand:"/>
+			</responds-to>
+			<responds-to command="print">
+				<cocoa method="handlePrintScriptCommand:"/>
+			</responds-to>
+			<responds-to command="save">
+				<cocoa method="handleSaveScriptCommand:"/>
+			</responds-to>
+			<responds-to command="crop">
+				<cocoa method="handleCropScriptCommand:"/>
+			</responds-to>
+			<responds-to command="undo">
+				<cocoa method="handleUndoScriptCommand:"/>
+			</responds-to>
+			<responds-to command="redo">
+				<cocoa method="handleRedoScriptCommand:"/>
+			</responds-to>
+			<responds-to command="resize image">
+				<cocoa method="handleResizeImageScriptCommand:"/>
+			</responds-to>
+			<responds-to command="resize canvas">
+				<cocoa method="handleResizeCanvasScriptCommand:"/>
+			</responds-to>
+			<responds-to command="trim">
+				<cocoa method="handleTrimScriptCommand:"/>
+			</responds-to>
+			<responds-to command="web export">
+				<cocoa method="handleWebExportCommand:"/>
+			</responds-to>
+			<responds-to command="copy merged">
+				<cocoa method="scriptingCopyMerged:"/>
+			</responds-to>
+			<responds-to command="copy">
+				<cocoa method="scriptingCopy:"/>
+			</responds-to>
+			<responds-to command="paste">
+				<cocoa method="scriptingPaste:"/>
+			</responds-to>
+			<responds-to command="clear">
+				<cocoa method="scriptingClear:"/>
+			</responds-to>
+			<responds-to command="cut">
+				<cocoa method="scriptingCut:"/>
+			</responds-to>
+			<responds-to command="delete">
+				<cocoa method="handleDeleteCommand:"/>
+			</responds-to>
+			<responds-to command="deselect">
+				<cocoa method="scriptingDeselect:"/>
+			</responds-to>
+			<responds-to command="fill">
+				<cocoa method="scriptingFill:"/>
+			</responds-to>
+			<responds-to command="flip canvas">
+				<cocoa method="scriptingFlipCanvas:"/>
+			</responds-to>
+			<responds-to command="invert selection">
+				<cocoa method="scriptingInvertSelection:"/>
+			</responds-to>
+			<responds-to command="merge visible layers">
+				<cocoa method="scriptingMergeVisibleLayers:"/>
+			</responds-to>
+			<responds-to command="select">
+				<cocoa method="scriptingSelectFrame:"/>
+			</responds-to>
+			<responds-to command="select all">
+				<cocoa method="scriptingSelectAll:"/>
+			</responds-to>
+			<responds-to command="select oval">
+				<cocoa method="scriptingSelectOval:"/>
+			</responds-to>
+			<responds-to command="do filter">
+				<cocoa method="scriptingCallFilterNamed:"/>
+			</responds-to>
+			<responds-to command="load filter preset">
+				<cocoa method="scriptingLoadFilterPresetFilterNamed:"/>
+			</responds-to>
+			<responds-to command="add layer mask">
+				<cocoa method="scriptingAddLayerMask:"/>
+			</responds-to>
+			<responds-to command="auto levels">
+				<cocoa method="scriptingCallAutoLevels:"/>
+			</responds-to>
+			<responds-to command="rotate canvas">
+				<cocoa method="scriptingRotateCanvas:"/>
+			</responds-to>
+		</class>
+		<class hidden="yes" name="graphic" code="grph" description="An vector object in a Acorn shape layer. There are subclasses for each kind of graphic.">
+			<cocoa class="TSGraphic"/>
+			<property name="x position" code="xpos" type="real"/>
+			<property name="y position" code="ypos" type="real"/>
+			<property name="width" code="widt" type="real"/>
+			<property name="height" code="heig" type="real"/>
+			<property name="fill color" code="fclr">
+				<cocoa key="scriptingFillColor"/>
+				<type type="RGB color"/>
+				<type type="missing value"/>
+			</property>
+			<property name="stroke color" code="sclr">
+				<cocoa key="scriptingStrokeColor"/>
+				<type type="RGB color"/>
+				<type type="missing value"/>
+			</property>
+			<property name="stroke thickness" code="slwd">
+				<cocoa key="scriptingStrokeWidth"/>
+				<type type="real"/>
+				<type type="missing value"/>
+			</property>
+		</class>
+		<class hidden="yes" name="box" code="d2rc" description="A rectangular graphic." plural="boxes" inherits="graphic">
+			<cocoa class="TSRectangle"/>
+		</class>
+		<class hidden="yes" name="circle" code="d2cr" description="an ellipsoidal graphic, actually." inherits="graphic">
+			<cocoa class="TSCircle"/>
+		</class>
+		<class hidden="yes" name="image" code="d2im" description="A placed image." inherits="graphic">
+			<cocoa class="TSImage"/>
+			<property name="imagefile" code="imgf" description="The path to the file containing the image. This is just for use when creating a new placed image using the make command." type="text" access="w">
+				<cocoa key="filePath"/>
+			</property>
+		</class>
+		<class hidden="yes" name="line" code="d2ln" description="A line graphic." inherits="graphic">
+			<cocoa class="TSLine"/>
+		</class>
+		<class hidden="yes" name="text area" code="d2ta" description="A text graphic." inherits="graphic">
+			<contents name="text contents" code="tact" description="Its contents." type="rich text">
+				<cocoa key="scriptingContents"/>
+			</contents>
+			<cocoa class="TSText"/>
+		</class>
+		<!-- need to inherit from NSCoreSuite.NSApplication so that we can get quit events and such.. -->
+		<class name="layer" code="layr" description="An Acorn layer.">
+			<cocoa class="TSLayer"/>
+			<element type="layer">
+				<cocoa key="scriptingLayers"/>
+			</element>
+			<element type="bitmap layer">
+				<cocoa key="scriptingBitmapLayers"/>
+			</element>
+			<element type="group layer">
+				<cocoa key="scriptingGroupLayers"/>
+			</element>
+			<element type="shape layer">
+				<cocoa key="scriptingShapeLayers"/>
+			</element>
+			<property name="name" code="pnam" type="text">
+				<cocoa key="layerName"/>
+			</property>
+			<property name="opacity" code="opac" type="real">
+				<cocoa key="opacity"/>
+			</property>
+			<property name="visible" code="pvis" type="boolean">
+				<cocoa key="visible"/>
+			</property>
+			<property name="bounds" code="bnds" access="r">
+				<cocoa key="scriptingBounds"/>
+				<type type="real" list="yes"/>
+			</property>
+			<property name="blend mode" code="lblm" type="blend mode">
+				<cocoa key="scriptingBlendMode"/>
+			</property>
+			<property name="origin" code="orgn">
+				<cocoa key="scriptingOrigin"/>
+				<type type="real" list="yes"/>
+			</property>
+			<responds-to command="auto levels">
+				<cocoa method="scriptingCallAutoLevels:"/>
+			</responds-to>
+			<responds-to command="load filter preset">
+				<cocoa method="scriptingLoadFilterPresetFilterNamed:"/>
+			</responds-to>
+			<responds-to command="add layer mask">
+				<cocoa method="scriptingAddLayerMask:"/>
+			</responds-to>
+		</class>
+		<class name="bitmap layer" code="blyr" description="An Acorn bitmap layer." inherits="layer">
+			<cocoa class="TSBitmapLayer"/>
+		</class>
+		<class name="group layer" code="glyr" description="An Group of other layers" inherits="layer">
+			<cocoa class="TSGroupLayer"/>
+		</class>
+		<class name="shape layer" code="slyr" description="A Shape / Text layer" inherits="layer">
+			<cocoa class="TSShapeLayer"/>
+			<element hidden="yes" type="graphic"/>
+			<element hidden="yes" type="box">
+				<cocoa key="rectangles"/>
+			</element>
+			<element hidden="yes" type="circle"/>
+			<element hidden="yes" type="image"/>
+			<element hidden="yes" type="line"/>
+			<element hidden="yes" type="text area"/>
+		</class>
+		<command name="taunt" code="Taunttau" description="Have Acorn taunt you.">
+			<result type="text"/>
+		</command>
+		<command name="crop" code="Cropzors" description="Crop an image">
+			<direct-parameter type="document"/>
+			<parameter name="rect" code="rect" description="The bounds of the crop area as 4 integers in a list.  The first two represent the lower left corner of the rect (x,y) and the second two represent the width and height.">
+				<cocoa key="rect"/>
+				<type type="integer" list="yes"/>
+			</parameter>
+		</command>
+		<command name="undo" code="Acrnundo" description="Undo the last operation">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="redo" code="Acrnredo" description="Redo the last undone operation.">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="resize image" code="Reszzors" description="Resize an image">
+			<direct-parameter type="document"/>
+			<parameter name="width" code="widt" description="The width to resize the image to in pixels." type="real" optional="yes">
+				<cocoa key="width"/>
+			</parameter>
+			<parameter name="height" code="heit" description="The height you want to resize the image to in pixels." type="real" optional="yes">
+				<cocoa key="height"/>
+			</parameter>
+			<parameter name="resolution" code="reso" description="The resolution of the image (dpi)" type="real" optional="yes">
+				<cocoa key="resolution"/>
+			</parameter>
+		</command>
+		<command name="resize canvas" code="Reszcnvs" description="Resize the canvas">
+			<direct-parameter type="document"/>
+			<parameter name="width" code="widt" description="The width in pixels." type="real" optional="yes">
+				<cocoa key="width"/>
+			</parameter>
+			<parameter name="height" code="heit" description="The height you want to resize the canvas to in pixels." type="real" optional="yes">
+				<cocoa key="height"/>
+			</parameter>
+			<parameter name="anchor position" code="anpo" description="The edge for the image to stick to when resizing the canvas." type="anchor position">
+				<cocoa key="anchor"/>
+			</parameter>
+		</command>
+		<command name="trim" code="Acrntrim" description="Trim an image, cropping out any whitespace.">
+			<direct-parameter type="document"/>
+		</command>
+		<!--
+			<parameter name="with properties" code="prdt" description="Various properties for the type to be exported." type="record" optional="yes">
+				<cocoa key="WithProperties"/>
+			</parameter>
+		    -->
+		<command name="web export" code="Acrnwxpr" description="Export a document for the Web.">
+			<direct-parameter description="The document to export" type="document"/>
+			<parameter name="in" code="kfil" description="The file in which to save the document." type="file">
+				<cocoa key="File"/>
+			</parameter>
+			<parameter name="as" code="fltp" description="The file format to use." type="saveable file format">
+				<cocoa key="FileType"/>
+			</parameter>
+			<parameter hidden="yes" name="with properties" code="prdt" description="Properties to set in the saved image." type="record" optional="yes">
+				<cocoa key="WithProperties"/>
+			</parameter>
+			<parameter name="quality" code="qual" description="The compression amount to use for JPEG or JPEG 2000 images, ranging from 0 to 100" type="integer" optional="yes">
+				<cocoa key="quality"/>
+			</parameter>
+			<parameter hidden="yes" name="is progressive" code="prog" description="The wether or not to make the image progressive for JPEG or JPEG 2000." type="boolean" optional="yes">
+				<cocoa key="progressive"/>
+			</parameter>
+			<parameter name="width" code="widt" description="The width to scale the image.  If only the width is given, the height is calculated proportinally to this value." type="integer" optional="yes">
+				<cocoa key="width"/>
+			</parameter>
+			<parameter name="height" code="heit" description="The height to scale the image.  If only the height is given, the width is calculated proportinally to this value." type="integer" optional="yes">
+				<cocoa key="height"/>
+			</parameter>
+		</command>
+		<command name="copy merged" code="Copymerg" description="Copy the document or selection, with combined layers.">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="copy" code="misccopy" description="Copy the layer or selection to the clipboard.">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="paste" code="Acrnpste" description="Paste whatever is on the clipboard, making a new layer.">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="clear" code="Acrncler" description="Clear (delete) the current selection">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="cut" code="Acrncutr" description="Cut (copy + delete) the current selection.  This is the same as the Edit ▸ Cut menu item.">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="deselect" code="Acrndesl" description="Clear the current selection">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="do JavaScript" code="sfridojs" description="Applies a string of JavaScript (or JSTalk) code to a document.">
+			<direct-parameter description="The JavaScript code to evaluate." type="text"/>
+			<parameter hidden="yes" name="in" code="dcnm" description="The document that the JavaScript should be evaluated in." type="document" optional="yes">
+				<cocoa key="in"/>
+			</parameter>
+			<parameter hidden="yes" name="with file" code="file" description="A path (String or Alias) to the the file to execute." type="file" optional="yes">
+				<cocoa key="file"/>
+			</parameter>
+			<result>
+				<type type="any"/>
+				<type type="text"/>
+				<type type="real"/>
+				<type type="integer"/>
+			</result>
+		</command>
+		<command name="fill" code="Acrnfill" description="Fill the current layer or selection with the forground color.">
+			<direct-parameter type="document"/>
+			<parameter name="with color" code="wclr" description="A color (list of 3 or 4 integers, ranged from 0 (black) to 65535 (white).  The optional 4th integer represents the alpha). Defaults to the front color.  " optional="yes">
+				<cocoa key="colorlist"/>
+				<type type="integer" list="yes"/>
+			</parameter>
+		</command>
+		<command name="flip canvas" code="Acrnflip" description="Flip the cavnas in a direction">
+			<direct-parameter type="document"/>
+			<parameter name="direction" code="dire" type="direction">
+				<cocoa key="direction"/>
+			</parameter>
+		</command>
+		<command name="invert selection" code="Acrninvs" description="Invert the current selection.">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="merge visible layers" code="Acrnmvls" description="Merge the visible layers into one.">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="select all" code="Acrnsela" description="Select the whole canvas">
+			<direct-parameter type="document"/>
+		</command>
+		<command name="select" code="Acrnself" description="Select a frame">
+			<direct-parameter type="document"/>
+			<parameter name="rect" code="rect" description="The frame of the selection area as 4 integers in a list.  The first two represent the lower left corner of the rect (x,y) and the second two represent the width and height.">
+				<cocoa key="rect"/>
+				<type type="integer" list="yes"/>
+			</parameter>
+		</command>
+		<command name="select oval" code="Acrnselo" description="Select an oval frame">
+			<direct-parameter type="document"/>
+			<parameter name="rect" code="rect" description="The frame of the selection area as 4 integers in a list.  The first two represent the lower left corner of the rect (x,y) and the second two represent the width and height.">
+				<cocoa key="rect"/>
+				<type type="integer" list="yes"/>
+			</parameter>
+		</command>
+		<command name="set preference" code="Acrnpref" description="Set a preference, using it&apos;s defaults name and value.">
+			<parameter name="key" code="pkey" description="The pref name." type="text">
+				<cocoa key="key"/>
+			</parameter>
+			<parameter name="value" code="valu" description="The value of the pref, strings only please." type="text">
+				<cocoa key="value"/>
+			</parameter>
+		</command>
+		<command name="do filter" code="Acrncafi" description="Call a Core Image filter for the selected layer, or a filter plugin with the given name.">
+			<direct-parameter type="document"/>
+			<parameter name="name" code="name" description="The name of the Core Image filter or plugin filter" type="text">
+				<cocoa key="name"/>
+			</parameter>
+		</command>
+		<command name="load filter preset" code="Acrndofp" description="Load a filter preset with the given name.">
+			<direct-parameter type="document"/>
+			<parameter name="name" code="name" description="The name of the filter preset" type="text">
+				<cocoa key="name"/>
+			</parameter>
+		</command>
+		<command name="add layer mask" code="Acrnadlm" description="Add a layer mask to the layer">
+			<direct-parameter type="document"/>
+		</command>
+		<command hidden="yes" name="select layer" code="Acrnsely" description="Make the passed layer the currently selected layer.">
+			<direct-parameter type="document"/>
+			<parameter name="layer" code="layr" description="The layer to select." type="layer">
+				<cocoa key="layer"/>
+			</parameter>
+		</command>
+		<command name="rotate canvas" code="Acrndort" description="Rotates the canvas">
+			<direct-parameter type="document"/>
+			<parameter name="angle" code="angl" description="The angle in degrees for rotating." type="real">
+				<cocoa key="angle"/>
+			</parameter>
+		</command>
+		<command name="auto levels" code="Acrnatlv" description="Perform autolevels for the layer or document">
+			<direct-parameter type="document"/>
+		</command>
+	</suite>
+</dictionary>
