@@ -103,9 +103,12 @@ class SBHeaderProcessor(object):
             func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
+        superclass = [child.spelling for child in cursor.get_children() if child.kind == CursorKind.OBJC_SUPER_CLASS_REF][0]
+        extension_class = superclass if superclass.startswith('SB') else 'SBObject'
+        super_protocol = superclass if not superclass.startswith('SB') else 'NSOBjectProtocol'
+        protocol_name = cursor.spelling
         self.emit_line('// MARK: {}'.format(cursor.spelling))
-        self.emit_line('@objc public protocol {} {{'.format(cursor.spelling))
-        superclass = 'SBObject'
+        self.emit_line('@objc public protocol {}: {} {{'.format(protocol_name, super_protocol))
         property_getters = [child.spelling for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, []))
                               if child.kind == CursorKind.OBJC_PROPERTY_DECL]
         property_setters = ['set{}{}:'.format(getter[0].capitalize(), getter[1:]) for getter in property_getters]
@@ -118,10 +121,8 @@ class SBHeaderProcessor(object):
             elif child.kind == CursorKind.OBJC_INSTANCE_METHOD_DECL and child.spelling not in function_list:
                 self.emit_function(child)
                 function_list.append(child.spelling)
-            elif child.kind == CursorKind.OBJC_SUPER_CLASS_REF and child.spelling.startswith('SB'):
-                superclass = child.spelling
         self.emit_line('}')
-        self.emit_line('extension {} : {} {{}}\n'.format(superclass, cursor.spelling))
+        self.emit_line('extension {}: {} {{}}\n'.format(extension_class, protocol_name))
 
     def gather_categories(self, categories):
         for category in categories:
