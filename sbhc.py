@@ -35,6 +35,7 @@ object_kinds = [TypeKind.OBJCID, TypeKind.OBJCOBJECTPOINTER]
 
 
 def safe_name(name):
+    name = name.rstrip('_')
     return '`{}`'.format(name) if name in keywords else name
 
 
@@ -91,7 +92,7 @@ class SBHeaderProcessor(object):
                                                                    self.line_comment(cursor)))
 
     def emit_function(self, cursor):
-        func_name = cursor.spelling.split(':')[0]
+        func_name = safe_name(cursor.spelling.split(':')[0])
         parameters = ['{}: {}'.format(safe_name(child.spelling), type_for_type(child.type, as_arg=True))
                       for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
         return_type = [child.type for child in cursor.get_children() if child.kind != CursorKind.PARM_DECL]
