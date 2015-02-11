@@ -115,14 +115,16 @@ class SBHeaderProcessor(object):
             func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
-        superclass = [child.spelling for child in cursor.get_children() if child.kind == CursorKind.OBJC_SUPER_CLASS_REF][0]
+        superclass = [child.spelling for child in cursor.get_children()
+                      if child.kind == CursorKind.OBJC_SUPER_CLASS_REF][0]
         extension_class = superclass if superclass.startswith('SB') else 'SBObject'
         super_protocol = superclass if not superclass.startswith('SB') else '{}Protocol'.format(superclass)
         protocol_name = cursor.spelling
         self.emit_line('// MARK: {}'.format(cursor.spelling))
         self.emit_line('@objc public protocol {}: {} {{'.format(protocol_name, super_protocol))
-        property_getters = [child.spelling for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, []))
-                              if child.kind == CursorKind.OBJC_PROPERTY_DECL]
+        property_getters = [child.spelling
+                            for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, []))
+                            if child.kind == CursorKind.OBJC_PROPERTY_DECL]
         property_setters = ['set{}{}:'.format(getter[0].capitalize(), getter[1:]) for getter in property_getters]
         function_list = property_getters + property_setters
         emitted_properties = []
@@ -154,7 +156,7 @@ class SBHeaderProcessor(object):
         self.emit_line(base_protocols)
         cursor = translation_unit.cursor
         local_children = [child for child in cursor.get_children()
-                  if child.location.file and child.location.file.name == self.file_path]
+                          if child.location.file and child.location.file.name == self.file_path]
         categories = [child for child in local_children if child.kind == CursorKind.OBJC_CATEGORY_DECL]
         self.gather_categories(categories)
         for child in [child for child in local_children if child.kind == CursorKind.OBJC_INTERFACE_DECL]:
