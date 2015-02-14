@@ -21,7 +21,7 @@ import ScriptingBridge
     optional func print(x: AnyObject!, withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func quitSaving(saving: MailSaveOptions) // Quit the application.
     optional func exists(x: AnyObject!) -> Bool // Verify that an object exists.
-    optional func checkForNewMailFor(`for`: MailAccount!) // Triggers a check for email.
+    optional func checkForNewMailFor(for_: MailAccount!) // Triggers a check for email.
     optional func extractNameFrom(x: String!) -> String // Command to get the full name out of a fully specified email address. E.g. Calling this with "John Doe <jdoe@example.com>" as the direct object would return "John Doe"
     optional func extractAddressFrom(x: String!) -> String // Command to get just the email address of a fully specified email address. E.g. Calling this with "John Doe <jdoe@example.com>" as the direct object would return "jdoe@example.com"
     optional func GetURL(x: String!) // Opens a mailto URL.
@@ -87,7 +87,7 @@ extension SBApplication: MailApplication {}
     optional var modified: Bool { get } // Has it been modified since the last save?
     optional var file: NSURL { get } // Its location on disk, if it has one.
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -110,7 +110,7 @@ extension SBObject: MailDocument {}
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: MailDocument { get } // The document whose contents are displayed in the window.
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -129,7 +129,7 @@ extension SBObject: MailWindow {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: NSNumber { get set } // The size in points of the first character.
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -153,7 +153,7 @@ extension SBObject: MailAttachment {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: NSNumber { get set } // The size in points of the first character.
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -170,7 +170,7 @@ extension SBObject: MailParagraph {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: NSNumber { get set } // The size in points of the first character.
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -186,7 +186,7 @@ extension SBObject: MailWord {}
     optional var font: String { get set } // The name of the font of the character.
     optional var size: NSNumber { get set } // The size in points of the character.
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -204,7 +204,7 @@ extension SBObject: MailCharacter {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: NSNumber { get set } // The size in points of the first character.
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -225,7 +225,7 @@ extension SBObject: MailAttributeRun {}
     optional var messageSignature: AnyObject { get set } // The signature of the message
     optional func id() -> Int // The unique identifier of the message
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -254,7 +254,7 @@ extension SBObject: MailOutgoingMessage {}
     optional var selectedMailboxes: [AnyObject] { get set } // List of mailboxes currently selected in the list of mailboxes
     optional var window: MailWindow { get set } // The window for the message viewer
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -267,7 +267,7 @@ extension SBObject: MailMessageViewer {}
     optional var content: String { get set } // Contents of email signature. If there is a version with fonts and/or styles, that will be returned over the plain text version
     optional var name: String { get set } // Name of the signature
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -305,7 +305,7 @@ extension SBObject: MailSignature {}
     optional var wasRedirected: Bool { get } // Indicates whether the message was redirected or not
     optional var wasRepliedTo: Bool { get } // Indicates whether the message was replied to or not
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -341,7 +341,7 @@ extension SBObject: MailMessage {}
     optional var moveDeletedMessagesToTrash: Bool { get set } // Indicates whether messages that are deleted will be moved to the trash mailbox
     optional var usesSsl: Bool { get set } // Indicates whether SSL is enabled for this receiving account
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -386,7 +386,7 @@ extension SBObject: MailPopAccount {}
     optional var serverName: String { get set } // The host name used to connect to an account
     optional var usesSsl: Bool { get set } // Indicates whether SSL is enabled for this receiving account
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -403,7 +403,7 @@ extension SBObject: MailSmtpServer {}
     optional var account: MailAccount { get }
     optional var container: MailMailbox { get }
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -435,7 +435,7 @@ extension SBObject: MailMailbox {}
     optional var shouldMoveMessage: Bool { get set } // Indicates whether the rule has a move action
     optional var stopEvaluatingRules: Bool { get set } // If rule matches, stop rule evaluation for this message
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -450,7 +450,7 @@ extension SBObject: MailRule {}
     optional var qualifier: MailRuleQualifier { get set } // Rule qualifier
     optional var ruleType: MailRuleType { get set } // Rule type
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -463,7 +463,7 @@ extension SBObject: MailRuleCondition {}
     optional var address: String { get set } // The recipients email address
     optional var name: String { get set } // The name used for display
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -496,7 +496,7 @@ extension SBObject: MailContainer {}
     optional var content: String { get set } // Contents of the header
     optional var name: String { get set } // Name of the header value
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -512,7 +512,7 @@ extension SBObject: MailHeader {}
     optional var downloaded: Bool { get } // Indicates whether the attachment has been downloaded.
     optional func id() -> String // The unique identifier of the attachment.
     optional func closeSaving(saving: MailSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: MailSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.

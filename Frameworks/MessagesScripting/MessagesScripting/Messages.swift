@@ -14,7 +14,7 @@ import ScriptingBridge
 @objc public protocol MessagesItem: SBObjectProtocol {
     optional var properties: [NSObject : AnyObject] { get set } // All of the object's properties.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -25,7 +25,7 @@ extension SBObject: MessagesItem {}
 // MARK: MessagesColor
 @objc public protocol MessagesColor: SBObjectProtocol {
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -39,7 +39,7 @@ extension SBObject: MessagesColor {}
     optional var modified: Bool { get } // Has the document been modified since the last save?
     optional var file: NSURL { get } // The document's location on disk.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -62,7 +62,7 @@ extension SBObject: MessagesDocument {}
     optional var zoomed: Bool { get set } // Whether the window is currently zoomed.
     optional var document: MessagesDocument { get } // The document whose contents are being displayed in the window.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -81,7 +81,7 @@ extension SBObject: MessagesWindow {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Double { get set } // The size in points of the first character.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -100,7 +100,7 @@ extension SBObject: MessagesRichText {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Int { get set } // The size in points of the first character.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -119,7 +119,7 @@ extension SBObject: MessagesCharacter {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Int { get set } // The size in points of the first character.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -138,7 +138,7 @@ extension SBObject: MessagesParagraph {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Int { get set } // The size in points of the first character.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -157,7 +157,7 @@ extension SBObject: MessagesWord {}
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Int { get set } // The size in points of the first character.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
@@ -199,7 +199,7 @@ extension SBObject: MessagesAttachment {}
     optional func logOut() // Logs out of a service, or all services if none is specified.
     optional func send(x: AnyObject!, to: AnyObject!) // Sends a message or file to a buddy or to a chat.
     optional func storeRecentPicture() // Stores the currently set buddy picture into your recent pictures.
-    optional func showChatChooserFor(`for`: MessagesBuddy!) // displays a dialog in Messages to start a new chat with the specified buddy
+    optional func showChatChooserFor(for_: MessagesBuddy!) // displays a dialog in Messages to start a new chat with the specified buddy
 }
 extension SBApplication: MessagesApplication {}
 
@@ -247,7 +247,7 @@ extension SBObject: MessagesService {}
     optional var started: NSDate { get } // The date on which this chat started.
     optional var updated: NSDate { get } // The date when this chat was last updated.
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: String!) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.

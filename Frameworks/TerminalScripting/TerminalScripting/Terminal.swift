@@ -19,7 +19,7 @@ import ScriptingBridge
     optional func open(x: [AnyObject]!) // Open a document.
     optional func print(x: AnyObject!, withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func quitSaving(saving: TerminalSaveOptions) // Quit the application.
-    optional func doScript(x: String!, `in`: AnyObject!) -> TerminalTab // Runs a UNIX shell script or command.
+    optional func doScript(x: String!, `in` in_: AnyObject!) -> TerminalTab // Runs a UNIX shell script or command.
     optional func settingsSets() -> SBElementArray
     optional var defaultSettings: TerminalSettingsSet { get set } // The settings set used for new windows.
     optional var startupSettings: TerminalSettingsSet { get set } // The settings set used for the window created on application startup.
@@ -47,7 +47,7 @@ extension SBApplication: TerminalApplication {}
     optional var size: NSPoint { get set } // The width and height of the window
     optional var frame: NSRect { get set } // The bounding rectangle, relative to the lower left corner of the screen.
     optional func closeSaving(saving: TerminalSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!) // Save a document.
+    optional func saveIn(in_: NSURL!) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy object(s) and put the copies at a new location.
@@ -77,7 +77,7 @@ extension SBObject: TerminalWindow {}
     optional var titleDisplaysCustomTitle: Bool { get set } // Whether the title contains a custom title.
     optional var customTitle: String { get set } // The tab’s custom title.
     optional func closeSaving(saving: TerminalSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!) // Save a document.
+    optional func saveIn(in_: NSURL!) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy object(s) and put the copies at a new location.
@@ -112,7 +112,7 @@ extension SBObject: TerminalSettingsSet {}
     optional var fontSize: Int { get set } // The size of the font used to display the tab’s contents.
     optional var fontAntialiasing: Bool { get set } // Whether the font used to display the tab’s contents is antialiased.
     optional func closeSaving(saving: TerminalSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!) // Save a document.
+    optional func saveIn(in_: NSURL!) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy object(s) and put the copies at a new location.

@@ -66,9 +66,15 @@ base_protocols = """
 
 
 def safe_name(name):
-    name = name.rstrip('_')
     return '`{}`'.format(name) if name in keywords else name
 
+
+def arg_name(name, position=0):
+    if position > 0 and name.endswith('_'):
+        stripped_name = name.rstrip('_')
+        return '{} {}'.format(safe_name(stripped_name), name)
+    else:
+        return safe_name(name)
 
 def type_for_type(objc_type, as_arg=False):
     obj_type_string = objc_type.spelling.split(" ")[0]
@@ -124,8 +130,9 @@ class SBHeaderProcessor(object):
 
     def emit_function(self, cursor):
         func_name = safe_name(cursor.spelling.split(':')[0])
-        parameters = ['{}: {}'.format(safe_name(child.spelling), type_for_type(child.type, as_arg=True))
-                      for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
+        parameter_cursors = [child for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
+        parameters = ['{}: {}'.format(arg_name(child.spelling, position=parameter_cursors.index(child)), type_for_type(child.type, as_arg=True))
+                      for child in parameter_cursors]
         return_type = [child.type for child in cursor.get_children() if child.kind != CursorKind.PARM_DECL]
         if return_type:
             return_string = ' -> {}'.format(type_for_type(return_type[0]))

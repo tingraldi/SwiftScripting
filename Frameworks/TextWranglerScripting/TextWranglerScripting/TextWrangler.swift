@@ -188,7 +188,7 @@ extension SBObject: TextWranglerItem {}
     optional func compare(x: AnyObject!, against: AnyObject!, options: TextWranglerCompareOptions!, filter: TextWranglerFilter!) -> TextWranglerCompareResults // compares two files or folders
     optional func find(x: String!, searchingIn: AnyObject!, selectingMatch: Bool, options: TextWranglerSearchOptions!, excludingMatches: Bool, filter: TextWranglerFilter!, recursion: Bool, textFilesOnly: Bool, skipShieldedFolders: Bool, searchInvisibleFolders: Bool, searchCompressedFiles: Bool) -> TextWranglerSearchMatch // Searches for text
     optional func grepSubstitutionOf(of: String!) -> String // computes the Grep replacement string based on the results of the most recent scripted Grep search
-    optional func replace(x: String!, using: String!, searchingIn: AnyObject!, searchingString: String!, options: TextWranglerSearchOptions!, saving: TextWranglerSavo, recursion: Bool, textFilesOnly: Bool, skipShieldedFolders: Bool) -> AnyObject // performs a Replace All
+    optional func replace(x: String!, using using_: String!, searchingIn: AnyObject!, searchingString: String!, options: TextWranglerSearchOptions!, saving: TextWranglerSavo, recursion: Bool, textFilesOnly: Bool, skipShieldedFolders: Bool) -> AnyObject // performs a Replace All
     optional func sleep() // save application state and quit immediately
     optional func runUnixScript(x: [AnyObject]!, selectionOnly: Bool, saveBeforeRunning: Bool, useDebugger: Bool, runInTerminal: Bool, chdirToScriptFolder: Bool, outputTo: TextWranglerOMd, clearBeforeWriting: Bool, saveAfterWriting: Bool) // runs the unix script in the front BBEdit window
     optional func runUnixFilter(x: NSURL!, outputSTDERRTo: TextWranglerFOM, clearBeforeWriting: Bool, saveAfterWriting: Bool, replacingSelection: Bool) // runs the specified unix filter on the selection in the frontmost BBEdit window
@@ -1523,7 +1523,7 @@ extension SBObject: TextWranglerDisplay_line {}
     optional func insertionPoints() -> SBElementArray
     optional func texts() -> SBElementArray
     optional func findSearchingIn(searchingIn: AnyObject!, selectingMatch: Bool, options: TextWranglerSearchOptions!, excludingMatches: Bool, filter: TextWranglerFilter!, recursion: Bool, textFilesOnly: Bool, skipShieldedFolders: Bool, searchInvisibleFolders: Bool, searchCompressedFiles: Bool) -> TextWranglerSearchMatch // Searches for text
-    optional func replaceUsing(using: String!, searchingIn: AnyObject!, searchingString: String!, options: TextWranglerSearchOptions!, saving: TextWranglerSavo, recursion: Bool, textFilesOnly: Bool, skipShieldedFolders: Bool) -> AnyObject // performs a Replace All
+    optional func replaceUsing(using_: String!, searchingIn: AnyObject!, searchingString: String!, options: TextWranglerSearchOptions!, saving: TextWranglerSavo, recursion: Bool, textFilesOnly: Bool, skipShieldedFolders: Bool) -> AnyObject // performs a Replace All
 }
 extension SBObject: TextWranglerText {}
 

@@ -82,7 +82,7 @@ extension SBApplication: FinderApplication {}
     optional var everyonesPrivileges: FinderPriv { get set }
     optional var informationWindow: SBObject { get } // the information window for the item
     optional var properties: [NSObject : AnyObject] { get set } // every property of an item
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -265,7 +265,7 @@ extension SBObject: FinderPackage {}
     optional var visible: Bool { get } // Is the window visible (always true for open Finder windows)?
     optional var collapsed: Bool { get set } // Is the window collapsed
     optional var properties: [NSObject : AnyObject] { get set } // every property of a window
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -334,7 +334,7 @@ extension SBObject: FinderClippingWindow {}
     optional var hasScriptingTerminology: Bool { get } // Does the process have a scripting terminology, i.e., can it be scripted?
     optional var totalPartitionSize: Int { get } // the size of the partition with which the process was launched
     optional var partitionSpaceUsed: Int { get } // the number of bytes currently used in the process' partition
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -383,7 +383,7 @@ extension SBObject: FinderDeskAccessoryProcess {}
     optional var foldersOpenInNewTabs: Bool { get set } // Folders open into new tabs?
     optional var newWindowsOpenInColumnView: Bool { get set } // Open new windows in column view?
     optional var allNameExtensionsShowing: Bool { get set } // Show name extensions, even for items whose “extension hidden” is true?
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -408,7 +408,7 @@ extension SBObject: FinderPreferences {}
     optional var name: String { get set } // the name associated with the label
     optional var index: Int { get set } // the index in the front-to-back ordering within its container
     optional var color: AnyObject { get set } // the color associated with the label
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -440,7 +440,7 @@ extension SBObject: FinderLabel {}
     optional var small32BitIcon: AnyObject { get } // the small 32-bit color icon
     optional var small8BitIcon: AnyObject { get } // the small 8-bit color icon
     optional var small4BitIcon: AnyObject { get } // the small 4-bit color icon
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -470,7 +470,7 @@ extension SBObject: FinderIconFamily {}
     optional var labelPosition: FinderEpos { get set } // the location of the label in reference to the icon
     optional var backgroundPicture: FinderFile { get set } // the background picture of the icon view
     optional var backgroundColor: AnyObject { get set } // the background color of the icon view
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -497,7 +497,7 @@ extension SBObject: FinderIconViewOptions {}
     optional var showsIconPreview: Bool { get set } // displays a preview of the item in column view
     optional var showsPreviewColumn: Bool { get set } // displays the preview column in column view
     optional var disclosesPreviewPane: Bool { get set } // discloses the preview pane of the preview column in column view
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -526,7 +526,7 @@ extension SBObject: FinderColumnViewOptions {}
     optional var textSize: Int { get set } // the size of the text displayed in the list view
     optional var sortColumn: FinderColumn { get set } // the column that the list view is sorted on
     optional var usesRelativeDates: Bool { get set } // Are relative dates (e.g., today, yesterday) shown in the list view?
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -555,7 +555,7 @@ extension SBObject: FinderListViewOptions {}
     optional var minimumWidth: Int { get } // the minimum allowed width of this column
     optional var maximumWidth: Int { get } // the maximum allowed width of this column
     optional var visible: Bool { get set } // is this column visible
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object
@@ -577,7 +577,7 @@ extension SBObject: FinderColumn {}
 
 // MARK: FinderAliasList
 @objc public protocol FinderAliasList: SBObjectProtocol {
-    optional func openUsing(using: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
     optional func activate() // Activate the specified window (or the Finder)
     optional func close() // Close an object

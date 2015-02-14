@@ -49,13 +49,13 @@ extension SBApplication: XcodeApplication {}
     optional var modified: Bool { get } // Has it been modified since the last save?
     optional var file: NSURL { get } // Its location on disk, if it has one.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional var path: String { get set } // The document's path.
@@ -77,13 +77,13 @@ extension SBObject: XcodeDocument {}
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: XcodeDocument { get } // The document whose contents are displayed in the window.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -100,13 +100,13 @@ extension SBObject: XcodeWindow {}
     optional var font: String { get set } // The name of the font of the text's first character.
     optional var size: Int { get set } // The size in points of the text's first character.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
@@ -125,13 +125,13 @@ extension SBObject: XcodeRichText {}
     optional var font: String { get set } // The name of its font.
     optional var size: Int { get set } // Its size, in points.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
@@ -150,13 +150,13 @@ extension SBObject: XcodeCharacter {}
     optional var font: String { get set } // The name of the font of the paragraph's first character.
     optional var size: Int { get set } // The size in points of the paragraph's first character.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
@@ -175,13 +175,13 @@ extension SBObject: XcodeParagraph {}
     optional var font: String { get set } // The name of the font of the word's first character.
     optional var size: Int { get set } // The size in points of the word's first character.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
@@ -200,13 +200,13 @@ extension SBObject: XcodeWord {}
     optional var font: String { get set } // The name of its font.
     optional var size: Int { get set } // Its size, in points.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
@@ -225,13 +225,13 @@ extension SBObject: XcodeAttachment {}
     optional var path: String { get set } // The path of the input file.
     optional var runScriptPhase: XcodeRunScriptPhase { get } // The run script phase that contains this input path.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -242,13 +242,13 @@ extension SBObject: XcodeInputPath {}
     optional var path: String { get set } // The path of the output file.
     optional var runScriptPhase: XcodeRunScriptPhase { get } // The run script phase that contains this output path.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -259,13 +259,13 @@ extension SBObject: XcodeOutputPath {}
     optional func id() -> String // The unique identifier for the build configuration type.
     optional var name: String { get set } // The name of this build configuration type.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -279,13 +279,13 @@ extension SBObject: XcodeBuildConfigurationType {}
     optional var message: String { get set } // The text of the build message.
     optional var path: String { get set } // The absolute path to the file that the build message is referencing.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -300,13 +300,13 @@ extension SBObject: XcodeBuildMessage {}
     optional var realPath: String { get } // The fully resolved path to the project file on disk. Specifically, all symlinks in the path have been resolved.
     optional var rootGroup: XcodeGroup { get } // The root of the files & groups hierarchy in the project.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -319,13 +319,13 @@ extension SBObject: XcodeContainer {}
     optional var container: XcodeContainer { get } // The container for this item.
     optional var project: XcodeProject { get } // The project that contains this item.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -463,13 +463,13 @@ extension SBObject: XcodeFileBreakpoint {}
     optional var name: String { get } // The name for the project template.
     optional var objectDescription: String { get } // A description of the project template.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -549,13 +549,13 @@ extension SBObject: XcodeXcode3Group {}
     optional var name: String { get set } // The unlocalized build setting name (e.g. DSTROOT).
     optional var value: String { get set } // A string value for the build setting.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -603,13 +603,13 @@ extension SBObject: XcodeTargetDependency {}
 @objc public protocol XcodeInsertionPoint: SBObjectProtocol {
     optional var contents: String { get set } // The contents at the insertion point.
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -665,13 +665,13 @@ extension SBObject: XcodeWorkspaceDocument {}
     optional var transient: Bool { get set } // Is the attribute transient?
     optional var userInfo: [NSObject : AnyObject] { get set } // User info dictionary for the attribute
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -696,13 +696,13 @@ extension SBObject: XcodeDataModelDocument {}
     optional var parent: XcodeEntity { get } // Parent from which the entity inherits
     optional var userInfo: [NSObject : AnyObject] { get set } // User info dictionary for the entity
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -713,13 +713,13 @@ extension SBObject: XcodeEntity {}
     optional var name: String { get set } // Fetch Request name
     optional var predicate: String { get set } // Text form of the predicate for the Fetch Request
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -734,13 +734,13 @@ extension SBObject: XcodeFetchRequest {}
     optional var transient: Bool { get set } // Is the attribute transient?
     optional var userInfo: [NSObject : AnyObject] { get set } // User info dictionary for the attribute
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
@@ -758,13 +758,13 @@ extension SBObject: XcodeFetchedProperty {}
     optional var transient: Bool { get set } // Is the relationship transient?
     optional var userInfo: [NSObject : AnyObject] { get set } // User information dictionary for the relationship
     optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
     optional func printPrintDialog(printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
     optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
     optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }

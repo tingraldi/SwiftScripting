@@ -41,7 +41,7 @@ extension SBApplication: AcornApplication {}
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: AcornDocument { get } // The document whose contents are displayed in the window.
     optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -60,7 +60,7 @@ extension SBObject: AcornWindow {}
     optional var font: String { get set } // The name of the font of the text's first character.
     optional var size: Int { get set } // The size in points of the text's first character.
     optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -79,7 +79,7 @@ extension SBObject: AcornRichText {}
     optional var font: String { get set } // The name of its font.
     optional var size: Int { get set } // Its size, in points.
     optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -98,7 +98,7 @@ extension SBObject: AcornCharacter {}
     optional var font: String { get set } // The name of the font of the paragraph's first character.
     optional var size: Int { get set } // The size in points of the paragraph's first character.
     optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -117,7 +117,7 @@ extension SBObject: AcornParagraph {}
     optional var font: String { get set } // The name of the font of the word's first character.
     optional var size: Int { get set } // The size in points of the word's first character.
     optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -136,7 +136,7 @@ extension SBObject: AcornWord {}
     optional var font: String { get set } // The name of its font.
     optional var size: Int { get set } // Its size, in points.
     optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -163,7 +163,7 @@ extension SBObject: AcornAttachment {}
     optional var width: Double { get set } // The width of the image in pixels.
     optional var currentLayer: AcornLayer { get set } // The Current layer
     optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
@@ -174,7 +174,7 @@ extension SBObject: AcornAttachment {}
     optional func resizeImageWidth(width: Double, height: Double, resolution: Double) // Resize an image
     optional func resizeCanvasWidth(width: Double, height: Double, anchorPosition: AcornAnchorPosition) // Resize the canvas
     optional func trim() // Trim an image, cropping out any whitespace.
-    optional func webExportIn(`in`: NSURL!, `as`: AcornSaveableFileFormat, quality: Int, width: Int, height: Int) // Export a document for the Web.
+    optional func webExportIn(in_: NSURL!, `as`: AcornSaveableFileFormat, quality: Int, width: Int, height: Int) // Export a document for the Web.
     optional func copyMerged() // Copy the document or selection, with combined layers.
     optional func copy() // Copy the layer or selection to the clipboard.
     optional func paste() // Paste whatever is on the clipboard, making a new layer.
@@ -209,7 +209,7 @@ extension SBObject: AcornDocument {}
     optional var blendMode: AcornBlendMode { get set }
     optional var origin: [AnyObject] { get set }
     optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(`in`: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
