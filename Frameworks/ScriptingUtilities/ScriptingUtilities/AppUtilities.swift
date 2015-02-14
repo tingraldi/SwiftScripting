@@ -28,10 +28,6 @@ let DefaultAppLocations = [
     "/System/Library/CoreServices"
 ]
 
-public func Application(#bundleIdentifier: String) -> AnyObject? {
-    return SBApplication.applicationWithBundleIdentifier(bundleIdentifier)
-}
-
 public func FindAppWithName(name: String, locations: [String] = DefaultAppLocations) -> String? {
     var path: String?
     for location in locations {
@@ -39,24 +35,35 @@ public func FindAppWithName(name: String, locations: [String] = DefaultAppLocati
         var isDirectory = ObjCBool(false)
         if NSFileManager.defaultManager().fileExistsAtPath(possiblePath, isDirectory: &isDirectory) && isDirectory.boolValue {
             path = possiblePath
+            break
         }
     }
 
     return path
 }
 
-public func Application(#name: String, locations: [String] = DefaultAppLocations) -> AnyObject? {
+public func Application(#bundleIdentifier: String) -> AnyObject? {
+    return SBApplication.applicationWithBundleIdentifier(bundleIdentifier)
+}
+
+public func Application(#path: String) -> AnyObject? {
     var app: AnyObject?
-    if let path = FindAppWithName(name, locations: locations) {
-        if let bundle = NSBundle(path: path) {
-            app = Application(bundleIdentifier: bundle.bundleIdentifier!)
-        }
+    if let bundle = NSBundle(path: path) {
+        app = Application(bundleIdentifier: bundle.bundleIdentifier!)
     }
 
     return app
 }
 
-public func Application(#name: String, location: String) -> AnyObject? {
-    return Application(name: name, locations: [location])
+public func Application(#name: String, locations: [String] = DefaultAppLocations) -> AnyObject? {
+    var app: AnyObject?
+    if let path = FindAppWithName(name, locations: locations) {
+        app = Application(path: path)
+    }
+
+    return app
 }
 
+public func ObjectWithApplication(application: AnyObject, #scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> AnyObject! {
+    return (application as SBApplication).objectForScriptingClass(scriptingClass, withProperties: properties)
+}

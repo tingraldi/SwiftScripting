@@ -12,6 +12,8 @@
 		E6981C761A86F52B0097ED59 /* ScriptingUtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6981C751A86F52B0097ED59 /* ScriptingUtilitiesTests.swift */; };
 		E6981C801A86F5490097ED59 /* AppUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6981C7F1A86F5490097ED59 /* AppUtilities.swift */; };
 		E6981C821A86F5970097ED59 /* SundryUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6981C811A86F5970097ED59 /* SundryUtilities.swift */; };
+		E6D9BB461A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D9BB441A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6D9BB471A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BB451A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,8 @@
 		E6981C751A86F52B0097ED59 /* ScriptingUtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptingUtilitiesTests.swift; sourceTree = "<group>"; };
 		E6981C7F1A86F5490097ED59 /* AppUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtilities.swift; sourceTree = "<group>"; };
 		E6981C811A86F5970097ED59 /* SundryUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SundryUtilities.swift; sourceTree = "<group>"; };
+		E6D9BB441A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBApplication+ScriptingUtilities.h"; sourceTree = "<group>"; };
+		E6D9BB451A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBApplication+ScriptingUtilities.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				E6981C681A86F52B0097ED59 /* ScriptingUtilities.h */,
 				E6981C7F1A86F5490097ED59 /* AppUtilities.swift */,
 				E6981C811A86F5970097ED59 /* SundryUtilities.swift */,
+				E6D9BB441A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.h */,
+				E6D9BB451A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.m */,
 				E6981C661A86F52B0097ED59 /* Supporting Files */,
 			);
 			path = ScriptingUtilities;
@@ -116,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6981C691A86F52B0097ED59 /* ScriptingUtilities.h in Headers */,
+				E6D9BB461A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D9BB471A8EFAF500C5D908 /* SBApplication+ScriptingUtilities.m in Sources */,
 				E6981C801A86F5490097ED59 /* AppUtilities.swift in Sources */,
 				E6981C821A86F5970097ED59 /* SundryUtilities.swift in Sources */,
 			);
@@ -408,6 +416,7 @@
 				E6981C7B1A86F52B0097ED59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E6981C7C1A86F52B0097ED59 /* Build configuration list for PBXNativeTarget "ScriptingUtilitiesTests" */ = {
 			isa = XCConfigurationList;
@@ -416,6 +425,7 @@
 				E6981C7E1A86F52B0097ED59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

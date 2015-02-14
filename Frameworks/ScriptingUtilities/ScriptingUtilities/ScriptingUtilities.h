@@ -33,4 +33,4 @@ FOUNDATION_EXPORT const unsigned char ScriptingUtilitiesVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ScriptingUtilities/PublicHeader.h>
 
-
+#import <ScriptingUtilities/SBApplication+ScriptingUtilities.h>
