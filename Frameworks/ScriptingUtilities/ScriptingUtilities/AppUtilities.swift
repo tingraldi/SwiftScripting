@@ -64,6 +64,7 @@ public func Application(#name: String, locations: [String] = DefaultAppLocations
     return app
 }
 
-public func ObjectWithApplication(application: AnyObject, #scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> AnyObject! {
-    return (application as SBApplication).objectForScriptingClass(scriptingClass, withProperties: properties)
+public func ObjectWithApplication(application: AnyObject, #scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
+    let theClass = (application as SBApplication).classForScriptingClass(scriptingClass) as SBObject.Type
+    return theClass(properties: properties)
 }
