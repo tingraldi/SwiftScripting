@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6D9BB9E1A9426A900C5D908 /* AcornScriptingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BB9D1A9426A900C5D908 /* AcornScriptingClass.swift */; };
 		E6EC965F1A8718A900A2ED4F /* Acorn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EC965D1A8718A900A2ED4F /* Acorn.swift */; };
 		E6EC96601A8718A900A2ED4F /* AcornEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6EC965E1A8718A900A2ED4F /* AcornEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6F29BD81A619A5B003F1552 /* AcornScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6F29BD71A619A5B003F1552 /* AcornScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		E695E5D21A8846480066C0EF /* Acorn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Acorn.h; sourceTree = "<group>"; };
 		E695E5D31A8846480066C0EF /* Acorn.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Acorn.sdef; sourceTree = "<group>"; };
+		E6D9BB9D1A9426A900C5D908 /* AcornScriptingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcornScriptingClass.swift; sourceTree = "<group>"; };
 		E6EC965D1A8718A900A2ED4F /* Acorn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acorn.swift; sourceTree = "<group>"; };
 		E6EC965E1A8718A900A2ED4F /* AcornEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcornEnums.h; sourceTree = "<group>"; };
 		E6F29BD21A619A5A003F1552 /* AcornScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AcornScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +92,7 @@
 				E6F29BD71A619A5B003F1552 /* AcornScripting.h */,
 				E6EC965D1A8718A900A2ED4F /* Acorn.swift */,
 				E6EC965E1A8718A900A2ED4F /* AcornEnums.h */,
+				E6D9BB9D1A9426A900C5D908 /* AcornScriptingClass.swift */,
 				E6F29BD51A619A5B003F1552 /* Supporting Files */,
 			);
 			path = AcornScripting;
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D9BB9E1A9426A900C5D908 /* AcornScriptingClass.swift in Sources */,
 				E6EC965F1A8718A900A2ED4F /* Acorn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

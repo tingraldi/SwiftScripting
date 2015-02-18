@@ -10,6 +10,7 @@
 		E65365F51A61C0B500BA00AB /* FinderScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E65365F41A61C0B500BA00AB /* FinderScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E65365FB1A61C0B500BA00AB /* FinderScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65365EF1A61C0B500BA00AB /* FinderScripting.framework */; };
 		E65366021A61C0B500BA00AB /* FinderScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E65366011A61C0B500BA00AB /* FinderScriptingTests.m */; };
+		E6D9BBA01A9426DD00C5D908 /* FinderScriptingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BB9F1A9426DD00C5D908 /* FinderScriptingClass.swift */; };
 		E6EC96631A871A9F00A2ED4F /* Finder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EC96611A871A9F00A2ED4F /* Finder.swift */; };
 		E6EC96641A871A9F00A2ED4F /* FinderEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6EC96621A871A9F00A2ED4F /* FinderEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -33,6 +34,7 @@
 		E65366011A61C0B500BA00AB /* FinderScriptingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinderScriptingTests.m; sourceTree = "<group>"; };
 		E653660B1A61C0C500BA00AB /* Finder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Finder.h; sourceTree = "<group>"; };
 		E6C82BB81A884936002D55A2 /* Finder.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Finder.sdef; sourceTree = "<group>"; };
+		E6D9BB9F1A9426DD00C5D908 /* FinderScriptingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinderScriptingClass.swift; sourceTree = "<group>"; };
 		E6EC96611A871A9F00A2ED4F /* Finder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Finder.swift; sourceTree = "<group>"; };
 		E6EC96621A871A9F00A2ED4F /* FinderEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinderEnums.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +83,7 @@
 				E65365F41A61C0B500BA00AB /* FinderScripting.h */,
 				E6EC96611A871A9F00A2ED4F /* Finder.swift */,
 				E6EC96621A871A9F00A2ED4F /* FinderEnums.h */,
+				E6D9BB9F1A9426DD00C5D908 /* FinderScriptingClass.swift */,
 				E65365F21A61C0B500BA00AB /* Supporting Files */,
 			);
 			path = FinderScripting;
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D9BBA01A9426DD00C5D908 /* FinderScriptingClass.swift in Sources */,
 				E6EC96631A871A9F00A2ED4F /* Finder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

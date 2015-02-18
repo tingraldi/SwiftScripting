@@ -12,6 +12,7 @@
 		E691CDE71A66BA44005FF12F /* SystemEventsScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E691CDE61A66BA44005FF12F /* SystemEventsScriptingTests.m */; };
 		E6C82BCC1A885212002D55A2 /* SystemEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BC91A885212002D55A2 /* SystemEvents.swift */; };
 		E6C82BCD1A885212002D55A2 /* SystemEventsEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BCA1A885212002D55A2 /* SystemEventsEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6D9BBAA1A94277800C5D908 /* SystemEventsScriptingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BBA91A94277700C5D908 /* SystemEventsScriptingClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		E6C82BC81A885212002D55A2 /* SystemEvents.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SystemEvents.sdef; sourceTree = "<group>"; };
 		E6C82BC91A885212002D55A2 /* SystemEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEvents.swift; sourceTree = "<group>"; };
 		E6C82BCA1A885212002D55A2 /* SystemEventsEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemEventsEnums.h; sourceTree = "<group>"; };
+		E6D9BBA91A94277700C5D908 /* SystemEventsScriptingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEventsScriptingClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				E691CDD91A66BA44005FF12F /* SystemEventsScripting.h */,
 				E6C82BC91A885212002D55A2 /* SystemEvents.swift */,
 				E6C82BCA1A885212002D55A2 /* SystemEventsEnums.h */,
+				E6D9BBA91A94277700C5D908 /* SystemEventsScriptingClass.swift */,
 				E691CDD71A66BA44005FF12F /* Supporting Files */,
 			);
 			path = SystemEventsScripting;
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D9BBAA1A94277800C5D908 /* SystemEventsScriptingClass.swift in Sources */,
 				E6C82BCC1A885212002D55A2 /* SystemEvents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

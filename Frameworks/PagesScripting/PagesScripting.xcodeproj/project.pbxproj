@@ -12,6 +12,7 @@
 		E62C7A781A55AED00039CF00 /* PagesScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E62C7A5F1A55AB470039CF00 /* PagesScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6C82BC61A884EE4002D55A2 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BC31A884EE4002D55A2 /* Pages.swift */; };
 		E6C82BC71A884EE4002D55A2 /* PagesEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BC41A884EE4002D55A2 /* PagesEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6D9BBA81A94275700C5D908 /* PagesScriptingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BBA71A94275700C5D908 /* PagesScriptingClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		E6C82BC21A884EE4002D55A2 /* Pages.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Pages.sdef; sourceTree = "<group>"; };
 		E6C82BC31A884EE4002D55A2 /* Pages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		E6C82BC41A884EE4002D55A2 /* PagesEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagesEnums.h; sourceTree = "<group>"; };
+		E6D9BBA71A94275700C5D908 /* PagesScriptingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesScriptingClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				E62C7A5F1A55AB470039CF00 /* PagesScripting.h */,
 				E6C82BC31A884EE4002D55A2 /* Pages.swift */,
 				E6C82BC41A884EE4002D55A2 /* PagesEnums.h */,
+				E6D9BBA71A94275700C5D908 /* PagesScriptingClass.swift */,
 				E62C7A5D1A55AB470039CF00 /* Supporting Files */,
 			);
 			path = PagesScripting;
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6C82BC61A884EE4002D55A2 /* Pages.swift in Sources */,
+				E6D9BBA81A94275700C5D908 /* PagesScriptingClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,18 @@
+public enum ImageEventsScriptingClass: String {
+    case Alias = "alias"
+    case ClassicDomainObject = "Classic domain object"
+    case Disk = "disk"
+    case DiskItem = "disk item"
+    case Domain = "domain"
+    case File = "file"
+    case FilePackage = "file package"
+    case Folder = "folder"
+    case LocalDomainObject = "local domain object"
+    case NetworkDomainObject = "network domain object"
+    case SystemDomainObject = "system domain object"
+    case UserDomainObject = "user domain object"
+    case Display = "display"
+    case Image = "image"
+    case MetadataTag = "metadata tag"
+    case Profile = "profile"
+}

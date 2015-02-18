@@ -12,6 +12,7 @@
 		E6D89B5E1A620F7C00452C8D /* MessagesScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D89B5D1A620F7C00452C8D /* MessagesScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D89B641A620F7C00452C8D /* MessagesScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D89B581A620F7C00452C8D /* MessagesScripting.framework */; };
 		E6D89B6B1A620F7C00452C8D /* MessagesScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D89B6A1A620F7C00452C8D /* MessagesScriptingTests.m */; };
+		E6D9BBA61A94274700C5D908 /* MessagesScriptingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BBA51A94274700C5D908 /* MessagesScriptingClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		E6D89B691A620F7C00452C8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6D89B6A1A620F7C00452C8D /* MessagesScriptingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesScriptingTests.m; sourceTree = "<group>"; };
 		E6D89B741A620F8600452C8D /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
+		E6D9BBA51A94274700C5D908 /* MessagesScriptingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesScriptingClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				E6C82BBB1A884CE2002D55A2 /* Messages.swift */,
 				E6C82BBC1A884CE2002D55A2 /* MessagesEnums.h */,
 				E6D89B5D1A620F7C00452C8D /* MessagesScripting.h */,
+				E6D9BBA51A94274700C5D908 /* MessagesScriptingClass.swift */,
 				E6D89B5B1A620F7C00452C8D /* Supporting Files */,
 			);
 			path = MessagesScripting;
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D9BBA61A94274700C5D908 /* MessagesScriptingClass.swift in Sources */,
 				E6C82BBE1A884CE2002D55A2 /* Messages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

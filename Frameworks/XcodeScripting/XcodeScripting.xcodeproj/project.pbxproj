@@ -12,6 +12,7 @@
 		E691CDBC1A65564B005FF12F /* XcodeScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E691CDBB1A65564B005FF12F /* XcodeScriptingTests.m */; };
 		E6C82BE11A886A8B002D55A2 /* Xcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BDE1A886A8B002D55A2 /* Xcode.swift */; };
 		E6C82BE21A886A8B002D55A2 /* XcodeEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BDF1A886A8B002D55A2 /* XcodeEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6D9BBB01A9427A800C5D908 /* XcodeScriptingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BBAF1A9427A800C5D908 /* XcodeScriptingClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		E6C82BDD1A886A8B002D55A2 /* Xcode.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Xcode.sdef; sourceTree = "<group>"; };
 		E6C82BDE1A886A8B002D55A2 /* Xcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Xcode.swift; sourceTree = "<group>"; };
 		E6C82BDF1A886A8B002D55A2 /* XcodeEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcodeEnums.h; sourceTree = "<group>"; };
+		E6D9BBAF1A9427A800C5D908 /* XcodeScriptingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeScriptingClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				E6C82BDE1A886A8B002D55A2 /* Xcode.swift */,
 				E6C82BDF1A886A8B002D55A2 /* XcodeEnums.h */,
 				E691CDAE1A65564B005FF12F /* XcodeScripting.h */,
+				E6D9BBAF1A9427A800C5D908 /* XcodeScriptingClass.swift */,
 				E691CDAC1A65564B005FF12F /* Supporting Files */,
 			);
 			path = XcodeScripting;
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D9BBB01A9427A800C5D908 /* XcodeScriptingClass.swift in Sources */,
 				E6C82BE11A886A8B002D55A2 /* Xcode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
