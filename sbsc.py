@@ -52,3 +52,4 @@ for raw_name in raw_names.strip().split("name="):
         out_file.write('    case {} = {}\n'.format(transform(raw_name), raw_name.strip()))
 
 out_file.write('}\n')
+out_file.close()
