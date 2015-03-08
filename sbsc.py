@@ -19,6 +19,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+#
+# Creates a Swift source file containing an enum encompassing the scripting
+# class names for the SDEF file specified on the command line.
+#
+# Sample usage:
+#
+# sbsc.py App.sdef
+#
 
 import os
 import string
@@ -42,7 +50,7 @@ pipe = os.popen(command_template.format(sys.argv[1]))
 raw_names = pipe.read()
 pipe.close()
 
-enum_name = '{}ScriptingClass'.format(name_from_path(sys.argv[1]))
+enum_name = '{}Scripting'.format(name_from_path(sys.argv[1]))
 out_file = open('{}.swift'.format(enum_name), 'w')
 
 out_file.write('public enum {}: String {{\n'.format(enum_name))
