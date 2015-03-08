@@ -27,4 +27,4 @@
 import ScriptingUtilities
 import AcornScripting
 
-(Application(name: "Acorn") as AcornApplication).taunt!()
+(Application(name: "Acorn") as! AcornApplication).taunt!()

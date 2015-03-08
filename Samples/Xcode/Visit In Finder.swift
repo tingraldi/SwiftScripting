@@ -29,8 +29,8 @@ import ScriptingUtilities
 import XcodeScripting
 import FinderScripting
 
-let xcode = Application(name: "Xcode") as XcodeApplication
-let finder = Application(name: "Finder") as FinderApplication
+let xcode = Application(name: "Xcode") as! XcodeApplication
+let finder = Application(name: "Finder") as! FinderApplication
 
 let workspace = xcode.activeWorkspaceDocument!
 let pathComponents = workspace.file!.pathComponents!.filter {
@@ -40,6 +40,6 @@ let path = NSString.pathWithComponents(pathComponents)
 let fileURL = NSURL(fileURLWithPath: path)
 
 finder.activate()
-let folder = finder.folders!().objectAtLocation(fileURL) as FinderFolder
+let folder = finder.folders!().objectAtLocation(fileURL) as! FinderFolder
 folder.openUsing!(nil, withProperties: nil)
 

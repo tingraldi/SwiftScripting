@@ -32,10 +32,10 @@ import ScriptingUtilities
 
 let imageExtensions = ["png", "jpg", "jpeg", "tif", "tiff", "gif"]
 
-let finder = Application(name: "Finder") as FinderApplication
-let imageEvents = Application(name: "Image Events") as ImageEventsApplication
+let finder = Application(name: "Finder") as! FinderApplication
+let imageEvents = Application(name: "Image Events") as! ImageEventsApplication
 
-for item in (finder.selection!.get() as NSArray) {
+for item in (finder.selection!.get() as! NSArray) {
     if let file = item as? FinderFile {
         let fileExtension = file.nameExtension!.lowercaseString
         if contains(imageExtensions, fileExtension) {
@@ -44,7 +44,7 @@ for item in (finder.selection!.get() as NSArray) {
             let outputFilename = "\(file.name!.stringByDeletingPathExtension) (half-scale).\(fileExtension)"
             let outputURL = outputDirectory.URLByAppendingPathComponent(outputFilename)
             
-            let image = imageEvents.open!(fileURL!) as ImageEventsImage
+            let image = imageEvents.open!(fileURL!) as! ImageEventsImage
             image.scaleByFactor!(0.5, toSize: 0)
             
             image.closeSaving!(ImageEventsSavoYes, savingIn: outputURL.path!)

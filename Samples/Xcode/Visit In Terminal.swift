@@ -29,8 +29,8 @@ import ScriptingUtilities
 import XcodeScripting
 import TerminalScripting
 
-let xcode = Application(name: "Xcode") as XcodeApplication
-let terminal = Application(name: "Terminal") as TerminalApplication
+let xcode = Application(name: "Xcode") as! XcodeApplication
+let terminal = Application(name: "Terminal") as! TerminalApplication
 
 let workspace = xcode.activeWorkspaceDocument!
 let pathComponents = workspace.file!.pathComponents!.filter {
@@ -40,7 +40,7 @@ let path = NSString.pathWithComponents(pathComponents)
 let script = "cd '\(path)'; clear;"
 
 terminal.activate()
-let terminalWindow = terminal.windows!().objectAtLocation(1) as TerminalWindow
+let terminalWindow = terminal.windows!().objectAtLocation(1) as! TerminalWindow
 let tab = terminalWindow.selectedTab! as TerminalTab
 
 if !terminalWindow.frontmost! || tab.busy! {

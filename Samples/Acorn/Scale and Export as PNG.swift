@@ -37,16 +37,16 @@ import ScriptingUtilities
 import FinderScripting
 import AcornScripting
 
-let finder = Application(name: "Finder") as FinderApplication
-let acorn = Application(name: "Acorn") as AcornApplication
+let finder = Application(name: "Finder") as! FinderApplication
+let acorn = Application(name: "Acorn") as! AcornApplication
 
 let imageFolderURL = NSURL(fileURLWithPath:"~/Desktop/Images".stringByExpandingTildeInPath)!
 NSFileManager.defaultManager().createDirectoryAtURL(imageFolderURL, withIntermediateDirectories: true, attributes: nil, error: nil)
 
-let document = acorn.documents!().objectAtLocation(0) as AcornDocument
+let document = acorn.documents!().objectAtLocation(0) as! AcornDocument
 let name = document.name!.stringByDeletingPathExtension
 
-let folder = finder.folders!().objectAtLocation(imageFolderURL) as FinderFolder
+let folder = finder.folders!().objectAtLocation(imageFolderURL) as! FinderFolder
 folder.openUsing!(nil, withProperties: nil)
 finder.activate()
 
