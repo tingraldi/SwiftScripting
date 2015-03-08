@@ -65,10 +65,10 @@ public func Application(#name: String, locations: [String] = DefaultAppLocations
 }
 
 public func ObjectWithApplication(application: AnyObject, #scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
-    let theClass = (application as SBApplication).classForScriptingClass(scriptingClass) as SBObject.Type
+    let theClass = (application as! SBApplication).classForScriptingClass(scriptingClass) as! SBObject.Type
     return theClass(properties: properties)
 }
 
 public func ObjectWithApplication<T: RawRepresentable>(application: AnyObject, #scriptingClass: T, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
-    return ObjectWithApplication(application, scriptingClass: (scriptingClass.rawValue as String), properties: properties)
+    return ObjectWithApplication(application, scriptingClass: (scriptingClass.rawValue as! String), properties: properties)
 }
