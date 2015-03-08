@@ -1,4 +1,4 @@
-public enum SystemEventsScriptingClass: String {
+public enum SystemEventsScripting: String {
     case User = "user"
     case AppearancePreferencesObject = "appearance preferences object"
     case CdAndDvdPreferencesObject = "CD and DVD preferences object"

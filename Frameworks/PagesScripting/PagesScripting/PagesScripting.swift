@@ -1,4 +1,4 @@
-public enum PagesScriptingClass: String {
+public enum PagesScripting: String {
     case Template = "template"
     case Section = "section"
     case Page = "page"

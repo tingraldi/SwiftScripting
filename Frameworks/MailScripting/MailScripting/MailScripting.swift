@@ -1,4 +1,4 @@
-public enum MailScriptingClass: String {
+public enum MailScripting: String {
     case RichText = "rich text"
     case Attachment = "attachment"
     case Paragraph = "paragraph"

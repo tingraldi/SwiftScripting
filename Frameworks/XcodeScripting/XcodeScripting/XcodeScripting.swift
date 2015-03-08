@@ -1,4 +1,4 @@
-public enum XcodeScriptingClass: String {
+public enum XcodeScripting: String {
     case RichText = "rich text"
     case Character = "character"
     case Paragraph = "paragraph"

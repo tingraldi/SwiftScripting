@@ -1,4 +1,4 @@
-public enum TextWranglerScriptingClass: String {
+public enum TextWranglerScripting: String {
     case PrintSettings = "print settings"
     case Item = "item"
     case Application = "application"

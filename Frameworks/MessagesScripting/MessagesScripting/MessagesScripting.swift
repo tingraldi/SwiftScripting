@@ -1,4 +1,4 @@
-public enum MessagesScriptingClass: String {
+public enum MessagesScripting: String {
     case Item = "item"
     case Color = "color"
     case Document = "document"

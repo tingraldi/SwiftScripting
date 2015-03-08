@@ -12,7 +12,7 @@
 		E6C82C011A886B54002D55A2 /* MailScriptingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82C001A886B54002D55A2 /* MailScriptingTests.swift */; };
 		E6C82C101A886BB9002D55A2 /* Mail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82C0C1A886BB9002D55A2 /* Mail.swift */; };
 		E6C82C111A886BB9002D55A2 /* MailEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82C0D1A886BB9002D55A2 /* MailEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6D9BBA41A94273400C5D908 /* MailScriptingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BBA31A94273400C5D908 /* MailScriptingClass.swift */; };
+		E6D7AE7D1AABF64500E8E744 /* MailScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE7C1AABF64500E8E744 /* MailScripting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,7 @@
 		E6C82C0B1A886BB9002D55A2 /* Mail.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Mail.sdef; sourceTree = "<group>"; };
 		E6C82C0C1A886BB9002D55A2 /* Mail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mail.swift; sourceTree = "<group>"; };
 		E6C82C0D1A886BB9002D55A2 /* MailEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailEnums.h; sourceTree = "<group>"; };
-		E6D9BBA31A94273400C5D908 /* MailScriptingClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailScriptingClass.swift; sourceTree = "<group>"; };
+		E6D7AE7C1AABF64500E8E744 /* MailScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailScripting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,7 @@
 				E6C82BF31A886B54002D55A2 /* MailScripting.h */,
 				E6C82C0C1A886BB9002D55A2 /* Mail.swift */,
 				E6C82C0D1A886BB9002D55A2 /* MailEnums.h */,
-				E6D9BBA31A94273400C5D908 /* MailScriptingClass.swift */,
+				E6D7AE7C1AABF64500E8E744 /* MailScripting.swift */,
 				E6C82BF11A886B54002D55A2 /* Supporting Files */,
 			);
 			path = MailScripting;
@@ -231,8 +231,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D7AE7D1AABF64500E8E744 /* MailScripting.swift in Sources */,
 				E6C82C101A886BB9002D55A2 /* Mail.swift in Sources */,
-				E6D9BBA41A94273400C5D908 /* MailScriptingClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

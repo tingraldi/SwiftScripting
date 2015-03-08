@@ -1,4 +1,4 @@
-public enum AcornScriptingClass: String {
+public enum AcornScripting: String {
     case Application = "application"
     case Window = "window"
     case RichText = "rich text"

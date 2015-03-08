@@ -1,4 +1,4 @@
-public enum FinderScriptingClass: String {
+public enum FinderScripting: String {
     case Application = "application"
     case Item = "item"
     case Container = "container"

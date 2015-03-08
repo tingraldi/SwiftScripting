@@ -1,4 +1,4 @@
-public enum ImageEventsScriptingClass: String {
+public enum ImageEventsScripting: String {
     case Alias = "alias"
     case ClassicDomainObject = "Classic domain object"
     case Disk = "disk"

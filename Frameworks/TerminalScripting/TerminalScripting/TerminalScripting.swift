@@ -1,4 +1,4 @@
-public enum TerminalScriptingClass: String {
+public enum TerminalScripting: String {
     case Application = "application"
     case Window = "window"
     case SettingsSet = "settings set"
