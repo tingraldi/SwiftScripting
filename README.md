@@ -28,7 +28,7 @@ The basic recipe for generating the Swift protocols and enums for a fictitious a
 4. `sbsc.py App.sdef`
 
 Step 1 will create the `App.sdef` file in the current directory. Step 2 will create a file `App.h`, also in the current
-directory. Step 3 will create two additional files in the current directory: `App.swift` and `AppEnums.h`. The final step will create the file `AppScriptingClass.swift` which contains an enum with values appropriate for class creation.
+directory. Step 3 will create two additional files in the current directory: `App.swift` and `AppEnums.h`. The final step will create the file `AppScripting.swift` which contains an enum with values appropriate for class creation.
 
 Note that the sbhc.py script leverages the [Python bindings](https://pypi.python.org/pypi/clang/3.5) for libclang.
 You must install these bindings before running the script.
