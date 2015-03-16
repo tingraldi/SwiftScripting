@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary xmlns:xi="http://www.w3.org/2003/XInclude">
+    <suite name="Standard Suite" code="????">
+        <xi:include href="file://localhost/System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite/node()[not(self::command and ((@name = 'delete') or (@name = 'duplicate') or (@name = 'move') or (@name = 'save')))])"/>
+    </suite>
+	<suite name="System Preferences" code="xpsp" description="System Preferences specific classes">
+		<class-extension extends="application" description="System Preferences top level scripting object">
+			<cocoa class="PreferencesApp"/>
+			<element type="pane" access="r">
+				<cocoa key="orderedPrefPanes"/>
+				<access-group identifier="preferencepane.reveal" access="r"/>
+				<access-group identifier="preferencepane.authorize" access="r"/>
+			</element>
+			<property name="current pane" code="xpcp" type="pane" description="the currently selected pane">
+				<cocoa key="currentPanel"/>
+				<access-group identifier="preferencepane.reveal" access="rw"/>
+				<access-group identifier="preferencepane.authorize" access="r"/>
+			</property>
+			<property name="preferences window" code="xppw" type="window" access="r" description="the main preferences window"/>
+			<property name="show all" code="xpsa" type="boolean" description="Is SystemPrefs in show all view. (Setting to false will do nothing)">
+				<access-group identifier="preferencepane.reveal" access="rw"/>
+			</property>
+		</class-extension>
+		<class name="pane" code="xppb" description="a preference pane" plural="panes">
+			<cocoa class="NSPrefPaneBundle"/>
+			<access-group identifier="preferencepane.reveal" access="r"/>
+			<element type="anchor" access="r"/>
+			<property name="id" code="ID  " type="text" access="r" description="locale independent name of the preference pane; can refer to a pane using the expression: pane id &quot;&lt;name&gt;&quot;">
+				<cocoa key="identifier"/>
+			</property>
+			<property name="localized name" code="xpsn" type="text" access="r" description="localized name of the preference pane">
+				<cocoa key="shortName"/>
+			</property>
+			<property name="name" code="pnam" type="text" access="r" description="name of the preference pane as it appears in the title bar; can refer to a pane using the expression: pane &quot;&lt;name&gt;&quot;"/>
+			<responds-to command="reveal">
+				<cocoa method="reveal:"/>
+			</responds-to>
+			<responds-to command="authorize">
+				<cocoa method="authorize:"/>
+			</responds-to>
+			<responds-to command="timedLoad" hidden="yes">
+				<cocoa method="timedLoad:"/>
+			</responds-to>
+		</class>
+		<class name="anchor" code="xppa" description="an anchor within a preference pane" plural="anchors">
+			<cocoa class="NSPrefPaneAnchor"/>
+			<access-group identifier="preferencepane.reveal" access="r"/>
+			<property name="name" code="pnam" type="text" access="r" description="name of the anchor within a preference pane"/>
+			<responds-to command="reveal">
+				<cocoa method="reveal:"/>
+			</responds-to>
+		</class>
+		<command name="reveal" code="miscmvis" description="Reveals an anchor within a preference pane or preference pane itself">
+			<access-group identifier="preferencepane.reveal"/>
+			<direct-parameter requires-access="r">
+				<type type="pane"/>
+				<type type="anchor"/>
+			</direct-parameter>
+			<result>
+				<type type="pane"/>
+				<type type="anchor"/>
+			</result>
+		</command>
+		<command name="authorize" code="miscmaut" description="Prompt authorization for given preference pane">
+			<access-group identifier="preferencepane.authorize"/>
+			<direct-parameter type="pane" requires-access="r"/>
+			<result>
+				<type type="pane"/>
+			</result>
+		</command>
+		<command name="timedLoad" code="miscmtml" description="Times and loads given preference pane and returns load time." hidden="yes">
+			<direct-parameter type="pane"/>
+			<result type="real"/>
+		</command>
+	</suite>
+</dictionary>
