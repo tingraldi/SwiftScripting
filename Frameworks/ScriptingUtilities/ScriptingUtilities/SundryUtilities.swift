@@ -29,3 +29,20 @@ public func NotifyUserWithMessage(message: String, #title: String) {
     var script = "display notification \"\(message)\" with title \"\(title)\""
     RunScript(script)
 }
+
+public func CommandOutput(commandPath: String, withArguments arguments: [String]? = nil, currentDirectoryPath: String? = nil) -> String? {
+    let task = NSTask()
+    let pipe = NSPipe()
+    task.standardOutput = pipe.fileHandleForWriting
+    task.launchPath = commandPath
+    if currentDirectoryPath != nil {
+        task.currentDirectoryPath = currentDirectoryPath!
+    }
+    if arguments != nil {
+        task.arguments = arguments!
+    }
+    task.launch()
+    task.waitUntilExit()
+    pipe.fileHandleForWriting.closeFile()
+    return NSString(data: pipe.fileHandleForReading.availableData, encoding: NSUTF8StringEncoding) as! String?
+}
