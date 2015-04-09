@@ -61,6 +61,8 @@
 		E695E5D11A8843B30066C0EF /* ObjC Header */ = {
 			isa = PBXGroup;
 			children = (
+				E695E5D21A8846480066C0EF /* Acorn.h */,
+				E695E5D31A8846480066C0EF /* Acorn.sdef */,
 			);
 			name = "ObjC Header";
 			sourceTree = "<group>";
@@ -86,8 +88,6 @@
 		E6F29BD41A619A5A003F1552 /* AcornScripting */ = {
 			isa = PBXGroup;
 			children = (
-				E695E5D21A8846480066C0EF /* Acorn.h */,
-				E695E5D31A8846480066C0EF /* Acorn.sdef */,
 				E695E5D11A8843B30066C0EF /* ObjC Header */,
 				E6F29BD71A619A5B003F1552 /* AcornScripting.h */,
 				E6EC965D1A8718A900A2ED4F /* Acorn.swift */,
