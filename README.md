@@ -4,7 +4,7 @@ Utilities and samples to aid in using Swift with the Scripting Bridge
 ## Generating Swift API for a Target Application
 
 The scripting approach leveraged here is a Swift layer on top of the [Scripting Bridge](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ScriptingBridgeConcepts/Introduction/Introduction.html).
-OS X ships with a pair of utilities, `sdef` and `sdp`, to aid Objective-C programmers in using the Scripting Bridge.
+Xcode ships with a pair of utilities, `sdef` and `sdp`, to aid Objective-C programmers in using the Scripting Bridge.
 
 The `sdef` tool is used to extract the scripting definition from an application. It emits the scripting 
 definition to standard output in XML format. The `sdp` tool can be used to convert the XML emitted by
