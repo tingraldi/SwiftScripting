@@ -27,19 +27,12 @@
 import Foundation
 import ScriptingUtilities
 import XcodeScripting
-import FinderScripting
 
 let xcode = application(name: "Xcode") as! XcodeApplication
-let finder = application(name: "Finder") as! FinderApplication
 
 let workspace = xcode.activeWorkspaceDocument!
 let pathComponents = workspace.file!.pathComponents!.filter {
     !$0.hasSuffix(".xcodeproj") && !$0.hasSuffix(".xcworkspace")
 }
 let path = NSString.pathWithComponents(pathComponents)
-let fileURL = NSURL(fileURLWithPath: path)
-
-finder.activate()
-let folder = finder.folders!().objectAtLocation(fileURL) as! FinderFolder
-folder.openUsing!(nil, withProperties: nil)
-
+NSTask.launchedTaskWithLaunchPath("/usr/bin/open", arguments: [path])

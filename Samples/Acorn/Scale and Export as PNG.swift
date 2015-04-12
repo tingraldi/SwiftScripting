@@ -34,28 +34,30 @@
 
 import Foundation
 import ScriptingUtilities
-import FinderScripting
 import AcornScripting
 
-let finder = application(name: "Finder") as! FinderApplication
 let acorn = application(name: "Acorn") as! AcornApplication
 
 let imageFolderURL = NSURL(fileURLWithPath:"~/Desktop/Images".stringByExpandingTildeInPath)!
-NSFileManager.defaultManager().createDirectoryAtURL(imageFolderURL, withIntermediateDirectories: true, attributes: nil, error: nil)
+NSFileManager.defaultManager().createDirectoryAtURL(imageFolderURL, 
+                                withIntermediateDirectories: true, 
+                                attributes: nil, 
+                                error: nil)
+NSTask.launchedTaskWithLaunchPath("/usr/bin/open", arguments: [imageFolderURL.path!])
 
 let document = acorn.documents!().objectAtLocation(0) as! AcornDocument
 let name = document.name!.stringByDeletingPathExtension
-
-let folder = finder.folders!().objectAtLocation(imageFolderURL) as! FinderFolder
-folder.openUsing!(nil, withProperties: nil)
-finder.activate()
 
 for (scale, suffix) in [1.0 : "@3x", 0.66 : "@2x", 0.33 : ""] {
     let fileName = "\(name)\(suffix).png"
     let fileURL: NSURL = imageFolderURL.URLByAppendingPathComponent(fileName)
     let scaledWidth = Int(scale * document.width!)
     let scaledHeight = Int(scale * document.height!)
-    document.webExportIn!(fileURL, `as`: AcornSaveableFileFormatPNG, quality: 100, width: scaledWidth, height: scaledHeight)
+    document.webExportIn!(fileURL, 
+              `as`: AcornSaveableFileFormatPNG, 
+              quality: 100, 
+              width: scaledWidth, 
+              height: scaledHeight)
 }
 
 notifyUserWithMessage("Export complete.", title: "Acorn")
