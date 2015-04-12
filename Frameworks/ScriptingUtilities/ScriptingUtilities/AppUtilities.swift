@@ -22,13 +22,13 @@
 import Foundation
 import ScriptingBridge
 
-let DefaultAppLocations = [
+let defaultAppLocations = [
     "/Applications",
     "/Applications/Utilities",
     "/System/Library/CoreServices"
 ]
 
-public func FindAppWithName(name: String, locations: [String] = DefaultAppLocations) -> String? {
+public func appPathForName(name: String, locations: [String] = defaultAppLocations) -> String? {
     var path: String?
     for location in locations {
         let possiblePath = "\(location)/\(name).app"
@@ -42,33 +42,33 @@ public func FindAppWithName(name: String, locations: [String] = DefaultAppLocati
     return path
 }
 
-public func Application(#bundleIdentifier: String) -> AnyObject? {
+public func application(#bundleIdentifier: String) -> AnyObject? {
     return SBApplication.applicationWithBundleIdentifier(bundleIdentifier)
 }
 
-public func Application(#path: String) -> AnyObject? {
+public func application(#path: String) -> AnyObject? {
     var app: AnyObject?
     if let bundle = NSBundle(path: path) {
-        app = Application(bundleIdentifier: bundle.bundleIdentifier!)
+        app = application(bundleIdentifier: bundle.bundleIdentifier!)
     }
 
     return app
 }
 
-public func Application(#name: String, locations: [String] = DefaultAppLocations) -> AnyObject? {
+public func application(#name: String, locations: [String] = defaultAppLocations) -> AnyObject? {
     var app: AnyObject?
-    if let path = FindAppWithName(name, locations: locations) {
-        app = Application(path: path)
+    if let path = appPathForName(name, locations: locations) {
+        app = application(path: path)
     }
 
     return app
 }
 
-public func ObjectWithApplication(application: AnyObject, #scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
+public func objectWithApplication(application: AnyObject, #scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
     let theClass = (application as! SBApplication).classForScriptingClass(scriptingClass) as! SBObject.Type
     return theClass(properties: properties)
 }
 
-public func ObjectWithApplication<T: RawRepresentable>(application: AnyObject, #scriptingClass: T, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
-    return ObjectWithApplication(application, scriptingClass: (scriptingClass.rawValue as! String), properties: properties)
+public func objectWithApplication<T: RawRepresentable>(application: AnyObject, #scriptingClass: T, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
+    return objectWithApplication(application, scriptingClass: (scriptingClass.rawValue as! String), properties: properties)
 }

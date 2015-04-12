@@ -36,14 +36,14 @@ import Foundation
 import ScriptingUtilities
 import XcodeScripting
 
-let xcode = Application(name: "Xcode") as! XcodeApplication
+let xcode = application(name: "Xcode") as! XcodeApplication
 
 let workspace = xcode.activeWorkspaceDocument!
 let pathComponents = workspace.file!.pathComponents!.filter {
     !$0.hasSuffix(".xcodeproj") && !$0.hasSuffix(".xcworkspace")
 }
 
-if let URLString = CommandOutput("/usr/bin/git", 
+if let URLString = commandOutput("/usr/bin/git", 
                                  withArguments: ["config", "--get", "remote.origin.url"], 
                                  currentDirectoryPath: NSString.pathWithComponents(pathComponents)) 
                                  where count(URLString) > 0 {

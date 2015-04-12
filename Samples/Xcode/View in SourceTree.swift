@@ -30,7 +30,7 @@ import Foundation
 import ScriptingUtilities
 import XcodeScripting
 
-let xcode = Application(name: "Xcode") as! XcodeApplication
+let xcode = application(name: "Xcode") as! XcodeApplication
 
 let workspace = xcode.activeWorkspaceDocument!
 let pathComponents = workspace.file!.pathComponents!.filter {

@@ -29,8 +29,8 @@ import ScriptingUtilities
 import XcodeScripting
 import TerminalScripting
 
-let xcode = Application(name: "Xcode") as! XcodeApplication
-let terminal = Application(name: "Terminal") as! TerminalApplication
+let xcode = application(name: "Xcode") as! XcodeApplication
+let terminal = application(name: "Terminal") as! TerminalApplication
 
 let workspace = xcode.activeWorkspaceDocument!
 let pathComponents = workspace.file!.pathComponents!.filter {

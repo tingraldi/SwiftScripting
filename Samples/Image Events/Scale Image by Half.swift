@@ -32,8 +32,8 @@ import ScriptingUtilities
 
 let imageExtensions = ["png", "jpg", "jpeg", "tif", "tiff", "gif"]
 
-let finder = Application(name: "Finder") as! FinderApplication
-let imageEvents = Application(name: "Image Events") as! ImageEventsApplication
+let finder = application(name: "Finder") as! FinderApplication
+let imageEvents = application(name: "Image Events") as! ImageEventsApplication
 
 for item in (finder.selection!.get() as! NSArray) {
     if let file = item as? FinderFile {

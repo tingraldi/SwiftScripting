@@ -37,8 +37,8 @@ import ScriptingUtilities
 import FinderScripting
 import AcornScripting
 
-let finder = Application(name: "Finder") as! FinderApplication
-let acorn = Application(name: "Acorn") as! AcornApplication
+let finder = application(name: "Finder") as! FinderApplication
+let acorn = application(name: "Acorn") as! AcornApplication
 
 let imageFolderURL = NSURL(fileURLWithPath:"~/Desktop/Images".stringByExpandingTildeInPath)!
 NSFileManager.defaultManager().createDirectoryAtURL(imageFolderURL, withIntermediateDirectories: true, attributes: nil, error: nil)
@@ -58,4 +58,4 @@ for (scale, suffix) in [1.0 : "@3x", 0.66 : "@2x", 0.33 : ""] {
     document.webExportIn!(fileURL, `as`: AcornSaveableFileFormatPNG, quality: 100, width: scaledWidth, height: scaledHeight)
 }
 
-NotifyUserWithMessage("Export complete.", title: "Acorn")
+notifyUserWithMessage("Export complete.", title: "Acorn")

@@ -21,16 +21,16 @@
 
 import Foundation
 
-public func RunScript(script: String) {
+public func runScript(script: String) {
     NSTask.launchedTaskWithLaunchPath("/usr/bin/osascript", arguments: ["-e", script])
 }
 
-public func NotifyUserWithMessage(message: String, #title: String) {
+public func notifyUserWithMessage(message: String, #title: String) {
     var script = "display notification \"\(message)\" with title \"\(title)\""
-    RunScript(script)
+    runScript(script)
 }
 
-public func CommandOutput(commandPath: String, withArguments arguments: [String]? = nil, currentDirectoryPath: String? = nil) -> String? {
+public func commandOutput(commandPath: String, withArguments arguments: [String]? = nil, currentDirectoryPath: String? = nil) -> String? {
     let task = NSTask()
     let pipe = NSPipe()
     task.standardOutput = pipe.fileHandleForWriting

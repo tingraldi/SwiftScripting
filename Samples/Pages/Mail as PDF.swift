@@ -31,8 +31,8 @@ import ScriptingUtilities
 import MailScripting
 import PagesScripting
 
-let pages = Application(name: "Pages") as! PagesApplication
-let mail = Application(name: "Mail") as! MailApplication
+let pages = application(name: "Pages") as! PagesApplication
+let mail = application(name: "Mail") as! MailApplication
 
 let document = pages.documents!().objectAtLocation(1) as! PagesDocument
 let tempDirectory = NSURL(fileURLWithPath: "/tmp")!
@@ -41,11 +41,11 @@ let pdfURL = tempDirectory.URLByAppendingPathComponent(pdfName)
 
 document.exportTo!(pdfURL, `as`: PagesExportFormatPDF, withProperties: nil)
 
-let futureMessage = ObjectWithApplication(mail, scriptingClass: MailScripting.OutgoingMessage)
+let futureMessage = objectWithApplication(mail, scriptingClass: MailScripting.OutgoingMessage)
 mail.outgoingMessages!().addObject(futureMessage)
 let message = futureMessage as MailOutgoingMessage
 
-let futureAttachment = ObjectWithApplication(mail, scriptingClass: MailScripting.Attachment, properties: ["fileName": pdfURL])
+let futureAttachment = objectWithApplication(mail, scriptingClass: MailScripting.Attachment, properties: ["fileName": pdfURL])
 message.content!.attachments!().addObject(futureAttachment)
 
 mail.activate()
