@@ -155,8 +155,7 @@ class SBHeaderProcessor(object):
             func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
-        superclass = [child.spelling for child in cursor.get_children()
-                      if child.kind == CursorKind.OBJC_SUPER_CLASS_REF][0]
+        superclass = [token.spelling for token in cursor.get_tokens()][4]
         extension_class = superclass if superclass.startswith('SB') else 'SBObject'
         super_protocol = superclass if not superclass.startswith('SB') else '{}Protocol'.format(superclass)
         protocol_name = cursor.spelling
