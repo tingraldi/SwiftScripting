@@ -34,6 +34,7 @@
 #
 
 import sys
+import struct
 
 from itertools import chain
 
@@ -123,7 +124,10 @@ class SBHeaderProcessor(object):
             self.emit_line('// MARK: {}'.format(cursor.spelling))
             self.emit_line('@objc public enum {} : AEKeyword {{'.format(cursor.spelling))
             for decl in [child for child in cursor.get_children() if child.kind == CursorKind.ENUM_CONSTANT_DECL]:
-                self.emit_line('    case {} = {}'.format(decl.spelling, hex(decl.enum_value)))
+                self.emit_line('    case {} = {} /* {} */'.format(
+                    decl.spelling,
+                    hex(decl.enum_value),
+                    repr(struct.pack('!I', decl.enum_value))))
             self.emit_line('}\n')
 
     def emit_line(self, line):
@@ -208,7 +212,6 @@ class SBHeaderProcessor(object):
 def main(file_path):
     header_processor = SBHeaderProcessor(file_path)
     header_processor.emit_swift()
-    # header_processor.emit_enums()
 
 
 if __name__ == '__main__':
