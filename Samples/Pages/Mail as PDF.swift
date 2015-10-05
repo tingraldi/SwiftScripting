@@ -35,8 +35,8 @@ let pages = application(name: "Pages") as! PagesApplication
 let mail = application(name: "Mail") as! MailApplication
 
 let document = pages.documents!().objectAtLocation(1) as! PagesDocument
-let tempDirectory = NSURL(fileURLWithPath: "/tmp")!
-let pdfName = "\(document.name!.stringByDeletingPathExtension).pdf"
+let tempDirectory = NSURL(fileURLWithPath: "/tmp")
+let pdfName = "\((document.name! as NSString).stringByDeletingPathExtension).pdf"
 let pdfURL = tempDirectory.URLByAppendingPathComponent(pdfName)
 
 document.exportTo!(pdfURL, `as`: PagesExportFormatPDF, withProperties: nil)

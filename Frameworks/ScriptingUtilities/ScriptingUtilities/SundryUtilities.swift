@@ -25,8 +25,8 @@ public func runScript(script: String) {
     NSTask.launchedTaskWithLaunchPath("/usr/bin/osascript", arguments: ["-e", script])
 }
 
-public func notifyUserWithMessage(message: String, #title: String) {
-    var script = "display notification \"\(message)\" with title \"\(title)\""
+public func notifyUserWithMessage(message: String, title: String) {
+    let script = "display notification \"\(message)\" with title \"\(title)\""
     runScript(script)
 }
 
@@ -44,5 +44,5 @@ public func commandOutput(commandPath: String, withArguments arguments: [String]
     task.launch()
     task.waitUntilExit()
     pipe.fileHandleForWriting.closeFile()
-    return NSString(data: pipe.fileHandleForReading.availableData, encoding: NSUTF8StringEncoding) as! String?
+    return NSString(data: pipe.fileHandleForReading.availableData, encoding: NSUTF8StringEncoding) as String?
 }

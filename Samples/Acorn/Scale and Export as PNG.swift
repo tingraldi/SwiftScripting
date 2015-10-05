@@ -38,15 +38,19 @@ import AcornScripting
 
 let acorn = application(name: "Acorn") as! AcornApplication
 
-let imageFolderURL = NSURL(fileURLWithPath:"~/Desktop/Images".stringByExpandingTildeInPath)!
-NSFileManager.defaultManager().createDirectoryAtURL(imageFolderURL, 
-                                withIntermediateDirectories: true, 
-                                attributes: nil, 
-                                error: nil)
+let imageFolderURL = NSURL(fileURLWithPath:("~/Desktop/Images" as NSString).stringByExpandingTildeInPath)
+
+do {
+    try NSFileManager.defaultManager().createDirectoryAtURL(imageFolderURL, 
+                                    withIntermediateDirectories: true, 
+                                    attributes: nil)
+} catch let error as NSError {
+}
+
 NSTask.launchedTaskWithLaunchPath("/usr/bin/open", arguments: [imageFolderURL.path!])
 
 let document = acorn.documents!().objectAtLocation(0) as! AcornDocument
-let name = document.name!.stringByDeletingPathExtension
+let name = (document.name! as NSString).stringByDeletingPathExtension
 
 for (scale, suffix) in [1.0 : "@3x", 0.66 : "@2x", 0.33 : ""] {
     let fileName = "\(name)\(suffix).png"

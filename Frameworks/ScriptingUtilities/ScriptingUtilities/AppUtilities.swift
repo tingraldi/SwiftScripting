@@ -42,11 +42,11 @@ public func appPathForName(name: String, locations: [String] = defaultAppLocatio
     return path
 }
 
-public func application(#bundleIdentifier: String) -> AnyObject? {
-    return SBApplication.applicationWithBundleIdentifier(bundleIdentifier)
+public func application(bundleIdentifier bundleIdentifier: String) -> AnyObject? {
+    return SBApplication(bundleIdentifier: bundleIdentifier)
 }
 
-public func application(#path: String) -> AnyObject? {
+public func application(path path: String) -> AnyObject? {
     var app: AnyObject?
     if let bundle = NSBundle(path: path) {
         app = application(bundleIdentifier: bundle.bundleIdentifier!)
@@ -55,7 +55,7 @@ public func application(#path: String) -> AnyObject? {
     return app
 }
 
-public func application(#name: String, locations: [String] = defaultAppLocations) -> AnyObject? {
+public func application(name name: String, locations: [String] = defaultAppLocations) -> AnyObject? {
     var app: AnyObject?
     if let path = appPathForName(name, locations: locations) {
         app = application(path: path)
@@ -64,11 +64,11 @@ public func application(#name: String, locations: [String] = defaultAppLocations
     return app
 }
 
-public func objectWithApplication(application: AnyObject, #scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
+public func objectWithApplication(application: AnyObject, scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
     let theClass = (application as! SBApplication).classForScriptingClass(scriptingClass) as! SBObject.Type
-    return theClass(properties: properties)
+    return theClass.init(properties: properties)
 }
 
-public func objectWithApplication<T: RawRepresentable>(application: AnyObject, #scriptingClass: T, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
+public func objectWithApplication<T: RawRepresentable>(application: AnyObject, scriptingClass: T, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
     return objectWithApplication(application, scriptingClass: (scriptingClass.rawValue as! String), properties: properties)
 }

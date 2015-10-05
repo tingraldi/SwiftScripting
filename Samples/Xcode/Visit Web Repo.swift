@@ -46,10 +46,11 @@ let pathComponents = workspace.file!.pathComponents!.filter {
 if let URLString = commandOutput("/usr/bin/git", 
                                  withArguments: ["config", "--get", "remote.origin.url"], 
                                  currentDirectoryPath: NSString.pathWithComponents(pathComponents)) 
-                                 where count(URLString) > 0 {
+                                 where URLString.characters.count > 0 {
     let parts = URLString.componentsSeparatedByString("@")
     if parts.count == 2 {
-        var location = parts[1].stringByDeletingPathExtension
+        let partOne: NSString = parts[1]
+        var location = partOne.stringByDeletingPathExtension
         location = location.stringByReplacingOccurrencesOfString(":", withString:"/")
         NSTask.launchedTaskWithLaunchPath("/usr/bin/open", arguments: ["https://\(location)"])
     }

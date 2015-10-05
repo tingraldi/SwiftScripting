@@ -38,10 +38,10 @@ let imageEvents = application(name: "Image Events") as! ImageEventsApplication
 for item in (finder.selection!.get() as! NSArray) {
     if let file = item as? FinderFile {
         let fileExtension = file.nameExtension!.lowercaseString
-        if contains(imageExtensions, fileExtension) {
+        if imageExtensions.contains(fileExtension) {
             let fileURL = NSURL(string: file.URL!)
             let outputDirectory = fileURL!.URLByDeletingLastPathComponent!
-            let outputFilename = "\(file.name!.stringByDeletingPathExtension) (half-scale).\(fileExtension)"
+            let outputFilename = "\((file.name! as NSString).stringByDeletingPathExtension) (half-scale).\(fileExtension)"
             let outputURL = outputDirectory.URLByAppendingPathComponent(outputFilename)
             
             let image = imageEvents.open!(fileURL!) as! ImageEventsImage
