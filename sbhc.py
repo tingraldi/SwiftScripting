@@ -34,6 +34,7 @@
 #
 
 import sys
+import struct
 
 from itertools import chain
 
@@ -118,15 +119,16 @@ class SBHeaderProcessor(object):
         parts = line.strip().split('//')
         return ' //{}'.format(parts[1]) if len(parts) == 2 else ''
 
-    def emit_enums(self):
-        enum_file = open('{}Enums.h'.format(self.app_name), 'w')
-        typedefs = [line for line in self.lines if line.startswith('typedef')]
-        class_lines = [line for line in self.lines if line.startswith('@class')]
-        start_line_index = self.lines.index(class_lines[-1]) + 1
-        last_typedef_line_index = self.lines.index(typedefs[-1]) + 1
-        for index in xrange(start_line_index, last_typedef_line_index):
-            enum_file.write(self.lines[index])
-        enum_file.close()
+    def emit_enums(self, cursors):
+        for cursor in cursors:
+            self.emit_line('// MARK: {}'.format(cursor.spelling))
+            self.emit_line('@objc public enum {} : AEKeyword {{'.format(cursor.spelling))
+            for decl in [child for child in cursor.get_children() if child.kind == CursorKind.ENUM_CONSTANT_DECL]:
+                self.emit_line('    case {} = {} /* {} */'.format(
+                    decl.spelling,
+                    hex(decl.enum_value),
+                    repr(struct.pack('!I', decl.enum_value))))
+            self.emit_line('}\n')
 
     def emit_line(self, line):
         self.swift_file.write(line + '\n')
@@ -196,6 +198,10 @@ class SBHeaderProcessor(object):
         cursor = translation_unit.cursor
         local_children = [child for child in cursor.get_children()
                           if child.location.file and child.location.file.name == self.file_path]
+
+        enums = [child for child in local_children if child.kind == CursorKind.ENUM_DECL]
+        self.emit_enums(enums)
+
         categories = [child for child in local_children if child.kind == CursorKind.OBJC_CATEGORY_DECL]
         self.gather_categories(categories)
         for child in [child for child in local_children if child.kind == CursorKind.OBJC_INTERFACE_DECL]:
@@ -206,7 +212,6 @@ class SBHeaderProcessor(object):
 def main(file_path):
     header_processor = SBHeaderProcessor(file_path)
     header_processor.emit_swift()
-    header_processor.emit_enums()
 
 
 if __name__ == '__main__':
