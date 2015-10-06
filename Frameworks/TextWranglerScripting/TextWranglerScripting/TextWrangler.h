@@ -141,7 +141,7 @@ typedef enum TextWranglerFltM TextWranglerFltM;
 
 enum TextWranglerFiel {
 	TextWranglerFielFile_name = 'Fnam' /* examines file’s name */,
-	TextWranglerFielParent_name = '\304nam' /* examines name of enclosing folder */,
+	/*TextWranglerFielParent_name = '\304nam' * examines name of enclosing folder *, CAN'T MAP TO SWIFT - Negative char code*/
 	TextWranglerFielFile_type = 'Ftyp' /* examines file’s type code */,
 	TextWranglerFielFile_creator = 'Fcrt' /* examines file’s creator code */,
 	TextWranglerFielCreation_date_only = 'Cdat' /* examines file’s creation date, ignoring the time */,

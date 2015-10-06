@@ -31,5 +31,3 @@ FOUNDATION_EXPORT double AcornScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char AcornScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <AcornScripting/PublicHeader.h>
-
-#import <AcornScripting/AcornEnums.h>

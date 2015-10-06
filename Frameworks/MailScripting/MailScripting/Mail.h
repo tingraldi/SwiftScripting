@@ -120,7 +120,7 @@ enum MailRuleType {
 	MailRuleTypeSenderIsNotInMyContacts = 'tsin' /* Sender is not in my contacts */,
 	MailRuleTypeSenderIsNotInMyPreviousRecipients = 'tnah' /* sender is not in my previous recipients */,
 	MailRuleTypeSenderIsNotMemberOfGroup = 'tsig' /* Sender is not member of group */,
-	MailRuleTypeSenderIsVIP = 'tsig' /* Sender is VIP */,
+	/* MailRuleTypeSenderIsVIP = 'tsig' BUG - duplicate * Sender is VIP *,*/
 	MailRuleTypeSubjectHeader = 'tsub' /* Subject header */,
 	MailRuleTypeToHeader = 'ttoo' /* To header */,
 	MailRuleTypeToOrCcHeader = 'ttoc' /* To or Cc header */,

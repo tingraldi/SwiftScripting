@@ -32,6 +32,3 @@ FOUNDATION_EXPORT double XcodeScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char XcodeScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <XcodeScripting/PublicHeader.h>
-
-
-#import <XcodeScripting/XcodeEnums.h>

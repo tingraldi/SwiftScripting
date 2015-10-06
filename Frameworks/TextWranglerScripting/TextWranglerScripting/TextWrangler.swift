@@ -10,6 +10,198 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: TextWranglerEnum
+@objc public enum TextWranglerEnum : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
+// MARK: TextWranglerRAsE
+@objc public enum TextWranglerRAsE : AEKeyword {
+    case Auto_detectFile = 0x52644144 /* 'RdAD' */
+    case UTF8File = 0x52645538 /* 'RdU8' */
+    case UnicodeFile = 0x52645562 /* 'RdUb' */
+    case ByteSwappedUnicodeFile = 0x5264556c /* 'RdUl' */
+}
+
+// MARK: TextWranglerPstp
+@objc public enum TextWranglerPstp : AEKeyword {
+    case ModificationDate = 0x61736d6f /* 'asmo' */
+    case PrintingDate = 0x50726e44 /* 'PrnD' */
+}
+
+// MARK: TextWranglerOpnE
+@objc public enum TextWranglerOpnE : AEKeyword {
+    case Front_window = 0x46727457 /* 'FrtW' */
+    case New_window = 0x4e657757 /* 'NewW' */
+    case Separate_windows = 0x53657057 /* 'SepW' */
+}
+
+// MARK: TextWranglerSavo
+@objc public enum TextWranglerSavo : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: TextWranglerKfrm
+@objc public enum TextWranglerKfrm : AEKeyword {
+    case Index = 0x696e6478 /* 'indx' */
+    case Named = 0x6e616d65 /* 'name' */
+    case Id = 0x49442020 /* 'ID  ' */
+}
+
+// MARK: TextWranglerRevo
+@objc public enum TextWranglerRevo : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: TextWranglerStyl
+@objc public enum TextWranglerStyl : AEKeyword {
+    case Plain = 0x706c616e /* 'plan' */
+    case Bold = 0x626f6c64 /* 'bold' */
+    case Italic = 0x6974616c /* 'ital' */
+    case Outline = 0x6f75746c /* 'outl' */
+    case Shadow = 0x73686164 /* 'shad' */
+    case Underline = 0x756e646c /* 'undl' */
+    case Condensed = 0x636f6e64 /* 'cond' */
+    case Extended = 0x45787464 /* 'Extd' */
+}
+
+// MARK: TextWranglerLinB
+@objc public enum TextWranglerLinB : AEKeyword {
+    case Mac = 0x43522020 /* 'CR  ' */
+    case Unix = 0x4c462020 /* 'LF  ' */
+    case DOS = 0x43524c46 /* 'CRLF' */
+}
+
+// MARK: TextWranglerWrMd
+@objc public enum TextWranglerWrMd : AEKeyword {
+    case PageGuide = 0x57725068 /* 'WrPh' */
+    case WindowWidth = 0x5772576e /* 'WrWn' */
+    case CharacterWidth = 0x57724368 /* 'WrCh' */
+}
+
+// MARK: TextWranglerSMod
+@objc public enum TextWranglerSMod : AEKeyword {
+    case Literal = 0x4c74726c /* 'Ltrl' */
+    case Grep = 0x47726570 /* 'Grep' */
+}
+
+// MARK: TextWranglerCact
+@objc public enum TextWranglerCact : AEKeyword {
+    case RaiseCase = 0x52617365 /* 'Rase' */
+    case LowerCase = 0x4c6f7772 /* 'Lowr' */
+    case CapitalizeWords = 0x43617057 /* 'CapW' */
+    case CapitalizeSentences = 0x43617053 /* 'CapS' */
+    case CapitalizeLines = 0x4361704c /* 'CapL' */
+}
+
+// MARK: TextWranglerIndt
+@objc public enum TextWranglerIndt : AEKeyword {
+    case None = 0x6e496e64 /* 'nInd' */
+    case First_line = 0x46727374 /* 'Frst' */
+    case All_lines = 0x416c6c4c /* 'AllL' */
+    case Reverse_indent = 0x52657649 /* 'RevI' */
+    case Same_as_first_line = 0x53467273 /* 'SFrs' */
+}
+
+// MARK: TextWranglerZAct
+@objc public enum TextWranglerZAct : AEKeyword {
+    case Delete_gremlin = 0x5a64656c /* 'Zdel' */
+    case Replace_with_code = 0x5a726364 /* 'Zrcd' */
+    case Replace_with_char = 0x5a726368 /* 'Zrch' */
+}
+
+// MARK: TextWranglerCFop
+@objc public enum TextWranglerCFop : AEKeyword {
+    case File_contains = 0x2b436e74 /* '+Cnt' */
+    case File_does_not_contain = 0x2d436e74 /* '-Cnt' */
+    case File_matches = 0x2b477270 /* '+Grp' */
+    case File_does_not_match = 0x2d477270 /* '-Grp' */
+}
+
+// MARK: TextWranglerErsl
+@objc public enum TextWranglerErsl : AEKeyword {
+    case Error_kind = 0x45727220 /* 'Err ' */
+    case Warning_kind = 0x57726e67 /* 'Wrng' */
+    case Note_kind = 0x4e6f7465 /* 'Note' */
+}
+
+// MARK: TextWranglerShDr
+@objc public enum TextWranglerShDr : AEKeyword {
+    case Left = 0x6c656674 /* 'left' */
+    case Right = 0x72676874 /* 'rght' */
+}
+
+// MARK: TextWranglerFltM
+@objc public enum TextWranglerFltM : AEKeyword {
+    case And_mode = 0x616e6446 /* 'andF' */
+    case Or_mode = 0x6f724620 /* 'orF ' */
+}
+
+// MARK: TextWranglerFiel
+@objc public enum TextWranglerFiel : AEKeyword {
+    case File_name = 0x466e616d /* 'Fnam' */
+    case File_type = 0x46747970 /* 'Ftyp' */
+    case File_creator = 0x46637274 /* 'Fcrt' */
+    case Creation_date_only = 0x43646174 /* 'Cdat' */
+    case Creation_date_and_time = 0x43646154 /* 'CdaT' */
+    case Mod_date_only = 0x4d646174 /* 'Mdat' */
+    case Mod_date_and_time = 0x4d646154 /* 'MdaT' */
+    case File_label = 0x466c6162 /* 'Flab' */
+    case File_visible = 0x46766973 /* 'Fvis' */
+    case File_locked = 0x466c636b /* 'Flck' */
+    case File_language = 0x466c616e /* 'Flan' */
+}
+
+// MARK: TextWranglerOper
+@objc public enum TextWranglerOper : AEKeyword {
+    case Op_is_equal = 0x2b457175 /* '+Equ' */
+    case Op_is_not_equal = 0x2d457175 /* '-Equ' */
+    case Op_less_than = 0x2b4c7420 /* '+Lt ' */
+    case Op_less_than_or_equal = 0x2b4c4571 /* '+LEq' */
+    case Op_greater_than = 0x2b477420 /* '+Gt ' */
+    case Op_greater_than_or_equal = 0x2b474571 /* '+GEq' */
+    case Op_starts_with = 0x2b426567 /* '+Beg' */
+    case Op_does_not_start_with = 0x2d426567 /* '-Beg' */
+    case Op_ends_with = 0x2b456e64 /* '+End' */
+    case Op_does_not_end_with = 0x2d456e64 /* '-End' */
+    case Op_contains = 0x2b436e74 /* '+Cnt' */
+    case Op_does_not_contain = 0x2d436e74 /* '-Cnt' */
+    case Op_matches_grep = 0x2b477270 /* '+Grp' */
+    case Op_does_not_match_grep = 0x2d477270 /* '-Grp' */
+    case Op_matches_wildcard = 0x2b576c64 /* '+Wld' */
+    case Op_does_not_match_wildcard = 0x2d576c64 /* '-Wld' */
+}
+
+// MARK: TextWranglerMMod
+@objc public enum TextWranglerMMod : AEKeyword {
+    case Matching_all = 0x4d416c6c /* 'MAll' */
+    case Leaving_one = 0x4c657631 /* 'Lev1' */
+}
+
+// MARK: TextWranglerESbM
+@objc public enum TextWranglerESbM : AEKeyword {
+    case Entire_match = 0x456e744c /* 'EntL' */
+    case All_subpatterns = 0x41537562 /* 'ASub' */
+    case Use_subpattern = 0x53756250 /* 'SubP' */
+}
+
+// MARK: TextWranglerOMd
+@objc public enum TextWranglerOMd : AEKeyword {
+    case UnixScriptOutputWindow = 0x6d70726c /* 'mprl' */
+    case NewUntitledWindow = 0x6e77696e /* 'nwin' */
+    case ScriptLogOutputWindow = 0x6c77696e /* 'lwin' */
+}
+
+// MARK: TextWranglerFOM
+@objc public enum TextWranglerFOM : AEKeyword {
+    case UnixScriptOutputWindow = 0x6d70726c /* 'mprl' */
+    case NewUntitledWindow = 0x6e77696e /* 'nwin' */
+}
+
 // MARK: TextWranglerPrintSettings
 @objc public protocol TextWranglerPrintSettings: SBObjectProtocol {
     optional var copies: Int { get } // the number of copies of a document to be printed

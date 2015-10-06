@@ -11,7 +11,6 @@
 		E691CDE01A66BA44005FF12F /* SystemEventsScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E691CDD41A66BA44005FF12F /* SystemEventsScripting.framework */; };
 		E691CDE71A66BA44005FF12F /* SystemEventsScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E691CDE61A66BA44005FF12F /* SystemEventsScriptingTests.m */; };
 		E6C82BCC1A885212002D55A2 /* SystemEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BC91A885212002D55A2 /* SystemEvents.swift */; };
-		E6C82BCD1A885212002D55A2 /* SystemEventsEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BCA1A885212002D55A2 /* SystemEventsEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D7AE831AABF68D00E8E744 /* SystemEventsScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE821AABF68C00E8E744 /* SystemEventsScripting.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		E691CDF01A66BA50005FF12F /* SystemEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemEvents.h; sourceTree = "<group>"; };
 		E6C82BC81A885212002D55A2 /* SystemEvents.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SystemEvents.sdef; sourceTree = "<group>"; };
 		E6C82BC91A885212002D55A2 /* SystemEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEvents.swift; sourceTree = "<group>"; };
-		E6C82BCA1A885212002D55A2 /* SystemEventsEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemEventsEnums.h; sourceTree = "<group>"; };
 		E6D7AE821AABF68C00E8E744 /* SystemEventsScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEventsScripting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +80,6 @@
 				E6C82BCE1A885217002D55A2 /* ObjC Header */,
 				E691CDD91A66BA44005FF12F /* SystemEventsScripting.h */,
 				E6C82BC91A885212002D55A2 /* SystemEvents.swift */,
-				E6C82BCA1A885212002D55A2 /* SystemEventsEnums.h */,
 				E6D7AE821AABF68C00E8E744 /* SystemEventsScripting.swift */,
 				E691CDD71A66BA44005FF12F /* Supporting Files */,
 			);
@@ -131,7 +128,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E691CDDA1A66BA44005FF12F /* SystemEventsScripting.h in Headers */,
-				E6C82BCD1A885212002D55A2 /* SystemEventsEnums.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

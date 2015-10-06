@@ -10,6 +10,112 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: XcodeSaveOptions
+@objc public enum XcodeSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: XcodePrintingErrorHandling
+@objc public enum XcodePrintingErrorHandling : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
+// MARK: XcodePwpa
+@objc public enum XcodePwpa : AEKeyword {
+    case ExecutablesDirectory = 0x70777065 /* 'pwpe' */
+    case Frameworks = 0x70777066 /* 'pwpf' */
+    case JavaResources = 0x7077706a /* 'pwpj' */
+    case PluginsDirectory = 0x7077706c /* 'pwpl' */
+    case ProductsDirectory = 0x70777070 /* 'pwpp' */
+    case Resources = 0x70777265 /* 'pwre' */
+    case RootVolume = 0x7077706e /* 'pwpn' */
+    case SharedFrameworks = 0x70777366 /* 'pwsf' */
+    case SharedSupport = 0x70777373 /* 'pwss' */
+    case Wrapper = 0x70777072 /* 'pwpr' */
+}
+
+// MARK: XcodeBmte
+@objc public enum XcodeBmte : AEKeyword {
+    case AnalyzerResult = 0x626d7461 /* 'bmta' */
+    case Error = 0x626d7465 /* 'bmte' */
+    case None = 0x626d746e /* 'bmtn' */
+    case Notice = 0x626d746f /* 'bmto' */
+    case Warning = 0x626d7477 /* 'bmtw' */
+}
+
+// MARK: XcodeLied
+@objc public enum XcodeLied : AEKeyword {
+    case CR = 0x63726c65 /* 'crle' */
+    case CRLF = 0x63726c66 /* 'crlf' */
+    case LF = 0x6c666c65 /* 'lfle' */
+    case PreserveExisting = 0x70656c65 /* 'pele' */
+}
+
+// MARK: XcodeFenc
+@objc public enum XcodeFenc : AEKeyword {
+    case Iso2022Japanese = 0x69736a70 /* 'isjp' */
+    case IsoLatin1 = 0x696c6131 /* 'ila1' */
+    case IsoLatin2 = 0x696c6132 /* 'ila2' */
+    case JapaneseEUC = 0x6a657563 /* 'jeuc' */
+    case MacosRoman = 0x6d6f7372 /* 'mosr' */
+    case Nextstep = 0x6e657874 /* 'next' */
+    case NonlossyAscii = 0x6e6c6173 /* 'nlas' */
+    case ShiftJisString = 0x736a6973 /* 'sjis' */
+    case SymbolString = 0x73796d73 /* 'syms' */
+    case Unicode = 0x756e6963 /* 'unic' */
+    case Utf8 = 0x75746638 /* 'utf8' */
+    case WindowsCyrillic = 0x77636f31 /* 'wco1' */
+    case WindowsGreek = 0x77637033 /* 'wcp3' */
+    case WindowsLatin1 = 0x77637032 /* 'wcp2' */
+    case WindowsLatin2 = 0x77637030 /* 'wcp0' */
+    case WindowsTurkish = 0x77637034 /* 'wcp4' */
+}
+
+// MARK: XcodeReft
+@objc public enum XcodeReft : AEKeyword {
+    case Absolute = 0x61737274 /* 'asrt' */
+    case BuildProductRelative = 0x62707274 /* 'bprt' */
+    case CurrentSDKRelative = 0x73647274 /* 'sdrt' */
+    case GroupRelative = 0x67727274 /* 'grrt' */
+    case Other = 0x6f726674 /* 'orft' */
+    case ProjectRelative = 0x70727274 /* 'prrt' */
+    case XcodeFolderRelative = 0x78727274 /* 'xrrt' */
+}
+
+// MARK: XcodeAsms
+@objc public enum XcodeAsms : AEKeyword {
+    case HasConflict = 0x73636373 /* 'sccs' */
+    case LocallyAdded = 0x736c6173 /* 'slas' */
+    case LocallyModified = 0x736c6d73 /* 'slms' */
+    case LocallyRemoved = 0x736c7273 /* 'slrs' */
+    case NeedsMerge = 0x736e6d73 /* 'snms' */
+    case NeedsUpdate = 0x736e6373 /* 'sncs' */
+    case Unknown = 0x73637573 /* 'scus' */
+    case UpToDate = 0x73756473 /* 'suds' */
+}
+
+// MARK: XcodeSaveableFileFormat
+@objc public enum XcodeSaveableFileFormat : AEKeyword {
+    case Text = 0x63747874 /* 'ctxt' */
+}
+
+// MARK: XcodeXdel
+@objc public enum XcodeXdel : AEKeyword {
+    case CPlusPlus = 0x78646570 /* 'xdep' */
+    case Java = 0x7864656a /* 'xdej' */
+    case ObjectiveC = 0x7864656f /* 'xdeo' */
+}
+
+// MARK: XcodeXdeh
+@objc public enum XcodeXdeh : AEKeyword {
+    case AlwaysHide = 0x78646561 /* 'xdea' */
+    case AlwaysShow = 0x78646573 /* 'xdes' */
+    case HidePerFilter = 0x78646566 /* 'xdef' */
+}
+
 // MARK: XcodeApplication
 @objc public protocol XcodeApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray

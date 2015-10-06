@@ -32,5 +32,3 @@ FOUNDATION_EXPORT double MessagesScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char MessagesScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MessagesScripting/PublicHeader.h>
-
-#import <MessagesScripting/MessagesEnums.h>

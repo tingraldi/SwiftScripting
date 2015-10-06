@@ -11,7 +11,6 @@
 		E6C82BFA1A886B54002D55A2 /* MailScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6C82BEE1A886B54002D55A2 /* MailScripting.framework */; };
 		E6C82C011A886B54002D55A2 /* MailScriptingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82C001A886B54002D55A2 /* MailScriptingTests.swift */; };
 		E6C82C101A886BB9002D55A2 /* Mail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82C0C1A886BB9002D55A2 /* Mail.swift */; };
-		E6C82C111A886BB9002D55A2 /* MailEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82C0D1A886BB9002D55A2 /* MailEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D7AE7D1AABF64500E8E744 /* MailScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE7C1AABF64500E8E744 /* MailScripting.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		E6C82C0A1A886BB9002D55A2 /* Mail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mail.h; sourceTree = "<group>"; };
 		E6C82C0B1A886BB9002D55A2 /* Mail.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Mail.sdef; sourceTree = "<group>"; };
 		E6C82C0C1A886BB9002D55A2 /* Mail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mail.swift; sourceTree = "<group>"; };
-		E6C82C0D1A886BB9002D55A2 /* MailEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailEnums.h; sourceTree = "<group>"; };
 		E6D7AE7C1AABF64500E8E744 /* MailScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailScripting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +80,6 @@
 				E6C82C121A886BC4002D55A2 /* ObjC Header */,
 				E6C82BF31A886B54002D55A2 /* MailScripting.h */,
 				E6C82C0C1A886BB9002D55A2 /* Mail.swift */,
-				E6C82C0D1A886BB9002D55A2 /* MailEnums.h */,
 				E6D7AE7C1AABF64500E8E744 /* MailScripting.swift */,
 				E6C82BF11A886B54002D55A2 /* Supporting Files */,
 			);
@@ -131,7 +128,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6C82BF41A886B54002D55A2 /* MailScripting.h in Headers */,
-				E6C82C111A886BB9002D55A2 /* MailEnums.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

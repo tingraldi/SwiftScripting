@@ -12,7 +12,6 @@
 		E6D9BB811A93E16300C5D908 /* ImageEventsScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D9BB751A93E16300C5D908 /* ImageEventsScripting.framework */; };
 		E6D9BB881A93E16300C5D908 /* ImageEventsScriptingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BB871A93E16300C5D908 /* ImageEventsScriptingTests.swift */; };
 		E6D9BB981A93E20900C5D908 /* ImageEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BB961A93E20900C5D908 /* ImageEvents.swift */; };
-		E6D9BB991A93E20900C5D908 /* ImageEventsEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D9BB971A93E20900C5D908 /* ImageEventsEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +35,6 @@
 		E6D9BB921A93E1F900C5D908 /* ImageEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEvents.h; sourceTree = "<group>"; };
 		E6D9BB931A93E1F900C5D908 /* ImageEvents.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ImageEvents.sdef; sourceTree = "<group>"; };
 		E6D9BB961A93E20900C5D908 /* ImageEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEvents.swift; sourceTree = "<group>"; };
-		E6D9BB971A93E20900C5D908 /* ImageEventsEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEventsEnums.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 				E6D9BB911A93E1C600C5D908 /* ObjC Header */,
 				E6D9BB7A1A93E16300C5D908 /* ImageEventsScripting.h */,
 				E6D9BB961A93E20900C5D908 /* ImageEvents.swift */,
-				E6D9BB971A93E20900C5D908 /* ImageEventsEnums.h */,
 				E6D7AE7A1AABF62300E8E744 /* ImageEventsScripting.swift */,
 				E6D9BB781A93E16300C5D908 /* Supporting Files */,
 			);
@@ -130,7 +127,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6D9BB991A93E20900C5D908 /* ImageEventsEnums.h in Headers */,
 				E6D9BB7B1A93E16300C5D908 /* ImageEventsScripting.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

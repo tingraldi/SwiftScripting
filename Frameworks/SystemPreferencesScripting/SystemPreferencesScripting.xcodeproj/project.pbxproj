@@ -13,7 +13,6 @@
 		E6A0549A1AB45CF400CAF2F7 /* SystemPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = E6A054981AB45CF400CAF2F7 /* SystemPreferences.h */; };
 		E6A0549B1AB45CF400CAF2F7 /* SystemPreferences.sdef in Resources */ = {isa = PBXBuildFile; fileRef = E6A054991AB45CF400CAF2F7 /* SystemPreferences.sdef */; };
 		E6A0549F1AB45D2600CAF2F7 /* SystemPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A0549C1AB45D2600CAF2F7 /* SystemPreferences.swift */; };
-		E6A054A01AB45D2600CAF2F7 /* SystemPreferencesEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6A0549D1AB45D2600CAF2F7 /* SystemPreferencesEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6A054A11AB45D2600CAF2F7 /* SystemPreferencesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A0549E1AB45D2600CAF2F7 /* SystemPreferencesScripting.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +36,6 @@
 		E6A054981AB45CF400CAF2F7 /* SystemPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemPreferences.h; sourceTree = "<group>"; };
 		E6A054991AB45CF400CAF2F7 /* SystemPreferences.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SystemPreferences.sdef; sourceTree = "<group>"; };
 		E6A0549C1AB45D2600CAF2F7 /* SystemPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPreferences.swift; sourceTree = "<group>"; };
-		E6A0549D1AB45D2600CAF2F7 /* SystemPreferencesEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemPreferencesEnums.h; sourceTree = "<group>"; };
 		E6A0549E1AB45D2600CAF2F7 /* SystemPreferencesScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPreferencesScripting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,7 +82,6 @@
 				E6A054971AB45CDC00CAF2F7 /* ObjC Header */,
 				E6A054801AB45A8700CAF2F7 /* SystemPreferencesScripting.h */,
 				E6A0549C1AB45D2600CAF2F7 /* SystemPreferences.swift */,
-				E6A0549D1AB45D2600CAF2F7 /* SystemPreferencesEnums.h */,
 				E6A0549E1AB45D2600CAF2F7 /* SystemPreferencesScripting.swift */,
 				E6A0547E1AB45A8700CAF2F7 /* Supporting Files */,
 			);
@@ -134,7 +131,6 @@
 			files = (
 				E6A0549A1AB45CF400CAF2F7 /* SystemPreferences.h in Headers */,
 				E6A054811AB45A8700CAF2F7 /* SystemPreferencesScripting.h in Headers */,
-				E6A054A01AB45D2600CAF2F7 /* SystemPreferencesEnums.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

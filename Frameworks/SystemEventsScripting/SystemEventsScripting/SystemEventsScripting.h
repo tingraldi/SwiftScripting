@@ -32,7 +32,3 @@ FOUNDATION_EXPORT double SystemEventsScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char SystemEventsScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SystemEventsScripting/PublicHeader.h>
-
-#import <SystemEventsScripting/SystemEventsEnums.h>
-
-

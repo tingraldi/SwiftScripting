@@ -10,6 +10,19 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: SystemPreferencesSaveOptions
+@objc public enum SystemPreferencesSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: SystemPreferencesPrintingErrorHandling
+@objc public enum SystemPreferencesPrintingErrorHandling : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
 // MARK: SystemPreferencesApplication
 @objc public protocol SystemPreferencesApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray

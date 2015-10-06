@@ -10,6 +10,82 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: AcornSaveOptions
+@objc public enum AcornSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: AcornPrintingErrorHandling
+@objc public enum AcornPrintingErrorHandling : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
+// MARK: AcornSaveableFileFormat
+@objc public enum AcornSaveableFileFormat : AEKeyword {
+    case Acorn = 0x4163524e /* 'AcRN' */
+    case PDF = 0x50444620 /* 'PDF ' */
+    case PNG = 0x504e4720 /* 'PNG ' */
+    case JPEG = 0x4a504547 /* 'JPEG' */
+    case TIFF = 0x54494646 /* 'TIFF' */
+    case JPEG2000 = 0x4a504532 /* 'JPE2' */
+    case GIF = 0x47494646 /* 'GIFF' */
+    case WebP = 0x57454250 /* 'WEBP' */
+}
+
+// MARK: AcornAnchorPosition
+@objc public enum AcornAnchorPosition : AEKeyword {
+    case TopLeft = 0x616e746c /* 'antl' */
+    case TopCenter = 0x616e7463 /* 'antc' */
+    case TopRight = 0x616e7472 /* 'antr' */
+    case MiddleLeft = 0x616e6d6c /* 'anml' */
+    case MiddleRight = 0x616e6d72 /* 'anmr' */
+    case BottomLeft = 0x616e626c /* 'anbl' */
+    case BottomCenter = 0x616e6263 /* 'anbc' */
+    case BottomRight = 0x616e6272 /* 'anbr' */
+    case MiddleCenter = 0x616e6d63 /* 'anmc' */
+}
+
+// MARK: AcornBlendMode
+@objc public enum AcornBlendMode : AEKeyword {
+    case Normal = 0x626d6e6f /* 'bmno' */
+    case Multiply = 0x626d6d6f /* 'bmmo' */
+    case Screen = 0x626d7363 /* 'bmsc' */
+    case Overlay = 0x626d6f76 /* 'bmov' */
+    case Darken = 0x626d6472 /* 'bmdr' */
+    case Lighten = 0x626d6c69 /* 'bmli' */
+    case ColorDodge = 0x626d6364 /* 'bmcd' */
+    case ColorBurn = 0x626d6362 /* 'bmcb' */
+    case SoftLight = 0x626d736c /* 'bmsl' */
+    case HardLight = 0x626d686c /* 'bmhl' */
+    case Difference = 0x626d6469 /* 'bmdi' */
+    case Exclusion = 0x626d6578 /* 'bmex' */
+    case Hue = 0x626d6875 /* 'bmhu' */
+    case Saturation = 0x626d7361 /* 'bmsa' */
+    case ColorBlend = 0x626d636f /* 'bmco' */
+    case Luminosity = 0x626d6c75 /* 'bmlu' */
+    case Clear = 0x626d636c /* 'bmcl' */
+    case Copy = 0x626d6370 /* 'bmcp' */
+    case SourceIn = 0x626d7369 /* 'bmsi' */
+    case SourceOut = 0x626d736f /* 'bmso' */
+    case SourceAtop = 0x626d7374 /* 'bmst' */
+    case DestinationOver = 0x626d646f /* 'bmdo' */
+    case DestinationOut = 0x626d6474 /* 'bmdt' */
+    case DestinationAtop = 0x626d6461 /* 'bmda' */
+    case Xor = 0x626d7872 /* 'bmxr' */
+    case PlusDarker = 0x626d7064 /* 'bmpd' */
+    case PlusLighter = 0x626d706c /* 'bmpl' */
+    case PassThrough = 0x626d7074 /* 'bmpt' */
+}
+
+// MARK: AcornDirection
+@objc public enum AcornDirection : AEKeyword {
+    case Horizontal = 0x686f727a /* 'horz' */
+    case Vertical = 0x76657274 /* 'vert' */
+}
+
 // MARK: AcornApplication
 @objc public protocol AcornApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray

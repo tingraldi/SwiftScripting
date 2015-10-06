@@ -32,5 +32,3 @@ FOUNDATION_EXPORT double MailScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char MailScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MailScripting/PublicHeader.h>
-
-#import <MailScripting/MailEnums.h>

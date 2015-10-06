@@ -32,6 +32,3 @@ FOUNDATION_EXPORT double PagesScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char PagesScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <PagesScripting/PublicHeader.h>
-
-#import <PagesScripting/PagesEnums.h>
-

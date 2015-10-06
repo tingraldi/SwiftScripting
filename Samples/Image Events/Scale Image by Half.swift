@@ -47,7 +47,7 @@ for item in (finder.selection!.get() as! NSArray) {
             let image = imageEvents.open!(fileURL!) as! ImageEventsImage
             image.scaleByFactor!(0.5, toSize: 0)
             
-            image.closeSaving!(ImageEventsSavoYes, savingIn: outputURL.path!)
+            image.closeSaving!(.Yes, savingIn: outputURL.path!)
         }
     }
 }

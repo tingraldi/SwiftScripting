@@ -32,5 +32,3 @@ FOUNDATION_EXPORT double ImageEventsScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char ImageEventsScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ImageEventsScripting/PublicHeader.h>
-
-#import <ImageEventsScripting/ImageEventsEnums.h>

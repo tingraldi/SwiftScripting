@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E6C82BD31A885373002D55A2 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BD01A885373002D55A2 /* Terminal.swift */; };
-		E6C82BD41A885373002D55A2 /* TerminalEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BD11A885373002D55A2 /* TerminalEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D5F26E1A646B26007ED52C /* TerminalScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D5F26D1A646B26007ED52C /* TerminalScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D5F2741A646B26007ED52C /* TerminalScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D5F2681A646B26007ED52C /* TerminalScripting.framework */; };
 		E6D5F27B1A646B26007ED52C /* TerminalScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D5F27A1A646B26007ED52C /* TerminalScriptingTests.m */; };
@@ -28,7 +27,6 @@
 /* Begin PBXFileReference section */
 		E6C82BCF1A885373002D55A2 /* Terminal.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Terminal.sdef; sourceTree = "<group>"; };
 		E6C82BD01A885373002D55A2 /* Terminal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
-		E6C82BD11A885373002D55A2 /* TerminalEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalEnums.h; sourceTree = "<group>"; };
 		E6D5F2681A646B26007ED52C /* TerminalScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TerminalScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6D5F26C1A646B26007ED52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6D5F26D1A646B26007ED52C /* TerminalScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TerminalScripting.h; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 			children = (
 				E6C82BD51A885379002D55A2 /* ObjC Header */,
 				E6C82BD01A885373002D55A2 /* Terminal.swift */,
-				E6C82BD11A885373002D55A2 /* TerminalEnums.h */,
 				E6D5F26D1A646B26007ED52C /* TerminalScripting.h */,
 				E6D7AE841AABF6A100E8E744 /* TerminalScripting.swift */,
 				E6D5F26B1A646B26007ED52C /* Supporting Files */,
@@ -130,7 +127,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6C82BD41A885373002D55A2 /* TerminalEnums.h in Headers */,
 				E6D5F26E1A646B26007ED52C /* TerminalScripting.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,6 +10,142 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: SystemEventsSaveOptions
+@objc public enum SystemEventsSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: SystemEventsPrintingErrorHandling
+@objc public enum SystemEventsPrintingErrorHandling : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
+// MARK: SystemEventsSaveableFileFormat
+@objc public enum SystemEventsSaveableFileFormat : AEKeyword {
+    case Text = 0x63747874 /* 'ctxt' */
+}
+
+// MARK: SystemEventsScrollPageBehaviors
+@objc public enum SystemEventsScrollPageBehaviors : AEKeyword {
+    case JumpToHere = 0x746f6872 /* 'tohr' */
+    case JumpToNextPage = 0x6e787067 /* 'nxpg' */
+}
+
+// MARK: SystemEventsFontSmoothingStyles
+@objc public enum SystemEventsFontSmoothingStyles : AEKeyword {
+    case Automatic = 0x6175746d /* 'autm' */
+    case Light = 0x6c697465 /* 'lite' */
+    case Medium = 0x6d656469 /* 'medi' */
+    case Standard = 0x73746e64 /* 'stnd' */
+    case Strong = 0x73747267 /* 'strg' */
+}
+
+// MARK: SystemEventsAppearances
+@objc public enum SystemEventsAppearances : AEKeyword {
+    case Blue = 0x626c7565 /* 'blue' */
+    case Graphite = 0x67726674 /* 'grft' */
+}
+
+// MARK: SystemEventsHighlightColors
+@objc public enum SystemEventsHighlightColors : AEKeyword {
+    case Blue = 0x626c7565 /* 'blue' */
+    case Gold = 0x676f6c64 /* 'gold' */
+    case Graphite = 0x67726674 /* 'grft' */
+    case Green = 0x6772656e /* 'gren' */
+    case Orange = 0x6f726e67 /* 'orng' */
+    case Purple = 0x7072706c /* 'prpl' */
+    case Red = 0x72656420 /* 'red ' */
+    case Silver = 0x736c7672 /* 'slvr' */
+}
+
+// MARK: SystemEventsDhac
+@objc public enum SystemEventsDhac : AEKeyword {
+    case AskWhatToDo = 0x64686173 /* 'dhas' */
+    case Ignore = 0x64686967 /* 'dhig' */
+    case OpenApplication = 0x64686170 /* 'dhap' */
+    case RunAScript = 0x64687273 /* 'dhrs' */
+}
+
+// MARK: SystemEventsDpls
+@objc public enum SystemEventsDpls : AEKeyword {
+    case Bottom = 0x626f7474 /* 'bott' */
+    case Left = 0x6c656674 /* 'left' */
+    case Right = 0x72696768 /* 'righ' */
+}
+
+// MARK: SystemEventsDpef
+@objc public enum SystemEventsDpef : AEKeyword {
+    case Genie = 0x67656e69 /* 'geni' */
+    case Scale = 0x7363616c /* 'scal' */
+}
+
+// MARK: SystemEventsEdfm
+@objc public enum SystemEventsEdfm : AEKeyword {
+    case ApplePhotoFormat = 0x64667068 /* 'dfph' */
+    case AppleShareFormat = 0x64666173 /* 'dfas' */
+    case AudioFormat = 0x64666175 /* 'dfau' */
+    case HighSierraFormat = 0x64666873 /* 'dfhs' */
+    case ISO9660Format = 0x64663936 /* 'df96' */
+    case MacOSExtendedFormat = 0x6466682b /* 'dfh+' */
+    case MacOSFormat = 0x64666866 /* 'dfhf' */
+    case MSDOSFormat = 0x64666d73 /* 'dfms' */
+    case NFSFormat = 0x64666e66 /* 'dfnf' */
+    case ProDOSFormat = 0x64667072 /* 'dfpr' */
+    case QuickTakeFormat = 0x64667174 /* 'dfqt' */
+    case UDFFormat = 0x64667564 /* 'dfud' */
+    case UFSFormat = 0x64667566 /* 'dfuf' */
+    case UnknownFormat = 0x64662424 /* 'df$$' */
+    case WebDAVFormat = 0x64667764 /* 'dfwd' */
+}
+
+// MARK: SystemEventsEMds
+@objc public enum SystemEventsEMds : AEKeyword {
+    case CommandDown = 0x4b636d64 /* 'Kcmd' */
+    case ControlDown = 0x4b63746c /* 'Kctl' */
+    case OptionDown = 0x4b6f7074 /* 'Kopt' */
+    case ShiftDown = 0x4b736674 /* 'Ksft' */
+}
+
+// MARK: SystemEventsEMky
+@objc public enum SystemEventsEMky : AEKeyword {
+    case Command = 0x65436d64 /* 'eCmd' */
+    case Control = 0x65436e74 /* 'eCnt' */
+    case Option = 0x654f7074 /* 'eOpt' */
+    case Shift = 0x65536674 /* 'eSft' */
+}
+
+// MARK: SystemEventsPrmd
+@objc public enum SystemEventsPrmd : AEKeyword {
+    case Normal = 0x6e6f726d /* 'norm' */
+    case SlideShow = 0x706d7373 /* 'pmss' */
+}
+
+// MARK: SystemEventsMvsz
+@objc public enum SystemEventsMvsz : AEKeyword {
+    case Current = 0x63757374 /* 'cust' */
+    case Double = 0x646f7562 /* 'doub' */
+    case Half = 0x68616c66 /* 'half' */
+    case Normal = 0x6e6f726d /* 'norm' */
+    case Screen = 0x66697473 /* 'fits' */
+}
+
+// MARK: SystemEventsEnum
+@objc public enum SystemEventsEnum : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
+// MARK: SystemEventsAccs
+@objc public enum SystemEventsAccs : AEKeyword {
+    case None = 0x6e6f6e65 /* 'none' */
+    case ReadOnly = 0x72656164 /* 'read' */
+    case ReadWrite = 0x72647772 /* 'rdwr' */
+    case WriteOnly = 0x77726974 /* 'writ' */
+}
+
 // MARK: SystemEventsApplication
 @objc public protocol SystemEventsApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray

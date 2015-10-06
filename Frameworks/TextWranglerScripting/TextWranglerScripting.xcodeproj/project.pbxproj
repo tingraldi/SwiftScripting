@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E64451B81A89BC430027F82A /* TextWrangler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BD71A8868AF002D55A2 /* TextWrangler.swift */; };
-		E64451B91A89BC460027F82A /* TextWranglerEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BD81A8868AF002D55A2 /* TextWranglerEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D5F2461A645481007ED52C /* TextWranglerScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D5F2451A645481007ED52C /* TextWranglerScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D5F24C1A645481007ED52C /* TextWranglerScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D5F2401A645481007ED52C /* TextWranglerScripting.framework */; };
 		E6D5F2531A645481007ED52C /* TextWranglerScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D5F2521A645481007ED52C /* TextWranglerScriptingTests.m */; };
@@ -28,7 +27,6 @@
 /* Begin PBXFileReference section */
 		E6C82BD61A8868AF002D55A2 /* TextWrangler.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TextWrangler.sdef; sourceTree = "<group>"; };
 		E6C82BD71A8868AF002D55A2 /* TextWrangler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextWrangler.swift; sourceTree = "<group>"; };
-		E6C82BD81A8868AF002D55A2 /* TextWranglerEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextWranglerEnums.h; sourceTree = "<group>"; };
 		E6D5F2401A645481007ED52C /* TextWranglerScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextWranglerScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6D5F2441A645481007ED52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6D5F2451A645481007ED52C /* TextWranglerScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextWranglerScripting.h; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 			children = (
 				E6C82BDC1A8868B3002D55A2 /* ObjC Header */,
 				E6C82BD71A8868AF002D55A2 /* TextWrangler.swift */,
-				E6C82BD81A8868AF002D55A2 /* TextWranglerEnums.h */,
 				E6D5F2451A645481007ED52C /* TextWranglerScripting.h */,
 				E6D7AE861AABF6B900E8E744 /* TextWranglerScripting.swift */,
 				E6D5F2431A645481007ED52C /* Supporting Files */,
@@ -130,7 +127,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E64451B91A89BC460027F82A /* TextWranglerEnums.h in Headers */,
 				E6D5F2461A645481007ED52C /* TextWranglerScripting.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

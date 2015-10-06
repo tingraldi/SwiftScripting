@@ -32,6 +32,3 @@ FOUNDATION_EXPORT double TextWranglerScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char TextWranglerScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <TextWranglerScripting/PublicHeader.h>
-
-#import <TextWranglerScripting/TextWranglerEnums.h>
-

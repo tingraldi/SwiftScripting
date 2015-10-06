@@ -12,7 +12,6 @@
 		E65366021A61C0B500BA00AB /* FinderScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E65366011A61C0B500BA00AB /* FinderScriptingTests.m */; };
 		E6D7AE791AABF60400E8E744 /* FinderScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE781AABF60400E8E744 /* FinderScripting.swift */; };
 		E6EC96631A871A9F00A2ED4F /* Finder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EC96611A871A9F00A2ED4F /* Finder.swift */; };
-		E6EC96641A871A9F00A2ED4F /* FinderEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6EC96621A871A9F00A2ED4F /* FinderEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +35,6 @@
 		E6C82BB81A884936002D55A2 /* Finder.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Finder.sdef; sourceTree = "<group>"; };
 		E6D7AE781AABF60400E8E744 /* FinderScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinderScripting.swift; sourceTree = "<group>"; };
 		E6EC96611A871A9F00A2ED4F /* Finder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Finder.swift; sourceTree = "<group>"; };
-		E6EC96621A871A9F00A2ED4F /* FinderEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinderEnums.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 				E6EC96651A871AEF00A2ED4F /* ObjC Header */,
 				E65365F41A61C0B500BA00AB /* FinderScripting.h */,
 				E6EC96611A871A9F00A2ED4F /* Finder.swift */,
-				E6EC96621A871A9F00A2ED4F /* FinderEnums.h */,
 				E6D7AE781AABF60400E8E744 /* FinderScripting.swift */,
 				E65365F21A61C0B500BA00AB /* Supporting Files */,
 			);
@@ -131,7 +128,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E65365F51A61C0B500BA00AB /* FinderScripting.h in Headers */,
-				E6EC96641A871A9F00A2ED4F /* FinderEnums.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

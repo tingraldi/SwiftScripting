@@ -11,7 +11,6 @@
 		E62C7A6D1A55AB470039CF00 /* PagesScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E62C7A6C1A55AB470039CF00 /* PagesScriptingTests.m */; };
 		E62C7A781A55AED00039CF00 /* PagesScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E62C7A5F1A55AB470039CF00 /* PagesScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6C82BC61A884EE4002D55A2 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BC31A884EE4002D55A2 /* Pages.swift */; };
-		E6C82BC71A884EE4002D55A2 /* PagesEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BC41A884EE4002D55A2 /* PagesEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D7AE811AABF67100E8E744 /* PagesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE801AABF67100E8E744 /* PagesScripting.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		E62C7A761A55AB6A0039CF00 /* Pages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pages.h; sourceTree = "<group>"; };
 		E6C82BC21A884EE4002D55A2 /* Pages.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Pages.sdef; sourceTree = "<group>"; };
 		E6C82BC31A884EE4002D55A2 /* Pages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
-		E6C82BC41A884EE4002D55A2 /* PagesEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagesEnums.h; sourceTree = "<group>"; };
 		E6D7AE801AABF67100E8E744 /* PagesScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesScripting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +80,6 @@
 				E6C82BC11A884EC4002D55A2 /* ObjC Header */,
 				E62C7A5F1A55AB470039CF00 /* PagesScripting.h */,
 				E6C82BC31A884EE4002D55A2 /* Pages.swift */,
-				E6C82BC41A884EE4002D55A2 /* PagesEnums.h */,
 				E6D7AE801AABF67100E8E744 /* PagesScripting.swift */,
 				E62C7A5D1A55AB470039CF00 /* Supporting Files */,
 			);
@@ -131,7 +128,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E62C7A781A55AED00039CF00 /* PagesScripting.h in Headers */,
-				E6C82BC71A884EE4002D55A2 /* PagesEnums.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,6 +32,3 @@ FOUNDATION_EXPORT double TerminalScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char TerminalScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <TerminalScripting/PublicHeader.h>
-
-
-#import <TerminalScripting/TerminalEnums.h>

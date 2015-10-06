@@ -10,6 +10,163 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: ImageEventsSaveOptions
+@objc public enum ImageEventsSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: ImageEventsPrintingErrorHandling
+@objc public enum ImageEventsPrintingErrorHandling : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
+// MARK: ImageEventsEdfm
+@objc public enum ImageEventsEdfm : AEKeyword {
+    case ApplePhotoFormat = 0x64667068 /* 'dfph' */
+    case AppleShareFormat = 0x64666173 /* 'dfas' */
+    case AudioFormat = 0x64666175 /* 'dfau' */
+    case HighSierraFormat = 0x64666873 /* 'dfhs' */
+    case ISO9660Format = 0x64663936 /* 'df96' */
+    case MacOSExtendedFormat = 0x6466682b /* 'dfh+' */
+    case MacOSFormat = 0x64666866 /* 'dfhf' */
+    case MSDOSFormat = 0x64666d73 /* 'dfms' */
+    case NFSFormat = 0x64666e66 /* 'dfnf' */
+    case ProDOSFormat = 0x64667072 /* 'dfpr' */
+    case QuickTakeFormat = 0x64667174 /* 'dfqt' */
+    case UDFFormat = 0x64667564 /* 'dfud' */
+    case UFSFormat = 0x64667566 /* 'dfuf' */
+    case UnknownFormat = 0x64662424 /* 'df$$' */
+    case WebDAVFormat = 0x64667764 /* 'dfwd' */
+}
+
+// MARK: ImageEventsBitz
+@objc public enum ImageEventsBitz : AEKeyword {
+    case Best = 0x62657374 /* 'best' */
+    case BlackWhite = 0x62267720 /* 'b&w ' */
+    case Color = 0x636f6c72 /* 'colr' */
+    case FourColors = 0x34636c72 /* '4clr' */
+    case FourGrays = 0x34677279 /* '4gry' */
+    case Grayscale = 0x67726179 /* 'gray' */
+    case MillionsOfColors = 0x6d696c6c /* 'mill' */
+    case MillionsOfColorsPlus = 0x6d696c2b /* 'mil+' */
+    case SixteenColors = 0x3136636c /* '16cl' */
+    case SixteenGrays = 0x31366772 /* '16gr' */
+    case ThousandsOfColors = 0x74686f75 /* 'thou' */
+    case TwoHundredFiftySixColors = 0x32353663 /* '256c' */
+    case TwoHundredFiftySixGrays = 0x32353667 /* '256g' */
+}
+
+// MARK: ImageEventsPCla
+@objc public enum ImageEventsPCla : AEKeyword {
+    case Abstract = 0x61627374 /* 'abst' */
+    case Colorspace = 0x73706163 /* 'spac' */
+    case Input = 0x73636e72 /* 'scnr' */
+    case Link = 0x6c696e6b /* 'link' */
+    case Monitor = 0x6d6e7472 /* 'mntr' */
+    case Named = 0x6e6d636c /* 'nmcl' */
+    case Output = 0x70727472 /* 'prtr' */
+}
+
+// MARK: ImageEventsPPCS
+@objc public enum ImageEventsPPCS : AEKeyword {
+    case Lab = 0x4c616220 /* 'Lab ' */
+    case XYZ = 0x58595a20 /* 'XYZ ' */
+}
+
+// MARK: ImageEventsCmlv
+@objc public enum ImageEventsCmlv : AEKeyword {
+    case High = 0x68696768 /* 'high' */
+    case Low = 0x6c6f7720 /* 'low ' */
+    case Medium = 0x6d656469 /* 'medi' */
+}
+
+// MARK: ImageEventsTypz
+@objc public enum ImageEventsTypz : AEKeyword {
+    case BMP = 0x424d5066 /* 'BMPf' */
+    case GIF = 0x47494620 /* 'GIF ' */
+    case JPEG = 0x4a504547 /* 'JPEG' */
+    case JPEG2 = 0x6a706732 /* 'jpg2' */
+    case MacPaint = 0x504e5447 /* 'PNTG' */
+    case PDF = 0x50444620 /* 'PDF ' */
+    case Photoshop = 0x38425053 /* '8BPS' */
+    case PICT = 0x50494354 /* 'PICT' */
+    case PNG = 0x504e4766 /* 'PNGf' */
+    case PSD = 0x70736420 /* 'psd ' */
+    case QuickTimeImage = 0x71746966 /* 'qtif' */
+    case SGI = 0x2e534749 /* '.SGI' */
+    case Text = 0x54455854 /* 'TEXT' */
+    case TGA = 0x74676120 /* 'tga ' */
+    case TIFF = 0x54494646 /* 'TIFF' */
+}
+
+// MARK: ImageEventsPQua
+@objc public enum ImageEventsPQua : AEKeyword {
+    case Best = 0x51756132 /* 'Qua2' */
+    case Draft = 0x51756131 /* 'Qua1' */
+    case Normal = 0x51756130 /* 'Qua0' */
+}
+
+// MARK: ImageEventsPSpc
+@objc public enum ImageEventsPSpc : AEKeyword {
+    case CMYK = 0x434d594b /* 'CMYK' */
+    case EightChannel = 0x4d434838 /* 'MCH8' */
+    case EightColor = 0x38434c52 /* '8CLR' */
+    case FiveChannel = 0x4d434835 /* 'MCH5' */
+    case FiveColor = 0x35434c52 /* '5CLR' */
+    case Gray = 0x47524159 /* 'GRAY' */
+    case Lab = 0x4c616220 /* 'Lab ' */
+    case Named = 0x4e414d45 /* 'NAME' */
+    case RGB = 0x52474220 /* 'RGB ' */
+    case SevenChannel = 0x4d434837 /* 'MCH7' */
+    case SevenColor = 0x37434c52 /* '7CLR' */
+    case SixChannel = 0x4d434836 /* 'MCH6' */
+    case SixColor = 0x36434c52 /* '6CLR' */
+    case XYZ = 0x58595a20 /* 'XYZ ' */
+}
+
+// MARK: ImageEventsPRdr
+@objc public enum ImageEventsPRdr : AEKeyword {
+    case AbsoluteColorimetricIntent = 0x52647233 /* 'Rdr3' */
+    case PerceptualIntent = 0x52647230 /* 'Rdr0' */
+    case RelativeColorimetricIntent = 0x52647231 /* 'Rdr1' */
+    case SaturationIntent = 0x52647232 /* 'Rdr2' */
+}
+
+// MARK: ImageEventsSavo
+@objc public enum ImageEventsSavo : AEKeyword {
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Yes = 0x79657320 /* 'yes ' */
+}
+
+// MARK: ImageEventsQual
+@objc public enum ImageEventsQual : AEKeyword {
+    case Best = 0x62657374 /* 'best' */
+    case High = 0x68696768 /* 'high' */
+    case Least = 0x6c656173 /* 'leas' */
+    case Low = 0x6c6f7720 /* 'low ' */
+    case Medium = 0x6d656469 /* 'medi' */
+}
+
+// MARK: ImageEventsTypv
+@objc public enum ImageEventsTypv : AEKeyword {
+    case BMP = 0x424d5066 /* 'BMPf' */
+    case JPEG = 0x4a504547 /* 'JPEG' */
+    case JPEG2 = 0x6a706732 /* 'jpg2' */
+    case PICT = 0x50494354 /* 'PICT' */
+    case PNG = 0x504e4766 /* 'PNGf' */
+    case PSD = 0x70736420 /* 'psd ' */
+    case QuickTimeImage = 0x71746966 /* 'qtif' */
+    case TIFF = 0x54494646 /* 'TIFF' */
+}
+
+// MARK: ImageEventsSaveableFileFormat
+@objc public enum ImageEventsSaveableFileFormat : AEKeyword {
+    case Text = 0x63747874 /* 'ctxt' */
+}
+
 // MARK: ImageEventsApplication
 @objc public protocol ImageEventsApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray

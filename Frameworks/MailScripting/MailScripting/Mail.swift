@@ -10,6 +10,134 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: MailSaveOptions
+@objc public enum MailSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: MailPrintingErrorHandling
+@objc public enum MailPrintingErrorHandling : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
+// MARK: MailSaveableFileFormat
+@objc public enum MailSaveableFileFormat : AEKeyword {
+    case NativeFormat = 0x6974656d /* 'item' */
+}
+
+// MARK: MailDefaultMessageFormat
+@objc public enum MailDefaultMessageFormat : AEKeyword {
+    case PlainFormat = 0x646d7074 /* 'dmpt' */
+    case RichFormat = 0x646d7274 /* 'dmrt' */
+}
+
+// MARK: MailQuotingColor
+@objc public enum MailQuotingColor : AEKeyword {
+    case Blue = 0x6363626c /* 'ccbl' */
+    case Green = 0x63636772 /* 'ccgr' */
+    case Orange = 0x63636f72 /* 'ccor' */
+    case Other = 0x63636f74 /* 'ccot' */
+    case Purple = 0x63637075 /* 'ccpu' */
+    case Red = 0x63637265 /* 'ccre' */
+    case Yellow = 0x63637965 /* 'ccye' */
+}
+
+// MARK: MailViewerColumns
+@objc public enum MailViewerColumns : AEKeyword {
+    case AttachmentsColumn = 0x65636174 /* 'ecat' */
+    case MessageColor = 0x6563636c /* 'eccl' */
+    case DateReceivedColumn = 0x65636472 /* 'ecdr' */
+    case DateSentColumn = 0x65636473 /* 'ecds' */
+    case FlagsColumn = 0x6563666c /* 'ecfl' */
+    case FromColumn = 0x65636672 /* 'ecfr' */
+    case MailboxColumn = 0x65636d62 /* 'ecmb' */
+    case MessageStatusColumn = 0x65636d73 /* 'ecms' */
+    case NumberColumn = 0x65636e6d /* 'ecnm' */
+    case SizeColumn = 0x6563737a /* 'ecsz' */
+    case SubjectColumn = 0x65637375 /* 'ecsu' */
+    case ToColumn = 0x6563746f /* 'ecto' */
+    case DateLastSavedColumn = 0x65636c73 /* 'ecls' */
+}
+
+// MARK: MailAuthentication
+@objc public enum MailAuthentication : AEKeyword {
+    case Password = 0x61786374 /* 'axct' */
+    case Apop = 0x6161706f /* 'aapo' */
+    case Kerberos5 = 0x61786b35 /* 'axk5' */
+    case Ntlm = 0x61786e74 /* 'axnt' */
+    case Md5 = 0x61786d64 /* 'axmd' */
+    case External = 0x61657874 /* 'aext' */
+    case AppleToken = 0x61746f6b /* 'atok' */
+    case None = 0x63636e6f /* 'ccno' */
+}
+
+// MARK: MailHighlightColors
+@objc public enum MailHighlightColors : AEKeyword {
+    case Blue = 0x6363626c /* 'ccbl' */
+    case Gray = 0x63636779 /* 'ccgy' */
+    case Green = 0x63636772 /* 'ccgr' */
+    case None = 0x63636e6f /* 'ccno' */
+    case Orange = 0x63636f72 /* 'ccor' */
+    case Other = 0x63636f74 /* 'ccot' */
+    case Purple = 0x63637075 /* 'ccpu' */
+    case Red = 0x63637265 /* 'ccre' */
+    case Yellow = 0x63637965 /* 'ccye' */
+}
+
+// MARK: MailMessageCachingPolicy
+@objc public enum MailMessageCachingPolicy : AEKeyword {
+    case DoNotKeepCopiesOfAnyMessages = 0x78396e6f /* 'x9no' */
+    case OnlyMessagesIHaveRead = 0x78397772 /* 'x9wr' */
+    case AllMessagesButOmitAttachments = 0x7839626f /* 'x9bo' */
+    case AllMessagesAndTheirAttachments = 0x7839616c /* 'x9al' */
+}
+
+// MARK: MailRuleQualifier
+@objc public enum MailRuleQualifier : AEKeyword {
+    case BeginsWithValue = 0x72716277 /* 'rqbw' */
+    case DoesContainValue = 0x7271636f /* 'rqco' */
+    case DoesNotContainValue = 0x7271646e /* 'rqdn' */
+    case EndsWithValue = 0x72716577 /* 'rqew' */
+    case EqualToValue = 0x72716965 /* 'rqie' */
+    case LessThanValue = 0x72716c74 /* 'rqlt' */
+    case GreaterThanValue = 0x72716774 /* 'rqgt' */
+    case None = 0x72716e6f /* 'rqno' */
+}
+
+// MARK: MailRuleType
+@objc public enum MailRuleType : AEKeyword {
+    case Account = 0x74616363 /* 'tacc' */
+    case AnyRecipient = 0x74616e72 /* 'tanr' */
+    case CcHeader = 0x74636363 /* 'tccc' */
+    case MatchesEveryMessage = 0x7465766d /* 'tevm' */
+    case FromHeader = 0x7466726f /* 'tfro' */
+    case HeaderKey = 0x7468646b /* 'thdk' */
+    case MessageContent = 0x746d6563 /* 'tmec' */
+    case MessageIsJunkMail = 0x746d696a /* 'tmij' */
+    case SenderIsInMyContacts = 0x74736969 /* 'tsii' */
+    case SenderIsInMyPreviousRecipients = 0x74736168 /* 'tsah' */
+    case SenderIsMemberOfGroup = 0x7473696d /* 'tsim' */
+    case SenderIsNotInMyContacts = 0x7473696e /* 'tsin' */
+    case SenderIsNotInMyPreviousRecipients = 0x746e6168 /* 'tnah' */
+    case SenderIsNotMemberOfGroup = 0x74736967 /* 'tsig' */
+    case SubjectHeader = 0x74737562 /* 'tsub' */
+    case ToHeader = 0x74746f6f /* 'ttoo' */
+    case ToOrCcHeader = 0x74746f63 /* 'ttoc' */
+    case AttachmentType = 0x74617474 /* 'tatt' */
+}
+
+// MARK: MailTypeOfAccount
+@objc public enum MailTypeOfAccount : AEKeyword {
+    case Pop = 0x6574706f /* 'etpo' */
+    case Smtp = 0x6574736d /* 'etsm' */
+    case Imap = 0x6574696d /* 'etim' */
+    case ICloud = 0x65746974 /* 'etit' */
+    case Unknown = 0x6574756e /* 'etun' */
+}
+
 // MARK: MailApplication
 @objc public protocol MailApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray

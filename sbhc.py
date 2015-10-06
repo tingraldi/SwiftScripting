@@ -103,6 +103,11 @@ def name_from_path(path):
     return last_part.split('.')[0]
 
 
+def strip_prefix(prefix, a_string):
+    if a_string.startswith(prefix):
+        a_string = a_string[len(prefix):]
+    return a_string
+
 class SBHeaderProcessor(object):
     swift_file = None
 
@@ -125,7 +130,7 @@ class SBHeaderProcessor(object):
             self.emit_line('@objc public enum {} : AEKeyword {{'.format(cursor.spelling))
             for decl in [child for child in cursor.get_children() if child.kind == CursorKind.ENUM_CONSTANT_DECL]:
                 self.emit_line('    case {} = {} /* {} */'.format(
-                    decl.spelling,
+                    strip_prefix(cursor.spelling, decl.spelling),
                     hex(decl.enum_value),
                     repr(struct.pack('!I', decl.enum_value))))
             self.emit_line('}\n')

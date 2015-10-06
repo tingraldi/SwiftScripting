@@ -72,7 +72,7 @@ enum AcornBlendMode {
 	AcornBlendModeSourceOut = 'bmso',
 	AcornBlendModeSourceAtop = 'bmst',
 	AcornBlendModeDestinationOver = 'bmdo',
-	AcornBlendModeDestinationIn = 'bmdi',
+	/* AcornBlendModeDestinationIn = 'bmdi', BUG - duplicate */
 	AcornBlendModeDestinationOut = 'bmdt',
 	AcornBlendModeDestinationAtop = 'bmda',
 	AcornBlendModeXor = 'bmxr',

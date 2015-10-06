@@ -10,6 +10,113 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: FinderPriv
+@objc public enum FinderPriv : AEKeyword {
+    case ReadOnly = 0x72656164 /* 'read' */
+    case ReadWrite = 0x72647772 /* 'rdwr' */
+    case WriteOnly = 0x77726974 /* 'writ' */
+    case None = 0x6e6f6e65 /* 'none' */
+}
+
+// MARK: FinderEdfm
+@objc public enum FinderEdfm : AEKeyword {
+    case MacOSFormat = 0x64666866 /* 'dfhf' */
+    case MacOSExtendedFormat = 0x6466682b /* 'dfh+' */
+    case UFSFormat = 0x64667566 /* 'dfuf' */
+    case NFSFormat = 0x64666e66 /* 'dfnf' */
+    case AudioFormat = 0x64666175 /* 'dfau' */
+    case ProDOSFormat = 0x64667072 /* 'dfpr' */
+    case MSDOSFormat = 0x64666d73 /* 'dfms' */
+    case NTFSFormat = 0x64666e74 /* 'dfnt' */
+    case ISO9660Format = 0x64663936 /* 'df96' */
+    case HighSierraFormat = 0x64666873 /* 'dfhs' */
+    case QuickTakeFormat = 0x64667174 /* 'dfqt' */
+    case ApplePhotoFormat = 0x64667068 /* 'dfph' */
+    case AppleShareFormat = 0x64666173 /* 'dfas' */
+    case UDFFormat = 0x64667564 /* 'dfud' */
+    case WebDAVFormat = 0x64667764 /* 'dfwd' */
+    case FTPFormat = 0x64666674 /* 'dfft' */
+    case PacketWrittenUDFFormat = 0x64667075 /* 'dfpu' */
+    case XsanFormat = 0x64666163 /* 'dfac' */
+    case UnknownFormat = 0x64663f3f /* 'df??' */
+}
+
+// MARK: FinderIpnl
+@objc public enum FinderIpnl : AEKeyword {
+    case GeneralInformationPanel = 0x67706e6c /* 'gpnl' */
+    case SharingPanel = 0x73706e6c /* 'spnl' */
+    case MemoryPanel = 0x6d706e6c /* 'mpnl' */
+    case PreviewPanel = 0x76706e6c /* 'vpnl' */
+    case ApplicationPanel = 0x61706e6c /* 'apnl' */
+    case LanguagesPanel = 0x706b6c67 /* 'pklg' */
+    case PluginsPanel = 0x706b7067 /* 'pkpg' */
+    case NameExtensionPanel = 0x6e706e6c /* 'npnl' */
+    case CommentsPanel = 0x63706e6c /* 'cpnl' */
+    case ContentIndexPanel = 0x63696e6c /* 'cinl' */
+    case BurningPanel = 0x62706e6c /* 'bpnl' */
+    case MoreInfoPanel = 0x6d696e6c /* 'minl' */
+    case SimpleHeaderPanel = 0x73686e6c /* 'shnl' */
+}
+
+// MARK: FinderPple
+@objc public enum FinderPple : AEKeyword {
+    case GeneralPreferencesPanel = 0x70676e70 /* 'pgnp' */
+    case LabelPreferencesPanel = 0x706c6270 /* 'plbp' */
+    case SidebarPreferencesPanel = 0x70736964 /* 'psid' */
+    case AdvancedPreferencesPanel = 0x70616476 /* 'padv' */
+}
+
+// MARK: FinderEcvw
+@objc public enum FinderEcvw : AEKeyword {
+    case IconView = 0x69636e76 /* 'icnv' */
+    case ListView = 0x6c737677 /* 'lsvw' */
+    case ColumnView = 0x636c7677 /* 'clvw' */
+    case GroupView = 0x67727677 /* 'grvw' */
+    case FlowView = 0x666c7677 /* 'flvw' */
+}
+
+// MARK: FinderEarr
+@objc public enum FinderEarr : AEKeyword {
+    case NotArranged = 0x6e617272 /* 'narr' */
+    case SnapToGrid = 0x67726461 /* 'grda' */
+    case ArrangedByName = 0x6e616d61 /* 'nama' */
+    case ArrangedByModificationDate = 0x6d647461 /* 'mdta' */
+    case ArrangedByCreationDate = 0x63647461 /* 'cdta' */
+    case ArrangedBySize = 0x73697a61 /* 'siza' */
+    case ArrangedByKind = 0x6b696e61 /* 'kina' */
+    case ArrangedByLabel = 0x6c616261 /* 'laba' */
+}
+
+// MARK: FinderEpos
+@objc public enum FinderEpos : AEKeyword {
+    case Right = 0x6c726774 /* 'lrgt' */
+    case Bottom = 0x6c626f74 /* 'lbot' */
+}
+
+// MARK: FinderSodr
+@objc public enum FinderSodr : AEKeyword {
+    case Normal = 0x736e726d /* 'snrm' */
+    case Reversed = 0x73727673 /* 'srvs' */
+}
+
+// MARK: FinderElsv
+@objc public enum FinderElsv : AEKeyword {
+    case NameColumn = 0x656c736e /* 'elsn' */
+    case ModificationDateColumn = 0x656c736d /* 'elsm' */
+    case CreationDateColumn = 0x656c7363 /* 'elsc' */
+    case SizeColumn = 0x656c7373 /* 'elss' */
+    case KindColumn = 0x656c736b /* 'elsk' */
+    case LabelColumn = 0x656c736c /* 'elsl' */
+    case VersionColumn = 0x656c7376 /* 'elsv' */
+    case CommentColumn = 0x656c7343 /* 'elsC' */
+}
+
+// MARK: FinderLvic
+@objc public enum FinderLvic : AEKeyword {
+    case SmallIcon = 0x736d6963 /* 'smic' */
+    case LargeIcon = 0x6c676963 /* 'lgic' */
+}
+
 // MARK: FinderApplication
 @objc public protocol FinderApplication: SBApplicationProtocol {
     optional func items() -> SBElementArray

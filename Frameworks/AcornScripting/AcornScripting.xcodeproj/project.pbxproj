@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E6D7AE771AABF5D200E8E744 /* AcornScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE761AABF5D200E8E744 /* AcornScripting.swift */; };
 		E6EC965F1A8718A900A2ED4F /* Acorn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EC965D1A8718A900A2ED4F /* Acorn.swift */; };
-		E6EC96601A8718A900A2ED4F /* AcornEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6EC965E1A8718A900A2ED4F /* AcornEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6F29BD81A619A5B003F1552 /* AcornScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6F29BD71A619A5B003F1552 /* AcornScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6F29BDE1A619A5B003F1552 /* AcornScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F29BD21A619A5A003F1552 /* AcornScripting.framework */; };
 		E6F29BE51A619A5B003F1552 /* AcornScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F29BE41A619A5B003F1552 /* AcornScriptingTests.m */; };
@@ -30,7 +29,6 @@
 		E695E5D31A8846480066C0EF /* Acorn.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Acorn.sdef; sourceTree = "<group>"; };
 		E6D7AE761AABF5D200E8E744 /* AcornScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcornScripting.swift; sourceTree = "<group>"; };
 		E6EC965D1A8718A900A2ED4F /* Acorn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Acorn.swift; sourceTree = "<group>"; };
-		E6EC965E1A8718A900A2ED4F /* AcornEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcornEnums.h; sourceTree = "<group>"; };
 		E6F29BD21A619A5A003F1552 /* AcornScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AcornScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6F29BD61A619A5B003F1552 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6F29BD71A619A5B003F1552 /* AcornScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcornScripting.h; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 				E695E5D11A8843B30066C0EF /* ObjC Header */,
 				E6F29BD71A619A5B003F1552 /* AcornScripting.h */,
 				E6EC965D1A8718A900A2ED4F /* Acorn.swift */,
-				E6EC965E1A8718A900A2ED4F /* AcornEnums.h */,
 				E6D7AE761AABF5D200E8E744 /* AcornScripting.swift */,
 				E6F29BD51A619A5B003F1552 /* Supporting Files */,
 			);
@@ -131,7 +128,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6F29BD81A619A5B003F1552 /* AcornScripting.h in Headers */,
-				E6EC96601A8718A900A2ED4F /* AcornEnums.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

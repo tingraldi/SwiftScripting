@@ -32,6 +32,3 @@ FOUNDATION_EXPORT double FinderScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char FinderScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <FinderScripting/PublicHeader.h>
-
-
-#import <FinderScripting/FinderEnums.h>

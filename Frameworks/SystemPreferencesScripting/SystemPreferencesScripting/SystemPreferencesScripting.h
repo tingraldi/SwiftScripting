@@ -32,5 +32,3 @@ FOUNDATION_EXPORT double SystemPreferencesScriptingVersionNumber;
 FOUNDATION_EXPORT const unsigned char SystemPreferencesScriptingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SystemPreferencesScripting/PublicHeader.h>
-
-#import <SystemPreferencesScripting/SystemPreferencesEnums.h>

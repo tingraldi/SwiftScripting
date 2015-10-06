@@ -10,6 +10,19 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: TerminalSaveOptions
+@objc public enum TerminalSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: TerminalPrintingErrorHandling
+@objc public enum TerminalPrintingErrorHandling : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
 // MARK: TerminalApplication
 @objc public protocol TerminalApplication: SBApplicationProtocol {
     optional func windows() -> SBElementArray

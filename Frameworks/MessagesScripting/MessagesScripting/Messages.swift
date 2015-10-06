@@ -10,6 +10,114 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: MessagesSaveOptions
+@objc public enum MessagesSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: MessagesInviteType
+@objc public enum MessagesInviteType : AEKeyword {
+    case AudioInvitation = 0x61636f6e /* 'acon' */
+    case TextChatInvitation = 0x74636f6e /* 'tcon' */
+    case VideoInvitation = 0x76636f6e /* 'vcon' */
+}
+
+// MARK: MessagesAccountStatus
+@objc public enum MessagesAccountStatus : AEKeyword {
+    case Available = 0x6176616c /* 'aval' */
+    case Away = 0x61776179 /* 'away' */
+    case Offline = 0x6f66666c /* 'offl' */
+    case Invisible = 0x696e7673 /* 'invs' */
+    case Idle = 0x69646c65 /* 'idle' */
+    case Unknown = 0x756e6b6e /* 'unkn' */
+}
+
+// MARK: MessagesMyStatus
+@objc public enum MessagesMyStatus : AEKeyword {
+    case Away = 0x61776179 /* 'away' */
+    case Available = 0x6176616c /* 'aval' */
+    case Offline = 0x6f66666c /* 'offl' */
+    case Invisible = 0x696e7673 /* 'invs' */
+}
+
+// MARK: MessagesConnectionStatus
+@objc public enum MessagesConnectionStatus : AEKeyword {
+    case Disconnecting = 0x64636e67 /* 'dcng' */
+    case Connected = 0x636f6e6e /* 'conn' */
+    case Connecting = 0x636f6e67 /* 'cong' */
+    case Disconnected = 0x64636f6e /* 'dcon' */
+}
+
+// MARK: MessagesCapabilities
+@objc public enum MessagesCapabilities : AEKeyword {
+    case VideoChat = 0x76636f6e /* 'vcon' */
+    case AudioChat = 0x61636f6e /* 'acon' */
+    case MultipersonVideo = 0x6d777663 /* 'mwvc' */
+    case MultipersonAudio = 0x6d776163 /* 'mwac' */
+}
+
+// MARK: MessagesScreenSharing
+@objc public enum MessagesScreenSharing : AEKeyword {
+    case None = 0x73736e73 /* 'ssns' */
+    case LocalScreen = 0x73736c73 /* 'ssls' */
+    case RemoteScreen = 0x73737273 /* 'ssrs' */
+}
+
+// MARK: MessagesServiceType
+@objc public enum MessagesServiceType : AEKeyword {
+    case AIM = 0x7361696d /* 'saim' */
+    case Bonjour = 0x73737562 /* 'ssub' */
+    case Jabber = 0x736a6162 /* 'sjab' */
+    case IMessage = 0x73696d73 /* 'sims' */
+}
+
+// MARK: MessagesDirection
+@objc public enum MessagesDirection : AEKeyword {
+    case Incoming = 0x46546963 /* 'FTic' */
+    case Outgoing = 0x46546f67 /* 'FTog' */
+}
+
+// MARK: MessagesTransferStatus
+@objc public enum MessagesTransferStatus : AEKeyword {
+    case Preparing = 0x46547370 /* 'FTsp' */
+    case Waiting = 0x46547377 /* 'FTsw' */
+    case Transferring = 0x46547367 /* 'FTsg' */
+    case Finalizing = 0x4654737a /* 'FTsz' */
+    case Finished = 0x46547366 /* 'FTsf' */
+    case Failed = 0x46547365 /* 'FTse' */
+}
+
+// MARK: MessagesAvType
+@objc public enum MessagesAvType : AEKeyword {
+    case Audio = 0x49434161 /* 'ICAa' */
+    case Video = 0x49434176 /* 'ICAv' */
+}
+
+// MARK: MessagesChatType
+@objc public enum MessagesChatType : AEKeyword {
+    case InstantMessage = 0x4943696d /* 'ICim' */
+    case DirectInstantMessage = 0x49436469 /* 'ICdi' */
+    case ChatRoom = 0x49436372 /* 'ICcr' */
+}
+
+// MARK: MessagesJoinState
+@objc public enum MessagesJoinState : AEKeyword {
+    case NotJoined = 0x49434a63 /* 'ICJc' */
+    case Joining = 0x49434a67 /* 'ICJg' */
+    case Joined = 0x49434a6a /* 'ICJj' */
+}
+
+// MARK: MessagesAvConnectionStatus
+@objc public enum MessagesAvConnectionStatus : AEKeyword {
+    case Invited = 0x49434169 /* 'ICAi' */
+    case Waiting = 0x49434177 /* 'ICAw' */
+    case Connecting = 0x49434178 /* 'ICAx' */
+    case Connected = 0x49434163 /* 'ICAc' */
+    case Ended = 0x4943416e /* 'ICAn' */
+}
+
 // MARK: MessagesItem
 @objc public protocol MessagesItem: SBObjectProtocol {
     optional var properties: [NSObject : AnyObject] { get set } // All of the object's properties.

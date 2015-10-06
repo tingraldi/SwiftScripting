@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E6C82BBE1A884CE2002D55A2 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BBB1A884CE2002D55A2 /* Messages.swift */; };
-		E6C82BBF1A884CE2002D55A2 /* MessagesEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BBC1A884CE2002D55A2 /* MessagesEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D7AE7F1AABF65A00E8E744 /* MessagesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE7E1AABF65A00E8E744 /* MessagesScripting.swift */; };
 		E6D89B5E1A620F7C00452C8D /* MessagesScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D89B5D1A620F7C00452C8D /* MessagesScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6D89B641A620F7C00452C8D /* MessagesScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D89B581A620F7C00452C8D /* MessagesScripting.framework */; };
@@ -28,7 +27,6 @@
 /* Begin PBXFileReference section */
 		E6C82BBA1A884CE2002D55A2 /* Messages.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Messages.sdef; sourceTree = "<group>"; };
 		E6C82BBB1A884CE2002D55A2 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
-		E6C82BBC1A884CE2002D55A2 /* MessagesEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesEnums.h; sourceTree = "<group>"; };
 		E6D7AE7E1AABF65A00E8E744 /* MessagesScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesScripting.swift; sourceTree = "<group>"; };
 		E6D89B581A620F7C00452C8D /* MessagesScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MessagesScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6D89B5C1A620F7C00452C8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,7 +88,6 @@
 			children = (
 				E6C82BC01A884CE7002D55A2 /* ObjC Header */,
 				E6C82BBB1A884CE2002D55A2 /* Messages.swift */,
-				E6C82BBC1A884CE2002D55A2 /* MessagesEnums.h */,
 				E6D89B5D1A620F7C00452C8D /* MessagesScripting.h */,
 				E6D7AE7E1AABF65A00E8E744 /* MessagesScripting.swift */,
 				E6D89B5B1A620F7C00452C8D /* Supporting Files */,
@@ -130,7 +127,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6C82BBF1A884CE2002D55A2 /* MessagesEnums.h in Headers */,
 				E6D89B5E1A620F7C00452C8D /* MessagesScripting.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -58,7 +58,7 @@ for (scale, suffix) in [1.0 : "@3x", 0.66 : "@2x", 0.33 : ""] {
     let scaledWidth = Int(scale * document.width!)
     let scaledHeight = Int(scale * document.height!)
     document.webExportIn!(fileURL, 
-              `as`: AcornSaveableFileFormatPNG, 
+              `as`: .PNG, 
               quality: 100, 
               width: scaledWidth, 
               height: scaledHeight)

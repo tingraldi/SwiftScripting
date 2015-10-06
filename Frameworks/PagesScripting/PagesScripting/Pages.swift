@@ -10,6 +10,91 @@ import ScriptingBridge
     var delegate: SBApplicationDelegate! { get set }
 }
 
+// MARK: PagesSaveOptions
+@objc public enum PagesSaveOptions : AEKeyword {
+    case Yes = 0x79657320 /* 'yes ' */
+    case No = 0x6e6f2020 /* 'no  ' */
+    case Ask = 0x61736b20 /* 'ask ' */
+}
+
+// MARK: PagesPrintingErrorHandling
+@objc public enum PagesPrintingErrorHandling : AEKeyword {
+    case Standard = 0x6c777374 /* 'lwst' */
+    case Detailed = 0x6c776474 /* 'lwdt' */
+}
+
+// MARK: PagesSaveableFileFormat
+@objc public enum PagesSaveableFileFormat : AEKeyword {
+    case PagesFormat = 0x50676666 /* 'Pgff' */
+}
+
+// MARK: PagesExportFormat
+@objc public enum PagesExportFormat : AEKeyword {
+    case Epub = 0x50657075 /* 'Pepu' */
+    case UnformattedText = 0x50747866 /* 'Ptxf' */
+    case PDF = 0x50706466 /* 'Ppdf' */
+    case MicrosoftWord = 0x50777264 /* 'Pwrd' */
+    case Pages09 = 0x50506167 /* 'PPag' */
+}
+
+// MARK: PagesTAVT
+@objc public enum PagesTAVT : AEKeyword {
+    case Bottom = 0x61766274 /* 'avbt' */
+    case Center = 0x61637472 /* 'actr' */
+    case Top = 0x61767470 /* 'avtp' */
+}
+
+// MARK: PagesTAHT
+@objc public enum PagesTAHT : AEKeyword {
+    case AutoAlign = 0x61617574 /* 'aaut' */
+    case Center = 0x61637472 /* 'actr' */
+    case Justify = 0x616a7374 /* 'ajst' */
+    case Left = 0x616c6674 /* 'alft' */
+    case Right = 0x61726974 /* 'arit' */
+}
+
+// MARK: PagesNMSD
+@objc public enum PagesNMSD : AEKeyword {
+    case Ascending = 0x6173636e /* 'ascn' */
+    case Descending = 0x6473636e /* 'dscn' */
+}
+
+// MARK: PagesNMCT
+@objc public enum PagesNMCT : AEKeyword {
+    case Automatic = 0x66617574 /* 'faut' */
+    case Checkbox = 0x66636368 /* 'fcch' */
+    case Currency = 0x66637572 /* 'fcur' */
+    case DateAndTime = 0x6664746d /* 'fdtm' */
+    case Fraction = 0x66667261 /* 'ffra' */
+    case Number = 0x6e6d6272 /* 'nmbr' */
+    case Percent = 0x66706572 /* 'fper' */
+    case PopUpMenu = 0x66637070 /* 'fcpp' */
+    case Scientific = 0x66736369 /* 'fsci' */
+    case Slider = 0x6663736c /* 'fcsl' */
+    case Stepper = 0x66637374 /* 'fcst' */
+    case Text = 0x63747874 /* 'ctxt' */
+    case Duration = 0x66647572 /* 'fdur' */
+    case Rating = 0x66726174 /* 'frat' */
+    case NumeralSystem = 0x66636e73 /* 'fcns' */
+}
+
+// MARK: PagesItemFillOptions
+@objc public enum PagesItemFillOptions : AEKeyword {
+    case NoFill = 0x66696e6f /* 'fino' */
+    case ColorFill = 0x6669636f /* 'fico' */
+    case GradientFill = 0x66696772 /* 'figr' */
+    case AdvancedGradientFill = 0x66696167 /* 'fiag' */
+    case ImageFill = 0x6669696d /* 'fiim' */
+    case AdvancedImageFill = 0x66696169 /* 'fiai' */
+}
+
+// MARK: PagesPlaybackRepetitionMethod
+@objc public enum PagesPlaybackRepetitionMethod : AEKeyword {
+    case None = 0x6d76726e /* 'mvrn' */
+    case Loop = 0x6d766c70 /* 'mvlp' */
+    case LoopBackAndForth = 0x6d766266 /* 'mvbf' */
+}
+
 // MARK: PagesApplication
 @objc public protocol PagesApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray
