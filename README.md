@@ -32,3 +32,5 @@ directory. Step 3 will create `App.swift` in the current directory. This is the 
 
 Note that the sbhc.py script leverages the [Python bindings](https://pypi.python.org/pypi/clang/3.5) for libclang.
 You must install these bindings before running the script.
+
+See [https://majestysoftware.wordpress.com/2015/03/31/swift-scripting-part-1/](https://majestysoftware.wordpress.com/2015/03/31/swift-scripting-part-1/) for part one of a four-part series that gives a bit of explanation related to SwiftScripting.
