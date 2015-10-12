@@ -146,6 +146,16 @@ import ScriptingBridge
     case WriteOnly = 0x77726974 /* 'writ' */
 }
 
+// MARK: SystemEventsGenericMethods
+@objc public protocol SystemEventsGenericMethods {
+    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
+    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
+    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
+    optional func delete() // Delete an object.
+    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
+    optional func moveTo(to: SBObject!) // Move an object to a new location.
+}
+
 // MARK: SystemEventsApplication
 @objc public protocol SystemEventsApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray
@@ -243,21 +253,15 @@ import ScriptingBridge
 extension SBApplication: SystemEventsApplication {}
 
 // MARK: SystemEventsDocument
-@objc public protocol SystemEventsDocument: SBObjectProtocol {
+@objc public protocol SystemEventsDocument: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // Its name.
     optional var modified: Bool { get } // Has it been modified since the last save?
     optional var file: SystemEventsFile { get } // Its location on disk, if it has one.
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsDocument {}
 
 // MARK: SystemEventsWindow
-@objc public protocol SystemEventsWindow: SBObjectProtocol {
+@objc public protocol SystemEventsWindow: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
     optional var index: Int { get set } // The index of the window, ordered front to back.
@@ -270,12 +274,6 @@ extension SBObject: SystemEventsDocument {}
     optional var zoomable: Bool { get } // Does the window have a zoom button?
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: SystemEventsDocument { get } // The document whose contents are displayed in the window.
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func actions() -> SBElementArray
     optional func attributes() -> SBElementArray
     optional func browsers() -> SBElementArray
@@ -332,22 +330,16 @@ extension SBObject: SystemEventsDocument {}
 extension SBObject: SystemEventsWindow {}
 
 // MARK: SystemEventsUser
-@objc public protocol SystemEventsUser: SBObjectProtocol {
+@objc public protocol SystemEventsUser: SBObjectProtocol, SystemEventsGenericMethods {
     optional var fullName: String { get } // user's full name
     optional var homeDirectory: AnyObject { get } // path to user's home directory
     optional var name: String { get } // user's short name
     optional var picturePath: AnyObject { get set } // path to user's picture. Can be set for current user only!
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsUser {}
 
 // MARK: SystemEventsAppearancePreferencesObject
-@objc public protocol SystemEventsAppearancePreferencesObject: SBObjectProtocol {
+@objc public protocol SystemEventsAppearancePreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
     optional var appearance: SystemEventsAppearances { get set } // the overall look of buttons, menus and windows
     optional var fontSmoothing: Bool { get set } // Is font smoothing on?
     optional var fontSmoothingStyle: SystemEventsFontSmoothingStyles { get set } // the method used for smoothing fonts
@@ -358,17 +350,11 @@ extension SBObject: SystemEventsUser {}
     optional var scrollBarAction: SystemEventsScrollPageBehaviors { get set } // the action performed by clicking the scroll bar
     optional var smoothScrolling: Bool { get set } // Is smooth scrolling used?
     optional var darkMode: Bool { get set } // use dark menu bar and dock
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsAppearancePreferencesObject {}
 
 // MARK: SystemEventsCDAndDVDPreferencesObject
-@objc public protocol SystemEventsCDAndDVDPreferencesObject: SBObjectProtocol {
+@objc public protocol SystemEventsCDAndDVDPreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
     optional var blankCD: SystemEventsInsertionPreference { get } // the blank CD insertion preference
     optional var blankDVD: SystemEventsInsertionPreference { get } // the blank DVD insertion preference
     optional var blankBD: SystemEventsInsertionPreference { get } // the blank BD insertion preference
@@ -376,31 +362,19 @@ extension SBObject: SystemEventsAppearancePreferencesObject {}
     optional var pictureCD: SystemEventsInsertionPreference { get } // the picture CD insertion preference
     optional var videoDVD: SystemEventsInsertionPreference { get } // the video DVD insertion preference
     optional var videoBD: SystemEventsInsertionPreference { get } // the video BD insertion preference
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsCDAndDVDPreferencesObject {}
 
 // MARK: SystemEventsInsertionPreference
-@objc public protocol SystemEventsInsertionPreference: SBObjectProtocol {
+@objc public protocol SystemEventsInsertionPreference: SBObjectProtocol, SystemEventsGenericMethods {
     optional var customApplication: AnyObject { get set } // application to launch or activate on the insertion of media
     optional var customScript: AnyObject { get set } // AppleScript to launch or activate on the insertion of media
     optional var insertionAction: SystemEventsDhac { get set } // action to perform on media insertion
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsInsertionPreference {}
 
 // MARK: SystemEventsDesktop
-@objc public protocol SystemEventsDesktop: SBObjectProtocol {
+@objc public protocol SystemEventsDesktop: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // name of the desktop
     optional func id() -> Int // unique identifier of the desktop
     optional var changeInterval: Double { get set } // number of seconds to wait between changing the desktop picture
@@ -410,17 +384,11 @@ extension SBObject: SystemEventsInsertionPreference {}
     optional var picturesFolder: AnyObject { get set } // path to folder containing pictures for changing desktop background
     optional var randomOrder: Bool { get set } // turn on for random ordering of changing desktop pictures
     optional var translucentMenuBar: Bool { get set } // indicates whether the menu bar is translucent
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsDesktop {}
 
 // MARK: SystemEventsDockPreferencesObject
-@objc public protocol SystemEventsDockPreferencesObject: SBObjectProtocol {
+@objc public protocol SystemEventsDockPreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
     optional var animate: Bool { get set } // is the animation of opening applications on or off?
     optional var autohide: Bool { get set } // is autohiding the dock on or off?
     optional var dockSize: Double { get set } // size/height of the items (between 0.0 (minimum) and 1.0 (maximum))
@@ -428,49 +396,31 @@ extension SBObject: SystemEventsDesktop {}
     optional var magnificationSize: Double { get set } // maximum magnification size when magnification is on (between 0.0 (minimum) and 1.0 (maximum))
     optional var minimizeEffect: SystemEventsDpef { get set } // minimization effect
     optional var screenEdge: SystemEventsDpls { get set } // location on screen
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsDockPreferencesObject {}
 
 // MARK: SystemEventsLoginItem
-@objc public protocol SystemEventsLoginItem: SBObjectProtocol {
+@objc public protocol SystemEventsLoginItem: SBObjectProtocol, SystemEventsGenericMethods {
     optional var hidden: Bool { get set } // Is the Login Item hidden when launched?
     optional var kind: String { get } // the file type of the Login Item
     optional var name: String { get } // the name of the Login Item
     optional var path: String { get } // the file system path to the Login Item
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsLoginItem {}
 
 // MARK: SystemEventsConfiguration
-@objc public protocol SystemEventsConfiguration: SBObjectProtocol {
+@objc public protocol SystemEventsConfiguration: SBObjectProtocol, SystemEventsGenericMethods {
     optional var accountName: String { get set } // the name used to authenticate
     optional var connected: Bool { get } // Is the configuration connected?
     optional func id() -> String // the unique identifier for the configuration
     optional var name: String { get } // the name of the configuration
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func connect() -> SystemEventsConfiguration // connect a configuration or service
     optional func disconnect() -> SystemEventsConfiguration // disconnect a configuration or service
 }
 extension SBObject: SystemEventsConfiguration {}
 
 // MARK: SystemEventsInterface
-@objc public protocol SystemEventsInterface: SBObjectProtocol {
+@objc public protocol SystemEventsInterface: SBObjectProtocol, SystemEventsGenericMethods {
     optional var automatic: Bool { get set } // configure the interface speed, duplex, and mtu automatically?
     optional var duplex: String { get set } // the duplex setting  half | full | full with flow control
     optional func id() -> String // the unique identifier for the interface
@@ -479,46 +429,28 @@ extension SBObject: SystemEventsConfiguration {}
     optional var mtu: Int { get set } // the packet size
     optional var name: String { get } // the name of the interface
     optional var speed: Int { get set } // ethernet speed 10 | 100 | 1000
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsInterface {}
 
 // MARK: SystemEventsLocation
-@objc public protocol SystemEventsLocation: SBObjectProtocol {
+@objc public protocol SystemEventsLocation: SBObjectProtocol, SystemEventsGenericMethods {
     optional func services() -> SBElementArray
     optional func id() -> String // the unique identifier for the location
     optional var name: String { get set } // the name of the location
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsLocation {}
 
 // MARK: SystemEventsNetworkPreferencesObject
-@objc public protocol SystemEventsNetworkPreferencesObject: SBObjectProtocol {
+@objc public protocol SystemEventsNetworkPreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
     optional func interfaces() -> SBElementArray
     optional func locations() -> SBElementArray
     optional func services() -> SBElementArray
     optional var currentLocation: SystemEventsLocation { get set } // the current location
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsNetworkPreferencesObject {}
 
 // MARK: SystemEventsService
-@objc public protocol SystemEventsService: SBObjectProtocol {
+@objc public protocol SystemEventsService: SBObjectProtocol, SystemEventsGenericMethods {
     optional func configurations() -> SBElementArray
     optional var active: Bool { get } // Is the service active?
     optional var currentConfiguration: SystemEventsConfiguration { get set } // the currently selected configuration
@@ -526,70 +458,46 @@ extension SBObject: SystemEventsNetworkPreferencesObject {}
     optional var interface: SystemEventsInterface { get } // the interface the service is built on
     optional var kind: Int { get } // the type of service
     optional var name: String { get set } // the name of the service
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func connect() -> SystemEventsConfiguration // connect a configuration or service
     optional func disconnect() -> SystemEventsConfiguration // disconnect a configuration or service
 }
 extension SBObject: SystemEventsService {}
 
 // MARK: SystemEventsScreenSaver
-@objc public protocol SystemEventsScreenSaver: SBObjectProtocol {
+@objc public protocol SystemEventsScreenSaver: SBObjectProtocol, SystemEventsGenericMethods {
     optional var displayedName: String { get } // name of the screen saver module as displayed to the user
     optional var name: String { get } // name of the screen saver module to be displayed
     optional var path: SystemEventsAlias { get } // path to the screen saver module
     optional var pictureDisplayStyle: String { get set } // effect to use when displaying picture-based screen savers (slideshow, collage, or mosaic)
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func start() // start the screen saver
     optional func stop() // stop the screen saver
 }
 extension SBObject: SystemEventsScreenSaver {}
 
 // MARK: SystemEventsScreenSaverPreferencesObject
-@objc public protocol SystemEventsScreenSaverPreferencesObject: SBObjectProtocol {
+@objc public protocol SystemEventsScreenSaverPreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
     optional var delayInterval: Int { get set } // number of seconds of idle time before the screen saver starts; zero for never
     optional var mainScreenOnly: Bool { get set } // should the screen saver be shown only on the main screen?
     optional var running: Bool { get } // is the screen saver running?
     optional var showClock: Bool { get set } // should a clock appear over the screen saver?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func start() // start the screen saver
     optional func stop() // stop the screen saver
 }
 extension SBObject: SystemEventsScreenSaverPreferencesObject {}
 
 // MARK: SystemEventsSecurityPreferencesObject
-@objc public protocol SystemEventsSecurityPreferencesObject: SBObjectProtocol {
+@objc public protocol SystemEventsSecurityPreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
     optional var automaticLogin: Bool { get set } // Is automatic login allowed?
     optional var logOutWhenInactive: Bool { get set } // Will the computer log out when inactive?
     optional var logOutWhenInactiveInterval: Int { get set } // The interval of inactivity after which the computer will log out
     optional var requirePasswordToUnlock: Bool { get set } // Is a password required to unlock secure preferences?
     optional var requirePasswordToWake: Bool { get set } // Is a password required to wake the computer from sleep or screen saver?
     optional var secureVirtualMemory: Bool { get set } // Is secure virtual memory being used?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsSecurityPreferencesObject {}
 
 // MARK: SystemEventsDiskItem
-@objc public protocol SystemEventsDiskItem: SBObjectProtocol {
+@objc public protocol SystemEventsDiskItem: SBObjectProtocol, SystemEventsGenericMethods {
     optional var busyStatus: Bool { get } // Is the disk item busy?
     optional var container: SystemEventsDiskItem { get } // the folder or disk which has this disk item as an element
     optional var creationDate: NSDate { get } // the date on which the disk item was created
@@ -606,12 +514,8 @@ extension SBObject: SystemEventsSecurityPreferencesObject {}
     optional var URL: String { get } // the URL of the disk item
     optional var visible: Bool { get set } // Is the disk item visible?
     optional var volume: String { get } // the volume on which the disk item resides
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
+    optional func delete() // Delete disk item(s).
+    optional func moveTo(to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
 }
 extension SBObject: SystemEventsDiskItem {}
 
@@ -654,7 +558,7 @@ extension SBObject: SystemEventsAlias {}
 extension SBObject: SystemEventsDisk {}
 
 // MARK: SystemEventsDomain
-@objc public protocol SystemEventsDomain: SBObjectProtocol {
+@objc public protocol SystemEventsDomain: SBObjectProtocol, SystemEventsGenericMethods {
     optional func folders() -> SBElementArray
     optional var applicationSupportFolder: SystemEventsFolder { get } // The Application Support folder
     optional var applicationsFolder: SystemEventsFolder { get } // The Applications folder
@@ -671,12 +575,6 @@ extension SBObject: SystemEventsDisk {}
     optional var speakableItemsFolder: SystemEventsFolder { get } // The Speakable Items folder
     optional var utilitiesFolder: SystemEventsFolder { get } // The Utilities folder
     optional var workflowsFolder: SystemEventsFolder { get } // The Automator Workflows folder
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsDomain {}
 
@@ -768,67 +666,43 @@ extension SBObject: SystemEventsSystemDomainObject {}
 extension SBObject: SystemEventsUserDomainObject {}
 
 // MARK: SystemEventsFolderAction
-@objc public protocol SystemEventsFolderAction: SBObjectProtocol {
+@objc public protocol SystemEventsFolderAction: SBObjectProtocol, SystemEventsGenericMethods {
     optional func scripts() -> SBElementArray
     optional var enabled: Bool { get set } // Is the folder action enabled?
     optional var name: String { get set } // the name of the folder action, which is also the name of the folder
     optional var path: AnyObject { get set } // the path to the folder to which the folder action applies
     optional var volume: String { get } // the volume on which the folder to which the folder action applies resides
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func enableProcessNewChanges(processNewChanges: SystemEventsSaveOptions) // Enable a folder action.
 }
 extension SBObject: SystemEventsFolderAction {}
 
 // MARK: SystemEventsScript
-@objc public protocol SystemEventsScript: SBObjectProtocol {
+@objc public protocol SystemEventsScript: SBObjectProtocol, SystemEventsGenericMethods {
     optional var enabled: Bool { get set } // Is the script enabled?
     optional var name: String { get } // the name of the script
     optional var path: String { get } // the file system path of the script
     optional var POSIXPath: String { get } // the POSIX file system path of the script
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScript {}
 
 // MARK: SystemEventsAction
-@objc public protocol SystemEventsAction: SBObjectProtocol {
+@objc public protocol SystemEventsAction: SBObjectProtocol, SystemEventsGenericMethods {
     optional var objectDescription: String { get } // what the action does
     optional var name: String { get } // the name of the action
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func perform() -> SystemEventsAction // cause the target process to behave as if the action were applied to its UI element
 }
 extension SBObject: SystemEventsAction {}
 
 // MARK: SystemEventsAttribute
-@objc public protocol SystemEventsAttribute: SBObjectProtocol {
+@objc public protocol SystemEventsAttribute: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // the name of the attribute
     optional var settable: Bool { get } // Can the attribute be set?
     optional var value: AnyObject { get set } // the current value of the attribute
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsAttribute {}
 
 // MARK: SystemEventsUIElement
-@objc public protocol SystemEventsUIElement: SBObjectProtocol {
+@objc public protocol SystemEventsUIElement: SBObjectProtocol, SystemEventsGenericMethods {
     optional func actions() -> SBElementArray
     optional func attributes() -> SBElementArray
     optional func browsers() -> SBElementArray
@@ -890,12 +764,6 @@ extension SBObject: SystemEventsAttribute {}
     optional var subrole: AnyObject { get } // an encoded description of the UI element and its capabilities
     optional var title: String { get } // the title of the UI element as it appears on the screen
     optional var value: AnyObject { get set } // the current value of the UI element
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func clickAt(at: [AnyObject]!) -> AnyObject // cause the target process to behave as if the UI element were clicked
     optional func select() -> SystemEventsUIElement // set the selected property of the UI element
 }
@@ -1152,37 +1020,25 @@ extension SBObject: SystemEventsValueIndicator {}
 extension SBObject: SystemEventsPropertyListFile {}
 
 // MARK: SystemEventsPropertyListItem
-@objc public protocol SystemEventsPropertyListItem: SBObjectProtocol {
+@objc public protocol SystemEventsPropertyListItem: SBObjectProtocol, SystemEventsGenericMethods {
     optional func propertyListItems() -> SBElementArray
     optional var kind: NSNumber { get } // the kind of data stored in the property list item: boolean/data/date/list/number/record/string
     optional var name: String { get } // the name of the property list item ( if any )
     optional var text: String { get set } // the text representation of the property list data
     optional var value: AnyObject { get set } // the value of the property list item
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsPropertyListItem {}
 
 // MARK: SystemEventsAnnotation
-@objc public protocol SystemEventsAnnotation: SBObjectProtocol {
+@objc public protocol SystemEventsAnnotation: SBObjectProtocol, SystemEventsGenericMethods {
     optional var fullText: String { get } // the full text of the annotation
     optional func id() -> String // the unique identifier of the annotation
     optional var name: String { get } // the name of the annotation
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsAnnotation {}
 
 // MARK: SystemEventsQuickTimeData
-@objc public protocol SystemEventsQuickTimeData: SBObjectProtocol {
+@objc public protocol SystemEventsQuickTimeData: SBObjectProtocol, SystemEventsGenericMethods {
     optional func annotations() -> SBElementArray
     optional func tracks() -> SBElementArray
     optional var autoPlay: Bool { get } // will the movie automatically start playing? (saved with QuickTime file)
@@ -1200,12 +1056,6 @@ extension SBObject: SystemEventsAnnotation {}
     optional var presentationSize: SystemEventsMvsz { get } // size at which the movie will be presented
     optional var storedStream: Bool { get } // is this a stored streaming movie?
     optional var timeScale: Int { get } // the time scale of the QuickTime file
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsQuickTimeData {}
 
@@ -1242,7 +1092,7 @@ extension SBObject: SystemEventsAudioFile {}
 extension SBObject: SystemEventsMovieFile {}
 
 // MARK: SystemEventsTrack
-@objc public protocol SystemEventsTrack: SBObjectProtocol {
+@objc public protocol SystemEventsTrack: SBObjectProtocol, SystemEventsGenericMethods {
     optional func annotations() -> SBElementArray
     optional var audioChannelCount: Int { get } // the number of channels in the audio
     optional var audioCharacteristic: Bool { get } // can the track be heard?
@@ -1265,56 +1115,32 @@ extension SBObject: SystemEventsMovieFile {}
     optional var typeClass: String { get } // deprecated: use "type" instead ( included only to resolve a terminology conflict, script text will be updated upon compilation )
     optional var videoDepth: Int { get } // the color depth of the video
     optional var visualCharacteristic: Bool { get } // can the track be seen?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsTrack {}
 
 // MARK: SystemEventsXMLAttribute
-@objc public protocol SystemEventsXMLAttribute: SBObjectProtocol {
+@objc public protocol SystemEventsXMLAttribute: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // the name of the XML attribute
     optional var value: AnyObject { get set } // the value of the XML attribute
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsXMLAttribute {}
 
 // MARK: SystemEventsXMLData
-@objc public protocol SystemEventsXMLData: SBObjectProtocol {
+@objc public protocol SystemEventsXMLData: SBObjectProtocol, SystemEventsGenericMethods {
     optional func XMLElements() -> SBElementArray
     optional func id() -> String // the unique identifier of the XML data
     optional var name: String { get set } // the name of the XML data
     optional var text: String { get set } // the text representation of the XML data
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsXMLData {}
 
 // MARK: SystemEventsXMLElement
-@objc public protocol SystemEventsXMLElement: SBObjectProtocol {
+@objc public protocol SystemEventsXMLElement: SBObjectProtocol, SystemEventsGenericMethods {
     optional func XMLAttributes() -> SBElementArray
     optional func XMLElements() -> SBElementArray
     optional func id() -> String // the unique identifier of the XML element
     optional var name: String { get } // the name of the XML element
     optional var value: AnyObject { get set } // the value of the XML element
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsXMLElement {}
 
@@ -1325,7 +1151,7 @@ extension SBObject: SystemEventsXMLElement {}
 extension SBObject: SystemEventsXMLFile {}
 
 // MARK: SystemEventsPrintSettings
-@objc public protocol SystemEventsPrintSettings: SBObjectProtocol {
+@objc public protocol SystemEventsPrintSettings: SBObjectProtocol, SystemEventsGenericMethods {
     optional var copies: Int { get set } // the number of copies of a document to be printed
     optional var collating: Bool { get set } // Should printed copies be collated?
     optional var startingPage: Int { get set } // the first page of the document to be printed
@@ -1336,17 +1162,11 @@ extension SBObject: SystemEventsXMLFile {}
     optional var errorHandling: SystemEventsEnum { get set } // how errors are handled
     optional var faxNumber: String { get set } // for fax number
     optional var targetPrinter: String { get set } // for target printer
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsPrintSettings {}
 
 // MARK: SystemEventsScriptingClass
-@objc public protocol SystemEventsScriptingClass: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingClass: SBObjectProtocol, SystemEventsGenericMethods {
     optional func scriptingElements() -> SBElementArray
     optional func scriptingProperties() -> SBElementArray
     optional var name: String { get } // The name of the class
@@ -1356,17 +1176,11 @@ extension SBObject: SystemEventsPrintSettings {}
     optional var pluralName: String { get } // The plural name of the class
     optional var suiteName: String { get } // The name of the suite to which this class belongs
     optional var superclass: SystemEventsScriptingClass { get } // The class from which this class inherits
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingClass {}
 
 // MARK: SystemEventsScriptingCommand
-@objc public protocol SystemEventsScriptingCommand: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingCommand: SBObjectProtocol, SystemEventsGenericMethods {
     optional func scriptingParameters() -> SBElementArray
     optional var name: String { get } // The name of the command
     optional func id() -> String // The unique identifier of the command
@@ -1375,24 +1189,12 @@ extension SBObject: SystemEventsScriptingClass {}
     optional var hidden: Bool { get } // Is the command hidden?
     optional var scriptingResult: SystemEventsScriptingResultObject { get } // The object or data returned by this command
     optional var suiteName: String { get } // The name of the suite to which this command belongs
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingCommand {}
 
 // MARK: SystemEventsScriptingDefinitionObject
-@objc public protocol SystemEventsScriptingDefinitionObject: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingDefinitionObject: SBObjectProtocol, SystemEventsGenericMethods {
     optional func scriptingSuites() -> SBElementArray
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingDefinitionObject {}
 
@@ -1402,54 +1204,36 @@ extension SBObject: SystemEventsScriptingDefinitionObject {}
 extension SBObject: SystemEventsScriptingElement {}
 
 // MARK: SystemEventsScriptingEnumeration
-@objc public protocol SystemEventsScriptingEnumeration: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingEnumeration: SBObjectProtocol, SystemEventsGenericMethods {
     optional func scriptingEnumerators() -> SBElementArray
     optional var name: String { get } // The name of the enumeration
     optional func id() -> String // The unique identifier of the enumeration
     optional var hidden: Bool { get } // Is the enumeration hidden?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingEnumeration {}
 
 // MARK: SystemEventsScriptingEnumerator
-@objc public protocol SystemEventsScriptingEnumerator: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingEnumerator: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // The name of the enumerator
     optional func id() -> String // The unique identifier of the enumerator
     optional var objectDescription: String { get } // The description of the enumerator
     optional var hidden: Bool { get } // Is the enumerator hidden?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingEnumerator {}
 
 // MARK: SystemEventsScriptingParameter
-@objc public protocol SystemEventsScriptingParameter: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingParameter: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // The name of the parameter
     optional func id() -> String // The unique identifier of the parameter
     optional var objectDescription: String { get } // The description of the parameter
     optional var hidden: Bool { get } // Is the parameter hidden?
     optional var kind: String { get } // The kind of object or data specified by this parameter
     optional var optional: Bool { get } // Is the parameter optional?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingParameter {}
 
 // MARK: SystemEventsScriptingProperty
-@objc public protocol SystemEventsScriptingProperty: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingProperty: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // The name of the property
     optional func id() -> String // The unique identifier of the property
     optional var access: SystemEventsAccs { get } // The type of access to this property
@@ -1458,32 +1242,20 @@ extension SBObject: SystemEventsScriptingParameter {}
     optional var hidden: Bool { get } // Is the property hidden?
     optional var kind: String { get } // The kind of object or data returned by this property
     optional var listed: Bool { get } // Is the property's value a list?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingProperty {}
 
 // MARK: SystemEventsScriptingResultObject
-@objc public protocol SystemEventsScriptingResultObject: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingResultObject: SBObjectProtocol, SystemEventsGenericMethods {
     optional var objectDescription: String { get } // The description of the property
     optional var enumerated: Bool { get } // Is the scripting result's value an enumerator?
     optional var kind: String { get } // The kind of object or data returned by this property
     optional var listed: Bool { get } // Is the scripting result's value a list?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingResultObject {}
 
 // MARK: SystemEventsScriptingSuite
-@objc public protocol SystemEventsScriptingSuite: SBObjectProtocol {
+@objc public protocol SystemEventsScriptingSuite: SBObjectProtocol, SystemEventsGenericMethods {
     optional func scriptingCommands() -> SBElementArray
     optional func scriptingClasses() -> SBElementArray
     optional func scriptingEnumerations() -> SBElementArray
@@ -1491,12 +1263,6 @@ extension SBObject: SystemEventsScriptingResultObject {}
     optional func id() -> String // The unique identifier of the suite
     optional var objectDescription: String { get } // The description of the suite
     optional var hidden: Bool { get } // Is the suite hidden?
-    optional func closeSaving(saving: SystemEventsSaveOptions, savingIn: SystemEventsFile!) // Close a document.
-    optional func saveIn(in_: SystemEventsFile!, `as`: SystemEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: SystemEventsPrintSettings!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: SystemEventsScriptingSuite {}
 

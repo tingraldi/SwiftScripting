@@ -90,6 +90,7 @@ def arg_name(name, position=0):
     else:
         return safe_name(name)
 
+
 def type_for_type(objc_type, as_arg=False):
     obj_type_string = objc_type.spelling.split(" ")[0]
     mapped_type = type_dict.get(obj_type_string, obj_type_string)
@@ -107,6 +108,13 @@ def strip_prefix(prefix, a_string):
     if a_string.startswith(prefix):
         a_string = a_string[len(prefix):]
     return a_string
+
+
+def cursor_super_entity(cursor):
+    tokens = [token.spelling for token in cursor.get_tokens()]
+    if tokens[3] == ":" and len(tokens) > 4:
+        return tokens[4]
+
 
 class SBHeaderProcessor(object):
     swift_file = None
@@ -135,7 +143,7 @@ class SBHeaderProcessor(object):
                     repr(struct.pack('!I', decl.enum_value))))
             self.emit_line('}\n')
 
-    def emit_line(self, line):
+    def emit_line(self, line=''):
         self.swift_file.write(line + '\n')
 
     def emit_property(self, cursor):
@@ -162,18 +170,26 @@ class SBHeaderProcessor(object):
             func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):
-        superclass = [token.spelling for token in cursor.get_tokens()][4]
-        extension_class = superclass if superclass.startswith('SB') else 'SBObject'
-        super_protocol = superclass if not superclass.startswith('SB') else '{}Protocol'.format(superclass)
         protocol_name = cursor.spelling
-        self.emit_line('// MARK: {}'.format(cursor.spelling))
-        self.emit_line('@objc public protocol {}: {} {{'.format(protocol_name, super_protocol))
+        self.emit_line('// MARK: {}'.format(protocol_name))
+        cursor_is_interface = cursor.kind == CursorKind.OBJC_INTERFACE_DECL
+        super_entity = cursor_super_entity(cursor)
+        if cursor_is_interface:
+            implemented_protocols = [child.spelling for child in cursor.get_children() if child.kind == CursorKind.OBJC_PROTOCOL_REF]
+            super_protocol = super_entity if not super_entity.startswith('SB') else '{}Protocol'.format(super_entity)
+            implemented_protocols.insert(0, super_protocol)
+            protocols = ", ".join(implemented_protocols)
+        else:
+            protocols = super_entity
+        extends = ': {}'.format(protocols) if protocols else ''
+        self.emit_line('@objc public protocol {}{} {{'.format(protocol_name, extends))
         property_getters = [child.spelling
                             for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, []))
                             if child.kind == CursorKind.OBJC_PROPERTY_DECL]
         property_setters = ['set{}{}:'.format(getter[0].capitalize(), getter[1:]) for getter in property_getters]
         function_list = property_getters + property_setters
         emitted_properties = []
+        implemented_protocols = []
         for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, [])):
             if child.kind == CursorKind.OBJC_PROPERTY_DECL and child.spelling not in emitted_properties:
                 self.emit_property(child)
@@ -181,8 +197,14 @@ class SBHeaderProcessor(object):
             elif child.kind == CursorKind.OBJC_INSTANCE_METHOD_DECL and child.spelling not in function_list:
                 self.emit_function(child)
                 function_list.append(child.spelling)
+            elif child.kind == CursorKind.OBJC_PROTOCOL_REF:
+                implemented_protocols.append(child.spelling)
         self.emit_line('}')
-        self.emit_line('extension {}: {} {{}}\n'.format(extension_class, protocol_name))
+        if cursor_is_interface:
+            extension_class = super_entity if super_entity.startswith('SB') else 'SBObject'
+            self.emit_line('extension {}: {} {{}}\n'.format(extension_class, protocol_name))
+        else:
+            self.emit_line()
 
     def gather_categories(self, categories):
         for category in categories:
@@ -206,6 +228,9 @@ class SBHeaderProcessor(object):
 
         enums = [child for child in local_children if child.kind == CursorKind.ENUM_DECL]
         self.emit_enums(enums)
+
+        for child in [child for child in local_children if child.kind == CursorKind.OBJC_PROTOCOL_DECL]:
+            self.emit_protocol(child)
 
         categories = [child for child in local_children if child.kind == CursorKind.OBJC_CATEGORY_DECL]
         self.gather_categories(categories)

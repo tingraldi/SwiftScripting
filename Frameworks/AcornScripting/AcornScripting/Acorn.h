@@ -88,6 +88,17 @@ enum AcornDirection {
 };
 typedef enum AcornDirection AcornDirection;
 
+@protocol AcornGenericMethods
+
+- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
+- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
+- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
+- (void) delete;  // Delete an object.
+- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
+- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
+
+@end
+
 
 
 /*
@@ -97,14 +108,14 @@ typedef enum AcornDirection AcornDirection;
 // The application's top-level scripting object.
 @interface AcornApplication : SBApplication
 
-- (SBElementArray *) documents;
-- (SBElementArray *) windows;
+- (SBElementArray<AcornDocument *> *) documents;
+- (SBElementArray<AcornWindow *> *) windows;
 
 @property (copy, readonly) NSString *name;  // The name of the application.
 @property (readonly) BOOL frontmost;  // Is this the active application?
 @property (copy, readonly) NSString *version;  // The version number of the application.
 
-- (void) open:(NSArray *)x;  // Open a document.
+- (void) open:(NSArray<NSURL *> *)x;  // Open a document.
 - (void) print:(id)x withProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
 - (void) quitSaving:(AcornSaveOptions)saving;  // Quit the application.
 - (BOOL) exists:(id)x;  // Verify that an object exists.
@@ -115,7 +126,7 @@ typedef enum AcornDirection AcornDirection;
 @end
 
 // A window.
-@interface AcornWindow : SBObject
+@interface AcornWindow : SBObject <AcornGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The title of the window.
 - (NSInteger) id;  // The unique identifier of the window.
@@ -129,12 +140,6 @@ typedef enum AcornDirection AcornDirection;
 @property BOOL zoomed;  // Is the window zoomed right now?
 @property (copy, readonly) AcornDocument *document;  // The document whose contents are displayed in the window.
 
-- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -145,112 +150,82 @@ typedef enum AcornDirection AcornDirection;
  */
 
 // Rich (styled) text.
-@interface AcornRichText : SBObject
+@interface AcornRichText : SBObject <AcornGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<AcornCharacter *> *) characters;
+- (SBElementArray<AcornParagraph *> *) paragraphs;
+- (SBElementArray<AcornWord *> *) words;
+- (SBElementArray<AcornAttributeRun *> *) attributeRuns;
+- (SBElementArray<AcornAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the text's first character.
 @property (copy) NSString *font;  // The name of the font of the text's first character.
 @property NSInteger size;  // The size in points of the text's first character.
 
-- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // One of some text's characters.
-@interface AcornCharacter : SBObject
+@interface AcornCharacter : SBObject <AcornGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<AcornCharacter *> *) characters;
+- (SBElementArray<AcornParagraph *> *) paragraphs;
+- (SBElementArray<AcornWord *> *) words;
+- (SBElementArray<AcornAttributeRun *> *) attributeRuns;
+- (SBElementArray<AcornAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // Its color.
 @property (copy) NSString *font;  // The name of its font.
 @property NSInteger size;  // Its size, in points.
 
-- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // One of some text's paragraphs.
-@interface AcornParagraph : SBObject
+@interface AcornParagraph : SBObject <AcornGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<AcornCharacter *> *) characters;
+- (SBElementArray<AcornParagraph *> *) paragraphs;
+- (SBElementArray<AcornWord *> *) words;
+- (SBElementArray<AcornAttributeRun *> *) attributeRuns;
+- (SBElementArray<AcornAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the paragraph's first character.
 @property (copy) NSString *font;  // The name of the font of the paragraph's first character.
 @property NSInteger size;  // The size in points of the paragraph's first character.
 
-- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // One of some text's words.
-@interface AcornWord : SBObject
+@interface AcornWord : SBObject <AcornGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<AcornCharacter *> *) characters;
+- (SBElementArray<AcornParagraph *> *) paragraphs;
+- (SBElementArray<AcornWord *> *) words;
+- (SBElementArray<AcornAttributeRun *> *) attributeRuns;
+- (SBElementArray<AcornAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the word's first character.
 @property (copy) NSString *font;  // The name of the font of the word's first character.
 @property NSInteger size;  // The size in points of the word's first character.
 
-- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A chunk of text that all has the same attributes.
-@interface AcornAttributeRun : SBObject
+@interface AcornAttributeRun : SBObject <AcornGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<AcornCharacter *> *) characters;
+- (SBElementArray<AcornParagraph *> *) paragraphs;
+- (SBElementArray<AcornWord *> *) words;
+- (SBElementArray<AcornAttributeRun *> *) attributeRuns;
+- (SBElementArray<AcornAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // Its color.
 @property (copy) NSString *font;  // The name of its font.
 @property NSInteger size;  // Its size, in points.
 
-- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -269,12 +244,12 @@ typedef enum AcornDirection AcornDirection;
  */
 
 // An Acorn document, representing one or more layers and groups to make up a single image.
-@interface AcornDocument : SBObject
+@interface AcornDocument : SBObject <AcornGenericMethods>
 
-- (SBElementArray *) layers;
-- (SBElementArray *) bitmapLayers;
-- (SBElementArray *) groupLayers;
-- (SBElementArray *) shapeLayers;
+- (SBElementArray<AcornLayer *> *) layers;
+- (SBElementArray<AcornBitmapLayer *> *) bitmapLayers;
+- (SBElementArray<AcornGroupLayer *> *) groupLayers;
+- (SBElementArray<AcornShapeLayer *> *) shapeLayers;
 
 @property (copy, readonly) NSString *name;  // Its name.
 @property (readonly) BOOL modified;  // Has it been modified since the last save?
@@ -283,13 +258,7 @@ typedef enum AcornDirection AcornDirection;
 @property double width;  // The width of the image in pixels.
 @property (copy) AcornLayer *currentLayer;  // The Current layer
 
-- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) cropRect:(NSArray *)rect;  // Crop an image
+- (void) cropRect:(NSArray<NSNumber *> *)rect;  // Crop an image
 - (void) undo;  // Undo the last operation
 - (void) redo;  // Redo the last undone operation.
 - (void) resizeImageWidth:(double)width height:(double)height resolution:(double)resolution;  // Resize an image
@@ -302,13 +271,13 @@ typedef enum AcornDirection AcornDirection;
 - (void) clear;  // Clear (delete) the current selection
 - (void) cut;  // Cut (copy + delete) the current selection.  This is the same as the Edit ▸ Cut menu item.
 - (void) deselect;  // Clear the current selection
-- (void) fillWithColor:(NSArray *)withColor;  // Fill the current layer or selection with the forground color.
+- (void) fillWithColor:(NSArray<NSNumber *> *)withColor;  // Fill the current layer or selection with the forground color.
 - (void) flipCanvasDirection:(AcornDirection)direction;  // Flip the cavnas in a direction
 - (void) invertSelection;  // Invert the current selection.
 - (void) mergeVisibleLayers;  // Merge the visible layers into one.
 - (void) selectAll;  // Select the whole canvas
-- (void) selectRect:(NSArray *)rect;  // Select a frame
-- (void) selectOvalRect:(NSArray *)rect;  // Select an oval frame
+- (void) selectRect:(NSArray<NSNumber *> *)rect;  // Select a frame
+- (void) selectOvalRect:(NSArray<NSNumber *> *)rect;  // Select an oval frame
 - (void) doFilterName:(NSString *)name;  // Call a Core Image filter for the selected layer, or a filter plugin with the given name.
 - (void) loadFilterPresetName:(NSString *)name;  // Load a filter preset with the given name.
 - (void) addLayerMask;  // Add a layer mask to the layer
@@ -318,26 +287,20 @@ typedef enum AcornDirection AcornDirection;
 @end
 
 // An Acorn layer.
-@interface AcornLayer : SBObject
+@interface AcornLayer : SBObject <AcornGenericMethods>
 
-- (SBElementArray *) layers;
-- (SBElementArray *) bitmapLayers;
-- (SBElementArray *) groupLayers;
-- (SBElementArray *) shapeLayers;
+- (SBElementArray<AcornLayer *> *) layers;
+- (SBElementArray<AcornBitmapLayer *> *) bitmapLayers;
+- (SBElementArray<AcornGroupLayer *> *) groupLayers;
+- (SBElementArray<AcornShapeLayer *> *) shapeLayers;
 
 @property (copy) NSString *name;
 @property double opacity;
 @property BOOL visible;
-@property (copy, readonly) NSArray *bounds;
+@property (copy, readonly) NSArray<NSNumber *> *bounds;
 @property AcornBlendMode blendMode;
-@property (copy) NSArray *origin;
+@property (copy) NSArray<NSNumber *> *origin;
 
-- (void) closeSaving:(AcornSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(AcornSaveableFileFormat)as;  // Save a document.  You can use this to rename a document as well.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 

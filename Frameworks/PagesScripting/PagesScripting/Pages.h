@@ -93,6 +93,18 @@ enum PagesPlaybackRepetitionMethod {
 };
 typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 
+@protocol PagesGenericMethods
+
+- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
+- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
+- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
+- (void) delete;  // Delete an object.
+- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
+- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
+- (void) delete;  // Delete an object.
+
+@end
+
 
 
 /*
@@ -102,8 +114,8 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 // The application's top-level scripting object.
 @interface PagesApplication : SBApplication
 
-- (SBElementArray *) documents;
-- (SBElementArray *) windows;
+- (SBElementArray<PagesDocument *> *) documents;
+- (SBElementArray<PagesWindow *> *) windows;
 
 @property (copy, readonly) NSString *name;  // The name of the application.
 @property (readonly) BOOL frontmost;  // Is this the active application?
@@ -117,25 +129,18 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 @end
 
 // A document.
-@interface PagesDocument : SBObject
+@interface PagesDocument : SBObject <PagesGenericMethods>
 
 @property (copy, readonly) NSString *name;  // Its name.
 @property (readonly) BOOL modified;  // Has it been modified since the last save?
 @property (copy, readonly) NSURL *file;  // Its location on disk, if it has one.
 
-- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (void) exportTo:(NSURL *)to as:(PagesExportFormat)as withProperties:(NSDictionary *)withProperties;  // Export a document to another file
-- (void) delete;  // Delete an object.
 
 @end
 
 // A window.
-@interface PagesWindow : SBObject
+@interface PagesWindow : SBObject <PagesGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The title of the window.
 - (NSInteger) id;  // The unique identifier of the window.
@@ -150,13 +155,6 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 @property BOOL zoomed;  // Is the window zoomed right now?
 @property (copy, readonly) PagesDocument *document;  // The document whose contents are displayed in the window.
 
-- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) delete;  // Delete an object.
 
 @end
 
@@ -169,26 +167,26 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 // The Pages application.
 @interface PagesApplication (PagesSuite)
 
-- (SBElementArray *) templates;
+- (SBElementArray<PagesTemplate *> *) templates;
 
 @end
 
 // A Pages document.
 @interface PagesDocument (PagesSuite)
 
-- (SBElementArray *) audioClips;
-- (SBElementArray *) charts;
-- (SBElementArray *) groups;
-- (SBElementArray *) images;
-- (SBElementArray *) iWorkItems;
-- (SBElementArray *) lines;
-- (SBElementArray *) movies;
-- (SBElementArray *) pages;
-- (SBElementArray *) sections;
-- (SBElementArray *) shapes;
-- (SBElementArray *) tables;
-- (SBElementArray *) textItems;
-- (SBElementArray *) placeholderTexts;
+- (SBElementArray<PagesAudioClip *> *) audioClips;
+- (SBElementArray<PagesChart *> *) charts;
+- (SBElementArray<PagesGroup *> *) groups;
+- (SBElementArray<PagesImage *> *) images;
+- (SBElementArray<PagesIWorkItem *> *) iWorkItems;
+- (SBElementArray<PagesLine *> *) lines;
+- (SBElementArray<PagesMovie *> *) movies;
+- (SBElementArray<PagesPage *> *) pages;
+- (SBElementArray<PagesSection *> *) sections;
+- (SBElementArray<PagesShape *> *) shapes;
+- (SBElementArray<PagesTable *> *) tables;
+- (SBElementArray<PagesTextItem *> *) textItems;
+- (SBElementArray<PagesPlaceholderText *> *) placeholderTexts;
 
 - (NSString *) id;  // Document ID.
 @property (copy, readonly) PagesTemplate *documentTemplate;  // The template assigned to the document.
@@ -199,45 +197,31 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 @end
 
 // A styled document layout.
-@interface PagesTemplate : SBObject
+@interface PagesTemplate : SBObject <PagesGenericMethods>
 
 - (NSString *) id;  // The identifier used by the application.
 @property (copy, readonly) NSString *name;  // The localized name displayed to the user.
 
-- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) delete;  // Delete an object.
 
 @end
 
 // A section within a document.
-@interface PagesSection : SBObject
+@interface PagesSection : SBObject <PagesGenericMethods>
 
-- (SBElementArray *) audioClips;
-- (SBElementArray *) charts;
-- (SBElementArray *) groups;
-- (SBElementArray *) images;
-- (SBElementArray *) iWorkItems;
-- (SBElementArray *) lines;
-- (SBElementArray *) movies;
-- (SBElementArray *) pages;
-- (SBElementArray *) shapes;
-- (SBElementArray *) tables;
-- (SBElementArray *) textItems;
+- (SBElementArray<PagesAudioClip *> *) audioClips;
+- (SBElementArray<PagesChart *> *) charts;
+- (SBElementArray<PagesGroup *> *) groups;
+- (SBElementArray<PagesImage *> *) images;
+- (SBElementArray<PagesIWorkItem *> *) iWorkItems;
+- (SBElementArray<PagesLine *> *) lines;
+- (SBElementArray<PagesMovie *> *) movies;
+- (SBElementArray<PagesPage *> *) pages;
+- (SBElementArray<PagesShape *> *) shapes;
+- (SBElementArray<PagesTable *> *) tables;
+- (SBElementArray<PagesTextItem *> *) textItems;
 
 @property (copy) PagesRichText *bodyText;  // The section body text.
 
-- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) delete;  // Delete an object.
 
 @end
 
@@ -248,24 +232,17 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
  */
 
 // This provides the base rich text class for all iWork applications.
-@interface PagesRichText : SBObject
+@interface PagesRichText : SBObject <PagesGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) placeholderTexts;
+- (SBElementArray<PagesCharacter *> *) characters;
+- (SBElementArray<PagesParagraph *> *) paragraphs;
+- (SBElementArray<PagesWord *> *) words;
+- (SBElementArray<PagesPlaceholderText *> *) placeholderTexts;
 
 @property (copy) NSColor *color;  // The color of the font. Expressed as an RGB value consisting of a list of three color values from 0 to 65535. ex: Blue = {0, 0, 65535}.
 @property (copy) NSString *font;  // The name of the font.  Can be the PostScript name, such as: “TimesNewRomanPS-ItalicMT”, or display name: “Times New Roman Italic”. TIP: Use the Font Book application get the information about a typeface.
 @property NSInteger size;  // The size of the font.
 
-- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) delete;  // Delete an object.
 
 @end
 
@@ -278,9 +255,9 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 // One of some text's paragraphs.
 @interface PagesParagraph : PagesRichText
 
-- (SBElementArray *) characters;
-- (SBElementArray *) words;
-- (SBElementArray *) placeholderTexts;
+- (SBElementArray<PagesCharacter *> *) characters;
+- (SBElementArray<PagesWord *> *) words;
+- (SBElementArray<PagesPlaceholderText *> *) placeholderTexts;
 
 
 @end
@@ -288,7 +265,7 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 // One of some text's words.
 @interface PagesWord : PagesRichText
 
-- (SBElementArray *) characters;
+- (SBElementArray<PagesCharacter *> *) characters;
 
 
 @end
@@ -308,26 +285,19 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
  */
 
 // A container for iWork items
-@interface PagesIWorkContainer : SBObject
+@interface PagesIWorkContainer : SBObject <PagesGenericMethods>
 
-- (SBElementArray *) audioClips;
-- (SBElementArray *) charts;
-- (SBElementArray *) images;
-- (SBElementArray *) iWorkItems;
-- (SBElementArray *) groups;
-- (SBElementArray *) lines;
-- (SBElementArray *) movies;
-- (SBElementArray *) shapes;
-- (SBElementArray *) tables;
-- (SBElementArray *) textItems;
+- (SBElementArray<PagesAudioClip *> *) audioClips;
+- (SBElementArray<PagesChart *> *) charts;
+- (SBElementArray<PagesImage *> *) images;
+- (SBElementArray<PagesIWorkItem *> *) iWorkItems;
+- (SBElementArray<PagesGroup *> *) groups;
+- (SBElementArray<PagesLine *> *) lines;
+- (SBElementArray<PagesMovie *> *) movies;
+- (SBElementArray<PagesShape *> *) shapes;
+- (SBElementArray<PagesTable *> *) tables;
+- (SBElementArray<PagesTextItem *> *) textItems;
 
-- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) delete;  // Delete an object.
 
 @end
 
@@ -352,7 +322,7 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
  */
 
 // An item which supports formatting
-@interface PagesIWorkItem : SBObject
+@interface PagesIWorkItem : SBObject <PagesGenericMethods>
 
 @property NSInteger height;  // The height of the iWork item.
 @property BOOL locked;  // Whether the object is locked.
@@ -360,13 +330,6 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 @property NSPoint position;  // The horizontal and vertical coordinates of the top left point of the iWork item.
 @property NSInteger width;  // The width of the iWork item.
 
-- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) delete;  // Delete an object.
 
 @end
 
@@ -454,10 +417,10 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 // A table
 @interface PagesTable : PagesIWorkItem
 
-- (SBElementArray *) cells;
-- (SBElementArray *) rows;
-- (SBElementArray *) columns;
-- (SBElementArray *) ranges;
+- (SBElementArray<PagesCell *> *) cells;
+- (SBElementArray<PagesRow *> *) rows;
+- (SBElementArray<PagesColumn *> *) columns;
+- (SBElementArray<PagesRange *> *) ranges;
 
 @property (copy) NSString *name;  // The item's name.
 @property (copy, readonly) PagesRange *cellRange;  // The range describing every cell in the table.
@@ -486,11 +449,11 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 @end
 
 // A range of cells in a table
-@interface PagesRange : SBObject
+@interface PagesRange : SBObject <PagesGenericMethods>
 
-- (SBElementArray *) cells;
-- (SBElementArray *) columns;
-- (SBElementArray *) rows;
+- (SBElementArray<PagesCell *> *) cells;
+- (SBElementArray<PagesColumn *> *) columns;
+- (SBElementArray<PagesRow *> *) rows;
 
 @property (copy) NSString *fontName;  // The font of the range's cells.
 @property double fontSize;  // The font size of the range's cells.
@@ -502,13 +465,6 @@ typedef enum PagesPlaybackRepetitionMethod PagesPlaybackRepetitionMethod;
 @property (copy) NSColor *backgroundColor;  // The background color of the range's cells.
 @property PagesTAVT verticalAlignment;  // The vertical alignment of content in the range's cells.
 
-- (void) closeSaving:(PagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(PagesSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) delete;  // Delete an object.
 - (void) clear;  // Clear the contents of a specified range of cells. Only content is removed; formatting and style are preserved.
 - (void) merge;  // Merge a specified range of cells.
 - (void) unmerge;  // Unmerge all merged cells in a specified range.

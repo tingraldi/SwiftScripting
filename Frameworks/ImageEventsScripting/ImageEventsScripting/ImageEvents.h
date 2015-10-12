@@ -165,6 +165,26 @@ enum ImageEventsSaveableFileFormat {
 };
 typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 
+@protocol ImageEventsGenericMethods
+
+- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
+- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
+- (void) delete;  // Delete an object.
+- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
+- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
+- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
+- (void) cropToDimensions:(NSArray<NSNumber *> *)toDimensions;  // Crop an image
+- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
+- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
+- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
+- (void) padToDimensions:(NSArray<NSNumber *> *)toDimensions withPadColor:(NSArray<NSNumber *> *)withPadColor;  // Pad an image
+- (void) rotateToAngle:(double)toAngle;  // Rotate an image
+- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
+- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
+- (void) unembed;  // Remove any embedded ICC profiles from an image
+
+@end
+
 
 
 /*
@@ -174,8 +194,8 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // The application's top-level scripting object.
 @interface ImageEventsApplication : SBApplication
 
-- (SBElementArray *) documents;
-- (SBElementArray *) windows;
+- (SBElementArray<ImageEventsDocument *> *) documents;
+- (SBElementArray<ImageEventsWindow *> *) windows;
 
 @property (copy, readonly) NSString *name;  // The name of the application.
 @property (readonly) BOOL frontmost;  // Is this the active application?
@@ -191,33 +211,17 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 @end
 
 // A document.
-@interface ImageEventsDocument : SBObject
+@interface ImageEventsDocument : SBObject <ImageEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // Its name.
 @property (readonly) BOOL modified;  // Has it been modified since the last save?
 @property (copy, readonly) ImageEventsFile *file;  // Its location on disk, if it has one.
 
-//- (void) closeSaving:(ImageEventsSaveOptions)saving savingIn:(ImageEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
-- (void) cropToDimensions:(NSArray *)toDimensions;  // Crop an image
-- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
-- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
-- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
-- (void) padToDimensions:(NSArray *)toDimensions withPadColor:(NSArray *)withPadColor;  // Pad an image
-- (void) rotateToAngle:(double)toAngle;  // Rotate an image
-- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
-- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
-- (void) unembed;  // Remove any embedded ICC profiles from an image
 
 @end
 
 // A window.
-@interface ImageEventsWindow : SBObject
+@interface ImageEventsWindow : SBObject <ImageEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The title of the window.
 - (NSInteger) id;  // The unique identifier of the window.
@@ -232,22 +236,6 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 @property BOOL zoomed;  // Is the window zoomed right now?
 @property (copy, readonly) ImageEventsDocument *document;  // The document whose contents are displayed in the window.
 
-//- (void) closeSaving:(ImageEventsSaveOptions)saving savingIn:(ImageEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
-- (void) cropToDimensions:(NSArray *)toDimensions;  // Crop an image
-- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
-- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
-- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
-- (void) padToDimensions:(NSArray *)toDimensions withPadColor:(NSArray *)withPadColor;  // Pad an image
-- (void) rotateToAngle:(double)toAngle;  // Rotate an image
-- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
-- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
-- (void) unembed;  // Remove any embedded ICC profiles from an image
 
 @end
 
@@ -260,13 +248,13 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // The Disk-Folder-File specific extensions to the application
 @interface ImageEventsApplication (DiskFolderFileSuite)
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) disks;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) domains;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsAlias *> *) aliases;
+- (SBElementArray<ImageEventsDisk *> *) disks;
+- (SBElementArray<ImageEventsDiskItem *> *) diskItems;
+- (SBElementArray<ImageEventsDomain *> *) domains;
+- (SBElementArray<ImageEventsFile *> *) files;
+- (SBElementArray<ImageEventsFilePackage *> *) filePackages;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 @property (copy, readonly) ImageEventsFolder *applicationSupportFolder;  // The Application Support folder
 @property (copy, readonly) ImageEventsFolder *applicationsFolder;  // The user's Applications folder
@@ -303,7 +291,7 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 @end
 
 // An item stored in the file system
-@interface ImageEventsDiskItem : SBObject
+@interface ImageEventsDiskItem : SBObject <ImageEventsGenericMethods>
 
 @property (readonly) BOOL busyStatus;  // Is the disk item busy?
 @property (copy, readonly) ImageEventsDiskItem *container;  // the folder or disk which has this disk item as an element
@@ -322,35 +310,19 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 @property BOOL visible;  // Is the disk item visible?
 @property (copy, readonly) NSString *volume;  // the volume on which the disk item resides
 
-//- (void) closeSaving:(ImageEventsSaveOptions)saving savingIn:(ImageEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (void) delete;  // Delete disk item(s).
 - (id) moveTo:(id)to;  // Move disk item(s) to a new location.
-- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
-- (void) cropToDimensions:(NSArray *)toDimensions;  // Crop an image
-- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
-- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
-- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
-- (void) padToDimensions:(NSArray *)toDimensions withPadColor:(NSArray *)withPadColor;  // Pad an image
-- (void) rotateToAngle:(double)toAngle;  // Rotate an image
-- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
-- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
-- (void) unembed;  // Remove any embedded ICC profiles from an image
 
 @end
 
 // An alias in the file system
 @interface ImageEventsAlias : ImageEventsDiskItem
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsAlias *> *) aliases;
+- (SBElementArray<ImageEventsDiskItem *> *) diskItems;
+- (SBElementArray<ImageEventsFile *> *) files;
+- (SBElementArray<ImageEventsFilePackage *> *) filePackages;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 @property (copy) id creatorType;  // the OSType identifying the application that created the alias
 @property (copy) id defaultApplication;  // the application that will launch if the alias is opened
@@ -368,11 +340,11 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // A disk in the file system
 @interface ImageEventsDisk : ImageEventsDiskItem
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsAlias *> *) aliases;
+- (SBElementArray<ImageEventsDiskItem *> *) diskItems;
+- (SBElementArray<ImageEventsFile *> *) files;
+- (SBElementArray<ImageEventsFilePackage *> *) filePackages;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 @property (copy, readonly) NSNumber *capacity;  // the total number of bytes (free or used) on the disk
 @property (readonly) BOOL ejectable;  // Can the media be ejected (floppies, CD's, and so on)?
@@ -388,9 +360,9 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 @end
 
 // A domain in the file system
-@interface ImageEventsDomain : SBObject
+@interface ImageEventsDomain : SBObject <ImageEventsGenericMethods>
 
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 @property (copy, readonly) ImageEventsFolder *applicationSupportFolder;  // The Application Support folder
 @property (copy, readonly) ImageEventsFolder *applicationsFolder;  // The Applications folder
@@ -408,29 +380,13 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 @property (copy, readonly) ImageEventsFolder *utilitiesFolder;  // The Utilities folder
 @property (copy, readonly) ImageEventsFolder *workflowsFolder;  // The Automator Workflows folder
 
-//- (void) closeSaving:(ImageEventsSaveOptions)saving savingIn:(ImageEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
-- (void) cropToDimensions:(NSArray *)toDimensions;  // Crop an image
-- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
-- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
-- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
-- (void) padToDimensions:(NSArray *)toDimensions withPadColor:(NSArray *)withPadColor;  // Pad an image
-- (void) rotateToAngle:(double)toAngle;  // Rotate an image
-- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
-- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
-- (void) unembed;  // Remove any embedded ICC profiles from an image
 
 @end
 
 // The Classic domain in the file system
 @interface ImageEventsClassicDomainObject : ImageEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 @property (copy, readonly) ImageEventsFolder *appleMenuFolder;  // The Apple Menu Items folder
 @property (copy, readonly) ImageEventsFolder *controlPanelsFolder;  // The Control Panels folder
@@ -468,11 +424,11 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // A file package in the file system
 @interface ImageEventsFilePackage : ImageEventsFile
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsAlias *> *) aliases;
+- (SBElementArray<ImageEventsDiskItem *> *) diskItems;
+- (SBElementArray<ImageEventsFile *> *) files;
+- (SBElementArray<ImageEventsFilePackage *> *) filePackages;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 
 @end
@@ -480,11 +436,11 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // A folder in the file system
 @interface ImageEventsFolder : ImageEventsDiskItem
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsAlias *> *) aliases;
+- (SBElementArray<ImageEventsDiskItem *> *) diskItems;
+- (SBElementArray<ImageEventsFile *> *) files;
+- (SBElementArray<ImageEventsFilePackage *> *) filePackages;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 
 @end
@@ -492,7 +448,7 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // The local domain in the file system
 @interface ImageEventsLocalDomainObject : ImageEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 
 @end
@@ -500,7 +456,7 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // The network domain in the file system
 @interface ImageEventsNetworkDomainObject : ImageEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 
 @end
@@ -508,7 +464,7 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // The system domain in the file system
 @interface ImageEventsSystemDomainObject : ImageEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 
 @end
@@ -516,7 +472,7 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // The user domain in the file system
 @interface ImageEventsUserDomainObject : ImageEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<ImageEventsFolder *> *) folders;
 
 @property (copy, readonly) ImageEventsFolder *desktopFolder;  // The user's Desktop folder
 @property (copy, readonly) ImageEventsFolder *documentsFolder;  // The user's Documents folder
@@ -540,93 +496,45 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
  */
 
 // A monitor connected to the computer
-@interface ImageEventsDisplay : SBObject
+@interface ImageEventsDisplay : SBObject <ImageEventsGenericMethods>
 
 @property (readonly) NSInteger displayNumber;  // the number of the display
 @property (copy, readonly) ImageEventsProfile *displayProfile;  // the profile for the display
 @property (copy, readonly) NSString *name;  // the name of the display
 
-//- (void) closeSaving:(ImageEventsSaveOptions)saving savingIn:(ImageEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
-- (void) cropToDimensions:(NSArray *)toDimensions;  // Crop an image
-- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
-- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
-- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
-- (void) padToDimensions:(NSArray *)toDimensions withPadColor:(NSArray *)withPadColor;  // Pad an image
-- (void) rotateToAngle:(double)toAngle;  // Rotate an image
-- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
-- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
-- (void) unembed;  // Remove any embedded ICC profiles from an image
 
 @end
 
 // An image contained in a file
-@interface ImageEventsImage : SBObject
+@interface ImageEventsImage : SBObject <ImageEventsGenericMethods>
 
-- (SBElementArray *) metadataTags;
-- (SBElementArray *) profiles;
+- (SBElementArray<ImageEventsMetadataTag *> *) metadataTags;
+- (SBElementArray<ImageEventsProfile *> *) profiles;
 
 @property (readonly) ImageEventsBitz bitDepth;  // bit depth of the image's color representation
 @property (readonly) ImageEventsPSpc colorSpace;  // color space of the image's color representation
-@property (copy, readonly) NSArray *dimensions;  // the width and height of the image, respectively, in pixels
+@property (copy, readonly) NSArray<NSNumber *> *dimensions;  // the width and height of the image, respectively, in pixels
 @property (copy, readonly) ImageEventsProfile *embeddedProfile;  // the profile, if any, embedded in the image
 @property (copy, readonly) id fileType;  // file type of the image's file
 @property (copy, readonly) ImageEventsFile *imageFile;  // the file that contains the image
 @property (copy, readonly) ImageEventsDiskItem *location;  // the folder or disk that encloses the file that contains the image
 @property (copy, readonly) NSString *name;  // the name of the image
-@property (copy, readonly) NSArray *resolution;  // the horizontal and vertical pixel density of the image, respectively, in dots per inch
+@property (copy, readonly) NSArray<NSNumber *> *resolution;  // the horizontal and vertical pixel density of the image, respectively, in dots per inch
 
-//- (void) closeSaving:(ImageEventsSaveOptions)saving savingIn:(ImageEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
-- (void) cropToDimensions:(NSArray *)toDimensions;  // Crop an image
-- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
-- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
-- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
-- (void) padToDimensions:(NSArray *)toDimensions withPadColor:(NSArray *)withPadColor;  // Pad an image
-- (void) rotateToAngle:(double)toAngle;  // Rotate an image
-- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
-- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
-- (void) unembed;  // Remove any embedded ICC profiles from an image
 
 @end
 
 // A metadata tag: EXIF, IPTC, etc.
-@interface ImageEventsMetadataTag : SBObject
+@interface ImageEventsMetadataTag : SBObject <ImageEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // the name of the tag
 @property (copy, readonly) id value;  // the current setting of the tag
 
-//- (void) closeSaving:(ImageEventsSaveOptions)saving savingIn:(ImageEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
-- (void) cropToDimensions:(NSArray *)toDimensions;  // Crop an image
-- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
-- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
-- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
-- (void) padToDimensions:(NSArray *)toDimensions withPadColor:(NSArray *)withPadColor;  // Pad an image
-- (void) rotateToAngle:(double)toAngle;  // Rotate an image
-- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
-- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
-- (void) unembed;  // Remove any embedded ICC profiles from an image
 
 @end
 
 // A ColorSync ICC profile.
-@interface ImageEventsProfile : SBObject
+@interface ImageEventsProfile : SBObject <ImageEventsGenericMethods>
 
 @property (readonly) ImageEventsPSpc colorSpace;  // the color space of the profile
 @property (readonly) ImageEventsPPCS connectionSpace;  // the connection space of the profile
@@ -644,22 +552,6 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 @property (readonly) NSInteger size;  // the size of the profile in bytes
 @property (copy, readonly) NSString *version;  // the version number of the profile
 
-//- (void) closeSaving:(ImageEventsSaveOptions)saving savingIn:(ImageEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(ImageEventsFile *)in_ as:(ImageEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (void) closeSaving:(ImageEventsSavo)saving savingIn:(NSString *)savingIn;  // Close an image
-- (void) cropToDimensions:(NSArray *)toDimensions;  // Crop an image
-- (void) embedWithSource:(ImageEventsProfile *)withSource;  // Embed an image with an ICC profile
-- (void) flipHorizontal:(BOOL)horizontal vertical:(BOOL)vertical;  // Flip an image
-- (void) matchToDestination:(ImageEventsProfile *)toDestination;  // Match an image
-- (void) padToDimensions:(NSArray *)toDimensions withPadColor:(NSArray *)withPadColor;  // Pad an image
-- (void) rotateToAngle:(double)toAngle;  // Rotate an image
-- (ImageEventsAlias *) saveAs:(ImageEventsTypv)as icon:(BOOL)icon in:(NSString *)in_ PackBits:(BOOL)PackBits withCompressionLevel:(ImageEventsCmlv)withCompressionLevel;  // Save an image to a file in one of various formats
-- (void) scaleByFactor:(double)byFactor toSize:(NSInteger)toSize;  // Scale an image
-- (void) unembed;  // Remove any embedded ICC profiles from an image
 
 @end
 
@@ -672,9 +564,9 @@ typedef enum ImageEventsSaveableFileFormat ImageEventsSaveableFileFormat;
 // The Image Events application
 @interface ImageEventsApplication (ImageEventsSuite)
 
-- (SBElementArray *) displays;
-- (SBElementArray *) images;
-- (SBElementArray *) profiles;
+- (SBElementArray<ImageEventsDisplay *> *) displays;
+- (SBElementArray<ImageEventsImage *> *) images;
+- (SBElementArray<ImageEventsProfile *> *) profiles;
 
 @property (copy) ImageEventsProfile *defaultCMYKProfile;  // the default CMYK profile
 @property (copy) ImageEventsFile *defaultCMYKProfileLocation;  // the default CMYK profile location

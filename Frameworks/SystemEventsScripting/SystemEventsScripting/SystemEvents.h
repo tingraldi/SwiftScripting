@@ -144,6 +144,17 @@ enum SystemEventsAccs {
 };
 typedef enum SystemEventsAccs SystemEventsAccs;
 
+@protocol SystemEventsGenericMethods
+
+- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
+- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
+- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
+- (void) delete;  // Delete an object.
+- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
+- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
+
+@end
+
 
 
 /*
@@ -153,8 +164,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The application's top-level scripting object.
 @interface SystemEventsApplication : SBApplication
 
-- (SBElementArray *) documents;
-- (SBElementArray *) windows;
+- (SBElementArray<SystemEventsDocument *> *) documents;
+- (SBElementArray<SystemEventsWindow *> *) windows;
 
 @property (copy, readonly) NSString *name;  // The name of the application.
 @property (readonly) BOOL frontmost;  // Is this the active application?
@@ -173,30 +184,24 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 - (void) restartStateSavingPreference:(BOOL)stateSavingPreference;  // Restart the computer
 - (void) shutDownStateSavingPreference:(BOOL)stateSavingPreference;  // Shut Down the computer
 - (void) sleep;  // Put the computer to sleep
-- (id) clickAt:(NSArray *)at;  // cause the target process to behave as if the UI element were clicked
+- (id) clickAt:(NSArray<NSNumber *> *)at;  // cause the target process to behave as if the UI element were clicked
 - (void) keyCode:(id)x using:(id)using_;  // cause the target process to behave as if key codes were entered
 - (void) keystroke:(NSString *)x using:(id)using_;  // cause the target process to behave as if keystrokes were entered
 
 @end
 
 // A document.
-@interface SystemEventsDocument : SBObject
+@interface SystemEventsDocument : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // Its name.
 @property (readonly) BOOL modified;  // Has it been modified since the last save?
 @property (copy, readonly) SystemEventsFile *file;  // Its location on disk, if it has one.
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A window.
-@interface SystemEventsWindow : SBObject
+@interface SystemEventsWindow : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The title of the window.
 - (NSInteger) id;  // The unique identifier of the window.
@@ -211,12 +216,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property BOOL zoomed;  // Is the window zoomed right now?
 @property (copy, readonly) SystemEventsDocument *document;  // The document whose contents are displayed in the window.
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -243,26 +242,20 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (AccountsSuite)
 
-- (SBElementArray *) users;
+- (SBElementArray<SystemEventsUser *> *) users;
 
 @property (copy, readonly) SystemEventsUser *currentUser;  // the currently logged in user
 
 @end
 
 // user account
-@interface SystemEventsUser : SBObject
+@interface SystemEventsUser : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *fullName;  // user's full name
 @property (copy, readonly) id homeDirectory;  // path to user's home directory
 @property (copy, readonly) NSString *name;  // user's short name
 @property (copy) id picturePath;  // path to user's picture. Can be set for current user only!
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -280,7 +273,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // A collection of appearance preferences
-@interface SystemEventsAppearancePreferencesObject : SBObject
+@interface SystemEventsAppearancePreferencesObject : SBObject <SystemEventsGenericMethods>
 
 @property SystemEventsAppearances appearance;  // the overall look of buttons, menus and windows
 @property BOOL fontSmoothing;  // Is font smoothing on?
@@ -293,12 +286,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property BOOL smoothScrolling;  // Is smooth scrolling used?
 @property BOOL darkMode;  // use dark menu bar and dock
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -316,7 +303,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // user's CD and DVD insertion preferences
-@interface SystemEventsCDAndDVDPreferencesObject : SBObject
+@interface SystemEventsCDAndDVDPreferencesObject : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) SystemEventsInsertionPreference *blankCD;  // the blank CD insertion preference
 @property (copy, readonly) SystemEventsInsertionPreference *blankDVD;  // the blank DVD insertion preference
@@ -326,28 +313,16 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) SystemEventsInsertionPreference *videoDVD;  // the video DVD insertion preference
 @property (copy, readonly) SystemEventsInsertionPreference *videoBD;  // the video BD insertion preference
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // a specific insertion preference
-@interface SystemEventsInsertionPreference : SBObject
+@interface SystemEventsInsertionPreference : SBObject <SystemEventsGenericMethods>
 
 @property (copy) id customApplication;  // application to launch or activate on the insertion of media
 @property (copy) id customScript;  // AppleScript to launch or activate on the insertion of media
 @property SystemEventsDhac insertionAction;  // action to perform on media insertion
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -360,14 +335,14 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (DesktopSuite)
 
-- (SBElementArray *) desktops;
+- (SBElementArray<SystemEventsDesktop *> *) desktops;
 
 @property (copy, readonly) SystemEventsDesktop *currentDesktop;  // the primary desktop
 
 @end
 
 // desktop picture settings
-@interface SystemEventsDesktop : SBObject
+@interface SystemEventsDesktop : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // name of the desktop
 - (NSInteger) id;  // unique identifier of the desktop
@@ -379,12 +354,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property BOOL randomOrder;  // turn on for random ordering of changing desktop pictures
 @property BOOL translucentMenuBar;  // indicates whether the menu bar is translucent
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -402,7 +371,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // user's dock preferences
-@interface SystemEventsDockPreferencesObject : SBObject
+@interface SystemEventsDockPreferencesObject : SBObject <SystemEventsGenericMethods>
 
 @property BOOL animate;  // is the animation of opening applications on or off?
 @property BOOL autohide;  // is autohiding the dock on or off?
@@ -412,12 +381,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property SystemEventsDpef minimizeEffect;  // minimization effect
 @property SystemEventsDpls screenEdge;  // location on screen
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -430,24 +393,18 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (LoginItemsSuite)
 
-- (SBElementArray *) loginItems;
+- (SBElementArray<SystemEventsLoginItem *> *) loginItems;
 
 @end
 
 // an item to be launched or opened at login
-@interface SystemEventsLoginItem : SBObject
+@interface SystemEventsLoginItem : SBObject <SystemEventsGenericMethods>
 
 @property BOOL hidden;  // Is the Login Item hidden when launched?
 @property (copy, readonly) NSString *kind;  // the file type of the Login Item
 @property (copy, readonly) NSString *name;  // the name of the Login Item
 @property (copy, readonly) NSString *path;  // the file system path to the Login Item
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -465,26 +422,20 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // A collection of settings for configuring a connection
-@interface SystemEventsConfiguration : SBObject
+@interface SystemEventsConfiguration : SBObject <SystemEventsGenericMethods>
 
 @property (copy) NSString *accountName;  // the name used to authenticate
 @property (readonly) BOOL connected;  // Is the configuration connected?
 - (NSString *) id;  // the unique identifier for the configuration
 @property (copy, readonly) NSString *name;  // the name of the configuration
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (SystemEventsConfiguration *) connect;  // connect a configuration or service
 - (SystemEventsConfiguration *) disconnect;  // disconnect a configuration or service
 
 @end
 
 // A collection of settings for a network interface
-@interface SystemEventsInterface : SBObject
+@interface SystemEventsInterface : SBObject <SystemEventsGenericMethods>
 
 @property BOOL automatic;  // configure the interface speed, duplex, and mtu automatically?
 @property (copy) NSString *duplex;  // the duplex setting  half | full | full with flow control
@@ -495,54 +446,36 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) NSString *name;  // the name of the interface
 @property NSInteger speed;  // ethernet speed 10 | 100 | 1000
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A set of services
-@interface SystemEventsLocation : SBObject
+@interface SystemEventsLocation : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) services;
+- (SBElementArray<SystemEventsService *> *) services;
 
 - (NSString *) id;  // the unique identifier for the location
 @property (copy) NSString *name;  // the name of the location
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // the preferences for the current user's network
-@interface SystemEventsNetworkPreferencesObject : SBObject
+@interface SystemEventsNetworkPreferencesObject : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) interfaces;
-- (SBElementArray *) locations;
-- (SBElementArray *) services;
+- (SBElementArray<SystemEventsInterface *> *) interfaces;
+- (SBElementArray<SystemEventsLocation *> *) locations;
+- (SBElementArray<SystemEventsService *> *) services;
 
 @property (copy) SystemEventsLocation *currentLocation;  // the current location
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A collection of settings for a network service
-@interface SystemEventsService : SBObject
+@interface SystemEventsService : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) configurations;
+- (SBElementArray<SystemEventsConfiguration *> *) configurations;
 
 @property (readonly) BOOL active;  // Is the service active?
 @property (copy) SystemEventsConfiguration *currentConfiguration;  // the currently selected configuration
@@ -551,12 +484,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (readonly) NSInteger kind;  // the type of service
 @property (copy) NSString *name;  // the name of the service
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (SystemEventsConfiguration *) connect;  // connect a configuration or service
 - (SystemEventsConfiguration *) disconnect;  // disconnect a configuration or service
 
@@ -571,7 +498,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (ScreenSaverSuite)
 
-- (SBElementArray *) screenSavers;
+- (SBElementArray<SystemEventsScreenSaver *> *) screenSavers;
 
 @property (copy) SystemEventsScreenSaver *currentScreenSaver;  // the currently selected screen saver
 @property (copy) SystemEventsScreenSaverPreferencesObject *screenSaverPreferences;  // the preferences common to all screen savers
@@ -579,38 +506,26 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // an installed screen saver
-@interface SystemEventsScreenSaver : SBObject
+@interface SystemEventsScreenSaver : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *displayedName;  // name of the screen saver module as displayed to the user
 @property (copy, readonly) NSString *name;  // name of the screen saver module to be displayed
 @property (copy, readonly) SystemEventsAlias *path;  // path to the screen saver module
 @property (copy) NSString *pictureDisplayStyle;  // effect to use when displaying picture-based screen savers (slideshow, collage, or mosaic)
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (void) start;  // start the screen saver
 - (void) stop;  // stop the screen saver
 
 @end
 
 // screen saver settings
-@interface SystemEventsScreenSaverPreferencesObject : SBObject
+@interface SystemEventsScreenSaverPreferencesObject : SBObject <SystemEventsGenericMethods>
 
 @property NSInteger delayInterval;  // number of seconds of idle time before the screen saver starts; zero for never
 @property BOOL mainScreenOnly;  // should the screen saver be shown only on the main screen?
 @property (readonly) BOOL running;  // is the screen saver running?
 @property BOOL showClock;  // should a clock appear over the screen saver?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (void) start;  // start the screen saver
 - (void) stop;  // stop the screen saver
 
@@ -625,8 +540,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (AudioFileSuite)
 
-- (SBElementArray *) audioDatas;
-- (SBElementArray *) audioFiles;
+- (SBElementArray<SystemEventsAudioData *> *) audioDatas;
+- (SBElementArray<SystemEventsAudioFile *> *) audioFiles;
 
 @end
 
@@ -644,7 +559,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // a collection of security preferences
-@interface SystemEventsSecurityPreferencesObject : SBObject
+@interface SystemEventsSecurityPreferencesObject : SBObject <SystemEventsGenericMethods>
 
 @property BOOL automaticLogin;  // Is automatic login allowed?
 @property BOOL logOutWhenInactive;  // Will the computer log out when inactive?
@@ -653,12 +568,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property BOOL requirePasswordToWake;  // Is a password required to wake the computer from sleep or screen saver?
 @property BOOL secureVirtualMemory;  // Is secure virtual memory being used?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -671,13 +580,13 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The Disk-Folder-File specific extensions to the application
 @interface SystemEventsApplication (DiskFolderFileSuite)
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) disks;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) domains;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsAlias *> *) aliases;
+- (SBElementArray<SystemEventsDisk *> *) disks;
+- (SBElementArray<SystemEventsDiskItem *> *) diskItems;
+- (SBElementArray<SystemEventsDomain *> *) domains;
+- (SBElementArray<SystemEventsFile *> *) files;
+- (SBElementArray<SystemEventsFilePackage *> *) filePackages;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 @property (copy, readonly) SystemEventsFolder *applicationSupportFolder;  // The Application Support folder
 @property (copy, readonly) SystemEventsFolder *applicationsFolder;  // The user's Applications folder
@@ -714,7 +623,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // An item stored in the file system
-@interface SystemEventsDiskItem : SBObject
+@interface SystemEventsDiskItem : SBObject <SystemEventsGenericMethods>
 
 @property (readonly) BOOL busyStatus;  // Is the disk item busy?
 @property (copy, readonly) SystemEventsDiskItem *container;  // the folder or disk which has this disk item as an element
@@ -733,12 +642,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property BOOL visible;  // Is the disk item visible?
 @property (copy, readonly) NSString *volume;  // the volume on which the disk item resides
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (void) delete;  // Delete disk item(s).
 - (id) moveTo:(id)to;  // Move disk item(s) to a new location.
 
@@ -747,11 +650,11 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // An alias in the file system
 @interface SystemEventsAlias : SystemEventsDiskItem
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsAlias *> *) aliases;
+- (SBElementArray<SystemEventsDiskItem *> *) diskItems;
+- (SBElementArray<SystemEventsFile *> *) files;
+- (SBElementArray<SystemEventsFilePackage *> *) filePackages;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 @property (copy) id creatorType;  // the OSType identifying the application that created the alias
 @property (copy) id defaultApplication;  // the application that will launch if the alias is opened
@@ -769,11 +672,11 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A disk in the file system
 @interface SystemEventsDisk : SystemEventsDiskItem
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsAlias *> *) aliases;
+- (SBElementArray<SystemEventsDiskItem *> *) diskItems;
+- (SBElementArray<SystemEventsFile *> *) files;
+- (SBElementArray<SystemEventsFilePackage *> *) filePackages;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 @property (copy, readonly) NSNumber *capacity;  // the total number of bytes (free or used) on the disk
 @property (readonly) BOOL ejectable;  // Can the media be ejected (floppies, CD's, and so on)?
@@ -789,9 +692,9 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // A domain in the file system
-@interface SystemEventsDomain : SBObject
+@interface SystemEventsDomain : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 @property (copy, readonly) SystemEventsFolder *applicationSupportFolder;  // The Application Support folder
 @property (copy, readonly) SystemEventsFolder *applicationsFolder;  // The Applications folder
@@ -809,19 +712,13 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) SystemEventsFolder *utilitiesFolder;  // The Utilities folder
 @property (copy, readonly) SystemEventsFolder *workflowsFolder;  // The Automator Workflows folder
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // The Classic domain in the file system
 @interface SystemEventsClassicDomainObject : SystemEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 @property (copy, readonly) SystemEventsFolder *appleMenuFolder;  // The Apple Menu Items folder
 @property (copy, readonly) SystemEventsFolder *controlPanelsFolder;  // The Control Panels folder
@@ -859,11 +756,11 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A file package in the file system
 @interface SystemEventsFilePackage : SystemEventsFile
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsAlias *> *) aliases;
+- (SBElementArray<SystemEventsDiskItem *> *) diskItems;
+- (SBElementArray<SystemEventsFile *> *) files;
+- (SBElementArray<SystemEventsFilePackage *> *) filePackages;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 
 @end
@@ -871,11 +768,11 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A folder in the file system
 @interface SystemEventsFolder : SystemEventsDiskItem
 
-- (SBElementArray *) aliases;
-- (SBElementArray *) diskItems;
-- (SBElementArray *) files;
-- (SBElementArray *) filePackages;
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsAlias *> *) aliases;
+- (SBElementArray<SystemEventsDiskItem *> *) diskItems;
+- (SBElementArray<SystemEventsFile *> *) files;
+- (SBElementArray<SystemEventsFilePackage *> *) filePackages;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 
 @end
@@ -883,7 +780,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The local domain in the file system
 @interface SystemEventsLocalDomainObject : SystemEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 
 @end
@@ -891,7 +788,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The network domain in the file system
 @interface SystemEventsNetworkDomainObject : SystemEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 
 @end
@@ -899,7 +796,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The system domain in the file system
 @interface SystemEventsSystemDomainObject : SystemEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 
 @end
@@ -907,7 +804,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The user domain in the file system
 @interface SystemEventsUserDomainObject : SystemEventsDomain
 
-- (SBElementArray *) folders;
+- (SBElementArray<SystemEventsFolder *> *) folders;
 
 @property (copy, readonly) SystemEventsFolder *desktopFolder;  // The user's Desktop folder
 @property (copy, readonly) SystemEventsFolder *documentsFolder;  // The user's Documents folder
@@ -933,46 +830,34 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (FolderActionsSuite)
 
-- (SBElementArray *) folderActions;
+- (SBElementArray<SystemEventsFolderAction *> *) folderActions;
 
 @property BOOL folderActionsEnabled;  // Are Folder Actions currently being processed?
 
 @end
 
 // An action attached to a folder in the file system
-@interface SystemEventsFolderAction : SBObject
+@interface SystemEventsFolderAction : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) scripts;
+- (SBElementArray<SystemEventsScript *> *) scripts;
 
 @property BOOL enabled;  // Is the folder action enabled?
 @property (copy) NSString *name;  // the name of the folder action, which is also the name of the folder
 @property (copy) id path;  // the path to the folder to which the folder action applies
 @property (copy, readonly) NSString *volume;  // the volume on which the folder to which the folder action applies resides
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (void) enableProcessNewChanges:(SystemEventsSaveOptions)processNewChanges;  // Enable a folder action.
 
 @end
 
 // A script invoked by a folder action
-@interface SystemEventsScript : SBObject
+@interface SystemEventsScript : SBObject <SystemEventsGenericMethods>
 
 @property BOOL enabled;  // Is the script enabled?
 @property (copy, readonly) NSString *name;  // the name of the script
 @property (copy, readonly) NSString *path;  // the file system path of the script
 @property (copy, readonly) NSString *POSIXPath;  // the POSIX file system path of the script
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -985,8 +870,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (MovieFileSuite)
 
-- (SBElementArray *) movieDatas;
-- (SBElementArray *) movieFiles;
+- (SBElementArray<SystemEventsMovieData *> *) movieDatas;
+- (SBElementArray<SystemEventsMovieFile *> *) movieFiles;
 
 @end
 
@@ -999,98 +884,86 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (ProcessesSuite)
 
-- (SBElementArray *) applicationProcesses;
-- (SBElementArray *) deskAccessoryProcesses;
-- (SBElementArray *) processes;
-- (SBElementArray *) UIElements;
+- (SBElementArray<SystemEventsApplicationProcess *> *) applicationProcesses;
+- (SBElementArray<SystemEventsDeskAccessoryProcess *> *) deskAccessoryProcesses;
+- (SBElementArray<SystemEventsProcess *> *) processes;
+- (SBElementArray<SystemEventsUIElement *> *) UIElements;
 
 @property (readonly) BOOL UIElementsEnabled;  // Are UI element events currently being processed?
 
 @end
 
 // An action that can be performed on the UI element
-@interface SystemEventsAction : SBObject
+@interface SystemEventsAction : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *objectDescription;  // what the action does
 @property (copy, readonly) NSString *name;  // the name of the action
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (SystemEventsAction *) perform;  // cause the target process to behave as if the action were applied to its UI element
 
 @end
 
 // An named data value associated with the UI element
-@interface SystemEventsAttribute : SBObject
+@interface SystemEventsAttribute : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // the name of the attribute
 @property (readonly) BOOL settable;  // Can the attribute be set?
 @property (copy) id value;  // the current value of the attribute
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A piece of the user interface of a process
-@interface SystemEventsUIElement : SBObject
+@interface SystemEventsUIElement : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) actions;
-- (SBElementArray *) attributes;
-- (SBElementArray *) browsers;
-- (SBElementArray *) busyIndicators;
-- (SBElementArray *) buttons;
-- (SBElementArray *) checkboxes;
-- (SBElementArray *) colorWells;
-- (SBElementArray *) columns;
-- (SBElementArray *) comboBoxes;
-- (SBElementArray *) drawers;
-- (SBElementArray *) groups;
-- (SBElementArray *) growAreas;
-- (SBElementArray *) images;
-- (SBElementArray *) incrementors;
-- (SBElementArray *) lists;
-- (SBElementArray *) menus;
-- (SBElementArray *) menuBars;
-- (SBElementArray *) menuBarItems;
-- (SBElementArray *) menuButtons;
-- (SBElementArray *) menuItems;
-- (SBElementArray *) outlines;
-- (SBElementArray *) popOvers;
-- (SBElementArray *) popUpButtons;
-- (SBElementArray *) progressIndicators;
-- (SBElementArray *) radioButtons;
-- (SBElementArray *) radioGroups;
-- (SBElementArray *) relevanceIndicators;
-- (SBElementArray *) rows;
-- (SBElementArray *) scrollAreas;
-- (SBElementArray *) scrollBars;
-- (SBElementArray *) sheets;
-- (SBElementArray *) sliders;
-- (SBElementArray *) splitters;
-- (SBElementArray *) splitterGroups;
-- (SBElementArray *) staticTexts;
-- (SBElementArray *) tabGroups;
-- (SBElementArray *) tables;
-- (SBElementArray *) textAreas;
-- (SBElementArray *) textFields;
-- (SBElementArray *) toolbars;
-- (SBElementArray *) UIElements;
-- (SBElementArray *) valueIndicators;
-- (SBElementArray *) windows;
+- (SBElementArray<SystemEventsAction *> *) actions;
+- (SBElementArray<SystemEventsAttribute *> *) attributes;
+- (SBElementArray<SystemEventsBrowser *> *) browsers;
+- (SBElementArray<SystemEventsBusyIndicator *> *) busyIndicators;
+- (SBElementArray<SystemEventsButton *> *) buttons;
+- (SBElementArray<SystemEventsCheckbox *> *) checkboxes;
+- (SBElementArray<SystemEventsColorWell *> *) colorWells;
+- (SBElementArray<SystemEventsColumn *> *) columns;
+- (SBElementArray<SystemEventsComboBox *> *) comboBoxes;
+- (SBElementArray<SystemEventsDrawer *> *) drawers;
+- (SBElementArray<SystemEventsGroup *> *) groups;
+- (SBElementArray<SystemEventsGrowArea *> *) growAreas;
+- (SBElementArray<SystemEventsImage *> *) images;
+- (SBElementArray<SystemEventsIncrementor *> *) incrementors;
+- (SBElementArray<NSArray *> *) lists;
+- (SBElementArray<SystemEventsMenu *> *) menus;
+- (SBElementArray<SystemEventsMenuBar *> *) menuBars;
+- (SBElementArray<SystemEventsMenuBarItem *> *) menuBarItems;
+- (SBElementArray<SystemEventsMenuButton *> *) menuButtons;
+- (SBElementArray<SystemEventsMenuItem *> *) menuItems;
+- (SBElementArray<SystemEventsOutline *> *) outlines;
+- (SBElementArray<SystemEventsPopOver *> *) popOvers;
+- (SBElementArray<SystemEventsPopUpButton *> *) popUpButtons;
+- (SBElementArray<SystemEventsProgressIndicator *> *) progressIndicators;
+- (SBElementArray<SystemEventsRadioButton *> *) radioButtons;
+- (SBElementArray<SystemEventsRadioGroup *> *) radioGroups;
+- (SBElementArray<SystemEventsRelevanceIndicator *> *) relevanceIndicators;
+- (SBElementArray<SystemEventsRow *> *) rows;
+- (SBElementArray<SystemEventsScrollArea *> *) scrollAreas;
+- (SBElementArray<SystemEventsScrollBar *> *) scrollBars;
+- (SBElementArray<SystemEventsSheet *> *) sheets;
+- (SBElementArray<SystemEventsSlider *> *) sliders;
+- (SBElementArray<SystemEventsSplitter *> *) splitters;
+- (SBElementArray<SystemEventsSplitterGroup *> *) splitterGroups;
+- (SBElementArray<SystemEventsStaticText *> *) staticTexts;
+- (SBElementArray<SystemEventsTabGroup *> *) tabGroups;
+- (SBElementArray<SystemEventsTable *> *) tables;
+- (SBElementArray<SystemEventsTextArea *> *) textAreas;
+- (SBElementArray<SystemEventsTextField *> *) textFields;
+- (SBElementArray<SystemEventsToolbar *> *) toolbars;
+- (SBElementArray<SystemEventsUIElement *> *) UIElements;
+- (SBElementArray<SystemEventsValueIndicator *> *) valueIndicators;
+- (SBElementArray<SystemEventsWindow *> *) windows;
 
 @property (copy, readonly) id accessibilityDescription;  // a more complete description of the UI element and its capabilities
 @property (copy, readonly) id objectDescription;  // the accessibility description, if available; otherwise, the role description
 @property (copy, readonly) id enabled;  // Is the UI element enabled? ( Does it accept clicks? )
-@property (copy, readonly) NSArray *entireContents;  // a list of every UI element contained in this UI element and its child UI elements, to the limits of the tree
+@property (copy, readonly) NSArray<SBObject *> *entireContents;  // a list of every UI element contained in this UI element and its child UI elements, to the limits of the tree
 @property (copy) id focused;  // Is the focus on this UI element?
 @property (copy, readonly) id help;  // an elaborate description of the UI element and its capabilities
 @property (copy, readonly) id maximumValue;  // the maximum value that the UI element can take on
@@ -1106,13 +979,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) NSString *title;  // the title of the UI element as it appears on the screen
 @property (copy) id value;  // the current value of the UI element
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (id) clickAt:(NSArray *)at;  // cause the target process to behave as if the UI element were clicked
+- (id) clickAt:(NSArray<NSNumber *> *)at;  // cause the target process to behave as if the UI element were clicked
 - (SystemEventsUIElement *) select;  // set the selected property of the UI element
 
 @end
@@ -1168,8 +1035,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A group belonging to a window
 @interface SystemEventsGroup : SystemEventsUIElement
 
-- (SBElementArray *) checkboxes;
-- (SBElementArray *) staticTexts;
+- (SBElementArray<SystemEventsCheckbox *> *) checkboxes;
+- (SBElementArray<SystemEventsStaticText *> *) staticTexts;
 
 
 @end
@@ -1201,7 +1068,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A menu belonging to a menu bar item
 @interface SystemEventsMenu : SystemEventsUIElement
 
-- (SBElementArray *) menuItems;
+- (SBElementArray<SystemEventsMenuItem *> *) menuItems;
 
 
 @end
@@ -1209,8 +1076,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A menu bar belonging to a process
 @interface SystemEventsMenuBar : SystemEventsUIElement
 
-- (SBElementArray *) menus;
-- (SBElementArray *) menuBarItems;
+- (SBElementArray<SystemEventsMenu *> *) menus;
+- (SBElementArray<SystemEventsMenuBarItem *> *) menuBarItems;
 
 
 @end
@@ -1218,7 +1085,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A menu bar item belonging to a menu bar
 @interface SystemEventsMenuBarItem : SystemEventsUIElement
 
-- (SBElementArray *) menus;
+- (SBElementArray<SystemEventsMenu *> *) menus;
 
 
 @end
@@ -1232,7 +1099,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A menu item belonging to a menu
 @interface SystemEventsMenuItem : SystemEventsUIElement
 
-- (SBElementArray *) menus;
+- (SBElementArray<SystemEventsMenu *> *) menus;
 
 
 @end
@@ -1258,8 +1125,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A process running on this computer
 @interface SystemEventsProcess : SystemEventsUIElement
 
-- (SBElementArray *) menuBars;
-- (SBElementArray *) windows;
+- (SBElementArray<SystemEventsMenuBar *> *) menuBars;
+- (SBElementArray<SystemEventsWindow *> *) windows;
 
 @property (readonly) BOOL acceptsHighLevelEvents;  // Is the process high-level event aware (accepts open application, open document, print document, and quit)?
 @property (readonly) BOOL acceptsRemoteEvents;  // Does the process accept remote events?
@@ -1315,7 +1182,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A radio button group belonging to a window
 @interface SystemEventsRadioGroup : SystemEventsUIElement
 
-- (SBElementArray *) radioButtons;
+- (SBElementArray<SystemEventsRadioButton *> *) radioButtons;
 
 
 @end
@@ -1341,8 +1208,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A scroll bar belonging to a window
 @interface SystemEventsScrollBar : SystemEventsUIElement
 
-- (SBElementArray *) buttons;
-- (SBElementArray *) valueIndicators;
+- (SBElementArray<SystemEventsButton *> *) buttons;
+- (SBElementArray<SystemEventsValueIndicator *> *) valueIndicators;
 
 
 @end
@@ -1374,7 +1241,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A static text field belonging to a window
 @interface SystemEventsStaticText : SystemEventsUIElement
 
-- (SBElementArray *) images;
+- (SBElementArray<SystemEventsImage *> *) images;
 
 
 @end
@@ -1418,46 +1285,46 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // A window belonging to a process
 @interface SystemEventsWindow (ProcessesSuite)
 
-- (SBElementArray *) actions;
-- (SBElementArray *) attributes;
-- (SBElementArray *) browsers;
-- (SBElementArray *) busyIndicators;
-- (SBElementArray *) buttons;
-- (SBElementArray *) checkboxes;
-- (SBElementArray *) colorWells;
-- (SBElementArray *) comboBoxes;
-- (SBElementArray *) drawers;
-- (SBElementArray *) groups;
-- (SBElementArray *) growAreas;
-- (SBElementArray *) images;
-- (SBElementArray *) incrementors;
-- (SBElementArray *) lists;
-- (SBElementArray *) menuButtons;
-- (SBElementArray *) outlines;
-- (SBElementArray *) popOvers;
-- (SBElementArray *) popUpButtons;
-- (SBElementArray *) progressIndicators;
-- (SBElementArray *) radioButtons;
-- (SBElementArray *) radioGroups;
-- (SBElementArray *) relevanceIndicators;
-- (SBElementArray *) scrollAreas;
-- (SBElementArray *) scrollBars;
-- (SBElementArray *) sheets;
-- (SBElementArray *) sliders;
-- (SBElementArray *) splitters;
-- (SBElementArray *) splitterGroups;
-- (SBElementArray *) staticTexts;
-- (SBElementArray *) tabGroups;
-- (SBElementArray *) tables;
-- (SBElementArray *) textAreas;
-- (SBElementArray *) textFields;
-- (SBElementArray *) toolbars;
-- (SBElementArray *) UIElements;
+- (SBElementArray<SystemEventsAction *> *) actions;
+- (SBElementArray<SystemEventsAttribute *> *) attributes;
+- (SBElementArray<SystemEventsBrowser *> *) browsers;
+- (SBElementArray<SystemEventsBusyIndicator *> *) busyIndicators;
+- (SBElementArray<SystemEventsButton *> *) buttons;
+- (SBElementArray<SystemEventsCheckbox *> *) checkboxes;
+- (SBElementArray<SystemEventsColorWell *> *) colorWells;
+- (SBElementArray<SystemEventsComboBox *> *) comboBoxes;
+- (SBElementArray<SystemEventsDrawer *> *) drawers;
+- (SBElementArray<SystemEventsGroup *> *) groups;
+- (SBElementArray<SystemEventsGrowArea *> *) growAreas;
+- (SBElementArray<SystemEventsImage *> *) images;
+- (SBElementArray<SystemEventsIncrementor *> *) incrementors;
+- (SBElementArray<NSArray *> *) lists;
+- (SBElementArray<SystemEventsMenuButton *> *) menuButtons;
+- (SBElementArray<SystemEventsOutline *> *) outlines;
+- (SBElementArray<SystemEventsPopOver *> *) popOvers;
+- (SBElementArray<SystemEventsPopUpButton *> *) popUpButtons;
+- (SBElementArray<SystemEventsProgressIndicator *> *) progressIndicators;
+- (SBElementArray<SystemEventsRadioButton *> *) radioButtons;
+- (SBElementArray<SystemEventsRadioGroup *> *) radioGroups;
+- (SBElementArray<SystemEventsRelevanceIndicator *> *) relevanceIndicators;
+- (SBElementArray<SystemEventsScrollArea *> *) scrollAreas;
+- (SBElementArray<SystemEventsScrollBar *> *) scrollBars;
+- (SBElementArray<SystemEventsSheet *> *) sheets;
+- (SBElementArray<SystemEventsSlider *> *) sliders;
+- (SBElementArray<SystemEventsSplitter *> *) splitters;
+- (SBElementArray<SystemEventsSplitterGroup *> *) splitterGroups;
+- (SBElementArray<SystemEventsStaticText *> *) staticTexts;
+- (SBElementArray<SystemEventsTabGroup *> *) tabGroups;
+- (SBElementArray<SystemEventsTable *> *) tables;
+- (SBElementArray<SystemEventsTextArea *> *) textAreas;
+- (SBElementArray<SystemEventsTextField *> *) textFields;
+- (SBElementArray<SystemEventsToolbar *> *) toolbars;
+- (SBElementArray<SystemEventsUIElement *> *) UIElements;
 
 @property (copy, readonly) id accessibilityDescription;  // a more complete description of the window and its capabilities
 @property (copy, readonly) id objectDescription;  // the accessibility description, if available; otherwise, the role description
 @property (copy, readonly) id enabled;  // Is the window enabled? ( Does it accept clicks? )
-@property (copy, readonly) NSArray *entireContents;  // a list of every UI element contained in this window and its child UI elements, to the limits of the tree
+@property (copy, readonly) NSArray<SBObject *> *entireContents;  // a list of every UI element contained in this window and its child UI elements, to the limits of the tree
 @property (copy) id focused;  // Is the focus on this window?
 @property (copy, readonly) id help;  // an elaborate description of the window and its capabilities
 @property (copy, readonly) id maximumValue;  // the maximum value that the UI element can take on
@@ -1484,8 +1351,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (PropertyListSuite)
 
-- (SBElementArray *) propertyListFiles;
-- (SBElementArray *) propertyListItems;
+- (SBElementArray<SystemEventsPropertyListFile *> *) propertyListFiles;
+- (SBElementArray<SystemEventsPropertyListItem *> *) propertyListItems;
 
 @end
 
@@ -1498,21 +1365,15 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // A unit of data in Property List format
-@interface SystemEventsPropertyListItem : SBObject
+@interface SystemEventsPropertyListItem : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) propertyListItems;
+- (SBElementArray<SystemEventsPropertyListItem *> *) propertyListItems;
 
 @property (copy, readonly) NSNumber *kind;  // the kind of data stored in the property list item: boolean/data/date/list/number/record/string
 @property (copy, readonly) NSString *name;  // the name of the property list item ( if any )
 @property (copy) NSString *text;  // the text representation of the property list data
 @property (copy) id value;  // the value of the property list item
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -1525,32 +1386,26 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (QuickTimeFileSuite)
 
-- (SBElementArray *) QuickTimeDatas;
-- (SBElementArray *) QuickTimeFiles;
+- (SBElementArray<SystemEventsQuickTimeData *> *) QuickTimeDatas;
+- (SBElementArray<SystemEventsQuickTimeFile *> *) QuickTimeFiles;
 
 @end
 
 // A unit of user data in a QuickTime file
-@interface SystemEventsAnnotation : SBObject
+@interface SystemEventsAnnotation : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *fullText;  // the full text of the annotation
 - (NSString *) id;  // the unique identifier of the annotation
 @property (copy, readonly) NSString *name;  // the name of the annotation
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // Data in QuickTime format
-@interface SystemEventsQuickTimeData : SBObject
+@interface SystemEventsQuickTimeData : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) annotations;
-- (SBElementArray *) tracks;
+- (SBElementArray<SystemEventsAnnotation *> *) annotations;
+- (SBElementArray<SystemEventsTrack *> *) tracks;
 
 @property (readonly) BOOL autoPlay;  // will the movie automatically start playing? (saved with QuickTime file)
 @property (readonly) BOOL autoPresent;  // will the movie automatically start presenting? (saved with QuickTime file)
@@ -1568,12 +1423,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (readonly) BOOL storedStream;  // is this a stored streaming movie?
 @property (readonly) NSInteger timeScale;  // the time scale of the QuickTime file
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -1598,8 +1447,8 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // Data in Movie format
 @interface SystemEventsMovieData : SystemEventsQuickTimeData
 
-@property (copy, readonly) NSArray *bounds;  // the bounding rectangle of the movie file
-@property (copy, readonly) NSArray *naturalDimensions;  // the dimensions the movie has when it is not scaled
+@property (copy, readonly) NSArray<NSNumber *> *bounds;  // the bounding rectangle of the movie file
+@property (copy, readonly) NSArray<NSNumber *> *naturalDimensions;  // the dimensions the movie has when it is not scaled
 @property (readonly) NSInteger previewDuration;  // the preview duration of the movie file
 @property (readonly) NSInteger previewTime;  // the preview time of the movie file
 
@@ -1655,9 +1504,9 @@ typedef enum SystemEventsAccs SystemEventsAccs;
  */
 
 // A track in a QuickTime file
-@interface SystemEventsTrack : SBObject
+@interface SystemEventsTrack : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) annotations;
+- (SBElementArray<SystemEventsAnnotation *> *) annotations;
 
 @property (readonly) NSInteger audioChannelCount;  // the number of channels in the audio
 @property (readonly) BOOL audioCharacteristic;  // can the track be heard?
@@ -1667,7 +1516,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) NSString *dataFormat;  // the data format
 @property (readonly) NSInteger dataRate;  // the data rate (bytes/sec) of the track
 @property (readonly) NSInteger dataSize;  // the size of the track data
-@property (copy, readonly) NSArray *dimensions;  // the current dimensions of the track
+@property (copy, readonly) NSArray<NSNumber *> *dimensions;  // the current dimensions of the track
 @property (readonly) NSInteger duration;  // the duration of the track, in terms of the time scale
 @property BOOL enabled;  // should this track be used when the movie is playing?
 @property BOOL highQuality;  // is the track high quality?
@@ -1681,12 +1530,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (readonly) NSInteger videoDepth;  // the color depth of the video
 @property (readonly) BOOL visualCharacteristic;  // can the track be seen?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -1699,60 +1542,42 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 // The System Events application
 @interface SystemEventsApplication (XMLSuite)
 
-- (SBElementArray *) XMLDatas;
-- (SBElementArray *) XMLFiles;
+- (SBElementArray<SystemEventsXMLData *> *) XMLDatas;
+- (SBElementArray<SystemEventsXMLFile *> *) XMLFiles;
 
 @end
 
 // A named value associated with a unit of data in XML format
-@interface SystemEventsXMLAttribute : SBObject
+@interface SystemEventsXMLAttribute : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // the name of the XML attribute
 @property (copy) id value;  // the value of the XML attribute
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // Data in XML format
-@interface SystemEventsXMLData : SBObject
+@interface SystemEventsXMLData : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) XMLElements;
+- (SBElementArray<SystemEventsXMLElement *> *) XMLElements;
 
 - (NSString *) id;  // the unique identifier of the XML data
 @property (copy) NSString *name;  // the name of the XML data
 @property (copy) NSString *text;  // the text representation of the XML data
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A unit of data in XML format
-@interface SystemEventsXMLElement : SBObject
+@interface SystemEventsXMLElement : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) XMLAttributes;
-- (SBElementArray *) XMLElements;
+- (SBElementArray<SystemEventsXMLAttribute *> *) XMLAttributes;
+- (SBElementArray<SystemEventsXMLElement *> *) XMLElements;
 
 - (NSString *) id;  // the unique identifier of the XML element
 @property (copy, readonly) NSString *name;  // the name of the XML element
 @property (copy) id value;  // the value of the XML element
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -1770,7 +1595,7 @@ typedef enum SystemEventsAccs SystemEventsAccs;
  * Type Definitions
  */
 
-@interface SystemEventsPrintSettings : SBObject
+@interface SystemEventsPrintSettings : SBObject <SystemEventsGenericMethods>
 
 @property NSInteger copies;  // the number of copies of a document to be printed
 @property BOOL collating;  // Should printed copies be collated?
@@ -1783,12 +1608,6 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy) NSString *faxNumber;  // for fax number
 @property (copy) NSString *targetPrinter;  // for target printer
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -1806,10 +1625,10 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // A class within a suite within a scripting definition
-@interface SystemEventsScriptingClass : SBObject
+@interface SystemEventsScriptingClass : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) scriptingElements;
-- (SBElementArray *) scriptingProperties;
+- (SBElementArray<SystemEventsScriptingElement *> *) scriptingElements;
+- (SBElementArray<SystemEventsScriptingProperty *> *) scriptingProperties;
 
 @property (copy, readonly) NSString *name;  // The name of the class
 - (NSString *) id;  // The unique identifier of the class
@@ -1819,19 +1638,13 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) NSString *suiteName;  // The name of the suite to which this class belongs
 @property (copy, readonly) SystemEventsScriptingClass *superclass;  // The class from which this class inherits
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A command within a suite within a scripting definition
-@interface SystemEventsScriptingCommand : SBObject
+@interface SystemEventsScriptingCommand : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) scriptingParameters;
+- (SBElementArray<SystemEventsScriptingParameter *> *) scriptingParameters;
 
 @property (copy, readonly) NSString *name;  // The name of the command
 - (NSString *) id;  // The unique identifier of the command
@@ -1841,26 +1654,14 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) SystemEventsScriptingResultObject *scriptingResult;  // The object or data returned by this command
 @property (copy, readonly) NSString *suiteName;  // The name of the suite to which this command belongs
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // The scripting definition of the System Events applicaation
-@interface SystemEventsScriptingDefinitionObject : SBObject
+@interface SystemEventsScriptingDefinitionObject : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) scriptingSuites;
+- (SBElementArray<SystemEventsScriptingSuite *> *) scriptingSuites;
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -1871,42 +1672,30 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @end
 
 // An enumeration within a suite within a scripting definition
-@interface SystemEventsScriptingEnumeration : SBObject
+@interface SystemEventsScriptingEnumeration : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) scriptingEnumerators;
+- (SBElementArray<SystemEventsScriptingEnumerator *> *) scriptingEnumerators;
 
 @property (copy, readonly) NSString *name;  // The name of the enumeration
 - (NSString *) id;  // The unique identifier of the enumeration
 @property (readonly) BOOL hidden;  // Is the enumeration hidden?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // An enumerator within an enumeration within a suite within a scripting definition
-@interface SystemEventsScriptingEnumerator : SBObject
+@interface SystemEventsScriptingEnumerator : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The name of the enumerator
 - (NSString *) id;  // The unique identifier of the enumerator
 @property (copy, readonly) NSString *objectDescription;  // The description of the enumerator
 @property (readonly) BOOL hidden;  // Is the enumerator hidden?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A parameter within a command within a suite within a scripting definition
-@interface SystemEventsScriptingParameter : SBObject
+@interface SystemEventsScriptingParameter : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The name of the parameter
 - (NSString *) id;  // The unique identifier of the parameter
@@ -1915,17 +1704,11 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) NSString *kind;  // The kind of object or data specified by this parameter
 @property (readonly) BOOL optional;  // Is the parameter optional?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A property within a class within a suite within a scripting definition
-@interface SystemEventsScriptingProperty : SBObject
+@interface SystemEventsScriptingProperty : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The name of the property
 - (NSString *) id;  // The unique identifier of the property
@@ -1936,50 +1719,32 @@ typedef enum SystemEventsAccs SystemEventsAccs;
 @property (copy, readonly) NSString *kind;  // The kind of object or data returned by this property
 @property (readonly) BOOL listed;  // Is the property's value a list?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // The result of a command within a suite within a scripting definition
-@interface SystemEventsScriptingResultObject : SBObject
+@interface SystemEventsScriptingResultObject : SBObject <SystemEventsGenericMethods>
 
 @property (copy, readonly) NSString *objectDescription;  // The description of the property
 @property (readonly) BOOL enumerated;  // Is the scripting result's value an enumerator?
 @property (copy, readonly) NSString *kind;  // The kind of object or data returned by this property
 @property (readonly) BOOL listed;  // Is the scripting result's value a list?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A suite within a scripting definition
-@interface SystemEventsScriptingSuite : SBObject
+@interface SystemEventsScriptingSuite : SBObject <SystemEventsGenericMethods>
 
-- (SBElementArray *) scriptingCommands;
-- (SBElementArray *) scriptingClasses;
-- (SBElementArray *) scriptingEnumerations;
+- (SBElementArray<SystemEventsScriptingCommand *> *) scriptingCommands;
+- (SBElementArray<SystemEventsScriptingClass *> *) scriptingClasses;
+- (SBElementArray<SystemEventsScriptingEnumeration *> *) scriptingEnumerations;
 
 @property (copy, readonly) NSString *name;  // The name of the suite
 - (NSString *) id;  // The unique identifier of the suite
 @property (copy, readonly) NSString *objectDescription;  // The description of the suite
 @property (readonly) BOOL hidden;  // Is the suite hidden?
 
-- (void) closeSaving:(SystemEventsSaveOptions)saving savingIn:(SystemEventsFile *)savingIn;  // Close a document.
-- (void) saveIn:(SystemEventsFile *)in_ as:(SystemEventsSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(SystemEventsPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 

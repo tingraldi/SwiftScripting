@@ -86,6 +86,16 @@ import ScriptingBridge
     case Vertical = 0x76657274 /* 'vert' */
 }
 
+// MARK: AcornGenericMethods
+@objc public protocol AcornGenericMethods {
+    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
+    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
+    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+    optional func delete() // Delete an object.
+    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
+    optional func moveTo(to: SBObject!) // Move an object to a new location.
+}
+
 // MARK: AcornApplication
 @objc public protocol AcornApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray
@@ -104,7 +114,7 @@ import ScriptingBridge
 extension SBApplication: AcornApplication {}
 
 // MARK: AcornWindow
-@objc public protocol AcornWindow: SBObjectProtocol {
+@objc public protocol AcornWindow: SBObjectProtocol, AcornGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
     optional var index: Int { get set } // The index of the window, ordered front to back.
@@ -116,17 +126,11 @@ extension SBApplication: AcornApplication {}
     optional var zoomable: Bool { get } // Does the window have a zoom button?
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: AcornDocument { get } // The document whose contents are displayed in the window.
-    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: AcornWindow {}
 
 // MARK: AcornRichText
-@objc public protocol AcornRichText: SBObjectProtocol {
+@objc public protocol AcornRichText: SBObjectProtocol, AcornGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -135,17 +139,11 @@ extension SBObject: AcornWindow {}
     optional var color: NSColor { get set } // The color of the text's first character.
     optional var font: String { get set } // The name of the font of the text's first character.
     optional var size: Int { get set } // The size in points of the text's first character.
-    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: AcornRichText {}
 
 // MARK: AcornCharacter
-@objc public protocol AcornCharacter: SBObjectProtocol {
+@objc public protocol AcornCharacter: SBObjectProtocol, AcornGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -154,17 +152,11 @@ extension SBObject: AcornRichText {}
     optional var color: NSColor { get set } // Its color.
     optional var font: String { get set } // The name of its font.
     optional var size: Int { get set } // Its size, in points.
-    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: AcornCharacter {}
 
 // MARK: AcornParagraph
-@objc public protocol AcornParagraph: SBObjectProtocol {
+@objc public protocol AcornParagraph: SBObjectProtocol, AcornGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -173,17 +165,11 @@ extension SBObject: AcornCharacter {}
     optional var color: NSColor { get set } // The color of the paragraph's first character.
     optional var font: String { get set } // The name of the font of the paragraph's first character.
     optional var size: Int { get set } // The size in points of the paragraph's first character.
-    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: AcornParagraph {}
 
 // MARK: AcornWord
-@objc public protocol AcornWord: SBObjectProtocol {
+@objc public protocol AcornWord: SBObjectProtocol, AcornGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -192,17 +178,11 @@ extension SBObject: AcornParagraph {}
     optional var color: NSColor { get set } // The color of the word's first character.
     optional var font: String { get set } // The name of the font of the word's first character.
     optional var size: Int { get set } // The size in points of the word's first character.
-    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: AcornWord {}
 
 // MARK: AcornAttributeRun
-@objc public protocol AcornAttributeRun: SBObjectProtocol {
+@objc public protocol AcornAttributeRun: SBObjectProtocol, AcornGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -211,12 +191,6 @@ extension SBObject: AcornWord {}
     optional var color: NSColor { get set } // Its color.
     optional var font: String { get set } // The name of its font.
     optional var size: Int { get set } // Its size, in points.
-    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: AcornAttributeRun {}
 
@@ -227,7 +201,7 @@ extension SBObject: AcornAttributeRun {}
 extension SBObject: AcornAttachment {}
 
 // MARK: AcornDocument
-@objc public protocol AcornDocument: SBObjectProtocol {
+@objc public protocol AcornDocument: SBObjectProtocol, AcornGenericMethods {
     optional func layers() -> SBElementArray
     optional func bitmapLayers() -> SBElementArray
     optional func groupLayers() -> SBElementArray
@@ -238,12 +212,6 @@ extension SBObject: AcornAttachment {}
     optional var height: Double { get set } // The height of the image in pixels.
     optional var width: Double { get set } // The width of the image in pixels.
     optional var currentLayer: AcornLayer { get set } // The Current layer
-    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func cropRect(rect: [AnyObject]!) // Crop an image
     optional func undo() // Undo the last operation
     optional func redo() // Redo the last undone operation.
@@ -273,7 +241,7 @@ extension SBObject: AcornAttachment {}
 extension SBObject: AcornDocument {}
 
 // MARK: AcornLayer
-@objc public protocol AcornLayer: SBObjectProtocol {
+@objc public protocol AcornLayer: SBObjectProtocol, AcornGenericMethods {
     optional func layers() -> SBElementArray
     optional func bitmapLayers() -> SBElementArray
     optional func groupLayers() -> SBElementArray
@@ -284,12 +252,6 @@ extension SBObject: AcornDocument {}
     optional var bounds: [AnyObject] { get }
     optional var blendMode: AcornBlendMode { get set }
     optional var origin: [AnyObject] { get set }
-    optional func closeSaving(saving: AcornSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: AcornSaveableFileFormat) // Save a document.  You can use this to rename a document as well.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: AcornLayer {}
 

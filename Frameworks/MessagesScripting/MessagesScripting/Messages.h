@@ -116,6 +116,17 @@ enum MessagesAvConnectionStatus {
 };
 typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
 
+@protocol MessagesGenericMethods
+
+- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
+- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
+- (void) delete;  // Delete an object.
+- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
+- (BOOL) exists;  // Verify if an object exists.
+- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
+
+@end
+
 
 
 /*
@@ -123,49 +134,31 @@ typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
  */
 
 // A scriptable object.
-@interface MessagesItem : SBObject
+@interface MessagesItem : SBObject <MessagesGenericMethods>
 
 @property (copy) NSDictionary *properties;  // All of the object's properties.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
 // A color.
-@interface MessagesColor : SBObject
+@interface MessagesColor : SBObject <MessagesGenericMethods>
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
 // An Messages document.
-@interface MessagesDocument : SBObject
+@interface MessagesDocument : SBObject <MessagesGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The document's name.
 @property (readonly) BOOL modified;  // Has the document been modified since the last save?
 @property (copy, readonly) NSURL *file;  // The document's location on disk.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
 // A window.
-@interface MessagesWindow : SBObject
+@interface MessagesWindow : SBObject <MessagesGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The full title of the window.
 - (NSInteger) id;  // The unique identifier of the window.
@@ -180,12 +173,6 @@ typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
 @property BOOL zoomed;  // Whether the window is currently zoomed.
 @property (copy, readonly) MessagesDocument *document;  // The document whose contents are being displayed in the window.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
@@ -196,112 +183,82 @@ typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
  */
 
 // Rich (styled) text
-@interface MessagesRichText : SBObject
+@interface MessagesRichText : SBObject <MessagesGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MessagesCharacter *> *) characters;
+- (SBElementArray<MessagesParagraph *> *) paragraphs;
+- (SBElementArray<MessagesWord *> *) words;
+- (SBElementArray<MessagesAttributeRun *> *) attributeRuns;
+- (SBElementArray<MessagesAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property double size;  // The size in points of the first character.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
 // This subdivides the text into characters.
-@interface MessagesCharacter : SBObject
+@interface MessagesCharacter : SBObject <MessagesGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MessagesCharacter *> *) characters;
+- (SBElementArray<MessagesParagraph *> *) paragraphs;
+- (SBElementArray<MessagesWord *> *) words;
+- (SBElementArray<MessagesAttributeRun *> *) attributeRuns;
+- (SBElementArray<MessagesAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property NSInteger size;  // The size in points of the first character.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
 // This subdivides the text into paragraphs.
-@interface MessagesParagraph : SBObject
+@interface MessagesParagraph : SBObject <MessagesGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MessagesCharacter *> *) characters;
+- (SBElementArray<MessagesParagraph *> *) paragraphs;
+- (SBElementArray<MessagesWord *> *) words;
+- (SBElementArray<MessagesAttributeRun *> *) attributeRuns;
+- (SBElementArray<MessagesAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property NSInteger size;  // The size in points of the first character.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
 // This subdivides the text into words.
-@interface MessagesWord : SBObject
+@interface MessagesWord : SBObject <MessagesGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MessagesCharacter *> *) characters;
+- (SBElementArray<MessagesParagraph *> *) paragraphs;
+- (SBElementArray<MessagesWord *> *) words;
+- (SBElementArray<MessagesAttributeRun *> *) attributeRuns;
+- (SBElementArray<MessagesAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property NSInteger size;  // The size in points of the first character.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
 // This subdivides the text into chunks that all have the same attributes.
-@interface MessagesAttributeRun : SBObject
+@interface MessagesAttributeRun : SBObject <MessagesGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MessagesCharacter *> *) characters;
+- (SBElementArray<MessagesParagraph *> *) paragraphs;
+- (SBElementArray<MessagesWord *> *) words;
+- (SBElementArray<MessagesAttributeRun *> *) attributeRuns;
+- (SBElementArray<MessagesAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property NSInteger size;  // The size in points of the first character.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 
 @end
 
@@ -322,19 +279,19 @@ typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
 // Messages application.
 @interface MessagesApplication : SBApplication
 
-- (SBElementArray *) buddies;
-- (SBElementArray *) services;
-- (SBElementArray *) fileTransfers;
-- (SBElementArray *) chats;
-- (SBElementArray *) textChats;
-- (SBElementArray *) audioChats;
-- (SBElementArray *) videoChats;
-- (SBElementArray *) authorizationRequests;
-- (SBElementArray *) documents;
-- (SBElementArray *) windows;
+- (SBElementArray<MessagesBuddy *> *) buddies;
+- (SBElementArray<MessagesService *> *) services;
+- (SBElementArray<MessagesFileTransfer *> *) fileTransfers;
+- (SBElementArray<MessagesChat *> *) chats;
+- (SBElementArray<MessagesTextChat *> *) textChats;
+- (SBElementArray<MessagesAudioChat *> *) audioChats;
+- (SBElementArray<MessagesVideoChat *> *) videoChats;
+- (SBElementArray<MessagesAuthorizationRequest *> *) authorizationRequests;
+- (SBElementArray<MessagesDocument *> *) documents;
+- (SBElementArray<MessagesWindow *> *) windows;
 
 @property (readonly) NSInteger idleTime;  // Time in seconds that I have been idle.
-@property (copy) NSData *image;  // My image as it appears in all services.
+@property (copy) NSImage *image;  // My image as it appears in all services.
 @property MessagesMyStatus status;  // My status on all services.
 @property (copy) NSString *statusMessage;  // My status message, visible to other people while I am online.
 @property (copy) MessagesAudioChat *activeAvChat;  // The currently active audio or video chat.
@@ -342,10 +299,10 @@ typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
 @property (readonly) BOOL frontmost;  // Is this the frontmost (active) application?
 @property (copy, readonly) NSString *version;  // The version of the application.
 
-- (void) open:(NSArray *)x;  // Open a document.
+- (void) open:(NSArray<NSURL *> *)x;  // Open a document.
 - (void) print:(NSURL *)x;  // Print an object.
 - (void) quitSaving:(MessagesSaveOptions)saving;  // Quit the application.
-- (void) invite:(NSArray *)x to:(id)to withMessage:(NSString *)withMessage;  // Invites a buddy to join an existing chat.
+- (void) invite:(NSArray<MessagesBuddy *> *)x to:(id)to withMessage:(NSString *)withMessage;  // Invites a buddy to join an existing chat.
 - (void) logIn;  // Log in to the specified service, or all services if none is specified. If the account password is not in the keychain the user will be prompted to enter one.
 - (void) logOut;  // Logs out of a service, or all services if none is specified.
 - (void) send:(id)x to:(id)to;  // Sends a message or file to a buddy or to a chat.
@@ -364,8 +321,8 @@ typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
 @property (readonly) MessagesAccountStatus status;  // The buddy's current status.
 @property (copy, readonly) NSString *statusMessage;  // The buddy's current status message.
 @property (readonly) NSInteger idleTime;  // The time in seconds the buddy has been idle.
-@property (copy, readonly) NSArray *capabilities;  // The buddy's messaging capabilities.
-@property (copy, readonly) NSData *image;  // The buddy's custom image.
+@property (copy, readonly) NSArray<NSAppleEventDescriptor *> *capabilities;  // The buddy's messaging capabilities.
+@property (copy, readonly) NSImage *image;  // The buddy's custom image.
 @property (copy, readonly) NSString *firstName;  // The first name from this buddy's Contacts card, if available
 @property (copy, readonly) NSString *lastName;  // The last name from this buddy's Contacts card, if available
 @property (copy, readonly) NSString *fullName;  // The full name from this buddy's Contacts card, if available
@@ -376,8 +333,8 @@ typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
 // A service that can be logged in from this system
 @interface MessagesService : MessagesItem
 
-- (SBElementArray *) buddies;
-- (SBElementArray *) chats;
+- (SBElementArray<MessagesBuddy *> *) buddies;
+- (SBElementArray<MessagesChat *> *) chats;
 
 - (NSString *) id;  // A guid identifier for this service.
 @property (copy) NSString *name;  // The name of this service as defined in Account preferences description field
@@ -393,23 +350,17 @@ typedef enum MessagesAvConnectionStatus MessagesAvConnectionStatus;
 @end
 
 // An audio, video, or text chat.
-@interface MessagesChat : SBObject
+@interface MessagesChat : SBObject <MessagesGenericMethods>
 
 - (NSString *) id;  // A guid identifier for this chat.
 @property (copy, readonly) MessagesService *service;  // The service which is participating in this chat.
-@property (copy, readonly) NSArray *participants;  // Other participants of this chat. This property may be specified at time of creation.
+@property (copy, readonly) NSArray<MessagesBuddy *> *participants;  // Other participants of this chat. This property may be specified at time of creation.
 @property (readonly) BOOL secure;  // Is this chat secure?
 @property (readonly) BOOL invitation;  // Is this an invitation to a chat?
 @property (readonly) BOOL active;  // Is this chat currently active?
 @property (copy, readonly) NSDate *started;  // The date on which this chat started.
 @property (copy, readonly) NSDate *updated;  // The date when this chat was last updated.
 
-- (void) closeSaving:(MessagesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(NSString *)as;  // Save a document.
-- (void) delete;  // Delete an object.
-- (SBObject *) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy object(s) and put the copies at a new location.
-- (BOOL) exists;  // Verify if an object exists.
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location.
 - (void) accept;  // Accepts an incoming text, audio, or video chat invitation, or file transfer
 - (void) decline;  // Declines an incoming text, audio, or video chat invitation, or file transfer
 

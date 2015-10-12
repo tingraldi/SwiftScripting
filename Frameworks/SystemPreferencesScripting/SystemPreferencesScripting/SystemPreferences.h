@@ -21,6 +21,13 @@ enum SystemPreferencesPrintingErrorHandling {
 };
 typedef enum SystemPreferencesPrintingErrorHandling SystemPreferencesPrintingErrorHandling;
 
+@protocol SystemPreferencesGenericMethods
+
+- (void) closeSaving:(SystemPreferencesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
+- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
+
+@end
+
 
 
 /*
@@ -30,8 +37,8 @@ typedef enum SystemPreferencesPrintingErrorHandling SystemPreferencesPrintingErr
 // The application's top-level scripting object.
 @interface SystemPreferencesApplication : SBApplication
 
-- (SBElementArray *) documents;
-- (SBElementArray *) windows;
+- (SBElementArray<SystemPreferencesDocument *> *) documents;
+- (SBElementArray<SystemPreferencesWindow *> *) windows;
 
 @property (copy, readonly) NSString *name;  // The name of the application.
 @property (readonly) BOOL frontmost;  // Is this the active application?
@@ -45,19 +52,17 @@ typedef enum SystemPreferencesPrintingErrorHandling SystemPreferencesPrintingErr
 @end
 
 // A document.
-@interface SystemPreferencesDocument : SBObject
+@interface SystemPreferencesDocument : SBObject <SystemPreferencesGenericMethods>
 
 @property (copy, readonly) NSString *name;  // Its name.
 @property (readonly) BOOL modified;  // Has it been modified since the last save?
 @property (copy, readonly) NSURL *file;  // Its location on disk, if it has one.
 
-- (void) closeSaving:(SystemPreferencesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
 
 @end
 
 // A window.
-@interface SystemPreferencesWindow : SBObject
+@interface SystemPreferencesWindow : SBObject <SystemPreferencesGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The title of the window.
 - (NSInteger) id;  // The unique identifier of the window.
@@ -72,8 +77,6 @@ typedef enum SystemPreferencesPrintingErrorHandling SystemPreferencesPrintingErr
 @property BOOL zoomed;  // Is the window zoomed right now?
 @property (copy, readonly) SystemPreferencesDocument *document;  // The document whose contents are displayed in the window.
 
-- (void) closeSaving:(SystemPreferencesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
 
 @end
 
@@ -86,7 +89,7 @@ typedef enum SystemPreferencesPrintingErrorHandling SystemPreferencesPrintingErr
 // System Preferences top level scripting object
 @interface SystemPreferencesApplication (SystemPreferences)
 
-- (SBElementArray *) panes;
+- (SBElementArray<SystemPreferencesPane *> *) panes;
 
 @property (copy) SystemPreferencesPane *currentPane;  // the currently selected pane
 @property (copy, readonly) SystemPreferencesWindow *preferencesWindow;  // the main preferences window
@@ -95,28 +98,24 @@ typedef enum SystemPreferencesPrintingErrorHandling SystemPreferencesPrintingErr
 @end
 
 // a preference pane
-@interface SystemPreferencesPane : SBObject
+@interface SystemPreferencesPane : SBObject <SystemPreferencesGenericMethods>
 
-- (SBElementArray *) anchors;
+- (SBElementArray<SystemPreferencesAnchor *> *) anchors;
 
 - (NSString *) id;  // locale independent name of the preference pane; can refer to a pane using the expression: pane id "<name>"
 @property (copy, readonly) NSString *localizedName;  // localized name of the preference pane
 @property (copy, readonly) NSString *name;  // name of the preference pane as it appears in the title bar; can refer to a pane using the expression: pane "<name>"
 
-- (void) closeSaving:(SystemPreferencesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
 - (id) reveal;  // Reveals an anchor within a preference pane or preference pane itself
 - (SystemPreferencesPane *) authorize;  // Prompt authorization for given preference pane
 
 @end
 
 // an anchor within a preference pane
-@interface SystemPreferencesAnchor : SBObject
+@interface SystemPreferencesAnchor : SBObject <SystemPreferencesGenericMethods>
 
 @property (copy, readonly) NSString *name;  // name of the anchor within a preference pane
 
-- (void) closeSaving:(SystemPreferencesSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
 - (id) reveal;  // Reveals an anchor within a preference pane or preference pane itself
 
 @end

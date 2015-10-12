@@ -23,6 +23,12 @@ import ScriptingBridge
     case Detailed = 0x6c776474 /* 'lwdt' */
 }
 
+// MARK: SystemPreferencesGenericMethods
+@objc public protocol SystemPreferencesGenericMethods {
+    optional func closeSaving(saving: SystemPreferencesSaveOptions, savingIn: NSURL!) // Close a document.
+    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+}
+
 // MARK: SystemPreferencesApplication
 @objc public protocol SystemPreferencesApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray
@@ -42,17 +48,15 @@ import ScriptingBridge
 extension SBApplication: SystemPreferencesApplication {}
 
 // MARK: SystemPreferencesDocument
-@objc public protocol SystemPreferencesDocument: SBObjectProtocol {
+@objc public protocol SystemPreferencesDocument: SBObjectProtocol, SystemPreferencesGenericMethods {
     optional var name: String { get } // Its name.
     optional var modified: Bool { get } // Has it been modified since the last save?
     optional var file: NSURL { get } // Its location on disk, if it has one.
-    optional func closeSaving(saving: SystemPreferencesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
 }
 extension SBObject: SystemPreferencesDocument {}
 
 // MARK: SystemPreferencesWindow
-@objc public protocol SystemPreferencesWindow: SBObjectProtocol {
+@objc public protocol SystemPreferencesWindow: SBObjectProtocol, SystemPreferencesGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
     optional var index: Int { get set } // The index of the window, ordered front to back.
@@ -65,29 +69,23 @@ extension SBObject: SystemPreferencesDocument {}
     optional var zoomable: Bool { get } // Does the window have a zoom button?
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: SystemPreferencesDocument { get } // The document whose contents are displayed in the window.
-    optional func closeSaving(saving: SystemPreferencesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
 }
 extension SBObject: SystemPreferencesWindow {}
 
 // MARK: SystemPreferencesPane
-@objc public protocol SystemPreferencesPane: SBObjectProtocol {
+@objc public protocol SystemPreferencesPane: SBObjectProtocol, SystemPreferencesGenericMethods {
     optional func anchors() -> SBElementArray
     optional func id() -> String // locale independent name of the preference pane; can refer to a pane using the expression: pane id "<name>"
     optional var localizedName: String { get } // localized name of the preference pane
     optional var name: String { get } // name of the preference pane as it appears in the title bar; can refer to a pane using the expression: pane "<name>"
-    optional func closeSaving(saving: SystemPreferencesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func reveal() -> AnyObject // Reveals an anchor within a preference pane or preference pane itself
     optional func authorize() -> SystemPreferencesPane // Prompt authorization for given preference pane
 }
 extension SBObject: SystemPreferencesPane {}
 
 // MARK: SystemPreferencesAnchor
-@objc public protocol SystemPreferencesAnchor: SBObjectProtocol {
+@objc public protocol SystemPreferencesAnchor: SBObjectProtocol, SystemPreferencesGenericMethods {
     optional var name: String { get } // name of the anchor within a preference pane
-    optional func closeSaving(saving: SystemPreferencesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func reveal() -> AnyObject // Reveals an anchor within a preference pane or preference pane itself
 }
 extension SBObject: SystemPreferencesAnchor {}

@@ -117,6 +117,27 @@ import ScriptingBridge
     case LargeIcon = 0x6c676963 /* 'lgic' */
 }
 
+// MARK: FinderGenericMethods
+@objc public protocol FinderGenericMethods {
+    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
+    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
+    optional func activate() // Activate the specified window (or the Finder)
+    optional func close() // Close an object
+    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
+    optional func delete() -> SBObject // Move an item from its container to the trash
+    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
+    optional func exists() -> Bool // Verify if an object exists
+    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
+    optional func select() // Select the specified object(s)
+    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
+    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
+    optional func eject() // Eject the specified disk(s)
+    optional func emptySecurity(security: Bool) // Empty the trash
+    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
+    optional func reveal() // Bring the specified object(s) into view
+    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
+}
+
 // MARK: FinderApplication
 @objc public protocol FinderApplication: SBApplicationProtocol {
     optional func items() -> SBElementArray
@@ -160,7 +181,7 @@ import ScriptingBridge
 extension SBApplication: FinderApplication {}
 
 // MARK: FinderItem
-@objc public protocol FinderItem: SBObjectProtocol {
+@objc public protocol FinderItem: SBObjectProtocol, FinderGenericMethods {
     optional var name: String { get set } // the name of the item
     optional var displayedName: String { get } // the user-visible name of the item
     optional var nameExtension: String { get set } // the name extension of the item (such as “txt”)
@@ -189,23 +210,6 @@ extension SBApplication: FinderApplication {}
     optional var everyonesPrivileges: FinderPriv { get set }
     optional var informationWindow: SBObject { get } // the information window for the item
     optional var properties: [NSObject : AnyObject] { get set } // every property of an item
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
 }
 extension SBObject: FinderItem {}
 
@@ -356,8 +360,8 @@ extension SBObject: FinderClipping {}
 extension SBObject: FinderPackage {}
 
 // MARK: FinderWindow
-@objc public protocol FinderWindow: SBObjectProtocol {
-    optional func id() -> AnyObject // the unique id for this window
+@objc public protocol FinderWindow: SBObjectProtocol, FinderGenericMethods {
+    optional func id() -> Int // the unique id for this window
     optional var position: NSPoint { get set } // the upper left position of the window
     optional var bounds: NSRect { get set } // the boundary rectangle for the window
     optional var titled: Bool { get } // Does the window have a title bar?
@@ -372,23 +376,6 @@ extension SBObject: FinderPackage {}
     optional var visible: Bool { get } // Is the window visible (always true for open Finder windows)?
     optional var collapsed: Bool { get set } // Is the window collapsed
     optional var properties: [NSObject : AnyObject] { get set } // every property of a window
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
 }
 extension SBObject: FinderWindow {}
 
@@ -429,7 +416,7 @@ extension SBObject: FinderPreferencesWindow {}
 extension SBObject: FinderClippingWindow {}
 
 // MARK: FinderProcess
-@objc public protocol FinderProcess: SBObjectProtocol {
+@objc public protocol FinderProcess: SBObjectProtocol, FinderGenericMethods {
     optional var name: String { get } // the name of the process
     optional var visible: Bool { get set } // Is the process' layer visible?
     optional var frontmost: Bool { get set } // Is the process the frontmost process?
@@ -441,23 +428,6 @@ extension SBObject: FinderClippingWindow {}
     optional var hasScriptingTerminology: Bool { get } // Does the process have a scripting terminology, i.e., can it be scripted?
     optional var totalPartitionSize: Int { get } // the size of the partition with which the process was launched
     optional var partitionSpaceUsed: Int { get } // the number of bytes currently used in the process' partition
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
 }
 extension SBObject: FinderProcess {}
 
@@ -474,7 +444,7 @@ extension SBObject: FinderApplicationProcess {}
 extension SBObject: FinderDeskAccessoryProcess {}
 
 // MARK: FinderPreferences
-@objc public protocol FinderPreferences: SBObjectProtocol {
+@objc public protocol FinderPreferences: SBObjectProtocol, FinderGenericMethods {
     optional var window: FinderPreferencesWindow { get } // the window that would open if Finder preferences was opened
     optional var iconViewOptions: FinderIconViewOptions { get } // the default icon view options
     optional var listViewOptions: FinderListViewOptions { get } // the default list view options
@@ -490,53 +460,19 @@ extension SBObject: FinderDeskAccessoryProcess {}
     optional var foldersOpenInNewTabs: Bool { get set } // Folders open into new tabs?
     optional var newWindowsOpenInColumnView: Bool { get set } // Open new windows in column view?
     optional var allNameExtensionsShowing: Bool { get set } // Show name extensions, even for items whose “extension hidden” is true?
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
 }
 extension SBObject: FinderPreferences {}
 
 // MARK: FinderLabel
-@objc public protocol FinderLabel: SBObjectProtocol {
+@objc public protocol FinderLabel: SBObjectProtocol, FinderGenericMethods {
     optional var name: String { get set } // the name associated with the label
     optional var index: Int { get set } // the index in the front-to-back ordering within its container
-    optional var color: AnyObject { get set } // the color associated with the label
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
+    optional var color: NSColor { get set } // the color associated with the label
 }
 extension SBObject: FinderLabel {}
 
 // MARK: FinderIconFamily
-@objc public protocol FinderIconFamily: SBObjectProtocol {
+@objc public protocol FinderIconFamily: SBObjectProtocol, FinderGenericMethods {
     optional var largeMonochromeIconAndMask: AnyObject { get } // the large black-and-white icon and the mask for large icons
     optional var large8BitMask: AnyObject { get } // the large 8-bit mask for large 32-bit icons
     optional var large32BitIcon: AnyObject { get } // the large 32-bit color icon
@@ -547,28 +483,11 @@ extension SBObject: FinderLabel {}
     optional var small32BitIcon: AnyObject { get } // the small 32-bit color icon
     optional var small8BitIcon: AnyObject { get } // the small 8-bit color icon
     optional var small4BitIcon: AnyObject { get } // the small 4-bit color icon
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
 }
 extension SBObject: FinderIconFamily {}
 
 // MARK: FinderIconViewOptions
-@objc public protocol FinderIconViewOptions: SBObjectProtocol {
+@objc public protocol FinderIconViewOptions: SBObjectProtocol, FinderGenericMethods {
     optional var arrangement: FinderEarr { get set } // the property by which to keep icons arranged
     optional var iconSize: Int { get set } // the size of icons displayed in the icon view
     optional var showsItemInfo: Bool { get set } // additional info about an item displayed in icon view
@@ -576,56 +495,22 @@ extension SBObject: FinderIconFamily {}
     optional var textSize: Int { get set } // the size of the text displayed in the icon view
     optional var labelPosition: FinderEpos { get set } // the location of the label in reference to the icon
     optional var backgroundPicture: FinderFile { get set } // the background picture of the icon view
-    optional var backgroundColor: AnyObject { get set } // the background color of the icon view
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
+    optional var backgroundColor: NSColor { get set } // the background color of the icon view
 }
 extension SBObject: FinderIconViewOptions {}
 
 // MARK: FinderColumnViewOptions
-@objc public protocol FinderColumnViewOptions: SBObjectProtocol {
+@objc public protocol FinderColumnViewOptions: SBObjectProtocol, FinderGenericMethods {
     optional var textSize: Int { get set } // the size of the text displayed in the column view
     optional var showsIcon: Bool { get set } // displays an icon next to the label in column view
     optional var showsIconPreview: Bool { get set } // displays a preview of the item in column view
     optional var showsPreviewColumn: Bool { get set } // displays the preview column in column view
     optional var disclosesPreviewPane: Bool { get set } // discloses the preview pane of the preview column in column view
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
 }
 extension SBObject: FinderColumnViewOptions {}
 
 // MARK: FinderListViewOptions
-@objc public protocol FinderListViewOptions: SBObjectProtocol {
+@objc public protocol FinderListViewOptions: SBObjectProtocol, FinderGenericMethods {
     optional func columns() -> SBElementArray
     optional var calculatesFolderSizes: Bool { get set } // Are folder sizes calculated and displayed in the window?
     optional var showsIconPreview: Bool { get set } // displays a preview of the item in list view
@@ -633,28 +518,11 @@ extension SBObject: FinderColumnViewOptions {}
     optional var textSize: Int { get set } // the size of the text displayed in the list view
     optional var sortColumn: FinderColumn { get set } // the column that the list view is sorted on
     optional var usesRelativeDates: Bool { get set } // Are relative dates (e.g., today, yesterday) shown in the list view?
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
 }
 extension SBObject: FinderListViewOptions {}
 
 // MARK: FinderColumn
-@objc public protocol FinderColumn: SBObjectProtocol {
+@objc public protocol FinderColumn: SBObjectProtocol, FinderGenericMethods {
     optional var index: Int { get set } // the index in the front-to-back ordering within its container
     optional var name: FinderElsv { get } // the column name
     optional var sortDirection: FinderSodr { get set } // The direction in which the window is sorted
@@ -662,45 +530,11 @@ extension SBObject: FinderListViewOptions {}
     optional var minimumWidth: Int { get } // the minimum allowed width of this column
     optional var maximumWidth: Int { get } // the maximum allowed width of this column
     optional var visible: Bool { get set } // is this column visible
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
 }
 extension SBObject: FinderColumn {}
 
 // MARK: FinderAliasList
-@objc public protocol FinderAliasList: SBObjectProtocol {
-    optional func openUsing(using_: SBObject!, withProperties: [NSObject : AnyObject]!) // Open the specified object(s)
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!) // Print the specified object(s)
-    optional func activate() // Activate the specified window (or the Finder)
-    optional func close() // Close an object
-    optional func dataSizeAs(`as`: NSNumber!) -> Int // Return the size in bytes of an object
-    optional func delete() -> SBObject // Move an item from its container to the trash
-    optional func duplicateTo(to: SBObject!, replacing: Bool, routingSuppressed: Bool, exactCopy: Bool) -> SBObject // Duplicate one or more object(s)
-    optional func exists() -> Bool // Verify if an object exists
-    optional func moveTo(to: SBObject!, replacing: Bool, positionedAt: [AnyObject]!, routingSuppressed: Bool) -> SBObject // Move object(s) to a new location
-    optional func select() // Select the specified object(s)
-    optional func sortBy(by: Selector) -> SBObject // Return the specified object(s) in a sorted list
-    optional func cleanUpBy(by: Selector) // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-    optional func eject() // Eject the specified disk(s)
-    optional func emptySecurity(security: Bool) // Empty the trash
-    optional func erase() // (NOT AVAILABLE) Erase the specified disk(s)
-    optional func reveal() // Bring the specified object(s) into view
-    optional func updateNecessity(necessity: Bool, registeringApplications: Bool) // Update the display of the specified object(s) to match their on-disk representation
+@objc public protocol FinderAliasList: SBObjectProtocol, FinderGenericMethods {
 }
 extension SBObject: FinderAliasList {}
 

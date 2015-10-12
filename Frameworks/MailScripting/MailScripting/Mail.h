@@ -137,6 +137,17 @@ enum MailTypeOfAccount {
 };
 typedef enum MailTypeOfAccount MailTypeOfAccount;
 
+@protocol MailGenericMethods
+
+- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
+- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
+- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
+- (void) delete;  // Delete an object.
+- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
+- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
+
+@end
+
 
 
 /*
@@ -146,8 +157,8 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 // The application's top-level scripting object.
 @interface MailApplication : SBApplication
 
-- (SBElementArray *) documents;
-- (SBElementArray *) windows;
+- (SBElementArray<MailDocument *> *) documents;
+- (SBElementArray<MailWindow *> *) windows;
 
 @property (copy, readonly) NSString *name;  // The name of the application.
 @property (readonly) BOOL frontmost;  // Is this the active application?
@@ -163,29 +174,23 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 - (void) GetURL:(NSString *)x;  // Opens a mailto URL.
 - (void) importMailMailboxAt:(NSURL *)at;  // Imports a mailbox created by Mail.
 - (void) mailto:(NSString *)x;  // Opens a mailto URL.
-- (void) performMailActionWithMessages:(NSArray *)x inMailboxes:(MailMailbox *)inMailboxes forRule:(MailRule *)forRule;  // Script handler invoked by rules and menus that execute AppleScripts. The direct parameter of this handler is a list of messages being acted upon.
+- (void) performMailActionWithMessages:(NSArray<MailMessage *> *)x inMailboxes:(MailMailbox *)inMailboxes forRule:(MailRule *)forRule;  // Script handler invoked by rules and menus that execute AppleScripts. The direct parameter of this handler is a list of messages being acted upon.
 - (void) synchronizeWith:(MailAccount *)with;  // Command to trigger synchronizing of an IMAP account with the server.
 
 @end
 
 // A document.
-@interface MailDocument : SBObject
+@interface MailDocument : SBObject <MailGenericMethods>
 
 @property (copy, readonly) NSString *name;  // Its name.
 @property (readonly) BOOL modified;  // Has it been modified since the last save?
 @property (copy, readonly) NSURL *file;  // Its location on disk, if it has one.
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A window.
-@interface MailWindow : SBObject
+@interface MailWindow : SBObject <MailGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The title of the window.
 - (NSInteger) id;  // The unique identifier of the window.
@@ -200,12 +205,6 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @property BOOL zoomed;  // Is the window zoomed right now?
 @property (copy, readonly) MailDocument *document;  // The document whose contents are displayed in the window.
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -216,24 +215,18 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
  */
 
 // Rich (styled) text
-@interface MailRichText : SBObject
+@interface MailRichText : SBObject <MailGenericMethods>
 
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) characters;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MailParagraph *> *) paragraphs;
+- (SBElementArray<MailWord *> *) words;
+- (SBElementArray<MailCharacter *> *) characters;
+- (SBElementArray<MailAttributeRun *> *) attributeRuns;
+- (SBElementArray<MailAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property (copy) NSNumber *size;  // The size in points of the first character.
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -246,83 +239,59 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @end
 
 // This subdivides the text into paragraphs.
-@interface MailParagraph : SBObject
+@interface MailParagraph : SBObject <MailGenericMethods>
 
-- (SBElementArray *) words;
-- (SBElementArray *) characters;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MailWord *> *) words;
+- (SBElementArray<MailCharacter *> *) characters;
+- (SBElementArray<MailAttributeRun *> *) attributeRuns;
+- (SBElementArray<MailAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property (copy) NSNumber *size;  // The size in points of the first character.
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // This subdivides the text into words.
-@interface MailWord : SBObject
+@interface MailWord : SBObject <MailGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MailCharacter *> *) characters;
+- (SBElementArray<MailAttributeRun *> *) attributeRuns;
+- (SBElementArray<MailAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property (copy) NSNumber *size;  // The size in points of the first character.
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // This subdivides the text into characters.
-@interface MailCharacter : SBObject
+@interface MailCharacter : SBObject <MailGenericMethods>
 
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<MailAttributeRun *> *) attributeRuns;
+- (SBElementArray<MailAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the character.
 @property (copy) NSString *font;  // The name of the font of the character.
 @property (copy) NSNumber *size;  // The size in points of the character.
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // This subdivides the text into chunks that all have the same attributes.
-@interface MailAttributeRun : SBObject
+@interface MailAttributeRun : SBObject <MailGenericMethods>
 
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) characters;
-- (SBElementArray *) attachments;
+- (SBElementArray<MailParagraph *> *) paragraphs;
+- (SBElementArray<MailWord *> *) words;
+- (SBElementArray<MailCharacter *> *) characters;
+- (SBElementArray<MailAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the first character.
 @property (copy) NSString *font;  // The name of the font of the first character.
 @property (copy) NSNumber *size;  // The size in points of the first character.
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -333,12 +302,12 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
  */
 
 // A new email message
-@interface MailOutgoingMessage : SBObject
+@interface MailOutgoingMessage : SBObject <MailGenericMethods>
 
-- (SBElementArray *) bccRecipients;
-- (SBElementArray *) ccRecipients;
-- (SBElementArray *) recipients;
-- (SBElementArray *) toRecipients;
+- (SBElementArray<MailBccRecipient *> *) bccRecipients;
+- (SBElementArray<MailCcRecipient *> *) ccRecipients;
+- (SBElementArray<MailRecipient *> *) recipients;
+- (SBElementArray<MailToRecipient *> *) toRecipients;
 
 @property (copy) NSString *sender;  // The sender of the message
 @property (copy) NSString *subject;  // The subject of the message
@@ -347,12 +316,6 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @property (copy) id messageSignature;  // The signature of the message
 - (NSInteger) id;  // The unique identifier of the message
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (BOOL) send;  // Sends a message.
 
 @end
@@ -360,21 +323,21 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 // Mail's top level scripting object.
 @interface MailApplication (Mail)
 
-- (SBElementArray *) accounts;
-- (SBElementArray *) popAccounts;
-- (SBElementArray *) imapAccounts;
-- (SBElementArray *) iCloudAccounts;
-- (SBElementArray *) smtpServers;
-- (SBElementArray *) outgoingMessages;
-- (SBElementArray *) mailboxes;
-- (SBElementArray *) messageViewers;
-- (SBElementArray *) rules;
-- (SBElementArray *) signatures;
+- (SBElementArray<MailAccount *> *) accounts;
+- (SBElementArray<MailPopAccount *> *) popAccounts;
+- (SBElementArray<MailImapAccount *> *) imapAccounts;
+- (SBElementArray<MailICloudAccount *> *) iCloudAccounts;
+- (SBElementArray<MailSmtpServer *> *) smtpServers;
+- (SBElementArray<MailOutgoingMessage *> *) outgoingMessages;
+- (SBElementArray<MailMailbox *> *) mailboxes;
+- (SBElementArray<MailMessageViewer *> *) messageViewers;
+- (SBElementArray<MailRule *> *) rules;
+- (SBElementArray<MailSignature *> *) signatures;
 
 @property (copy, readonly) NSString *version;  // The version of the application.
 @property BOOL alwaysBccMyself;  // Indicates whether you will be included in the Bcc: field of messages which you are composing
 @property BOOL alwaysCcMyself;  // Indicates whether you will be included in the Cc: field of messages which you are composing
-@property (copy, readonly) NSArray *selection;  // List of messages that the user has selected
+@property (copy, readonly) NSArray<MailMessage *> *selection;  // List of messages that the user has selected
 @property (copy, readonly) NSString *applicationVersion;  // The build number for the Mail application bundle
 @property NSInteger fetchInterval;  // The interval (in minutes) between automatic fetches of new mail, -1 means to use an automatically determined interval
 @property (readonly) NSInteger backgroundActivityCount;  // Number of background activities currently running in Mail, according to the Activity window
@@ -415,9 +378,9 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @end
 
 // Represents the object responsible for managing a viewer window
-@interface MailMessageViewer : SBObject
+@interface MailMessageViewer : SBObject <MailGenericMethods>
 
-- (SBElementArray *) messages;
+- (SBElementArray<MailMessage *> *) messages;
 
 @property (copy, readonly) MailMailbox *draftsMailbox;  // The top level Drafts mailbox
 @property (copy, readonly) MailMailbox *inbox;  // The top level In mailbox
@@ -429,34 +392,22 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @property BOOL sortedAscending;  // Whether the viewer is sorted ascending or not
 @property BOOL mailboxListVisible;  // Controls whether the list of mailboxes is visible or not
 @property BOOL previewPaneIsVisible;  // Controls whether the preview pane of the message viewer window is visible or not
-@property (copy) NSArray *visibleColumns;  // List of columns that are visible. The subject column and the message status column will always be visible
+@property (copy) NSArray<NSAppleEventDescriptor *> *visibleColumns;  // List of columns that are visible. The subject column and the message status column will always be visible
 - (NSInteger) id;  // The unique identifier of the message viewer
-@property (copy) NSArray *visibleMessages;  // List of messages currently being displayed in the viewer
-@property (copy) NSArray *selectedMessages;  // List of messages currently selected
-@property (copy) NSArray *selectedMailboxes;  // List of mailboxes currently selected in the list of mailboxes
+@property (copy) NSArray<MailMessage *> *visibleMessages;  // List of messages currently being displayed in the viewer
+@property (copy) NSArray<MailMessage *> *selectedMessages;  // List of messages currently selected
+@property (copy) NSArray<MailMailbox *> *selectedMailboxes;  // List of mailboxes currently selected in the list of mailboxes
 @property (copy) MailWindow *window;  // The window for the message viewer
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // Email signatures
-@interface MailSignature : SBObject
+@interface MailSignature : SBObject <MailGenericMethods>
 
 @property (copy) NSString *content;  // Contents of email signature. If there is a version with fonts and/or styles, that will be returned over the plain text version
 @property (copy) NSString *name;  // Name of the signature
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -467,14 +418,14 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
  */
 
 // An email message
-@interface MailMessage : SBObject
+@interface MailMessage : SBObject <MailGenericMethods>
 
-- (SBElementArray *) bccRecipients;
-- (SBElementArray *) ccRecipients;
-- (SBElementArray *) recipients;
-- (SBElementArray *) toRecipients;
-- (SBElementArray *) headers;
-- (SBElementArray *) mailAttachments;
+- (SBElementArray<MailBccRecipient *> *) bccRecipients;
+- (SBElementArray<MailCcRecipient *> *) ccRecipients;
+- (SBElementArray<MailRecipient *> *) recipients;
+- (SBElementArray<MailToRecipient *> *) toRecipients;
+- (SBElementArray<MailHeader *> *) headers;
+- (SBElementArray<MailMailAttachment *> *) mailAttachments;
 
 - (NSInteger) id;  // The unique identifier of the message.
 @property (copy, readonly) NSString *allHeaders;  // All the headers of the message
@@ -498,12 +449,6 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @property (readonly) BOOL wasRedirected;  // Indicates whether the message was redirected or not
 @property (readonly) BOOL wasRepliedTo;  // Indicates whether the message was replied to or not
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 - (MailOutgoingMessage *) forwardOpeningWindow:(BOOL)openingWindow;  // Creates a forwarded message.
 - (MailOutgoingMessage *) redirectOpeningWindow:(BOOL)openingWindow;  // Creates a redirected message.
 - (MailOutgoingMessage *) replyOpeningWindow:(BOOL)openingWindow replyToAll:(BOOL)replyToAll;  // Creates a reply message.
@@ -511,16 +456,16 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @end
 
 // A Mail account for receiving messages (POP/IMAP). To create a new receiving account, use the 'pop account', 'imap account', and 'iCloud account' objects
-@interface MailAccount : SBObject
+@interface MailAccount : SBObject <MailGenericMethods>
 
-- (SBElementArray *) mailboxes;
+- (SBElementArray<MailMailbox *> *) mailboxes;
 
 @property (copy) id deliveryAccount;  // The delivery account used when sending mail from this account
 @property (copy) NSString *name;  // The name of an account
 @property (copy) NSString *password;  // Password for this account. Can be set, but not read via scripting
 @property MailAuthentication authentication;  // Preferred authentication scheme for account
 @property (readonly) MailTypeOfAccount accountType;  // The type of an account
-@property (copy) NSArray *emailAddresses;  // The list of email addresses configured for an account
+@property (copy) NSArray<NSString *> *emailAddresses;  // The list of email addresses configured for an account
 @property (copy) NSString *fullName;  // The users full name configured for an account
 @property NSInteger emptyJunkMessagesFrequency;  // Number of days before junk messages are deleted (0 = delete on quit, -1 = never delete)
 @property NSInteger emptySentMessagesFrequency;  // Number of days before archived sent messages are deleted (0 = delete on quit, -1 = never delete)
@@ -537,12 +482,6 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @property BOOL moveDeletedMessagesToTrash;  // Indicates whether messages that are deleted will be moved to the trash mailbox
 @property BOOL usesSsl;  // Indicates whether SSL is enabled for this receiving account
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -577,7 +516,7 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @end
 
 // An SMTP account (for sending email)
-@interface MailSmtpServer : SBObject
+@interface MailSmtpServer : SBObject <MailGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The name of an account
 @property (copy) NSString *password;  // Password for this account. Can be set, but not read via scripting
@@ -589,39 +528,27 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @property (copy) NSString *serverName;  // The host name used to connect to an account
 @property BOOL usesSsl;  // Indicates whether SSL is enabled for this receiving account
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A mailbox that holds messages
-@interface MailMailbox : SBObject
+@interface MailMailbox : SBObject <MailGenericMethods>
 
-- (SBElementArray *) mailboxes;
-- (SBElementArray *) messages;
+- (SBElementArray<MailMailbox *> *) mailboxes;
+- (SBElementArray<MailMessage *> *) messages;
 
 @property (copy) NSString *name;  // The name of a mailbox
 @property (readonly) NSInteger unreadCount;  // The number of unread messages in the mailbox
 @property (copy, readonly) MailAccount *account;
 @property (copy, readonly) MailMailbox *container;
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // Class for message rules
-@interface MailRule : SBObject
+@interface MailRule : SBObject <MailGenericMethods>
 
-- (SBElementArray *) ruleConditions;
+- (SBElementArray<MailRuleCondition *> *) ruleConditions;
 
 @property MailHighlightColors colorMessage;  // If rule matches, apply this color
 @property BOOL deleteMessage;  // If rule matches, delete message
@@ -644,44 +571,26 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @property BOOL shouldMoveMessage;  // Indicates whether the rule has a move action
 @property BOOL stopEvaluatingRules;  // If rule matches, stop rule evaluation for this message
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // Class for conditions that can be attached to a single rule
-@interface MailRuleCondition : SBObject
+@interface MailRuleCondition : SBObject <MailGenericMethods>
 
 @property (copy) NSString *expression;  // Rule expression field
 @property (copy) NSString *header;  // Rule header key
 @property MailRuleQualifier qualifier;  // Rule qualifier
 @property MailRuleType ruleType;  // Rule type
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // An email recipient
-@interface MailRecipient : SBObject
+@interface MailRecipient : SBObject <MailGenericMethods>
 
 @property (copy) NSString *address;  // The recipients email address
 @property (copy) NSString *name;  // The name used for display
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
@@ -710,22 +619,16 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @end
 
 // A header value for a message. E.g. To, Subject, From.
-@interface MailHeader : SBObject
+@interface MailHeader : SBObject <MailGenericMethods>
 
 @property (copy) NSString *content;  // Contents of the header
 @property (copy) NSString *name;  // Name of the header value
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 
 // A file attached to a received message.
-@interface MailMailAttachment : SBObject
+@interface MailMailAttachment : SBObject <MailGenericMethods>
 
 @property (copy, readonly) NSString *name;  // Name of the attachment
 @property (copy, readonly) NSString *MIMEType;  // MIME type of the attachment E.g. text/plain.
@@ -733,12 +636,6 @@ typedef enum MailTypeOfAccount MailTypeOfAccount;
 @property (readonly) BOOL downloaded;  // Indicates whether the attachment has been downloaded.
 - (NSString *) id;  // The unique identifier of the attachment.
 
-- (void) closeSaving:(MailSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(MailSaveableFileFormat)as;  // Save a document.
-- (void) printWithProperties:(NSDictionary *)withProperties printDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
 
 @end
 

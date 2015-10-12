@@ -167,6 +167,25 @@ import ScriptingBridge
     case Text = 0x63747874 /* 'ctxt' */
 }
 
+// MARK: ImageEventsGenericMethods
+@objc public protocol ImageEventsGenericMethods {
+    optional func closeSaving(saving: ImageEventsSaveOptions, savingIn: String!) // Close a document.
+    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
+    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+    optional func delete() // Delete an object.
+    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
+    optional func moveTo(to: SBObject!) // Move an object to a new location.
+    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
+    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
+    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
+    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
+    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
+    optional func rotateToAngle(toAngle: Double) // Rotate an image
+    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
+    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
+    optional func unembed() // Remove any embedded ICC profiles from an image
+}
+
 // MARK: ImageEventsApplication
 @objc public protocol ImageEventsApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray
@@ -239,30 +258,15 @@ import ScriptingBridge
 extension SBApplication: ImageEventsApplication {}
 
 // MARK: ImageEventsDocument
-@objc public protocol ImageEventsDocument: SBObjectProtocol {
+@objc public protocol ImageEventsDocument: SBObjectProtocol, ImageEventsGenericMethods {
     optional var name: String { get } // Its name.
     optional var modified: Bool { get } // Has it been modified since the last save?
     optional var file: ImageEventsFile { get } // Its location on disk, if it has one.
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
 }
 extension SBObject: ImageEventsDocument {}
 
 // MARK: ImageEventsWindow
-@objc public protocol ImageEventsWindow: SBObjectProtocol {
+@objc public protocol ImageEventsWindow: SBObjectProtocol, ImageEventsGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
     optional var index: Int { get set } // The index of the window, ordered front to back.
@@ -275,26 +279,11 @@ extension SBObject: ImageEventsDocument {}
     optional var zoomable: Bool { get } // Does the window have a zoom button?
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: ImageEventsDocument { get } // The document whose contents are displayed in the window.
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
 }
 extension SBObject: ImageEventsWindow {}
 
 // MARK: ImageEventsDiskItem
-@objc public protocol ImageEventsDiskItem: SBObjectProtocol {
+@objc public protocol ImageEventsDiskItem: SBObjectProtocol, ImageEventsGenericMethods {
     optional var busyStatus: Bool { get } // Is the disk item busy?
     optional var container: ImageEventsDiskItem { get } // the folder or disk which has this disk item as an element
     optional var creationDate: NSDate { get } // the date on which the disk item was created
@@ -311,21 +300,8 @@ extension SBObject: ImageEventsWindow {}
     optional var URL: String { get } // the URL of the disk item
     optional var visible: Bool { get set } // Is the disk item visible?
     optional var volume: String { get } // the volume on which the disk item resides
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
+    optional func delete() // Delete disk item(s).
+    optional func moveTo(to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
 }
 extension SBObject: ImageEventsDiskItem {}
 
@@ -368,7 +344,7 @@ extension SBObject: ImageEventsAlias {}
 extension SBObject: ImageEventsDisk {}
 
 // MARK: ImageEventsDomain
-@objc public protocol ImageEventsDomain: SBObjectProtocol {
+@objc public protocol ImageEventsDomain: SBObjectProtocol, ImageEventsGenericMethods {
     optional func folders() -> SBElementArray
     optional var applicationSupportFolder: ImageEventsFolder { get } // The Application Support folder
     optional var applicationsFolder: ImageEventsFolder { get } // The Applications folder
@@ -385,21 +361,6 @@ extension SBObject: ImageEventsDisk {}
     optional var speakableItemsFolder: ImageEventsFolder { get } // The Speakable Items folder
     optional var utilitiesFolder: ImageEventsFolder { get } // The Utilities folder
     optional var workflowsFolder: ImageEventsFolder { get } // The Automator Workflows folder
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
 }
 extension SBObject: ImageEventsDomain {}
 
@@ -491,30 +452,15 @@ extension SBObject: ImageEventsSystemDomainObject {}
 extension SBObject: ImageEventsUserDomainObject {}
 
 // MARK: ImageEventsDisplay
-@objc public protocol ImageEventsDisplay: SBObjectProtocol {
+@objc public protocol ImageEventsDisplay: SBObjectProtocol, ImageEventsGenericMethods {
     optional var displayNumber: Int { get } // the number of the display
     optional var displayProfile: ImageEventsProfile { get } // the profile for the display
     optional var name: String { get } // the name of the display
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
 }
 extension SBObject: ImageEventsDisplay {}
 
 // MARK: ImageEventsImage
-@objc public protocol ImageEventsImage: SBObjectProtocol {
+@objc public protocol ImageEventsImage: SBObjectProtocol, ImageEventsGenericMethods {
     optional func metadataTags() -> SBElementArray
     optional func profiles() -> SBElementArray
     optional var bitDepth: ImageEventsBitz { get } // bit depth of the image's color representation
@@ -526,48 +472,18 @@ extension SBObject: ImageEventsDisplay {}
     optional var location: ImageEventsDiskItem { get } // the folder or disk that encloses the file that contains the image
     optional var name: String { get } // the name of the image
     optional var resolution: [AnyObject] { get } // the horizontal and vertical pixel density of the image, respectively, in dots per inch
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
 }
 extension SBObject: ImageEventsImage {}
 
 // MARK: ImageEventsMetadataTag
-@objc public protocol ImageEventsMetadataTag: SBObjectProtocol {
+@objc public protocol ImageEventsMetadataTag: SBObjectProtocol, ImageEventsGenericMethods {
     optional var name: String { get } // the name of the tag
     optional var value: AnyObject { get } // the current setting of the tag
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
 }
 extension SBObject: ImageEventsMetadataTag {}
 
 // MARK: ImageEventsProfile
-@objc public protocol ImageEventsProfile: SBObjectProtocol {
+@objc public protocol ImageEventsProfile: SBObjectProtocol, ImageEventsGenericMethods {
     optional var colorSpace: ImageEventsPSpc { get } // the color space of the profile
     optional var connectionSpace: ImageEventsPPCS { get } // the connection space of the profile
     optional var creationDate: NSDate { get } // the creation date of the profile
@@ -583,21 +499,6 @@ extension SBObject: ImageEventsMetadataTag {}
     optional var renderingIntent: ImageEventsPRdr { get } // the rendering intent of the profile
     optional var size: Int { get } // the size of the profile in bytes
     optional var version: String { get } // the version number of the profile
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
 }
 extension SBObject: ImageEventsProfile {}
 

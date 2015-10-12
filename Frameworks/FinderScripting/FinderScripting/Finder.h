@@ -115,6 +115,28 @@ enum FinderLvic {
 };
 typedef enum FinderLvic FinderLvic;
 
+@protocol FinderGenericMethods
+
+- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
+- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
+- (void) activate;  // Activate the specified window (or the Finder)
+- (void) close;  // Close an object
+- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
+- (SBObject *) delete;  // Move an item from its container to the trash
+- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
+- (BOOL) exists;  // Verify if an object exists
+- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
+- (void) select;  // Select the specified object(s)
+- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
+- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
+- (void) eject;  // Eject the specified disk(s)
+- (void) emptySecurity:(BOOL)security;  // Empty the trash
+- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
+- (void) reveal;  // Bring the specified object(s) into view
+- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
+
+@end
+
 
 
 /*
@@ -124,20 +146,20 @@ typedef enum FinderLvic FinderLvic;
 // The Finder
 @interface FinderApplication : SBApplication
 
-- (SBElementArray *) items;
-- (SBElementArray *) containers;
-- (SBElementArray *) disks;
-- (SBElementArray *) folders;
-- (SBElementArray *) files;
-- (SBElementArray *) aliasFiles;
-- (SBElementArray *) applicationFiles;
-- (SBElementArray *) documentFiles;
-- (SBElementArray *) internetLocationFiles;
-- (SBElementArray *) clippings;
-- (SBElementArray *) packages;
-- (SBElementArray *) windows;
-- (SBElementArray *) FinderWindows;
-- (SBElementArray *) clippingWindows;
+- (SBElementArray<FinderItem *> *) items;
+- (SBElementArray<FinderContainer *> *) containers;
+- (SBElementArray<FinderDisk *> *) disks;
+- (SBElementArray<FinderFolder *> *) folders;
+- (SBElementArray<FinderFile *> *) files;
+- (SBElementArray<FinderAliasFile *> *) aliasFiles;
+- (SBElementArray<FinderApplicationFile *> *) applicationFiles;
+- (SBElementArray<FinderDocumentFile *> *) documentFiles;
+- (SBElementArray<FinderInternetLocationFile *> *) internetLocationFiles;
+- (SBElementArray<FinderClipping *> *) clippings;
+- (SBElementArray<FinderPackage *> *) packages;
+- (SBElementArray<FinderWindow *> *) windows;
+- (SBElementArray<FinderFinderWindow *> *) FinderWindows;
+- (SBElementArray<FinderClippingWindow *> *) clippingWindows;
 
 @property (copy, readonly) SBObject *clipboard;  // (NOT AVAILABLE YET) the Finder’s clipboard window
 @property (copy, readonly) NSString *name;  // the Finder’s name
@@ -172,7 +194,7 @@ typedef enum FinderLvic FinderLvic;
  */
 
 // An item
-@interface FinderItem : SBObject
+@interface FinderItem : SBObject <FinderGenericMethods>
 
 @property (copy) NSString *name;  // the name of the item
 @property (copy, readonly) NSString *displayedName;  // the user-visible name of the item
@@ -203,23 +225,6 @@ typedef enum FinderLvic FinderLvic;
 @property (copy, readonly) SBObject *informationWindow;  // the information window for the item
 @property (copy) NSDictionary *properties;  // every property of an item
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
@@ -232,16 +237,16 @@ typedef enum FinderLvic FinderLvic;
 // An item that contains other items
 @interface FinderContainer : FinderItem
 
-- (SBElementArray *) items;
-- (SBElementArray *) containers;
-- (SBElementArray *) folders;
-- (SBElementArray *) files;
-- (SBElementArray *) aliasFiles;
-- (SBElementArray *) applicationFiles;
-- (SBElementArray *) documentFiles;
-- (SBElementArray *) internetLocationFiles;
-- (SBElementArray *) clippings;
-- (SBElementArray *) packages;
+- (SBElementArray<FinderItem *> *) items;
+- (SBElementArray<FinderContainer *> *) containers;
+- (SBElementArray<FinderFolder *> *) folders;
+- (SBElementArray<FinderFile *> *) files;
+- (SBElementArray<FinderAliasFile *> *) aliasFiles;
+- (SBElementArray<FinderApplicationFile *> *) applicationFiles;
+- (SBElementArray<FinderDocumentFile *> *) documentFiles;
+- (SBElementArray<FinderInternetLocationFile *> *) internetLocationFiles;
+- (SBElementArray<FinderClipping *> *) clippings;
+- (SBElementArray<FinderPackage *> *) packages;
 
 @property (copy, readonly) SBObject *entireContents;  // the entire contents of the container, including the contents of its children
 @property (readonly) BOOL expandable;  // (NOT AVAILABLE YET) Is the container capable of being expanded as an outline?
@@ -261,16 +266,16 @@ typedef enum FinderLvic FinderLvic;
 // A disk
 @interface FinderDisk : FinderContainer
 
-- (SBElementArray *) items;
-- (SBElementArray *) containers;
-- (SBElementArray *) folders;
-- (SBElementArray *) files;
-- (SBElementArray *) aliasFiles;
-- (SBElementArray *) applicationFiles;
-- (SBElementArray *) documentFiles;
-- (SBElementArray *) internetLocationFiles;
-- (SBElementArray *) clippings;
-- (SBElementArray *) packages;
+- (SBElementArray<FinderItem *> *) items;
+- (SBElementArray<FinderContainer *> *) containers;
+- (SBElementArray<FinderFolder *> *) folders;
+- (SBElementArray<FinderFile *> *) files;
+- (SBElementArray<FinderAliasFile *> *) aliasFiles;
+- (SBElementArray<FinderApplicationFile *> *) applicationFiles;
+- (SBElementArray<FinderDocumentFile *> *) documentFiles;
+- (SBElementArray<FinderInternetLocationFile *> *) internetLocationFiles;
+- (SBElementArray<FinderClipping *> *) clippings;
+- (SBElementArray<FinderPackage *> *) packages;
 
 - (NSInteger) id;  // the unique id for this disk (unchanged while disk remains connected and Finder remains running)
 @property (readonly) long long capacity;  // the total number of bytes (free or used) on the disk
@@ -288,16 +293,16 @@ typedef enum FinderLvic FinderLvic;
 // A folder
 @interface FinderFolder : FinderContainer
 
-- (SBElementArray *) items;
-- (SBElementArray *) containers;
-- (SBElementArray *) folders;
-- (SBElementArray *) files;
-- (SBElementArray *) aliasFiles;
-- (SBElementArray *) applicationFiles;
-- (SBElementArray *) documentFiles;
-- (SBElementArray *) internetLocationFiles;
-- (SBElementArray *) clippings;
-- (SBElementArray *) packages;
+- (SBElementArray<FinderItem *> *) items;
+- (SBElementArray<FinderContainer *> *) containers;
+- (SBElementArray<FinderFolder *> *) folders;
+- (SBElementArray<FinderFile *> *) files;
+- (SBElementArray<FinderAliasFile *> *) aliasFiles;
+- (SBElementArray<FinderApplicationFile *> *) applicationFiles;
+- (SBElementArray<FinderDocumentFile *> *) documentFiles;
+- (SBElementArray<FinderInternetLocationFile *> *) internetLocationFiles;
+- (SBElementArray<FinderClipping *> *) clippings;
+- (SBElementArray<FinderPackage *> *) packages;
 
 
 @end
@@ -305,17 +310,17 @@ typedef enum FinderLvic FinderLvic;
 // Desktop-object is the class of the “desktop” object
 @interface FinderDesktopObject : FinderContainer
 
-- (SBElementArray *) items;
-- (SBElementArray *) containers;
-- (SBElementArray *) disks;
-- (SBElementArray *) folders;
-- (SBElementArray *) files;
-- (SBElementArray *) aliasFiles;
-- (SBElementArray *) applicationFiles;
-- (SBElementArray *) documentFiles;
-- (SBElementArray *) internetLocationFiles;
-- (SBElementArray *) clippings;
-- (SBElementArray *) packages;
+- (SBElementArray<FinderItem *> *) items;
+- (SBElementArray<FinderContainer *> *) containers;
+- (SBElementArray<FinderDisk *> *) disks;
+- (SBElementArray<FinderFolder *> *) folders;
+- (SBElementArray<FinderFile *> *) files;
+- (SBElementArray<FinderAliasFile *> *) aliasFiles;
+- (SBElementArray<FinderApplicationFile *> *) applicationFiles;
+- (SBElementArray<FinderDocumentFile *> *) documentFiles;
+- (SBElementArray<FinderInternetLocationFile *> *) internetLocationFiles;
+- (SBElementArray<FinderClipping *> *) clippings;
+- (SBElementArray<FinderPackage *> *) packages;
 
 
 @end
@@ -323,16 +328,16 @@ typedef enum FinderLvic FinderLvic;
 // Trash-object is the class of the “trash” object
 @interface FinderTrashObject : FinderContainer
 
-- (SBElementArray *) items;
-- (SBElementArray *) containers;
-- (SBElementArray *) folders;
-- (SBElementArray *) files;
-- (SBElementArray *) aliasFiles;
-- (SBElementArray *) applicationFiles;
-- (SBElementArray *) documentFiles;
-- (SBElementArray *) internetLocationFiles;
-- (SBElementArray *) clippings;
-- (SBElementArray *) packages;
+- (SBElementArray<FinderItem *> *) items;
+- (SBElementArray<FinderContainer *> *) containers;
+- (SBElementArray<FinderFolder *> *) folders;
+- (SBElementArray<FinderFile *> *) files;
+- (SBElementArray<FinderAliasFile *> *) aliasFiles;
+- (SBElementArray<FinderApplicationFile *> *) applicationFiles;
+- (SBElementArray<FinderDocumentFile *> *) documentFiles;
+- (SBElementArray<FinderInternetLocationFile *> *) internetLocationFiles;
+- (SBElementArray<FinderClipping *> *) clippings;
+- (SBElementArray<FinderPackage *> *) packages;
 
 @property BOOL warnsBeforeEmptying;  // Display a dialog when emptying the trash?
 
@@ -414,9 +419,9 @@ typedef enum FinderLvic FinderLvic;
  */
 
 // A window
-@interface FinderWindow : SBObject
+@interface FinderWindow : SBObject <FinderGenericMethods>
 
-- (id) id;  // the unique id for this window
+- (NSInteger) id;  // the unique id for this window
 @property NSPoint position;  // the upper left position of the window
 @property NSRect bounds;  // the boundary rectangle for the window
 @property (readonly) BOOL titled;  // Does the window have a title bar?
@@ -432,23 +437,6 @@ typedef enum FinderLvic FinderLvic;
 @property BOOL collapsed;  // Is the window collapsed
 @property (copy) NSDictionary *properties;  // every property of a window
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
@@ -510,7 +498,7 @@ typedef enum FinderLvic FinderLvic;
 @end
 
 // A process running on this computer
-@interface FinderProcess : SBObject
+@interface FinderProcess : SBObject <FinderGenericMethods>
 
 @property (copy, readonly) NSString *name;  // the name of the process
 @property BOOL visible;  // Is the process' layer visible?
@@ -524,23 +512,6 @@ typedef enum FinderLvic FinderLvic;
 @property (readonly) NSInteger totalPartitionSize;  // the size of the partition with which the process was launched
 @property (readonly) NSInteger partitionSpaceUsed;  // the number of bytes currently used in the process' partition
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
@@ -567,7 +538,7 @@ typedef enum FinderLvic FinderLvic;
  */
 
 // The Finder Preferences
-@interface FinderPreferences : SBObject
+@interface FinderPreferences : SBObject <FinderGenericMethods>
 
 @property (copy, readonly) FinderPreferencesWindow *window;  // the window that would open if Finder preferences was opened
 @property (copy, readonly) FinderIconViewOptions *iconViewOptions;  // the default icon view options
@@ -585,55 +556,21 @@ typedef enum FinderLvic FinderLvic;
 @property BOOL newWindowsOpenInColumnView;  // Open new windows in column view?
 @property BOOL allNameExtensionsShowing;  // Show name extensions, even for items whose “extension hidden” is true?
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
 // (NOT AVAILABLE YET) A Finder label (name and color)
-@interface FinderLabel : SBObject
+@interface FinderLabel : SBObject <FinderGenericMethods>
 
 @property (copy) NSString *name;  // the name associated with the label
 @property NSInteger index;  // the index in the front-to-back ordering within its container
-@property (copy) id color;  // the color associated with the label
+@property (copy) NSColor *color;  // the color associated with the label
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
 // (NOT AVAILABLE YET) A family of icons
-@interface FinderIconFamily : SBObject
+@interface FinderIconFamily : SBObject <FinderGenericMethods>
 
 @property (copy, readonly) id largeMonochromeIconAndMask;  // the large black-and-white icon and the mask for large icons
 @property (copy, readonly) id large8BitMask;  // the large 8-bit mask for large 32-bit icons
@@ -646,28 +583,11 @@ typedef enum FinderLvic FinderLvic;
 @property (copy, readonly) id small8BitIcon;  // the small 8-bit color icon
 @property (copy, readonly) id small4BitIcon;  // the small 4-bit color icon
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
 // the icon view options
-@interface FinderIconViewOptions : SBObject
+@interface FinderIconViewOptions : SBObject <FinderGenericMethods>
 
 @property FinderEarr arrangement;  // the property by which to keep icons arranged
 @property NSInteger iconSize;  // the size of icons displayed in the icon view
@@ -676,30 +596,13 @@ typedef enum FinderLvic FinderLvic;
 @property NSInteger textSize;  // the size of the text displayed in the icon view
 @property FinderEpos labelPosition;  // the location of the label in reference to the icon
 @property (copy) FinderFile *backgroundPicture;  // the background picture of the icon view
-@property (copy) id backgroundColor;  // the background color of the icon view
+@property (copy) NSColor *backgroundColor;  // the background color of the icon view
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
 // the column view options
-@interface FinderColumnViewOptions : SBObject
+@interface FinderColumnViewOptions : SBObject <FinderGenericMethods>
 
 @property NSInteger textSize;  // the size of the text displayed in the column view
 @property BOOL showsIcon;  // displays an icon next to the label in column view
@@ -707,30 +610,13 @@ typedef enum FinderLvic FinderLvic;
 @property BOOL showsPreviewColumn;  // displays the preview column in column view
 @property BOOL disclosesPreviewPane;  // discloses the preview pane of the preview column in column view
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
 // the list view options
-@interface FinderListViewOptions : SBObject
+@interface FinderListViewOptions : SBObject <FinderGenericMethods>
 
-- (SBElementArray *) columns;
+- (SBElementArray<FinderColumn *> *) columns;
 
 @property BOOL calculatesFolderSizes;  // Are folder sizes calculated and displayed in the window?
 @property BOOL showsIconPreview;  // displays a preview of the item in list view
@@ -739,28 +625,11 @@ typedef enum FinderLvic FinderLvic;
 @property (copy) FinderColumn *sortColumn;  // the column that the list view is sorted on
 @property BOOL usesRelativeDates;  // Are relative dates (e.g., today, yesterday) shown in the list view?
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
 // a column of a list view
-@interface FinderColumn : SBObject
+@interface FinderColumn : SBObject <FinderGenericMethods>
 
 @property NSInteger index;  // the index in the front-to-back ordering within its container
 @property (readonly) FinderElsv name;  // the column name
@@ -770,46 +639,12 @@ typedef enum FinderLvic FinderLvic;
 @property (readonly) NSInteger maximumWidth;  // the maximum allowed width of this column
 @property BOOL visible;  // is this column visible
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 
 // A list of aliases.  Use ‘as alias list’ when a list of aliases is needed (instead of a list of file system item references).
-@interface FinderAliasList : SBObject
+@interface FinderAliasList : SBObject <FinderGenericMethods>
 
-- (void) openUsing:(SBObject *)using_ withProperties:(NSDictionary *)withProperties;  // Open the specified object(s)
-- (void) printWithProperties:(NSDictionary *)withProperties;  // Print the specified object(s)
-- (void) activate;  // Activate the specified window (or the Finder)
-- (void) close;  // Close an object
-- (NSInteger) dataSizeAs:(NSNumber *)as;  // Return the size in bytes of an object
-- (SBObject *) delete;  // Move an item from its container to the trash
-- (SBObject *) duplicateTo:(SBObject *)to replacing:(BOOL)replacing routingSuppressed:(BOOL)routingSuppressed exactCopy:(BOOL)exactCopy;  // Duplicate one or more object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to replacing:(BOOL)replacing positionedAt:(NSArray *)positionedAt routingSuppressed:(BOOL)routingSuppressed;  // Move object(s) to a new location
-- (void) select;  // Select the specified object(s)
-- (SBObject *) sortBy:(SEL)by;  // Return the specified object(s) in a sorted list
-- (void) cleanUpBy:(SEL)by;  // Arrange items in window nicely (only applies to open windows in icon view that are not kept arranged)
-- (void) eject;  // Eject the specified disk(s)
-- (void) emptySecurity:(BOOL)security;  // Empty the trash
-- (void) erase;  // (NOT AVAILABLE) Erase the specified disk(s)
-- (void) reveal;  // Bring the specified object(s) into view
-- (void) updateNecessity:(BOOL)necessity registeringApplications:(BOOL)registeringApplications;  // Update the display of the specified object(s) to match their on-disk representation
 
 @end
 

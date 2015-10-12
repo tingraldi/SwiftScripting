@@ -23,6 +23,17 @@ import ScriptingBridge
     case Detailed = 0x6c776474 /* 'lwdt' */
 }
 
+// MARK: TerminalGenericMethods
+@objc public protocol TerminalGenericMethods {
+    optional func closeSaving(saving: TerminalSaveOptions, savingIn: NSURL!) // Close a document.
+    optional func saveIn(in_: NSURL!) // Save a document.
+    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+    optional func delete() // Delete an object.
+    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy object(s) and put the copies at a new location.
+    optional func exists() -> Bool // Verify if an object exists.
+    optional func moveTo(to: SBObject!) // Move object(s) to a new location.
+}
+
 // MARK: TerminalApplication
 @objc public protocol TerminalApplication: SBApplicationProtocol {
     optional func windows() -> SBElementArray
@@ -40,7 +51,7 @@ import ScriptingBridge
 extension SBApplication: TerminalApplication {}
 
 // MARK: TerminalWindow
-@objc public protocol TerminalWindow: SBObjectProtocol {
+@objc public protocol TerminalWindow: SBObjectProtocol, TerminalGenericMethods {
     optional func tabs() -> SBElementArray
     optional var name: String { get } // The full title of the window.
     optional func id() -> Int // The unique identifier of the window.
@@ -59,18 +70,11 @@ extension SBApplication: TerminalApplication {}
     optional var origin: NSPoint { get set } // The position of the window, relative to the lower left corner of the screen.
     optional var size: NSPoint { get set } // The width and height of the window
     optional var frame: NSRect { get set } // The bounding rectangle, relative to the lower left corner of the screen.
-    optional func closeSaving(saving: TerminalSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) // Move object(s) to a new location.
 }
 extension SBObject: TerminalWindow {}
 
 // MARK: TerminalSettingsSet
-@objc public protocol TerminalSettingsSet: SBObjectProtocol {
+@objc public protocol TerminalSettingsSet: SBObjectProtocol, TerminalGenericMethods {
     optional func id() -> Int // The unique identifier of the settings set.
     optional var name: String { get set } // The name of the settings set.
     optional var numberOfRows: Int { get set } // The number of rows displayed in the tab.
@@ -89,18 +93,11 @@ extension SBObject: TerminalWindow {}
     optional var titleDisplaysSettingsName: Bool { get set } // Whether the title contains the settings name.
     optional var titleDisplaysCustomTitle: Bool { get set } // Whether the title contains a custom title.
     optional var customTitle: String { get set } // The tab’s custom title.
-    optional func closeSaving(saving: TerminalSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) // Move object(s) to a new location.
 }
 extension SBObject: TerminalSettingsSet {}
 
 // MARK: TerminalTab
-@objc public protocol TerminalTab: SBObjectProtocol {
+@objc public protocol TerminalTab: SBObjectProtocol, TerminalGenericMethods {
     optional var numberOfRows: Int { get set } // The number of rows displayed in the tab.
     optional var numberOfColumns: Int { get set } // The number of columns displayed in the tab.
     optional var contents: String { get } // The currently visible contents of the tab.
@@ -124,13 +121,6 @@ extension SBObject: TerminalSettingsSet {}
     optional var fontName: String { get set } // The name of the font used to display the tab’s contents.
     optional var fontSize: Int { get set } // The size of the font used to display the tab’s contents.
     optional var fontAntialiasing: Bool { get set } // Whether the font used to display the tab’s contents is antialiased.
-    optional func closeSaving(saving: TerminalSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) // Move object(s) to a new location.
 }
 extension SBObject: TerminalTab {}
 

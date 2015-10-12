@@ -95,6 +95,16 @@ import ScriptingBridge
     case LoopBackAndForth = 0x6d766266 /* 'mvbf' */
 }
 
+// MARK: PagesGenericMethods
+@objc public protocol PagesGenericMethods {
+    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
+    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
+    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+    optional func delete() // Delete an object.
+    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
+    optional func moveTo(to: SBObject!) // Move an object to a new location.
+}
+
 // MARK: PagesApplication
 @objc public protocol PagesApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray
@@ -111,16 +121,10 @@ import ScriptingBridge
 extension SBApplication: PagesApplication {}
 
 // MARK: PagesDocument
-@objc public protocol PagesDocument: SBObjectProtocol {
+@objc public protocol PagesDocument: SBObjectProtocol, PagesGenericMethods {
     optional var name: String { get } // Its name.
     optional var modified: Bool { get } // Has it been modified since the last save?
     optional var file: NSURL { get } // Its location on disk, if it has one.
-    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func exportTo(to: NSURL!, `as`: PagesExportFormat, withProperties: [NSObject : AnyObject]!) // Export a document to another file
     optional func audioClips() -> SBElementArray
     optional func charts() -> SBElementArray
@@ -144,7 +148,7 @@ extension SBApplication: PagesApplication {}
 extension SBObject: PagesDocument {}
 
 // MARK: PagesWindow
-@objc public protocol PagesWindow: SBObjectProtocol {
+@objc public protocol PagesWindow: SBObjectProtocol, PagesGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
     optional var index: Int { get set } // The index of the window, ordered front to back.
@@ -157,30 +161,18 @@ extension SBObject: PagesDocument {}
     optional var zoomable: Bool { get } // Does the window have a zoom button?
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: PagesDocument { get } // The document whose contents are displayed in the window.
-    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: PagesWindow {}
 
 // MARK: PagesTemplate
-@objc public protocol PagesTemplate: SBObjectProtocol {
+@objc public protocol PagesTemplate: SBObjectProtocol, PagesGenericMethods {
     optional func id() -> String // The identifier used by the application.
     optional var name: String { get } // The localized name displayed to the user.
-    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: PagesTemplate {}
 
 // MARK: PagesSection
-@objc public protocol PagesSection: SBObjectProtocol {
+@objc public protocol PagesSection: SBObjectProtocol, PagesGenericMethods {
     optional func audioClips() -> SBElementArray
     optional func charts() -> SBElementArray
     optional func groups() -> SBElementArray
@@ -193,17 +185,11 @@ extension SBObject: PagesTemplate {}
     optional func tables() -> SBElementArray
     optional func textItems() -> SBElementArray
     optional var bodyText: PagesRichText { get set } // The section body text.
-    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: PagesSection {}
 
 // MARK: PagesRichText
-@objc public protocol PagesRichText: SBObjectProtocol {
+@objc public protocol PagesRichText: SBObjectProtocol, PagesGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -211,12 +197,6 @@ extension SBObject: PagesSection {}
     optional var color: NSColor { get set } // The color of the font. Expressed as an RGB value consisting of a list of three color values from 0 to 65535. ex: Blue = {0, 0, 65535}.
     optional var font: String { get set } // The name of the font.  Can be the PostScript name, such as: “TimesNewRomanPS-ItalicMT”, or display name: “Times New Roman Italic”. TIP: Use the Font Book application get the information about a typeface.
     optional var size: Int { get set } // The size of the font.
-    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: PagesRichText {}
 
@@ -246,7 +226,7 @@ extension SBObject: PagesWord {}
 extension SBObject: PagesPlaceholderText {}
 
 // MARK: PagesIWorkContainer
-@objc public protocol PagesIWorkContainer: SBObjectProtocol {
+@objc public protocol PagesIWorkContainer: SBObjectProtocol, PagesGenericMethods {
     optional func audioClips() -> SBElementArray
     optional func charts() -> SBElementArray
     optional func images() -> SBElementArray
@@ -257,12 +237,6 @@ extension SBObject: PagesPlaceholderText {}
     optional func shapes() -> SBElementArray
     optional func tables() -> SBElementArray
     optional func textItems() -> SBElementArray
-    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: PagesIWorkContainer {}
 
@@ -273,18 +247,12 @@ extension SBObject: PagesIWorkContainer {}
 extension SBObject: PagesPage {}
 
 // MARK: PagesIWorkItem
-@objc public protocol PagesIWorkItem: SBObjectProtocol {
+@objc public protocol PagesIWorkItem: SBObjectProtocol, PagesGenericMethods {
     optional var height: Int { get set } // The height of the iWork item.
     optional var locked: Bool { get set } // Whether the object is locked.
     optional var parent: PagesIWorkContainer { get } // The iWork container containing this iWork item.
     optional var position: NSPoint { get set } // The horizontal and vertical coordinates of the top left point of the iWork item.
     optional var width: Int { get set } // The width of the iWork item.
-    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
 }
 extension SBObject: PagesIWorkItem {}
 
@@ -386,7 +354,7 @@ extension SBObject: PagesTable {}
 extension SBObject: PagesTextItem {}
 
 // MARK: PagesRange
-@objc public protocol PagesRange: SBObjectProtocol {
+@objc public protocol PagesRange: SBObjectProtocol, PagesGenericMethods {
     optional func cells() -> SBElementArray
     optional func columns() -> SBElementArray
     optional func rows() -> SBElementArray
@@ -399,12 +367,6 @@ extension SBObject: PagesTextItem {}
     optional var textWrap: Bool { get set } // Whether text should wrap in the range's cells.
     optional var backgroundColor: NSColor { get set } // The background color of the range's cells.
     optional var verticalAlignment: PagesTAVT { get set } // The vertical alignment of content in the range's cells.
-    optional func closeSaving(saving: PagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: PagesSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
     optional func clear() // Clear the contents of a specified range of cells. Only content is removed; formatting and style are preserved.
     optional func merge() // Merge a specified range of cells.
     optional func unmerge() // Unmerge all merged cells in a specified range.

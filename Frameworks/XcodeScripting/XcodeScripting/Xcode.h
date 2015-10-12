@@ -114,6 +114,21 @@ enum XcodeXdeh {
 };
 typedef enum XcodeXdeh XcodeXdeh;
 
+@protocol XcodeGenericMethods
+
+- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
+- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
+- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
+- (void) delete;  // Delete an object.
+- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
+- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
+- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
+- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
+
+@end
+
 
 
 /*
@@ -123,8 +138,8 @@ typedef enum XcodeXdeh XcodeXdeh;
 // The application's top-level scripting object.
 @interface XcodeApplication : SBApplication
 
-- (SBElementArray *) documents;
-- (SBElementArray *) windows;
+- (SBElementArray<XcodeDocument *> *) documents;
+- (SBElementArray<XcodeWindow *> *) windows;
 
 @property (copy, readonly) NSString *name;  // The name of the application.
 @property (readonly) BOOL frontmost;  // Is this the active application?
@@ -147,27 +162,17 @@ typedef enum XcodeXdeh XcodeXdeh;
 @end
 
 // A document.
-@interface XcodeDocument : SBObject
+@interface XcodeDocument : SBObject <XcodeGenericMethods>
 
 @property (copy, readonly) NSString *name;  // Its name.
 @property (readonly) BOOL modified;  // Has it been modified since the last save?
 @property (copy, readonly) NSURL *file;  // Its location on disk, if it has one.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // A window.
-@interface XcodeWindow : SBObject
+@interface XcodeWindow : SBObject <XcodeGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The title of the window.
 - (NSInteger) id;  // The unique identifier of the window.
@@ -182,16 +187,6 @@ typedef enum XcodeXdeh XcodeXdeh;
 @property BOOL zoomed;  // Is the window zoomed right now?
 @property (copy, readonly) XcodeDocument *document;  // The document whose contents are displayed in the window.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
@@ -202,132 +197,82 @@ typedef enum XcodeXdeh XcodeXdeh;
  */
 
 // Rich (styled) text.
-@interface XcodeRichText : SBObject
+@interface XcodeRichText : SBObject <XcodeGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<XcodeCharacter *> *) characters;
+- (SBElementArray<XcodeParagraph *> *) paragraphs;
+- (SBElementArray<XcodeWord *> *) words;
+- (SBElementArray<XcodeAttributeRun *> *) attributeRuns;
+- (SBElementArray<XcodeAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the text's first character.
 @property (copy) NSString *font;  // The name of the font of the text's first character.
 @property NSInteger size;  // The size in points of the text's first character.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // One of some text's characters.
-@interface XcodeCharacter : SBObject
+@interface XcodeCharacter : SBObject <XcodeGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<XcodeCharacter *> *) characters;
+- (SBElementArray<XcodeParagraph *> *) paragraphs;
+- (SBElementArray<XcodeWord *> *) words;
+- (SBElementArray<XcodeAttributeRun *> *) attributeRuns;
+- (SBElementArray<XcodeAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // Its color.
 @property (copy) NSString *font;  // The name of its font.
 @property NSInteger size;  // Its size, in points.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // One of some text's paragraphs.
-@interface XcodeParagraph : SBObject
+@interface XcodeParagraph : SBObject <XcodeGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<XcodeCharacter *> *) characters;
+- (SBElementArray<XcodeParagraph *> *) paragraphs;
+- (SBElementArray<XcodeWord *> *) words;
+- (SBElementArray<XcodeAttributeRun *> *) attributeRuns;
+- (SBElementArray<XcodeAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the paragraph's first character.
 @property (copy) NSString *font;  // The name of the font of the paragraph's first character.
 @property NSInteger size;  // The size in points of the paragraph's first character.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // One of some text's words.
-@interface XcodeWord : SBObject
+@interface XcodeWord : SBObject <XcodeGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<XcodeCharacter *> *) characters;
+- (SBElementArray<XcodeParagraph *> *) paragraphs;
+- (SBElementArray<XcodeWord *> *) words;
+- (SBElementArray<XcodeAttributeRun *> *) attributeRuns;
+- (SBElementArray<XcodeAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // The color of the word's first character.
 @property (copy) NSString *font;  // The name of the font of the word's first character.
 @property NSInteger size;  // The size in points of the word's first character.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // A chunk of text that all has the same attributes.
-@interface XcodeAttributeRun : SBObject
+@interface XcodeAttributeRun : SBObject <XcodeGenericMethods>
 
-- (SBElementArray *) characters;
-- (SBElementArray *) paragraphs;
-- (SBElementArray *) words;
-- (SBElementArray *) attributeRuns;
-- (SBElementArray *) attachments;
+- (SBElementArray<XcodeCharacter *> *) characters;
+- (SBElementArray<XcodeParagraph *> *) paragraphs;
+- (SBElementArray<XcodeWord *> *) words;
+- (SBElementArray<XcodeAttributeRun *> *) attributeRuns;
+- (SBElementArray<XcodeAttachment *> *) attachments;
 
 @property (copy) NSColor *color;  // Its color.
 @property (copy) NSString *font;  // The name of its font.
 @property NSInteger size;  // Its size, in points.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
@@ -346,40 +291,20 @@ typedef enum XcodeXdeh XcodeXdeh;
  */
 
 // An object that represents a input path that is used by a run script phase.
-@interface XcodeInputPath : SBObject
+@interface XcodeInputPath : SBObject <XcodeGenericMethods>
 
 @property (copy) NSString *path;  // The path of the input file.
 @property (copy, readonly) XcodeRunScriptPhase *runScriptPhase;  // The run script phase that contains this input path.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // An object that represents a output path that is used by a run script phase.
-@interface XcodeOutputPath : SBObject
+@interface XcodeOutputPath : SBObject <XcodeGenericMethods>
 
 @property (copy) NSString *path;  // The path of the output file.
 @property (copy, readonly) XcodeRunScriptPhase *runScriptPhase;  // The run script phase that contains this output path.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
@@ -390,26 +315,16 @@ typedef enum XcodeXdeh XcodeXdeh;
  */
 
 // A type of build configuration available for a project and all its targets. Build configuration types can only be created by duplicating an existing build configuration type.
-@interface XcodeBuildConfigurationType : SBObject
+@interface XcodeBuildConfigurationType : SBObject <XcodeGenericMethods>
 
 - (NSString *) id;  // The unique identifier for the build configuration type.
 @property (copy) NSString *name;  // The name of this build configuration type.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // A message generated during a build that usually points to a warning or error in the associated build file.
-@interface XcodeBuildMessage : SBObject
+@interface XcodeBuildMessage : SBObject <XcodeGenericMethods>
 
 @property (copy) XcodeBuildFile *buildFile;  // The build file that contains this build message
 @property XcodeBmte kind;  // Indicates the kind of build message.
@@ -417,21 +332,11 @@ typedef enum XcodeXdeh XcodeXdeh;
 @property (copy) NSString *message;  // The text of the build message.
 @property (copy) NSString *path;  // The absolute path to the file that the build message is referencing.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // The abstract class for any container.
-@interface XcodeContainer : SBObject
+@interface XcodeContainer : SBObject <XcodeGenericMethods>
 
 @property (copy, readonly) NSString *fullPath;  // The full path to the project file on disk.
 @property (copy, readonly) NSString *name;  // The name of this project.
@@ -440,52 +345,32 @@ typedef enum XcodeXdeh XcodeXdeh;
 @property (copy, readonly) NSString *realPath;  // The fully resolved path to the project file on disk. Specifically, all symlinks in the path have been resolved.
 @property (copy, readonly) XcodeGroup *rootGroup;  // The root of the files & groups hierarchy in the project.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // The abstract class for any item in a container, one of which is a project.
-@interface XcodeContainerItem : SBObject
+@interface XcodeContainerItem : SBObject <XcodeGenericMethods>
 
 - (NSString *) id;  // The unique identifier for the project item.
 @property (copy) NSString *comments;  // Comments about this project item.
 @property (copy, readonly) XcodeContainer *container;  // The container for this item.
 @property (copy, readonly) XcodeProject *project;  // The project that contains this item.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // The model for an Xcode project. Note that the item references, file references, and groups elements are read-only. Changing the contents of these element relationships is unsupported.
 @interface XcodeProject : XcodeContainer
 
-- (SBElementArray *) buildConfigurations;
-- (SBElementArray *) buildConfigurationTypes;
-- (SBElementArray *) fileReferences;
-- (SBElementArray *) groups;
-- (SBElementArray *) itemReferences;
-- (SBElementArray *) schemes;
-- (SBElementArray *) targets;
-- (SBElementArray *) Xcode3Groups;
-- (SBElementArray *) Xcode3FileReferences;
+- (SBElementArray<XcodeBuildConfiguration *> *) buildConfigurations;
+- (SBElementArray<XcodeBuildConfigurationType *> *) buildConfigurationTypes;
+- (SBElementArray<XcodeFileReference *> *) fileReferences;
+- (SBElementArray<XcodeGroup *> *) groups;
+- (SBElementArray<XcodeItemReference *> *) itemReferences;
+- (SBElementArray<XcodeScheme *> *) schemes;
+- (SBElementArray<XcodeTarget *> *) targets;
+- (SBElementArray<XcodeXcode3Group *> *) Xcode3Groups;
+- (SBElementArray<XcodeXcode3FileReference *> *) Xcode3FileReferences;
 
 @property (copy) XcodeBuildConfigurationType *defaultBuildConfigurationType;  // The default build configuration type used when building with xcodebuild if no -configuration option is supplied.
 - (NSString *) id;  // The unique identifier for the project.
@@ -515,7 +400,7 @@ typedef enum XcodeXdeh XcodeXdeh;
 // A build phase represents a stage in the build of a target.  Each build phase contains a set of build files and information about how to process those files.
 @interface XcodeBuildPhase : XcodeProjectItem
 
-- (SBElementArray *) buildFiles;
+- (SBElementArray<XcodeBuildFile *> *) buildFiles;
 
 @property (copy, readonly) NSString *name;  // The name of this build phase.
 @property (copy, readonly) XcodeTarget *target;  // The target that contains this build phase.
@@ -577,8 +462,8 @@ typedef enum XcodeXdeh XcodeXdeh;
 
 @interface XcodeRunScriptPhase : XcodeBuildPhase
 
-- (SBElementArray *) inputPaths;
-- (SBElementArray *) outputPaths;
+- (SBElementArray<XcodeInputPath *> *) inputPaths;
+- (SBElementArray<XcodeOutputPath *> *) outputPaths;
 
 @property BOOL runOnlyWhenInstalling;  // Indicates if the build phase should only be run when performing an install build.
 @property (copy) NSString *shellPath;  // The absolute path to the shell used by the shell script.
@@ -608,9 +493,9 @@ typedef enum XcodeXdeh XcodeXdeh;
 // A set of build settings for a target or project. Each target and project has one build configuration for each build configuration type in the project. New build configurations are created automatically when a new build configuration type is created.
 @interface XcodeBuildConfiguration : XcodeProjectItem
 
-- (SBElementArray *) baseBuildSettings;
-- (SBElementArray *) buildSettings;
-- (SBElementArray *) flattenedBuildSettings;
+- (SBElementArray<XcodeBaseBuildSetting *> *) baseBuildSettings;
+- (SBElementArray<XcodeBuildSetting *> *) buildSettings;
+- (SBElementArray<XcodeFlattenedBuildSetting *> *) flattenedBuildSettings;
 
 @property (copy, readonly) XcodeBuildConfigurationType *buildConfigurationType;  // The associated build configuration type.
 @property (copy) XcodeFileReference *configurationSettingsFile;  // The optional configuration settings file this configuration is based on. May be 'missing value'.
@@ -622,7 +507,7 @@ typedef enum XcodeXdeh XcodeXdeh;
 // A "build file" represents an association between a target and a file reference and tracks any target-specific settings for that file reference.
 @interface XcodeBuildFile : XcodeProjectItem
 
-- (SBElementArray *) buildMessages;
+- (SBElementArray<XcodeBuildMessage *> *) buildMessages;
 
 @property (copy, readonly) XcodeBuildPhase *buildPhase;  // The build phase that this build file is contained by.
 @property (readonly) NSInteger compiledCodeSize;  // The size of the object file generated when compiling the associated file.
@@ -643,21 +528,11 @@ typedef enum XcodeXdeh XcodeXdeh;
 @end
 
 // A set of files and options from which to form a project.
-@interface XcodeProjectTemplate : SBObject
+@interface XcodeProjectTemplate : SBObject <XcodeGenericMethods>
 
 @property (copy, readonly) NSString *name;  // The name for the project template.
 @property (copy, readonly) NSString *objectDescription;  // A description of the project template.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
@@ -686,8 +561,8 @@ typedef enum XcodeXdeh XcodeXdeh;
 @interface XcodeItemReference : XcodeContainerItem
 
 @property (copy, readonly) NSString *buildProductsRelativePath;  // The path to the item referenced relative to the build products folder.
-@property (copy, readonly) NSArray *contents;  // A list of the immediate contents of this reference.
-@property (copy, readonly) NSArray *entireContents;  // A list of the contents of this reference, including the entire contents of its children.
+@property (copy, readonly) NSArray<SBObject *> *contents;  // A list of the immediate contents of this reference.
+@property (copy, readonly) NSArray<SBObject *> *entireContents;  // A list of the contents of this reference, including the entire contents of its children.
 @property XcodeFenc fileEncoding;  // The file encoding used to display the contents of any text files referenced by this item. In the case of a group or folder reference, this encoding is used for the items contained by this item.
 @property (copy, readonly) NSString *fullPath;  // The full path to the item referenced.
 @property (copy, readonly) XcodeGroup *group;  // The group that this reference is contained in.
@@ -720,16 +595,16 @@ typedef enum XcodeXdeh XcodeXdeh;
 // A group is a container of references in a project's group hierarchy.  A group does not represent a specific file or path on disk, but is internal to the project's structure.
 @interface XcodeGroup : XcodeItemReference
 
-- (SBElementArray *) fileReferences;
-- (SBElementArray *) groups;
-- (SBElementArray *) itemReferences;
+- (SBElementArray<XcodeFileReference *> *) fileReferences;
+- (SBElementArray<XcodeGroup *> *) groups;
+- (SBElementArray<XcodeItemReference *> *) itemReferences;
 
 
 @end
 
 @interface XcodeXcode3FileReference : XcodeFileReference
 
-- (SBElementArray *) Xcode3FileReferences;
+- (SBElementArray<XcodeXcode3FileReference *> *) Xcode3FileReferences;
 
 @property (copy) NSString *path;  // Returns the path to the item referenced. The format of this path depends on the path type.
 @property XcodeReft pathType;  // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
@@ -740,8 +615,8 @@ typedef enum XcodeXdeh XcodeXdeh;
 // A group is a container of references in a project's group hierarchy.  A group does not represent a specific file or path on disk, but is internal to the project's structure.
 @interface XcodeXcode3Group : XcodeGroup
 
-- (SBElementArray *) Xcode3FileReferences;
-- (SBElementArray *) Xcode3Groups;
+- (SBElementArray<XcodeXcode3FileReference *> *) Xcode3FileReferences;
+- (SBElementArray<XcodeXcode3Group *> *) Xcode3Groups;
 
 @property (copy) NSString *path;  // Returns the path to the item referenced. The format of this path depends on the path type.
 @property XcodeReft pathType;  // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
@@ -756,22 +631,12 @@ typedef enum XcodeXdeh XcodeXdeh;
  */
 
 // An object that represents a build setting.
-@interface XcodeBuildSetting : SBObject
+@interface XcodeBuildSetting : SBObject <XcodeGenericMethods>
 
 @property (copy, readonly) XcodeProjectItem *container;  // The build configuration that contains this build setting.
 @property (copy) NSString *name;  // The unlocalized build setting name (e.g. DSTROOT).
 @property (copy) NSString *value;  // A string value for the build setting.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
@@ -790,13 +655,13 @@ typedef enum XcodeXdeh XcodeXdeh;
 // A target is a blueprint for building a product. Besides specifying the type of product to build, a target consists of an ordered list of build phases, a record of 'build settings', an Info.plist record (the 'product settings'), a list of build rules, and 
 @interface XcodeTarget : XcodeProjectItem
 
-- (SBElementArray *) buildConfigurations;
-- (SBElementArray *) buildFiles;
-- (SBElementArray *) buildPhases;
-- (SBElementArray *) compileApplescriptsPhases;
-- (SBElementArray *) copyFilesPhases;
-- (SBElementArray *) runScriptPhases;
-- (SBElementArray *) targetDependencies;
+- (SBElementArray<XcodeBuildConfiguration *> *) buildConfigurations;
+- (SBElementArray<XcodeBuildFile *> *) buildFiles;
+- (SBElementArray<XcodeBuildPhase *> *) buildPhases;
+- (SBElementArray<XcodeCompileApplescriptsPhase *> *) compileApplescriptsPhases;
+- (SBElementArray<XcodeCopyFilesPhase *> *) copyFilesPhases;
+- (SBElementArray<XcodeRunScriptPhase *> *) runScriptPhases;
+- (SBElementArray<XcodeTargetDependency *> *) targetDependencies;
 
 @property (copy, readonly) XcodeBuildJavaResourcesPhase *buildJavaResourcesPhase;  // The "Build Java Resources" build phase for this target if it exists.
 @property (copy, readonly) XcodeBuildResourceManagerResourcesPhase *buildResourceManagerResourcesPhase;  // The "Build Resource Manager Resources" build phase for this target if it exists.
@@ -829,15 +694,15 @@ typedef enum XcodeXdeh XcodeXdeh;
 // The Xcode application.
 @interface XcodeApplication (XcodeApplicationSuite)
 
-- (SBElementArray *) breakpoints;
-- (SBElementArray *) dataModelDocuments;
-- (SBElementArray *) fileBreakpoints;
-- (SBElementArray *) fileDocuments;
-- (SBElementArray *) projects;
-- (SBElementArray *) projectTemplates;
-- (SBElementArray *) sourceDocuments;
-- (SBElementArray *) symbolicBreakpoints;
-- (SBElementArray *) workspaceDocuments;
+- (SBElementArray<XcodeBreakpoint *> *) breakpoints;
+- (SBElementArray<XcodeDataModelDocument *> *) dataModelDocuments;
+- (SBElementArray<XcodeFileBreakpoint *> *) fileBreakpoints;
+- (SBElementArray<XcodeFileDocument *> *) fileDocuments;
+- (SBElementArray<XcodeProject *> *) projects;
+- (SBElementArray<XcodeProjectTemplate *> *) projectTemplates;
+- (SBElementArray<XcodeSourceDocument *> *) sourceDocuments;
+- (SBElementArray<XcodeSymbolicBreakpoint *> *) symbolicBreakpoints;
+- (SBElementArray<XcodeWorkspaceDocument *> *) workspaceDocuments;
 
 @property (copy) XcodeWorkspaceDocument *activeWorkspaceDocument;  // The active workspace document in Xcode.
 
@@ -846,58 +711,48 @@ typedef enum XcodeXdeh XcodeXdeh;
 // This subdivides the text into chunks that all have the same attributes.
 @interface XcodeAttributeRun (XcodeApplicationSuite)
 
-- (SBElementArray *) richText;
-- (SBElementArray *) insertionPoints;
+- (SBElementArray<XcodeRichText *> *) richText;
+- (SBElementArray<XcodeInsertionPoint *> *) insertionPoints;
 
 @end
 
 // This subdivides the text into characters.
 @interface XcodeCharacter (XcodeApplicationSuite)
 
-- (SBElementArray *) richText;
-- (SBElementArray *) insertionPoints;
+- (SBElementArray<XcodeRichText *> *) richText;
+- (SBElementArray<XcodeInsertionPoint *> *) insertionPoints;
 
 @end
 
 // The insertion point in a document, which is either empty or has an associated text selection.
-@interface XcodeInsertionPoint : SBObject
+@interface XcodeInsertionPoint : SBObject <XcodeGenericMethods>
 
 @property (copy) NSString *contents;  // The contents at the insertion point.
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // This subdivides the text into paragraphs.
 @interface XcodeParagraph (XcodeApplicationSuite)
 
-- (SBElementArray *) richText;
-- (SBElementArray *) insertionPoints;
+- (SBElementArray<XcodeRichText *> *) richText;
+- (SBElementArray<XcodeInsertionPoint *> *) insertionPoints;
 
 @end
 
 // An object that represents a block of text.
 @interface XcodeRichText (XcodeApplicationSuite)
 
-- (SBElementArray *) richText;
-- (SBElementArray *) insertionPoints;
+- (SBElementArray<XcodeRichText *> *) richText;
+- (SBElementArray<XcodeInsertionPoint *> *) insertionPoints;
 
 @end
 
 // This subdivides the text into words.
 @interface XcodeWord (XcodeApplicationSuite)
 
-- (SBElementArray *) richText;
-- (SBElementArray *) insertionPoints;
+- (SBElementArray<XcodeRichText *> *) richText;
+- (SBElementArray<XcodeInsertionPoint *> *) insertionPoints;
 
 @end
 
@@ -926,8 +781,8 @@ typedef enum XcodeXdeh XcodeXdeh;
 
 @property (copy) NSString *contents;  // The contents of the text file.
 @property BOOL notifiesWhenClosing;  // Should Xcode notify other apps when this document is closed?
-@property (copy) NSArray *selectedCharacterRange;  // The first and last character positions in the selection.
-@property (copy) NSArray *selectedParagraphRange;  // The first and last paragraph positions that contain the selection.
+@property (copy) NSArray<NSNumber *> *selectedCharacterRange;  // The first and last character positions in the selection.
+@property (copy) NSArray<NSNumber *> *selectedParagraphRange;  // The first and last paragraph positions that contain the selection.
 @property (copy) SBObject *selection;  // The current selection in the text document.
 @property (copy) NSString *text;  // The text of the text file referenced.
 
@@ -945,17 +800,17 @@ typedef enum XcodeXdeh XcodeXdeh;
 // A document that represents a workspace on disk. It also provides access to the window it appears in.
 @interface XcodeWorkspaceDocument : XcodeDocument
 
-- (SBElementArray *) breakpoints;
-- (SBElementArray *) buildMessages;
-- (SBElementArray *) fileBreakpoints;
-- (SBElementArray *) fileReferences;
-- (SBElementArray *) groups;
-- (SBElementArray *) itemReferences;
-- (SBElementArray *) projects;
-- (SBElementArray *) schemes;
-- (SBElementArray *) symbolicBreakpoints;
-- (SBElementArray *) Xcode3Groups;
-- (SBElementArray *) Xcode3FileReferences;
+- (SBElementArray<XcodeBreakpoint *> *) breakpoints;
+- (SBElementArray<XcodeBuildMessage *> *) buildMessages;
+- (SBElementArray<XcodeFileBreakpoint *> *) fileBreakpoints;
+- (SBElementArray<XcodeFileReference *> *) fileReferences;
+- (SBElementArray<XcodeGroup *> *) groups;
+- (SBElementArray<XcodeItemReference *> *) itemReferences;
+- (SBElementArray<XcodeProject *> *) projects;
+- (SBElementArray<XcodeScheme *> *) schemes;
+- (SBElementArray<XcodeSymbolicBreakpoint *> *) symbolicBreakpoints;
+- (SBElementArray<XcodeXcode3Group *> *) Xcode3Groups;
+- (SBElementArray<XcodeXcode3FileReference *> *) Xcode3FileReferences;
 
 @property BOOL breakpointsEnabled;  // Are breakpoints enabled in this workspace?
 @property (copy) NSString *intermediatesDirectory;  // The full path to the folder that contains all intermediate files for the project.
@@ -971,7 +826,7 @@ typedef enum XcodeXdeh XcodeXdeh;
  */
 
 // Data model attributes of the entity
-@interface XcodeAttribute : SBObject
+@interface XcodeAttribute : SBObject <XcodeGenericMethods>
 
 @property (copy, readonly) NSString *attributeType;  // The CoreData type of the attribute
 @property (copy, readonly) NSString *defaultValue;  // Default value of the attribute
@@ -980,23 +835,13 @@ typedef enum XcodeXdeh XcodeXdeh;
 @property BOOL transient;  // Is the attribute transient?
 @property (copy) NSDictionary *userInfo;  // User info dictionary for the attribute
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // Document containing a Data Model for generating Core Data schema
 @interface XcodeDataModelDocument : XcodeFileDocument
 
-- (SBElementArray *) entities;
+- (SBElementArray<XcodeEntity *> *) entities;
 
 @property (copy, readonly) NSString *name;  // The name of the document
 
@@ -1004,12 +849,12 @@ typedef enum XcodeXdeh XcodeXdeh;
 @end
 
 // Entity in a data model
-@interface XcodeEntity : SBObject
+@interface XcodeEntity : SBObject <XcodeGenericMethods>
 
-- (SBElementArray *) attributes;
-- (SBElementArray *) fetchRequests;
-- (SBElementArray *) fetchedProperties;
-- (SBElementArray *) relationships;
+- (SBElementArray<XcodeAttribute *> *) attributes;
+- (SBElementArray<XcodeFetchRequest *> *) fetchRequests;
+- (SBElementArray<XcodeFetchedProperty *> *) fetchedProperties;
+- (SBElementArray<XcodeRelationship *> *) relationships;
 
 @property BOOL abstract;  // Is the entity abstract?
 @property (copy) NSString *name;  // Name of the entity
@@ -1017,40 +862,20 @@ typedef enum XcodeXdeh XcodeXdeh;
 @property (copy, readonly) XcodeEntity *parent;  // Parent from which the entity inherits
 @property (copy) NSDictionary *userInfo;  // User info dictionary for the entity
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // Fetch Requests of the schema associated with this entity
-@interface XcodeFetchRequest : SBObject
+@interface XcodeFetchRequest : SBObject <XcodeGenericMethods>
 
 @property (copy) NSString *name;  // Fetch Request name
 @property (copy) NSString *predicate;  // Text form of the predicate for the Fetch Request
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // Entity attribute whose value is fetched from the database dynamically
-@interface XcodeFetchedProperty : SBObject
+@interface XcodeFetchedProperty : SBObject <XcodeGenericMethods>
 
 @property (copy) XcodeEntity *destination;  // The destination entity of the fetched property
 @property (copy) NSString *name;  // Fetched Property attribute name
@@ -1059,21 +884,11 @@ typedef enum XcodeXdeh XcodeXdeh;
 @property BOOL transient;  // Is the attribute transient?
 @property (copy) NSDictionary *userInfo;  // User info dictionary for the attribute
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 
 // A relationship from a data model entity to another
-@interface XcodeRelationship : SBObject
+@interface XcodeRelationship : SBObject <XcodeGenericMethods>
 
 @property (copy) XcodeEntity *destinationEntity;  // The other entity related to this one.
 @property (copy) XcodeRelationship *inverseRelationship;  // The relationship that the related element has to this one.
@@ -1085,16 +900,6 @@ typedef enum XcodeXdeh XcodeXdeh;
 @property BOOL transient;  // Is the relationship transient?
 @property (copy) NSDictionary *userInfo;  // User information dictionary for the relationship
 
-- (void) closeSaving:(XcodeSaveOptions)saving savingIn:(NSURL *)savingIn;  // Close a document.
-- (void) saveIn:(NSURL *)in_ as:(XcodeSaveableFileFormat)as;  // Save a document.
-- (void) printPrintDialog:(BOOL)printDialog;  // Print a document.
-- (void) delete;  // Delete an object.
-- (void) duplicateTo:(SBObject *)to withProperties:(NSDictionary *)withProperties;  // Copy an object.
-- (void) moveTo:(SBObject *)to;  // Move an object to a new location.
-- (NSString *) buildStaticAnalysis:(BOOL)staticAnalysis transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-- (NSString *) cleanRemovingPrecompiledHeaders:(BOOL)removingPrecompiledHeaders transcript:(BOOL)transcript using:(XcodeBuildConfigurationType *)using_;  // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-- (void) addTo:(SBObject *)to;  // Adds an existing object to the container specified.
-- (void) removeFrom:(id)from;  // Removes the object from the designated container without deleting it.
 
 @end
 

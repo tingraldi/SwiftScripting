@@ -116,6 +116,20 @@ import ScriptingBridge
     case HidePerFilter = 0x78646566 /* 'xdef' */
 }
 
+// MARK: XcodeGenericMethods
+@objc public protocol XcodeGenericMethods {
+    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
+    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
+    optional func printPrintDialog(printDialog: Bool) // Print a document.
+    optional func delete() // Delete an object.
+    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
+    optional func moveTo(to: SBObject!) // Move an object to a new location.
+    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
+    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
+}
+
 // MARK: XcodeApplication
 @objc public protocol XcodeApplication: SBApplicationProtocol {
     optional func documents() -> SBElementArray
@@ -150,26 +164,16 @@ import ScriptingBridge
 extension SBApplication: XcodeApplication {}
 
 // MARK: XcodeDocument
-@objc public protocol XcodeDocument: SBObjectProtocol {
+@objc public protocol XcodeDocument: SBObjectProtocol, XcodeGenericMethods {
     optional var name: String { get } // Its name.
     optional var modified: Bool { get } // Has it been modified since the last save?
     optional var file: NSURL { get } // Its location on disk, if it has one.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional var path: String { get set } // The document's path.
 }
 extension SBObject: XcodeDocument {}
 
 // MARK: XcodeWindow
-@objc public protocol XcodeWindow: SBObjectProtocol {
+@objc public protocol XcodeWindow: SBObjectProtocol, XcodeGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
     optional var index: Int { get set } // The index of the window, ordered front to back.
@@ -182,21 +186,11 @@ extension SBObject: XcodeDocument {}
     optional var zoomable: Bool { get } // Does the window have a zoom button?
     optional var zoomed: Bool { get set } // Is the window zoomed right now?
     optional var document: XcodeDocument { get } // The document whose contents are displayed in the window.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeWindow {}
 
 // MARK: XcodeRichText
-@objc public protocol XcodeRichText: SBObjectProtocol {
+@objc public protocol XcodeRichText: SBObjectProtocol, XcodeGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -205,23 +199,13 @@ extension SBObject: XcodeWindow {}
     optional var color: NSColor { get set } // The color of the text's first character.
     optional var font: String { get set } // The name of the font of the text's first character.
     optional var size: Int { get set } // The size in points of the text's first character.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
     optional func insertionPoints() -> SBElementArray
 }
 extension SBObject: XcodeRichText {}
 
 // MARK: XcodeCharacter
-@objc public protocol XcodeCharacter: SBObjectProtocol {
+@objc public protocol XcodeCharacter: SBObjectProtocol, XcodeGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -230,23 +214,13 @@ extension SBObject: XcodeRichText {}
     optional var color: NSColor { get set } // Its color.
     optional var font: String { get set } // The name of its font.
     optional var size: Int { get set } // Its size, in points.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
     optional func insertionPoints() -> SBElementArray
 }
 extension SBObject: XcodeCharacter {}
 
 // MARK: XcodeParagraph
-@objc public protocol XcodeParagraph: SBObjectProtocol {
+@objc public protocol XcodeParagraph: SBObjectProtocol, XcodeGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -255,23 +229,13 @@ extension SBObject: XcodeCharacter {}
     optional var color: NSColor { get set } // The color of the paragraph's first character.
     optional var font: String { get set } // The name of the font of the paragraph's first character.
     optional var size: Int { get set } // The size in points of the paragraph's first character.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
     optional func insertionPoints() -> SBElementArray
 }
 extension SBObject: XcodeParagraph {}
 
 // MARK: XcodeWord
-@objc public protocol XcodeWord: SBObjectProtocol {
+@objc public protocol XcodeWord: SBObjectProtocol, XcodeGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -280,23 +244,13 @@ extension SBObject: XcodeParagraph {}
     optional var color: NSColor { get set } // The color of the word's first character.
     optional var font: String { get set } // The name of the font of the word's first character.
     optional var size: Int { get set } // The size in points of the word's first character.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
     optional func insertionPoints() -> SBElementArray
 }
 extension SBObject: XcodeWord {}
 
 // MARK: XcodeAttributeRun
-@objc public protocol XcodeAttributeRun: SBObjectProtocol {
+@objc public protocol XcodeAttributeRun: SBObjectProtocol, XcodeGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -305,16 +259,6 @@ extension SBObject: XcodeWord {}
     optional var color: NSColor { get set } // Its color.
     optional var font: String { get set } // The name of its font.
     optional var size: Int { get set } // Its size, in points.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
     optional func richText() -> SBElementArray
     optional func insertionPoints() -> SBElementArray
 }
@@ -327,113 +271,53 @@ extension SBObject: XcodeAttributeRun {}
 extension SBObject: XcodeAttachment {}
 
 // MARK: XcodeInputPath
-@objc public protocol XcodeInputPath: SBObjectProtocol {
+@objc public protocol XcodeInputPath: SBObjectProtocol, XcodeGenericMethods {
     optional var path: String { get set } // The path of the input file.
     optional var runScriptPhase: XcodeRunScriptPhase { get } // The run script phase that contains this input path.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeInputPath {}
 
 // MARK: XcodeOutputPath
-@objc public protocol XcodeOutputPath: SBObjectProtocol {
+@objc public protocol XcodeOutputPath: SBObjectProtocol, XcodeGenericMethods {
     optional var path: String { get set } // The path of the output file.
     optional var runScriptPhase: XcodeRunScriptPhase { get } // The run script phase that contains this output path.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeOutputPath {}
 
 // MARK: XcodeBuildConfigurationType
-@objc public protocol XcodeBuildConfigurationType: SBObjectProtocol {
+@objc public protocol XcodeBuildConfigurationType: SBObjectProtocol, XcodeGenericMethods {
     optional func id() -> String // The unique identifier for the build configuration type.
     optional var name: String { get set } // The name of this build configuration type.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeBuildConfigurationType {}
 
 // MARK: XcodeBuildMessage
-@objc public protocol XcodeBuildMessage: SBObjectProtocol {
+@objc public protocol XcodeBuildMessage: SBObjectProtocol, XcodeGenericMethods {
     optional var buildFile: XcodeBuildFile { get set } // The build file that contains this build message
     optional var kind: XcodeBmte { get set } // Indicates the kind of build message.
     optional var location: Int { get set } // The line number in the file that the build message corresponds to.
     optional var message: String { get set } // The text of the build message.
     optional var path: String { get set } // The absolute path to the file that the build message is referencing.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeBuildMessage {}
 
 // MARK: XcodeContainer
-@objc public protocol XcodeContainer: SBObjectProtocol {
+@objc public protocol XcodeContainer: SBObjectProtocol, XcodeGenericMethods {
     optional var fullPath: String { get } // The full path to the project file on disk.
     optional var name: String { get } // The name of this project.
     optional var path: String { get } // The path to the project file on disk.
     optional var readOnly: Bool { get } // Is the project only open for reading?
     optional var realPath: String { get } // The fully resolved path to the project file on disk. Specifically, all symlinks in the path have been resolved.
     optional var rootGroup: XcodeGroup { get } // The root of the files & groups hierarchy in the project.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeContainer {}
 
 // MARK: XcodeContainerItem
-@objc public protocol XcodeContainerItem: SBObjectProtocol {
+@objc public protocol XcodeContainerItem: SBObjectProtocol, XcodeGenericMethods {
     optional func id() -> String // The unique identifier for the project item.
     optional var comments: String { get set } // Comments about this project item.
     optional var container: XcodeContainer { get } // The container for this item.
     optional var project: XcodeProject { get } // The project that contains this item.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeContainerItem {}
 
@@ -565,19 +449,9 @@ extension SBObject: XcodeBuildFile {}
 extension SBObject: XcodeFileBreakpoint {}
 
 // MARK: XcodeProjectTemplate
-@objc public protocol XcodeProjectTemplate: SBObjectProtocol {
+@objc public protocol XcodeProjectTemplate: SBObjectProtocol, XcodeGenericMethods {
     optional var name: String { get } // The name for the project template.
     optional var objectDescription: String { get } // A description of the project template.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeProjectTemplate {}
 
@@ -650,20 +524,10 @@ extension SBObject: XcodeXcode3FileReference {}
 extension SBObject: XcodeXcode3Group {}
 
 // MARK: XcodeBuildSetting
-@objc public protocol XcodeBuildSetting: SBObjectProtocol {
+@objc public protocol XcodeBuildSetting: SBObjectProtocol, XcodeGenericMethods {
     optional var container: XcodeProjectItem { get } // The build configuration that contains this build setting.
     optional var name: String { get set } // The unlocalized build setting name (e.g. DSTROOT).
     optional var value: String { get set } // A string value for the build setting.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeBuildSetting {}
 
@@ -706,18 +570,8 @@ extension SBObject: XcodeTarget {}
 extension SBObject: XcodeTargetDependency {}
 
 // MARK: XcodeInsertionPoint
-@objc public protocol XcodeInsertionPoint: SBObjectProtocol {
+@objc public protocol XcodeInsertionPoint: SBObjectProtocol, XcodeGenericMethods {
     optional var contents: String { get set } // The contents at the insertion point.
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeInsertionPoint {}
 
@@ -763,23 +617,13 @@ extension SBObject: XcodeSourceDocument {}
 extension SBObject: XcodeWorkspaceDocument {}
 
 // MARK: XcodeAttribute
-@objc public protocol XcodeAttribute: SBObjectProtocol {
+@objc public protocol XcodeAttribute: SBObjectProtocol, XcodeGenericMethods {
     optional var attributeType: String { get } // The CoreData type of the attribute
     optional var defaultValue: String { get } // Default value of the attribute
     optional var name: String { get set } // Attribute name
     optional var optional: Bool { get set } // Is the attribute optional?
     optional var transient: Bool { get set } // Is the attribute transient?
     optional var userInfo: [NSObject : AnyObject] { get set } // User info dictionary for the attribute
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeAttribute {}
 
@@ -791,7 +635,7 @@ extension SBObject: XcodeAttribute {}
 extension SBObject: XcodeDataModelDocument {}
 
 // MARK: XcodeEntity
-@objc public protocol XcodeEntity: SBObjectProtocol {
+@objc public protocol XcodeEntity: SBObjectProtocol, XcodeGenericMethods {
     optional func attributes() -> SBElementArray
     optional func fetchRequests() -> SBElementArray
     optional func fetchedProperties() -> SBElementArray
@@ -801,59 +645,29 @@ extension SBObject: XcodeDataModelDocument {}
     optional var objectClass: String { get set } // The Objective C class of the object backing this entity
     optional var parent: XcodeEntity { get } // Parent from which the entity inherits
     optional var userInfo: [NSObject : AnyObject] { get set } // User info dictionary for the entity
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeEntity {}
 
 // MARK: XcodeFetchRequest
-@objc public protocol XcodeFetchRequest: SBObjectProtocol {
+@objc public protocol XcodeFetchRequest: SBObjectProtocol, XcodeGenericMethods {
     optional var name: String { get set } // Fetch Request name
     optional var predicate: String { get set } // Text form of the predicate for the Fetch Request
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeFetchRequest {}
 
 // MARK: XcodeFetchedProperty
-@objc public protocol XcodeFetchedProperty: SBObjectProtocol {
+@objc public protocol XcodeFetchedProperty: SBObjectProtocol, XcodeGenericMethods {
     optional var destination: XcodeEntity { get set } // The destination entity of the fetched property
     optional var name: String { get set } // Fetched Property attribute name
     optional var optional: Bool { get set } // Is the attribute optional?
     optional var predicate: String { get set } // Text form of the predicate that selects the property
     optional var transient: Bool { get set } // Is the attribute transient?
     optional var userInfo: [NSObject : AnyObject] { get set } // User info dictionary for the attribute
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeFetchedProperty {}
 
 // MARK: XcodeRelationship
-@objc public protocol XcodeRelationship: SBObjectProtocol {
+@objc public protocol XcodeRelationship: SBObjectProtocol, XcodeGenericMethods {
     optional var destinationEntity: XcodeEntity { get set } // The other entity related to this one.
     optional var inverseRelationship: XcodeRelationship { get set } // The relationship that the related element has to this one.
     optional var maximumCount: Int { get set } // Maximum number of related data objects
@@ -863,16 +677,6 @@ extension SBObject: XcodeFetchedProperty {}
     optional var toMany: Bool { get set } // Is the relationship a “to-many” relationship?
     optional var transient: Bool { get set } // Is the relationship transient?
     optional var userInfo: [NSObject : AnyObject] { get set } // User information dictionary for the relationship
-    optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    optional func printPrintDialog(printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
 }
 extension SBObject: XcodeRelationship {}
 

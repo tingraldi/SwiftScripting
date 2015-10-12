@@ -201,13 +201,67 @@ enum TextWranglerFOM {
 };
 typedef enum TextWranglerFOM TextWranglerFOM;
 
+@protocol TextWranglerGenericMethods
+
+- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
+- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
+- (void) closeSaving:(TextWranglerSavo)saving savingIn:(NSURL *)savingIn;  // Closes the designated window.
+- (void) delete;  // Delete an element from an object
+- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
+- (BOOL) exists;  // Verify if an object exists
+- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
+- (void) saveTo:(NSURL *)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
+- (void) activate;  // activate the application or a window
+- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
+- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
+- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
+- (void) paste;  // Paste an object from the clipboard
+- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
+- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
+- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
+- (void) select;  // Select the specified object
+- (void) undo;  // Undoes the effects of the last command, if possible.
+- (void) exportTo:(NSURL *)to;  // Export an object
+- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
+- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
+- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
+- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
+- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
+- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
+- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
+- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
+- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
+- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
+- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
+- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
+- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
+- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
+- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
+- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
+- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
+- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
+- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
+- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
+- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
+- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
+- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
+- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
+- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
+- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
+- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
+- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
+- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
+- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
+
+@end
+
 
 
 /*
  * Required Suite
  */
 
-@interface TextWranglerPrintSettings : SBObject
+@interface TextWranglerPrintSettings : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) NSInteger copies;  // the number of copies of a document to be printed 
 @property (readonly) BOOL collating;  // Should printed copies be collated?
@@ -217,7 +271,7 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property (readonly) NSInteger pagesDown;  // number of logical pages laid out down a physical page
 @property (copy, readonly) NSDate *requestedPrintTime;  // the time at which the desktop printer should print the document...
 @property (readonly) TextWranglerEnum errorHandling;  // how errors are handled
-@property (copy, readonly) NSArray *printerFeatures;  // for printer specific features
+@property (copy, readonly) NSArray<NSArray *> *printerFeatures;  // for printer specific features
 @property (copy, readonly) NSString *faxNumber;  // for fax number
 @property (copy, readonly) NSString *targetPrinter;  // for target printer
 @property (copy, readonly) NSString *printingFont;
@@ -233,55 +287,6 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property (readonly) BOOL printColorSyntax;
 @property (readonly) TextWranglerPstp timeStamp;
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
@@ -292,79 +297,30 @@ typedef enum TextWranglerFOM TextWranglerFOM;
  */
 
 // an OSA object
-@interface TextWranglerItem : SBObject
+@interface TextWranglerItem : SBObject <TextWranglerGenericMethods>
 
 @property (copy) NSDictionary *properties;  // all of this object’s properties
 @property (copy, readonly) SBObject *container;  // object’s container (if any)
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // An application program
 @interface TextWranglerApplication : SBApplication
 
-- (SBElementArray *) windows;
-- (SBElementArray *) textWindows;
-- (SBElementArray *) documents;
-- (SBElementArray *) textDocuments;
-- (SBElementArray *) palettes;
-- (SBElementArray *) clipboards;
+- (SBElementArray<TextWranglerWindow *> *) windows;
+- (SBElementArray<TextWranglerTextWindow *> *) textWindows;
+- (SBElementArray<TextWranglerDocument *> *) documents;
+- (SBElementArray<TextWranglerTextDocument *> *) textDocuments;
+- (SBElementArray<TextWranglerPalette *> *) palettes;
+- (SBElementArray<TextWranglerClipboard *> *) clipboards;
 
 @property (readonly) NSInteger ID;  // object’s unique id
 @property (copy, readonly) NSString *name;  // the name
 @property (copy, readonly) SBObject *selection;  // the selection visible to the user
 @property BOOL frontmost;  // Is this the frontmost application?
 @property (copy, readonly) NSString *version;  // the version number of the application
-@property (copy, readonly) id buildNumber;  // the build number of the application
+@property (readonly) NSInteger buildNumber;  // the build number of the application
 @property (copy, readonly) NSString *serialNumber;  // the application’s serial number
 @property (copy) id currentClipboard;  // the clipboard
 @property (copy, readonly) TextWranglerSearchOptions *currentSearchOptions;  // search options used by the most recent search/replace operation
@@ -391,76 +347,27 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 - (void) redo;  // Reverses the effects of the most recent Undo, if possible.
 - (void) select;  // Select the specified object
 - (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) applyTextFactory:(id)x to:(id)to options:(TextWranglerSearchOptions *)options filter:(TextWranglerFilter *)filter saving:(TextWranglerSavo)saving recursion:(BOOL)recursion textFilesOnly:(BOOL)textFilesOnly skipShieldedFolders:(BOOL)skipShieldedFolders searchInvisibleFolders:(BOOL)searchInvisibleFolders searchCompressedFiles:(BOOL)searchCompressedFiles;  // Applies the operations in a specified text factory to the designated items
+- (void) exportTo:(NSURL *)to;  // Export an object
+- (void) applyTextFactory:(NSURL *)x to:(id)to options:(TextWranglerSearchOptions *)options filter:(TextWranglerFilter *)filter saving:(TextWranglerSavo)saving recursion:(BOOL)recursion textFilesOnly:(BOOL)textFilesOnly skipShieldedFolders:(BOOL)skipShieldedFolders searchInvisibleFolders:(BOOL)searchInvisibleFolders searchCompressedFiles:(BOOL)searchCompressedFiles;  // Applies the operations in a specified text factory to the designated items
 - (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (TextWranglerCompareResults *) compare:(id)x against:(id)against options:(TextWranglerCompareOptions *)options filter:(TextWranglerFilter *)filter;  // compares two files or folders
+- (TextWranglerCompareResults *) compare:(NSURL *)x against:(NSURL *)against options:(TextWranglerCompareOptions *)options filter:(TextWranglerFilter *)filter;  // compares two files or folders
 - (TextWranglerSearchMatch *) find:(NSString *)x searchingIn:(id)searchingIn selectingMatch:(BOOL)selectingMatch options:(TextWranglerSearchOptions *)options excludingMatches:(BOOL)excludingMatches filter:(TextWranglerFilter *)filter recursion:(BOOL)recursion textFilesOnly:(BOOL)textFilesOnly skipShieldedFolders:(BOOL)skipShieldedFolders searchInvisibleFolders:(BOOL)searchInvisibleFolders searchCompressedFiles:(BOOL)searchCompressedFiles;  // Searches for text
 - (NSString *) grepSubstitutionOf:(NSString *)of;  // computes the Grep replacement string based on the results of the most recent scripted Grep search
-- (id) replace:(NSString *)x using:(NSString *)using_ searchingIn:(id)searchingIn searchingString:(NSString *)searchingString options:(TextWranglerSearchOptions *)options saving:(TextWranglerSavo)saving recursion:(BOOL)recursion textFilesOnly:(BOOL)textFilesOnly skipShieldedFolders:(BOOL)skipShieldedFolders;  // performs a Replace All
+- (NSInteger) replace:(NSString *)x using:(NSString *)using_ searchingIn:(id)searchingIn searchingString:(NSString *)searchingString options:(TextWranglerSearchOptions *)options saving:(TextWranglerSavo)saving recursion:(BOOL)recursion textFilesOnly:(BOOL)textFilesOnly skipShieldedFolders:(BOOL)skipShieldedFolders;  // performs a Replace All
 - (void) sleep;  // save application state and quit immediately
-- (void) runUnixScript:(NSArray *)x selectionOnly:(BOOL)selectionOnly saveBeforeRunning:(BOOL)saveBeforeRunning useDebugger:(BOOL)useDebugger runInTerminal:(BOOL)runInTerminal chdirToScriptFolder:(BOOL)chdirToScriptFolder outputTo:(TextWranglerOMd)outputTo clearBeforeWriting:(BOOL)clearBeforeWriting saveAfterWriting:(BOOL)saveAfterWriting;  // runs the unix script in the front BBEdit window
+- (void) runUnixScript:(NSArray<id> *)x selectionOnly:(BOOL)selectionOnly saveBeforeRunning:(BOOL)saveBeforeRunning useDebugger:(BOOL)useDebugger runInTerminal:(BOOL)runInTerminal chdirToScriptFolder:(BOOL)chdirToScriptFolder outputTo:(TextWranglerOMd)outputTo clearBeforeWriting:(BOOL)clearBeforeWriting saveAfterWriting:(BOOL)saveAfterWriting;  // runs the unix script in the front BBEdit window
 - (void) runUnixFilter:(NSURL *)x outputSTDERRTo:(TextWranglerFOM)outputSTDERRTo clearBeforeWriting:(BOOL)clearBeforeWriting saveAfterWriting:(BOOL)saveAfterWriting replacingSelection:(BOOL)replacingSelection;  // runs the specified unix filter on the selection in the frontmost BBEdit window
 
 @end
 
 // A clipboard
-@interface TextWranglerClipboard : SBObject
+@interface TextWranglerClipboard : SBObject <TextWranglerGenericMethods>
 
 @property (copy) NSString *contents;  // contents of the clipboard
 @property (readonly) NSInteger length;  // length of the clipboard text in characters
 @property (readonly) NSInteger index;  // the index of this clipboard
 @property (copy, readonly) NSString *sourceLanguage;  // name of the source language, for syntax coloring and function navigation
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
@@ -473,7 +380,7 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property (copy, readonly) NSDate *modificationDate;  // date and time this document was last modified
 @property (copy) NSString *name;  // the title of the window (r/o if on disk is true)
 @property (readonly) BOOL onDisk;  // does this document exist on disk?
-@property (copy, readonly) id file;  // the disk file containing the document’s data
+@property (copy, readonly) NSURL *file;  // the disk file containing the document’s data
 @property (copy) NSNumber *creatorType;  // the OSType identifying the application that created the item
 @property (copy, readonly) TextWranglerWindow *window;  // this document’s window
 
@@ -488,120 +395,22 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @end
 
 // a file filter
-@interface TextWranglerFilter : SBObject
+@interface TextWranglerFilter : SBObject <TextWranglerGenericMethods>
 
 @property (copy, readonly) NSString *name;  // filter name
 @property (readonly) TextWranglerFltM filter_mode;  // criteria interpretation mode
-@property (copy, readonly) NSArray *filter_terms;  // filter criteria terms
+@property (copy, readonly) NSArray<TextWranglerFilter_term *> *filter_terms;  // filter criteria terms
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // a file filter criteria term
-@interface TextWranglerFilter_term : SBObject
+@interface TextWranglerFilter_term : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) TextWranglerFiel field;  // criteria match field
 - (TextWranglerOper) operator;  // comparison operator
 @property (copy, readonly) id operand;  // comparison operand data
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
@@ -623,7 +432,7 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 // A text document
 @interface TextWranglerTextDocument : TextWranglerDocument
 
-- (SBElementArray *) texts;
+- (SBElementArray<TextWranglerText *> *) texts;
 
 @property (copy) NSString *encoding;  // name of the file’s character set encoding
 @property (copy, readonly) TextWranglerFTPInfo *FTPInfo;  // FTP information for this document
@@ -641,8 +450,8 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 // an open window
 @interface TextWranglerWindow : TextWranglerItem
 
-- (SBElementArray *) texts;
-- (SBElementArray *) documents;
+- (SBElementArray<TextWranglerText *> *) texts;
+- (SBElementArray<TextWranglerDocument *> *) documents;
 
 @property (readonly) NSInteger ID;  // object’s unique id
 @property (copy, readonly) TextWranglerDocument *document;  // the document associated with this window
@@ -651,7 +460,7 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property BOOL collapsed;  // Is the window collapsed?
 @property NSInteger index;  // the number of the window
 @property (readonly) BOOL modal;  // Is the window modal?
-@property (copy, readonly) id file;  // the disk file associated with this window, if any
+@property (copy, readonly) NSURL *file;  // the disk file associated with this window, if any
 @property (readonly) BOOL modified;  // Has the window been modified since the last save?
 @property (copy) NSString *name;  // the title of the window (r/o if the window represents a document which has been saved to disk)
 @property NSPoint position;  // upper left coordinates of the window
@@ -758,12 +567,12 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 // A text-editing window
 @interface TextWranglerTextWindow : TextWranglerWindow
 
-- (SBElementArray *) textDocuments;
+- (SBElementArray<TextWranglerTextDocument *> *) textDocuments;
 
 @property (copy, readonly) TextWranglerDocument *activeDocument;  // the current document being displayed/edited
 @property (copy) NSString *displayFont;  // font in which text is displayed
 @property NSInteger displayFontSize;  // point size of displayed text
-@property (copy) NSArray *displayFontStyle;  // text style(s) of displayed text
+@property (copy) NSArray<NSAppleEventDescriptor *> *displayFontStyle;  // text style(s) of displayed text
 @property double displayMagnification;  // text display magnification multiplier
 @property NSInteger tabWidth;  // number of spaces per tab
 @property BOOL smartQuotes;  // are smart quotes enabled?
@@ -810,7 +619,7 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @end
 
 // options to control the behavior of Find Differences
-@interface TextWranglerCompareOptions : SBObject
+@interface TextWranglerCompareOptions : SBObject <TextWranglerGenericMethods>
 
 @property BOOL ignoreLeadingSpaces;  // ignore leading whitespace on lines?
 @property BOOL ignoreTrailingSpaces;  // ignore trailing whitespace on lines?
@@ -823,121 +632,23 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property BOOL flattenFolders;  // flatten folder hierarchies when comparing folders?
 @property BOOL skipShieldedFolders;  // skip folders whose names are enclosed in (parentheses)?
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // information about the results of a Compare operation
-@interface TextWranglerCompareResults : SBObject
+@interface TextWranglerCompareResults : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) BOOL differencesFound;  // were any differences found?
 @property (copy, readonly) NSString *reasonForNoDifferences;  // reason for there being no differences
 @property (copy, readonly) SBObject *differencesWindow;  // if differences were found, refers to the resulting Differences window
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // information about a file residing on an FTP server
-@interface TextWranglerFTPInfo : SBObject
+@interface TextWranglerFTPInfo : SBObject <TextWranglerGenericMethods>
 
-@property (copy, readonly) id file;  // the disk file in which this file is stored locally
+@property (copy, readonly) NSURL *file;  // the disk file in which this file is stored locally
 @property (copy, readonly) NSString *host;  // name of the FTP server
 @property (readonly) NSInteger port;  // TCP connection port to the server
 @property (copy, readonly) NSString *path;  // path to the file on the server
@@ -948,183 +659,36 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property (readonly) BOOL passiveTransfer;  // was the file transferred using passive FTP
 @property (copy, readonly) NSString *URL;  // the URL for this file on the FTP server
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // Options for the “mark” command
-@interface TextWranglerMarkOptions : SBObject
+@interface TextWranglerMarkOptions : SBObject <TextWranglerGenericMethods>
 
 @property (copy, readonly) NSString *searchingFor;  // the search pattern (Grep is implicit)
 - (NSString *) using;  // the Grep replacement pattern to use for generating the marker name
 @property BOOL clearingExisting;  // clear existing markers before setting the new ones?
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // batch operation result entry -- describes an error, warning, note, or batch search result
-@interface TextWranglerResultEntry : SBObject
+@interface TextWranglerResultEntry : SBObject <TextWranglerGenericMethods>
 
 @property TextWranglerErsl result_kind;  // the type of result entry
 @property (copy) SBObject *result_document;  // reference to the document, if not on disk
-@property (copy) id result_file;  // reference to the file, if saved to disk
+@property (copy) NSURL *result_file;  // reference to the file, if saved to disk
 @property NSInteger start_offset;  // starting offset in the file
 @property NSInteger end_offset;  // ending offset in the file
 @property NSInteger result_line;  // line in the file (may be -1 if line information is not available)
 @property (copy) NSString *message;  // explanatory text (line context, if it’s a search result)
 @property (copy) NSString *match_string;  // for Grep search results, contains the text matched by the pattern
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // Options for “find” and “replace” commands
-@interface TextWranglerSearchOptions : SBObject
+@interface TextWranglerSearchOptions : SBObject <TextWranglerGenericMethods>
 
 @property TextWranglerSMod searchMode;  // the type of search (literal search if omitted)
 @property BOOL startingAtTop;  // start from the top of the document? (false if omitted)
@@ -1136,179 +700,32 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property BOOL returningResults;  // if performing a batch or multi-file search, return a list of matches? (false if omitted)
 @property BOOL showingResults;  // if performing a batch or multi-file search, open the list of results? (true if omitted)
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // Information about text found by a “find” command
-@interface TextWranglerSearchMatch : SBObject
+@interface TextWranglerSearchMatch : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) BOOL found;  // was a match found?
 @property (copy, readonly) SBObject *foundObject;  // for a single-file search, a reference to the found text
 @property (copy, readonly) NSString *foundText;  // for a single-file search, the found text
-@property (copy, readonly) NSArray *foundMatches;  // for a multi-file or batch search, a list of the found occurrences
+@property (copy, readonly) NSArray<TextWranglerResultEntry *> *foundMatches;  // for a multi-file or batch search, a list of the found occurrences
 @property (copy, readonly) SBObject *matchListWindow;  // for a multi-file or batch search, the window listing the matches
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // current search strings, as an application property
-@interface TextWranglerSearchStringProperties : SBObject
+@interface TextWranglerSearchStringProperties : SBObject <TextWranglerGenericMethods>
 
 @property (copy, readonly) NSString *searchString;  // search text
 @property (copy, readonly) NSString *replacementString;  // replace text
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // options to control the sorting behavior of “sort lines”
-@interface TextWranglerSortLinesOptions : SBObject
+@interface TextWranglerSortLinesOptions : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) BOOL sortingCaseSensitive;
 @property (readonly) BOOL sortIgnoringLeadingSpace;
@@ -1319,118 +736,20 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property (readonly) TextWranglerESbM sortSubpatternKey;
 @property (copy, readonly) NSString *sortSubpattern;
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
-@interface TextWranglerSortLinesOutputOptions : SBObject
+@interface TextWranglerSortLinesOutputOptions : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) BOOL replacingTarget;
 @property (readonly) BOOL copyingToClipboard;
 @property (readonly) BOOL copyingToNewDocument;
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
 // options to control the behavior of “process duplicate lines”
-@interface TextWranglerProcessDuplicatesOptions : SBObject
+@interface TextWranglerProcessDuplicatesOptions : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) TextWranglerMMod matchMode;
 @property (readonly) BOOL matchingCaseSensitive;
@@ -1441,59 +760,10 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property (readonly) TextWranglerESbM matchSubpatternKey;
 @property (copy, readonly) NSString *matchSubpattern;
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
-@interface TextWranglerProcessDuplicatesOutputOptions : SBObject
+@interface TextWranglerProcessDuplicatesOutputOptions : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) BOOL deletingDuplicates;
 @property (readonly) BOOL duplicatesToClipboard;
@@ -1501,228 +771,32 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 @property (readonly) BOOL uniqueLinesToClipboard;
 @property (readonly) BOOL uniqueLinesToNewDocument;
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
-@interface TextWranglerProcessDuplicatesResults : SBObject
+@interface TextWranglerProcessDuplicatesResults : SBObject <TextWranglerGenericMethods>
 
 @property (copy, readonly) NSString *duplicateLines;  // the duplicate lines in the input
 @property (copy, readonly) NSString *uniqueLines;  // the unique lines in the input
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
-@interface TextWranglerProcessLinesContainingOutputOptions : SBObject
+@interface TextWranglerProcessLinesContainingOutputOptions : SBObject <TextWranglerGenericMethods>
 
 @property (readonly) BOOL deletingMatchedLines;
 @property (readonly) BOOL copyingToClipboard;
 @property (readonly) BOOL copyingToNewDocument;
 @property (readonly) BOOL reportingResults;
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
-@interface TextWranglerProcessLinesContainingResults : SBObject
+@interface TextWranglerProcessLinesContainingResults : SBObject <TextWranglerGenericMethods>
 
 @property (copy, readonly) NSString *copiedLines;  // the lines in the input matching the string
 @property (copy, readonly) NSString *modifiedText;  // the lines in the input not matching the string
 
-- (void) openWithProperties:(NSDictionary *)withProperties openingIn:(id)openingIn stationeryAwareness:(BOOL)stationeryAwareness LFTranslation:(BOOL)LFTranslation readOnly:(BOOL)readOnly readingAs:(TextWranglerRAsE)readingAs addingToRecentList:(BOOL)addingToRecentList;  // Opens the specified item(s)
-- (void) printWithProperties:(TextWranglerPrintSettings *)withProperties printDialog:(BOOL)printDialog;  // Print the specified object(s)
-- (void) closeSaving:(TextWranglerSavo)saving savingIn:(id)savingIn;  // Closes the designated window.
-- (void) delete;  // Delete an element from an object
-- (SBObject *) duplicateTo:(SBObject *)to;  // Duplicate object(s)
-- (BOOL) exists;  // Verify if an object exists
-- (SBObject *) moveTo:(SBObject *)to;  // Move object(s) to a new location
-- (void) saveTo:(id)to savingAsStationery:(BOOL)savingAsStationery addToRecentList:(BOOL)addToRecentList;  // Save a window or document.
-- (void) activate;  // activate the application or a window
-- (void) copyAppendingToClipboard:(BOOL)appendingToClipboard NS_RETURNS_NOT_RETAINED;  // Copy an object to the clipboard
-- (void) extendedCopyAppendingToClipboard:(BOOL)appendingToClipboard;  // Copy an object to the clipboard - supplied as an alternative to AppleScript users since it refuses to compile “copy with append to clipboard”
-- (void) cutAppendingToClipboard:(BOOL)appendingToClipboard;  // Cut an object to the clipboard
-- (void) paste;  // Paste an object from the clipboard
-- (void) pasteColumn;  // Paste an text from the clipboard forcing insertion as a rectangular column
-- (void) redo;  // Reverses the effects of the most recent Undo, if possible.
-- (void) revertDiscardingUnsavedChanges:(TextWranglerRevo)discardingUnsavedChanges;  // Restore the object to its last saved state
-- (void) select;  // Select the specified object
-- (void) undo;  // Undoes the effects of the last command, if possible.
-- (void) exportTo:(id)to;  // Export an object
-- (void) addLineBreaks;  // Inserts a hard line break character at the end of each soft-wrapped line
-- (NSString *) addPrefixPrefix:(NSString *)prefix;  // inserts a string at the beginning of each line in the indicated text
-- (NSString *) addSuffixSuffix:(NSString *)suffix;  // inserts a string at the end of each line in the indicated text
-- (NSString *) removePrefixPrefix:(NSString *)prefix;  // removes a string from the beginning of each line in the indicated text
-- (NSString *) removeSuffixSuffix:(NSString *)suffix;  // removes a string from the end of each line in the indicated text
-- (NSString *) addPrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously adds a prefix and suffix to each line in the indicated text
-- (NSString *) removePrefixAndSuffixPrefix:(NSString *)prefix suffix:(NSString *)suffix;  // simultaneously removes a prefix and suffix from each line in the indicated text
-- (NSString *) addLineNumbersStartNumber:(NSInteger)startNumber increment:(NSInteger)increment addingSpace:(BOOL)addingSpace keepingJustified:(BOOL)keepingJustified;  // numbers each line in the indicated text
-- (NSString *) removeLineNumbersAddingSpace:(BOOL)addingSpace;  // removes leading numbering from each line in the indicated text
-- (void) changeCaseMaking:(TextWranglerCact)making;  // Changes the case of text
-- (void) clearUndoHistoryConfirming:(BOOL)confirming;  // Deletes all Undo/Redo history information for this document
-- (NSString *) convertToASCIIReplacingTarget:(BOOL)replacingTarget;  // Converts 8-bit characters to 7-bit characters
-- (void) decrementQuoteLevel;  // removes one level of Internet-style quoting from each line of the specified text
-- (void) detabTabWidth:(NSInteger)tabWidth;  // Replace tabs with runs of spaces.
-- (void) entabTabWidth:(NSInteger)tabWidth;  // Replace runs of spaces with tabs.
-- (NSString *) educateQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert straight quotes into curly (typographer’s) quotes
-- (NSString *) straightenQuotesReplacingTarget:(BOOL)replacingTarget;  // Convert curly (typographer’s) quotes into straight quotes
-- (void) hardWrapLimit:(TextWranglerWrMd)limit paragraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative;  // hard-wraps text to conform to the parameters
-- (void) incrementQuoteLevelQuoteString:(NSString *)quoteString;  // adds one level of Internet-style quoting to each line of the specified text
-- (void) markOptions:(TextWranglerMarkOptions *)options;  // mark matches of a specified search pattern with a string
-- (NSString *) normalizeLineEndings;  // convert any CRLF pairs and LF characters remaining after line-break conversion
-- (TextWranglerProcessDuplicatesResults *) processDuplicateLinesDuplicatesOptions:(TextWranglerProcessDuplicatesOptions *)duplicatesOptions outputOptions:(TextWranglerProcessDuplicatesOutputOptions *)outputOptions;  // analyze the specified text for duplicate lines
-- (TextWranglerProcessLinesContainingResults *) processLinesContainingMatchingString:(NSString *)matchingString matchingWithGrep:(BOOL)matchingWithGrep caseSensitive:(BOOL)caseSensitive outputOptions:(TextWranglerProcessLinesContainingOutputOptions *)outputOptions;  // search for lines in the specified text containing the indicated string
-- (void) removeLineBreaks;  // Removes hard line-break characters and line-leading white space from the specified text, making it suitable for soft-wrapping.
-- (void) rewrapQuotedTextParagraphFill:(BOOL)paragraphFill width:(NSInteger)width indentation:(TextWranglerIndt)indentation relative:(BOOL)relative removingQuoteSpaces:(BOOL)removingQuoteSpaces leavingTrailingQuoteSpaces:(BOOL)leavingTrailingQuoteSpaces;  // hard-wraps text, taking Internet-style line quoting into account
-- (void) shiftDirection:(TextWranglerShDr)direction shiftingBySpaces:(BOOL)shiftingBySpaces;  // shift the specified text left or right, optionally by one space
-- (NSString *) sortLinesSortingOptions:(TextWranglerSortLinesOptions *)sortingOptions outputOptions:(TextWranglerSortLinesOutputOptions *)outputOptions;  // order the lines in the specified text
-- (void) stripQuotes;  // removes all Internet-style quoting from each line of the specified text
-- (NSString *) zapGremlinsZapAction:(TextWranglerZAct)zapAction zapCharacter:(NSString *)zapCharacter nulls:(BOOL)nulls controls:(BOOL)controls nonASCIICharacters:(BOOL)nonASCIICharacters;  // Removes or replaces unwanted characters from text
-- (void) appendToScratchpad;  // Appends the specified text to the global scratchpad.
 
 @end
 
@@ -1762,12 +836,12 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 
 @interface TextWranglerCharacter (TextSuite)
 
-- (SBElementArray *) characters;
-- (SBElementArray *) words;
-- (SBElementArray *) lines;
-- (SBElementArray *) display_lines;
-- (SBElementArray *) insertionPoints;
-- (SBElementArray *) texts;
+- (SBElementArray<TextWranglerCharacter *> *) characters;
+- (SBElementArray<TextWranglerWord *> *) words;
+- (SBElementArray<TextWranglerLine *> *) lines;
+- (SBElementArray<TextWranglerDisplay_line *> *) display_lines;
+- (SBElementArray<TextWranglerInsertionPoint *> *) insertionPoints;
+- (SBElementArray<TextWranglerText *> *) texts;
 
 @end
 
@@ -1779,12 +853,12 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 
 @interface TextWranglerWord (TextSuite)
 
-- (SBElementArray *) characters;
-- (SBElementArray *) words;
-- (SBElementArray *) lines;
-- (SBElementArray *) display_lines;
-- (SBElementArray *) insertionPoints;
-- (SBElementArray *) texts;
+- (SBElementArray<TextWranglerCharacter *> *) characters;
+- (SBElementArray<TextWranglerWord *> *) words;
+- (SBElementArray<TextWranglerLine *> *) lines;
+- (SBElementArray<TextWranglerDisplay_line *> *) display_lines;
+- (SBElementArray<TextWranglerInsertionPoint *> *) insertionPoints;
+- (SBElementArray<TextWranglerText *> *) texts;
 
 @end
 
@@ -1796,12 +870,12 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 
 @interface TextWranglerLine (TextSuite)
 
-- (SBElementArray *) characters;
-- (SBElementArray *) words;
-- (SBElementArray *) lines;
-- (SBElementArray *) display_lines;
-- (SBElementArray *) insertionPoints;
-- (SBElementArray *) texts;
+- (SBElementArray<TextWranglerCharacter *> *) characters;
+- (SBElementArray<TextWranglerWord *> *) words;
+- (SBElementArray<TextWranglerLine *> *) lines;
+- (SBElementArray<TextWranglerDisplay_line *> *) display_lines;
+- (SBElementArray<TextWranglerInsertionPoint *> *) insertionPoints;
+- (SBElementArray<TextWranglerText *> *) texts;
 
 @end
 
@@ -1813,27 +887,27 @@ typedef enum TextWranglerFOM TextWranglerFOM;
 
 @interface TextWranglerDisplay_line (TextSuite)
 
-- (SBElementArray *) characters;
-- (SBElementArray *) words;
-- (SBElementArray *) lines;
-- (SBElementArray *) display_lines;
-- (SBElementArray *) insertionPoints;
-- (SBElementArray *) texts;
+- (SBElementArray<TextWranglerCharacter *> *) characters;
+- (SBElementArray<TextWranglerWord *> *) words;
+- (SBElementArray<TextWranglerLine *> *) lines;
+- (SBElementArray<TextWranglerDisplay_line *> *) display_lines;
+- (SBElementArray<TextWranglerInsertionPoint *> *) insertionPoints;
+- (SBElementArray<TextWranglerText *> *) texts;
 
 @end
 
 // Text
 @interface TextWranglerText : TextWranglerText_object
 
-- (SBElementArray *) characters;
-- (SBElementArray *) words;
-- (SBElementArray *) lines;
-- (SBElementArray *) display_lines;
-- (SBElementArray *) insertionPoints;
-- (SBElementArray *) texts;
+- (SBElementArray<TextWranglerCharacter *> *) characters;
+- (SBElementArray<TextWranglerWord *> *) words;
+- (SBElementArray<TextWranglerLine *> *) lines;
+- (SBElementArray<TextWranglerDisplay_line *> *) display_lines;
+- (SBElementArray<TextWranglerInsertionPoint *> *) insertionPoints;
+- (SBElementArray<TextWranglerText *> *) texts;
 
 - (TextWranglerSearchMatch *) findSearchingIn:(id)searchingIn selectingMatch:(BOOL)selectingMatch options:(TextWranglerSearchOptions *)options excludingMatches:(BOOL)excludingMatches filter:(TextWranglerFilter *)filter recursion:(BOOL)recursion textFilesOnly:(BOOL)textFilesOnly skipShieldedFolders:(BOOL)skipShieldedFolders searchInvisibleFolders:(BOOL)searchInvisibleFolders searchCompressedFiles:(BOOL)searchCompressedFiles;  // Searches for text
-- (id) replaceUsing:(NSString *)using_ searchingIn:(id)searchingIn searchingString:(NSString *)searchingString options:(TextWranglerSearchOptions *)options saving:(TextWranglerSavo)saving recursion:(BOOL)recursion textFilesOnly:(BOOL)textFilesOnly skipShieldedFolders:(BOOL)skipShieldedFolders;  // performs a Replace All
+- (NSInteger) replaceUsing:(NSString *)using_ searchingIn:(id)searchingIn searchingString:(NSString *)searchingString options:(TextWranglerSearchOptions *)options saving:(TextWranglerSavo)saving recursion:(BOOL)recursion textFilesOnly:(BOOL)textFilesOnly skipShieldedFolders:(BOOL)skipShieldedFolders;  // performs a Replace All
 
 @end
 

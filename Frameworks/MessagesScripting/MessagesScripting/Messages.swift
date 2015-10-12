@@ -118,45 +118,37 @@ import ScriptingBridge
     case Ended = 0x4943416e /* 'ICAn' */
 }
 
-// MARK: MessagesItem
-@objc public protocol MessagesItem: SBObjectProtocol {
-    optional var properties: [NSObject : AnyObject] { get set } // All of the object's properties.
+// MARK: MessagesGenericMethods
+@objc public protocol MessagesGenericMethods {
     optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
     optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
     optional func exists() -> Bool // Verify if an object exists.
     optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
+}
+
+// MARK: MessagesItem
+@objc public protocol MessagesItem: SBObjectProtocol, MessagesGenericMethods {
+    optional var properties: [NSObject : AnyObject] { get set } // All of the object's properties.
 }
 extension SBObject: MessagesItem {}
 
 // MARK: MessagesColor
-@objc public protocol MessagesColor: SBObjectProtocol {
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
+@objc public protocol MessagesColor: SBObjectProtocol, MessagesGenericMethods {
 }
 extension SBObject: MessagesColor {}
 
 // MARK: MessagesDocument
-@objc public protocol MessagesDocument: SBObjectProtocol {
+@objc public protocol MessagesDocument: SBObjectProtocol, MessagesGenericMethods {
     optional var name: String { get } // The document's name.
     optional var modified: Bool { get } // Has the document been modified since the last save?
     optional var file: NSURL { get } // The document's location on disk.
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 extension SBObject: MessagesDocument {}
 
 // MARK: MessagesWindow
-@objc public protocol MessagesWindow: SBObjectProtocol {
+@objc public protocol MessagesWindow: SBObjectProtocol, MessagesGenericMethods {
     optional var name: String { get } // The full title of the window.
     optional func id() -> Int // The unique identifier of the window.
     optional var index: Int { get set } // The index of the window, ordered front to back.
@@ -169,17 +161,11 @@ extension SBObject: MessagesDocument {}
     optional var zoomable: Bool { get } // Whether the window can be zoomed.
     optional var zoomed: Bool { get set } // Whether the window is currently zoomed.
     optional var document: MessagesDocument { get } // The document whose contents are being displayed in the window.
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 extension SBObject: MessagesWindow {}
 
 // MARK: MessagesRichText
-@objc public protocol MessagesRichText: SBObjectProtocol {
+@objc public protocol MessagesRichText: SBObjectProtocol, MessagesGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -188,17 +174,11 @@ extension SBObject: MessagesWindow {}
     optional var color: NSColor { get set } // The color of the first character.
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Double { get set } // The size in points of the first character.
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 extension SBObject: MessagesRichText {}
 
 // MARK: MessagesCharacter
-@objc public protocol MessagesCharacter: SBObjectProtocol {
+@objc public protocol MessagesCharacter: SBObjectProtocol, MessagesGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -207,17 +187,11 @@ extension SBObject: MessagesRichText {}
     optional var color: NSColor { get set } // The color of the first character.
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Int { get set } // The size in points of the first character.
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 extension SBObject: MessagesCharacter {}
 
 // MARK: MessagesParagraph
-@objc public protocol MessagesParagraph: SBObjectProtocol {
+@objc public protocol MessagesParagraph: SBObjectProtocol, MessagesGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -226,17 +200,11 @@ extension SBObject: MessagesCharacter {}
     optional var color: NSColor { get set } // The color of the first character.
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Int { get set } // The size in points of the first character.
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 extension SBObject: MessagesParagraph {}
 
 // MARK: MessagesWord
-@objc public protocol MessagesWord: SBObjectProtocol {
+@objc public protocol MessagesWord: SBObjectProtocol, MessagesGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -245,17 +213,11 @@ extension SBObject: MessagesParagraph {}
     optional var color: NSColor { get set } // The color of the first character.
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Int { get set } // The size in points of the first character.
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 extension SBObject: MessagesWord {}
 
 // MARK: MessagesAttributeRun
-@objc public protocol MessagesAttributeRun: SBObjectProtocol {
+@objc public protocol MessagesAttributeRun: SBObjectProtocol, MessagesGenericMethods {
     optional func characters() -> SBElementArray
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
@@ -264,12 +226,6 @@ extension SBObject: MessagesWord {}
     optional var color: NSColor { get set } // The color of the first character.
     optional var font: String { get set } // The name of the font of the first character.
     optional var size: Int { get set } // The size in points of the first character.
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 extension SBObject: MessagesAttributeRun {}
 
@@ -292,7 +248,7 @@ extension SBObject: MessagesAttachment {}
     optional func documents() -> SBElementArray
     optional func windows() -> SBElementArray
     optional var idleTime: Int { get } // Time in seconds that I have been idle.
-    optional var image: NSData { get set } // My image as it appears in all services.
+    optional var image: NSImage { get set } // My image as it appears in all services.
     optional var status: MessagesMyStatus { get set } // My status on all services.
     optional var statusMessage: String { get set } // My status message, visible to other people while I am online.
     optional var activeAvChat: MessagesAudioChat { get set } // The currently active audio or video chat.
@@ -321,7 +277,7 @@ extension SBApplication: MessagesApplication {}
     optional var statusMessage: String { get } // The buddy's current status message.
     optional var idleTime: Int { get } // The time in seconds the buddy has been idle.
     optional var capabilities: [AnyObject] { get } // The buddy's messaging capabilities.
-    optional var image: NSData { get } // The buddy's custom image.
+    optional var image: NSImage { get } // The buddy's custom image.
     optional var firstName: String { get } // The first name from this buddy's Contacts card, if available
     optional var lastName: String { get } // The last name from this buddy's Contacts card, if available
     optional var fullName: String { get } // The full name from this buddy's Contacts card, if available
@@ -345,7 +301,7 @@ extension SBObject: MessagesBuddy {}
 extension SBObject: MessagesService {}
 
 // MARK: MessagesChat
-@objc public protocol MessagesChat: SBObjectProtocol {
+@objc public protocol MessagesChat: SBObjectProtocol, MessagesGenericMethods {
     optional func id() -> String // A guid identifier for this chat.
     optional var service: MessagesService { get } // The service which is participating in this chat.
     optional var participants: [AnyObject] { get } // Other participants of this chat. This property may be specified at time of creation.
@@ -354,12 +310,6 @@ extension SBObject: MessagesService {}
     optional var active: Bool { get } // Is this chat currently active?
     optional var started: NSDate { get } // The date on which this chat started.
     optional var updated: NSDate { get } // The date when this chat was last updated.
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
     optional func accept() // Accepts an incoming text, audio, or video chat invitation, or file transfer
     optional func decline() // Declines an incoming text, audio, or video chat invitation, or file transfer
 }
