@@ -169,12 +169,12 @@ import ScriptingBridge
 
 // MARK: ImageEventsGenericMethods
 @objc public protocol ImageEventsGenericMethods {
-    optional func closeSaving(saving: ImageEventsSaveOptions, savingIn: String!) // Close a document.
     optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
     optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
     optional func delete() // Delete an object.
     optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
     optional func moveTo(to: SBObject!) // Move an object to a new location.
+    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
     optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
     optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
     optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
@@ -239,21 +239,35 @@ import ScriptingBridge
     optional func displays() -> SBElementArray
     optional func images() -> SBElementArray
     optional func profiles() -> SBElementArray
-    optional var defaultCMYKProfile: ImageEventsProfile { get set } // the default CMYK profile
-    optional var defaultCMYKProfileLocation: ImageEventsFile { get set } // the default CMYK profile location
-    optional var defaultGrayProfile: ImageEventsProfile { get set } // the default Gray profile
-    optional var defaultGrayProfileLocation: ImageEventsFile { get set } // the default Gray profile location
-    optional var defaultLabProfile: ImageEventsProfile { get set } // the default Lab profile
-    optional var defaultLabProfileLocation: ImageEventsFile { get set } // the default Lab profile location
-    optional var defaultRGBProfile: ImageEventsProfile { get set } // the default RGB profile
-    optional var defaultRGBProfileLocation: ImageEventsFile { get set } // the default RGB profile location
-    optional var defaultXYZProfile: ImageEventsProfile { get set } // the default XYZ profile
-    optional var defaultXYZProfileLocation: ImageEventsFile { get set } // the default XYZ profile location
-    optional var preferredCMM: String { get set } // specifies preferred Color Management Module to use, or "automatic"
+    optional var defaultCMYKProfile: ImageEventsProfile { get } // the default CMYK profile
+    optional var defaultCMYKProfileLocation: ImageEventsFile { get } // the default CMYK profile location
+    optional var defaultGrayProfile: ImageEventsProfile { get } // the default Gray profile
+    optional var defaultGrayProfileLocation: ImageEventsFile { get } // the default Gray profile location
+    optional var defaultLabProfile: ImageEventsProfile { get } // the default Lab profile
+    optional var defaultLabProfileLocation: ImageEventsFile { get } // the default Lab profile location
+    optional var defaultRGBProfile: ImageEventsProfile { get } // the default RGB profile
+    optional var defaultRGBProfileLocation: ImageEventsFile { get } // the default RGB profile location
+    optional var defaultXYZProfile: ImageEventsProfile { get } // the default XYZ profile
+    optional var defaultXYZProfileLocation: ImageEventsFile { get } // the default XYZ profile location
+    optional var preferredCMM: String { get } // specifies preferred Color Management Module to use, or "automatic"
     optional var profileFolder: AnyObject { get } // the ColorSync profile folder
-    optional var quitDelay: Int { get set } // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
-    optional var systemProfile: ImageEventsProfile { get set } // the default system profile
-    optional var systemProfileLocation: ImageEventsFile { get set } // the default system profile location
+    optional var quitDelay: Int { get } // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
+    optional var systemProfile: ImageEventsProfile { get } // the default system profile
+    optional var systemProfileLocation: ImageEventsFile { get } // the default system profile location
+    optional func setDefaultCMYKProfile(defaultCMYKProfile: ImageEventsProfile!) // the default CMYK profile
+    optional func setDefaultCMYKProfileLocation(defaultCMYKProfileLocation: ImageEventsFile!) // the default CMYK profile location
+    optional func setDefaultGrayProfile(defaultGrayProfile: ImageEventsProfile!) // the default Gray profile
+    optional func setDefaultGrayProfileLocation(defaultGrayProfileLocation: ImageEventsFile!) // the default Gray profile location
+    optional func setDefaultLabProfile(defaultLabProfile: ImageEventsProfile!) // the default Lab profile
+    optional func setDefaultLabProfileLocation(defaultLabProfileLocation: ImageEventsFile!) // the default Lab profile location
+    optional func setDefaultRGBProfile(defaultRGBProfile: ImageEventsProfile!) // the default RGB profile
+    optional func setDefaultRGBProfileLocation(defaultRGBProfileLocation: ImageEventsFile!) // the default RGB profile location
+    optional func setDefaultXYZProfile(defaultXYZProfile: ImageEventsProfile!) // the default XYZ profile
+    optional func setDefaultXYZProfileLocation(defaultXYZProfileLocation: ImageEventsFile!) // the default XYZ profile location
+    optional func setPreferredCMM(preferredCMM: String!) // specifies preferred Color Management Module to use, or "automatic"
+    optional func setQuitDelay(quitDelay: Int) // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
+    optional func setSystemProfile(systemProfile: ImageEventsProfile!) // the default system profile
+    optional func setSystemProfileLocation(systemProfileLocation: ImageEventsFile!) // the default system profile location
 }
 extension SBApplication: ImageEventsApplication {}
 
@@ -269,16 +283,21 @@ extension SBObject: ImageEventsDocument {}
 @objc public protocol ImageEventsWindow: SBObjectProtocol, ImageEventsGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
-    optional var index: Int { get set } // The index of the window, ordered front to back.
-    optional var bounds: NSRect { get set } // The bounding rectangle of the window.
+    optional var index: Int { get } // The index of the window, ordered front to back.
+    optional var bounds: NSRect { get } // The bounding rectangle of the window.
     optional var closeable: Bool { get } // Does the window have a close button?
     optional var miniaturizable: Bool { get } // Does the window have a minimize button?
-    optional var miniaturized: Bool { get set } // Is the window minimized right now?
+    optional var miniaturized: Bool { get } // Is the window minimized right now?
     optional var resizable: Bool { get } // Can the window be resized?
-    optional var visible: Bool { get set } // Is the window visible right now?
+    optional var visible: Bool { get } // Is the window visible right now?
     optional var zoomable: Bool { get } // Does the window have a zoom button?
-    optional var zoomed: Bool { get set } // Is the window zoomed right now?
+    optional var zoomed: Bool { get } // Is the window zoomed right now?
     optional var document: ImageEventsDocument { get } // The document whose contents are displayed in the window.
+    optional func setIndex(index: Int) // The index of the window, ordered front to back.
+    optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
+    optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
+    optional func setVisible(visible: Bool) // Is the window visible right now?
+    optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
 }
 extension SBObject: ImageEventsWindow {}
 
@@ -289,8 +308,8 @@ extension SBObject: ImageEventsWindow {}
     optional var creationDate: NSDate { get } // the date on which the disk item was created
     optional var displayedName: String { get } // the name of the disk item as displayed in the User Interface
     optional func id() -> String // the unique ID of the disk item
-    optional var modificationDate: NSDate { get set } // the date on which the disk item was last modified
-    optional var name: String { get set } // the name of the disk item
+    optional var modificationDate: NSDate { get } // the date on which the disk item was last modified
+    optional var name: String { get } // the name of the disk item
     optional var nameExtension: String { get } // the extension portion of the name
     optional var packageFolder: Bool { get } // Is the disk item a package?
     optional var path: String { get } // the file system path of the disk item
@@ -298,10 +317,13 @@ extension SBObject: ImageEventsWindow {}
     optional var POSIXPath: String { get } // the POSIX file system path of the disk item
     optional var size: Int { get } // the logical size of the disk item
     optional var URL: String { get } // the URL of the disk item
-    optional var visible: Bool { get set } // Is the disk item visible?
+    optional var visible: Bool { get } // Is the disk item visible?
     optional var volume: String { get } // the volume on which the disk item resides
     optional func delete() // Delete disk item(s).
     optional func moveTo(to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
+    optional func setModificationDate(modificationDate: NSDate!) // the date on which the disk item was last modified
+    optional func setName(name: String!) // the name of the disk item
+    optional func setVisible(visible: Bool) // Is the disk item visible?
 }
 extension SBObject: ImageEventsDiskItem {}
 
@@ -312,15 +334,19 @@ extension SBObject: ImageEventsDiskItem {}
     optional func files() -> SBElementArray
     optional func filePackages() -> SBElementArray
     optional func folders() -> SBElementArray
-    optional var creatorType: AnyObject { get set } // the OSType identifying the application that created the alias
-    optional var defaultApplication: AnyObject { get set } // the application that will launch if the alias is opened
-    optional var fileType: AnyObject { get set } // the OSType identifying the type of data contained in the alias
+    optional var creatorType: AnyObject { get } // the OSType identifying the application that created the alias
+    optional var defaultApplication: AnyObject { get } // the application that will launch if the alias is opened
+    optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the alias
     optional var kind: String { get } // The kind of alias, as shown in Finder
     optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
     optional var shortVersion: String { get } // the short version of the application bundle referenced by the alias
-    optional var stationery: Bool { get set } // Is the alias a stationery pad?
+    optional var stationery: Bool { get } // Is the alias a stationery pad?
     optional var typeIdentifier: String { get } // The type identifier of the alias
     optional var version: String { get } // the version of the application bundle referenced by the alias (visible at the bottom of the "Get Info" window)
+    optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the alias
+    optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the alias is opened
+    optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the alias
+    optional func setStationery(stationery: Bool) // Is the alias a stationery pad?
 }
 extension SBObject: ImageEventsAlias {}
 
@@ -335,11 +361,12 @@ extension SBObject: ImageEventsAlias {}
     optional var ejectable: Bool { get } // Can the media be ejected (floppies, CD's, and so on)?
     optional var format: ImageEventsEdfm { get } // the file system format of this disk
     optional var freeSpace: NSNumber { get } // the number of free bytes left on the disk
-    optional var ignorePrivileges: Bool { get set } // Ignore permissions on this disk?
+    optional var ignorePrivileges: Bool { get } // Ignore permissions on this disk?
     optional var localVolume: Bool { get } // Is the media a local volume (as opposed to a file server)?
     optional var server: AnyObject { get } // the server on which the disk resides, AFP volumes only
     optional var startup: Bool { get } // Is this disk the boot disk?
     optional var zone: AnyObject { get } // the zone in which the disk's server resides, AFP volumes only
+    optional func setIgnorePrivileges(ignorePrivileges: Bool) // Ignore permissions on this disk?
 }
 extension SBObject: ImageEventsDisk {}
 
@@ -383,16 +410,20 @@ extension SBObject: ImageEventsClassicDomainObject {}
 
 // MARK: ImageEventsFile
 @objc public protocol ImageEventsFile: ImageEventsDiskItem {
-    optional var creatorType: AnyObject { get set } // the OSType identifying the application that created the file
-    optional var defaultApplication: AnyObject { get set } // the application that will launch if the file is opened
-    optional var fileType: AnyObject { get set } // the OSType identifying the type of data contained in the file
+    optional var creatorType: AnyObject { get } // the OSType identifying the application that created the file
+    optional var defaultApplication: AnyObject { get } // the application that will launch if the file is opened
+    optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the file
     optional var kind: String { get } // The kind of file, as shown in Finder
     optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
     optional var shortVersion: String { get } // the short version of the file
-    optional var stationery: Bool { get set } // Is the file a stationery pad?
+    optional var stationery: Bool { get } // Is the file a stationery pad?
     optional var typeIdentifier: String { get } // The type identifier of the file
     optional var version: String { get } // the version of the file (visible at the bottom of the "Get Info" window)
     optional func open() -> AnyObject // Open a document.
+    optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the file
+    optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the file is opened
+    optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the file
+    optional func setStationery(stationery: Bool) // Is the file a stationery pad?
 }
 extension SBObject: ImageEventsFile {}
 

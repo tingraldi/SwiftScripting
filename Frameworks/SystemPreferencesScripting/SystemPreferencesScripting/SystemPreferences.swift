@@ -41,9 +41,11 @@ import ScriptingBridge
     optional func quitSaving(saving: SystemPreferencesSaveOptions) // Quit the application.
     optional func exists(x: AnyObject!) -> Bool // Verify that an object exists.
     optional func panes() -> SBElementArray
-    optional var currentPane: SystemPreferencesPane { get set } // the currently selected pane
+    optional var currentPane: SystemPreferencesPane { get } // the currently selected pane
     optional var preferencesWindow: SystemPreferencesWindow { get } // the main preferences window
-    optional var showAll: Bool { get set } // Is SystemPrefs in show all view. (Setting to false will do nothing)
+    optional var showAll: Bool { get } // Is SystemPrefs in show all view. (Setting to false will do nothing)
+    optional func setCurrentPane(currentPane: SystemPreferencesPane!) // the currently selected pane
+    optional func setShowAll(showAll: Bool) // Is SystemPrefs in show all view. (Setting to false will do nothing)
 }
 extension SBApplication: SystemPreferencesApplication {}
 
@@ -59,16 +61,21 @@ extension SBObject: SystemPreferencesDocument {}
 @objc public protocol SystemPreferencesWindow: SBObjectProtocol, SystemPreferencesGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
-    optional var index: Int { get set } // The index of the window, ordered front to back.
-    optional var bounds: NSRect { get set } // The bounding rectangle of the window.
+    optional var index: Int { get } // The index of the window, ordered front to back.
+    optional var bounds: NSRect { get } // The bounding rectangle of the window.
     optional var closeable: Bool { get } // Does the window have a close button?
     optional var miniaturizable: Bool { get } // Does the window have a minimize button?
-    optional var miniaturized: Bool { get set } // Is the window minimized right now?
+    optional var miniaturized: Bool { get } // Is the window minimized right now?
     optional var resizable: Bool { get } // Can the window be resized?
-    optional var visible: Bool { get set } // Is the window visible right now?
+    optional var visible: Bool { get } // Is the window visible right now?
     optional var zoomable: Bool { get } // Does the window have a zoom button?
-    optional var zoomed: Bool { get set } // Is the window zoomed right now?
+    optional var zoomed: Bool { get } // Is the window zoomed right now?
     optional var document: SystemPreferencesDocument { get } // The document whose contents are displayed in the window.
+    optional func setIndex(index: Int) // The index of the window, ordered front to back.
+    optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
+    optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
+    optional func setVisible(visible: Bool) // Is the window visible right now?
+    optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
 }
 extension SBObject: SystemPreferencesWindow {}
 

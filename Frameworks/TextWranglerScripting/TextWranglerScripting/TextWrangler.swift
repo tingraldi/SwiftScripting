@@ -285,8 +285,9 @@ extension SBObject: TextWranglerPrintSettings {}
 
 // MARK: TextWranglerItem
 @objc public protocol TextWranglerItem: SBObjectProtocol, TextWranglerGenericMethods {
-    optional var properties: [NSObject : AnyObject] { get set } // all of this object’s properties
+    optional var properties: [NSObject : AnyObject] { get } // all of this object’s properties
     optional var container: SBObject { get } // object’s container (if any)
+    optional func setProperties(properties: [NSObject : AnyObject]!) // all of this object’s properties
 }
 extension SBObject: TextWranglerItem {}
 
@@ -301,13 +302,13 @@ extension SBObject: TextWranglerItem {}
     optional var ID: Int { get } // object’s unique id
     optional var name: String { get } // the name
     optional var selection: SBObject { get } // the selection visible to the user
-    optional var frontmost: Bool { get set } // Is this the frontmost application?
+    optional var frontmost: Bool { get } // Is this the frontmost application?
     optional var version: String { get } // the version number of the application
     optional var buildNumber: Int { get } // the build number of the application
     optional var serialNumber: String { get } // the application’s serial number
-    optional var currentClipboard: AnyObject { get set } // the clipboard
+    optional var currentClipboard: AnyObject { get } // the clipboard
     optional var currentSearchOptions: TextWranglerSearchOptions { get } // search options used by the most recent search/replace operation
-    optional var currentSearchStrings: TextWranglerSearchStringProperties { get set } // search strings used by the most recent search/replace operation
+    optional var currentSearchStrings: TextWranglerSearchStringProperties { get } // search strings used by the most recent search/replace operation
     optional var windowList: TextWranglerPalette { get } // the floating window displaying the open windows in the application
     optional var ASCIITable: TextWranglerPalette { get } // the floating window displaying ASCII character and escape sequences
     optional var findWindow: TextWranglerFind_window { get } // the Find window
@@ -339,15 +340,19 @@ extension SBObject: TextWranglerItem {}
     optional func sleep() // save application state and quit immediately
     optional func runUnixScript(x: [AnyObject]!, selectionOnly: Bool, saveBeforeRunning: Bool, useDebugger: Bool, runInTerminal: Bool, chdirToScriptFolder: Bool, outputTo: TextWranglerOMd, clearBeforeWriting: Bool, saveAfterWriting: Bool) // runs the unix script in the front BBEdit window
     optional func runUnixFilter(x: NSURL!, outputSTDERRTo: TextWranglerFOM, clearBeforeWriting: Bool, saveAfterWriting: Bool, replacingSelection: Bool) // runs the specified unix filter on the selection in the frontmost BBEdit window
+    optional func setFrontmost(frontmost: Bool) // Is this the frontmost application?
+    optional func setCurrentClipboard(currentClipboard: AnyObject!) // the clipboard
+    optional func setCurrentSearchStrings(currentSearchStrings: TextWranglerSearchStringProperties!) // search strings used by the most recent search/replace operation
 }
 extension SBApplication: TextWranglerApplication {}
 
 // MARK: TextWranglerClipboard
 @objc public protocol TextWranglerClipboard: SBObjectProtocol, TextWranglerGenericMethods {
-    optional var contents: String { get set } // contents of the clipboard
+    optional var contents: String { get } // contents of the clipboard
     optional var length: Int { get } // length of the clipboard text in characters
     optional var index: Int { get } // the index of this clipboard
     optional var sourceLanguage: String { get } // name of the source language, for syntax coloring and function navigation
+    optional func setContents(contents: String!) // contents of the clipboard
 }
 extension SBObject: TextWranglerClipboard {}
 
@@ -357,11 +362,13 @@ extension SBObject: TextWranglerClipboard {}
     optional var modified: Bool { get } // does this document have unsaved changes?
     optional var modifiable: Bool { get } // can this document be modified?
     optional var modificationDate: NSDate { get } // date and time this document was last modified
-    optional var name: String { get set } // the title of the window (r/o if on disk is true)
+    optional var name: String { get } // the title of the window (r/o if on disk is true)
     optional var onDisk: Bool { get } // does this document exist on disk?
     optional var file: NSURL { get } // the disk file containing the document’s data
-    optional var creatorType: NSNumber { get set } // the OSType identifying the application that created the item
+    optional var creatorType: NSNumber { get } // the OSType identifying the application that created the item
     optional var window: TextWranglerWindow { get } // this document’s window
+    optional func setName(name: String!) // the title of the window (r/o if on disk is true)
+    optional func setCreatorType(creatorType: NSNumber!) // the OSType identifying the application that created the item
 }
 extension SBObject: TextWranglerDocument {}
 
@@ -394,23 +401,30 @@ extension SBObject: TextWranglerImageDocument {}
 
 // MARK: TextWranglerShellDocument
 @objc public protocol TextWranglerShellDocument: TextWranglerDocument {
-    optional var shellPath: String { get set } // path to the Unix shell used for executing commands in this worksheet
-    optional var workingDirectory: String { get set } // path to this worksheet’s current Unix working directory
+    optional var shellPath: String { get } // path to the Unix shell used for executing commands in this worksheet
+    optional var workingDirectory: String { get } // path to this worksheet’s current Unix working directory
+    optional func setShellPath(shellPath: String!) // path to the Unix shell used for executing commands in this worksheet
+    optional func setWorkingDirectory(workingDirectory: String!) // path to this worksheet’s current Unix working directory
 }
 extension SBObject: TextWranglerShellDocument {}
 
 // MARK: TextWranglerTextDocument
 @objc public protocol TextWranglerTextDocument: TextWranglerDocument {
     optional func texts() -> SBElementArray
-    optional var encoding: String { get set } // name of the file’s character set encoding
+    optional var encoding: String { get } // name of the file’s character set encoding
     optional var FTPInfo: TextWranglerFTPInfo { get } // FTP information for this document
     optional var isFTP: Bool { get } // was this document opened from (or saved to) an FTP server?
-    optional var lineBreaks: TextWranglerLinB { get set } // type of line endings in this document
-    optional var sourceLanguage: String { get set } // name of the source language, for syntax coloring and function navigation
+    optional var lineBreaks: TextWranglerLinB { get } // type of line endings in this document
+    optional var sourceLanguage: String { get } // name of the source language, for syntax coloring and function navigation
     optional var stateModified: Bool { get } // has the document’s state (window position, etc) been modified?
     optional var URL: String { get } // if on disk, the URL to this document’s location
-    optional var contents: AnyObject { get set } // contents of the document (if any)
-    optional var text: TextWranglerText { get set } // the document’s text object (if any)
+    optional var contents: AnyObject { get } // contents of the document (if any)
+    optional var text: TextWranglerText { get } // the document’s text object (if any)
+    optional func setEncoding(encoding: String!) // name of the file’s character set encoding
+    optional func setLineBreaks(lineBreaks: TextWranglerLinB) // type of line endings in this document
+    optional func setSourceLanguage(sourceLanguage: String!) // name of the source language, for syntax coloring and function navigation
+    optional func setContents(contents: AnyObject!) // contents of the document (if any)
+    optional func setText(text: TextWranglerText!) // the document’s text object (if any)
 }
 extension SBObject: TextWranglerTextDocument {}
 
@@ -420,23 +434,32 @@ extension SBObject: TextWranglerTextDocument {}
     optional func documents() -> SBElementArray
     optional var ID: Int { get } // object’s unique id
     optional var document: TextWranglerDocument { get } // the document associated with this window
-    optional var bounds: NSRect { get set } // the boundary rectangle for the window
+    optional var bounds: NSRect { get } // the boundary rectangle for the window
     optional var closeable: Bool { get } // Does the window have a close box?
-    optional var collapsed: Bool { get set } // Is the window collapsed?
-    optional var index: Int { get set } // the number of the window
+    optional var collapsed: Bool { get } // Is the window collapsed?
+    optional var index: Int { get } // the number of the window
     optional var modal: Bool { get } // Is the window modal?
     optional var file: NSURL { get } // the disk file associated with this window, if any
     optional var modified: Bool { get } // Has the window been modified since the last save?
-    optional var name: String { get set } // the title of the window (r/o if the window represents a document which has been saved to disk)
-    optional var position: NSPoint { get set } // upper left coordinates of the window
+    optional var name: String { get } // the title of the window (r/o if the window represents a document which has been saved to disk)
+    optional var position: NSPoint { get } // upper left coordinates of the window
     optional var resizable: Bool { get } // Is the window resizable?
-    optional var selection: SBObject { get set } // the selection
-    optional var contents: AnyObject { get set } // contents of the window (if any)
-    optional var text: TextWranglerText { get set } // the window's text object (if any)
+    optional var selection: SBObject { get } // the selection
+    optional var contents: AnyObject { get } // contents of the window (if any)
+    optional var text: TextWranglerText { get } // the window's text object (if any)
     optional var titled: Bool { get } // Does the window have a title bar?
     optional var visible: Bool { get } // Is the window visible?
     optional var zoomable: Bool { get } // Is the window zoomable?
-    optional var zoomed: Bool { get set } // Is the window zoomed?
+    optional var zoomed: Bool { get } // Is the window zoomed?
+    optional func setBounds(bounds: NSRect) // the boundary rectangle for the window
+    optional func setCollapsed(collapsed: Bool) // Is the window collapsed?
+    optional func setIndex(index: Int) // the number of the window
+    optional func setName(name: String!) // the title of the window (r/o if the window represents a document which has been saved to disk)
+    optional func setPosition(position: NSPoint) // upper left coordinates of the window
+    optional func setSelection(selection: SBObject!) // the selection
+    optional func setContents(contents: AnyObject!) // contents of the window (if any)
+    optional func setText(text: TextWranglerText!) // the window's text object (if any)
+    optional func setZoomed(zoomed: Bool) // Is the window zoomed?
 }
 extension SBObject: TextWranglerWindow {}
 
@@ -447,7 +470,8 @@ extension SBObject: TextWranglerDifferences_window {}
 
 // MARK: TextWranglerDiskBrowserWindow
 @objc public protocol TextWranglerDiskBrowserWindow: TextWranglerWindow {
-    optional var rootPath: String { get set } // path to the root of this disk browser
+    optional var rootPath: String { get } // path to the root of this disk browser
+    optional func setRootPath(rootPath: String!) // path to the root of this disk browser
 }
 extension SBObject: TextWranglerDiskBrowserWindow {}
 
@@ -468,7 +492,8 @@ extension SBObject: TextWranglerFTPBrowserWindow {}
 
 // MARK: TextWranglerOpen_file_by_name_window
 @objc public protocol TextWranglerOpen_file_by_name_window: TextWranglerWindow {
-    optional var searchString: String { get set } // the string entered into the search box
+    optional var searchString: String { get } // the string entered into the search box
+    optional func setSearchString(searchString: String!) // the string entered into the search box
 }
 extension SBObject: TextWranglerOpen_file_by_name_window {}
 
@@ -516,29 +541,52 @@ extension SBObject: TextWranglerShellWindow {}
 @objc public protocol TextWranglerTextWindow: TextWranglerWindow {
     optional func textDocuments() -> SBElementArray
     optional var activeDocument: TextWranglerDocument { get } // the current document being displayed/edited
-    optional var displayFont: String { get set } // font in which text is displayed
-    optional var displayFontSize: Int { get set } // point size of displayed text
-    optional var displayFontStyle: [AnyObject] { get set } // text style(s) of displayed text
-    optional var displayMagnification: Double { get set } // text display magnification multiplier
-    optional var tabWidth: Int { get set } // number of spaces per tab
-    optional var smartQuotes: Bool { get set } // are smart quotes enabled?
-    optional var showInvisibles: Bool { get set } // are invisible characters displayed?
-    optional var expandTabs: Bool { get set } // is auto-expansion of tabs enabled?
-    optional var liveSearchBarVisible: Bool { get set } // is the Live Search bar visible?
-    optional var softWrapText: Bool { get set } // is automatic text wrapping enabled?
-    optional var softWrapMode: TextWranglerWrMd { get set } // how line breaks are computed when soft-wrapping
-    optional var softWrapWidth: Int { get set } // if soft-wrapping to character width, the maximum number of characters per line
-    optional var showSpaces: Bool { get set } // are spaces displayed (only if “show invisibles” is true)?
-    optional var showToolbar: Bool { get set } // display the editor toolbar in this window?
-    optional var showStatusBar: Bool { get set } // display the editor status bar in this window?
-    optional var showNavigationBar: Bool { get set } // display the navigation bar in this window?
-    optional var showPageGuide: Bool { get set } // display the page guide in this window?
-    optional var showTabStops: Bool { get set } // display tab stops in the window's status bar?
-    optional var showLineNumbers: Bool { get set } // display line numbers next to text in the window?
-    optional var showGutter: Bool { get set } // display the gutter next to the text in the window?
-    optional var sourceLanguage: String { get set } // name of the source language, for syntax coloring and function navigation
-    optional var colorSyntax: Bool { get set } // color language keywords and other recognized structures?
-    optional var splitProportion: Int { get set } // vertical position of split bar, expressed as a percentage of window height
+    optional var displayFont: String { get } // font in which text is displayed
+    optional var displayFontSize: Int { get } // point size of displayed text
+    optional var displayFontStyle: [AnyObject] { get } // text style(s) of displayed text
+    optional var displayMagnification: Double { get } // text display magnification multiplier
+    optional var tabWidth: Int { get } // number of spaces per tab
+    optional var smartQuotes: Bool { get } // are smart quotes enabled?
+    optional var showInvisibles: Bool { get } // are invisible characters displayed?
+    optional var expandTabs: Bool { get } // is auto-expansion of tabs enabled?
+    optional var liveSearchBarVisible: Bool { get } // is the Live Search bar visible?
+    optional var softWrapText: Bool { get } // is automatic text wrapping enabled?
+    optional var softWrapMode: TextWranglerWrMd { get } // how line breaks are computed when soft-wrapping
+    optional var softWrapWidth: Int { get } // if soft-wrapping to character width, the maximum number of characters per line
+    optional var showSpaces: Bool { get } // are spaces displayed (only if “show invisibles” is true)?
+    optional var showToolbar: Bool { get } // display the editor toolbar in this window?
+    optional var showStatusBar: Bool { get } // display the editor status bar in this window?
+    optional var showNavigationBar: Bool { get } // display the navigation bar in this window?
+    optional var showPageGuide: Bool { get } // display the page guide in this window?
+    optional var showTabStops: Bool { get } // display tab stops in the window's status bar?
+    optional var showLineNumbers: Bool { get } // display line numbers next to text in the window?
+    optional var showGutter: Bool { get } // display the gutter next to the text in the window?
+    optional var sourceLanguage: String { get } // name of the source language, for syntax coloring and function navigation
+    optional var colorSyntax: Bool { get } // color language keywords and other recognized structures?
+    optional var splitProportion: Int { get } // vertical position of split bar, expressed as a percentage of window height
+    optional func setDisplayFont(displayFont: String!) // font in which text is displayed
+    optional func setDisplayFontSize(displayFontSize: Int) // point size of displayed text
+    optional func setDisplayFontStyle(displayFontStyle: [AnyObject]!) // text style(s) of displayed text
+    optional func setDisplayMagnification(displayMagnification: Double) // text display magnification multiplier
+    optional func setTabWidth(tabWidth: Int) // number of spaces per tab
+    optional func setSmartQuotes(smartQuotes: Bool) // are smart quotes enabled?
+    optional func setShowInvisibles(showInvisibles: Bool) // are invisible characters displayed?
+    optional func setExpandTabs(expandTabs: Bool) // is auto-expansion of tabs enabled?
+    optional func setLiveSearchBarVisible(liveSearchBarVisible: Bool) // is the Live Search bar visible?
+    optional func setSoftWrapText(softWrapText: Bool) // is automatic text wrapping enabled?
+    optional func setSoftWrapMode(softWrapMode: TextWranglerWrMd) // how line breaks are computed when soft-wrapping
+    optional func setSoftWrapWidth(softWrapWidth: Int) // if soft-wrapping to character width, the maximum number of characters per line
+    optional func setShowSpaces(showSpaces: Bool) // are spaces displayed (only if “show invisibles” is true)?
+    optional func setShowToolbar(showToolbar: Bool) // display the editor toolbar in this window?
+    optional func setShowStatusBar(showStatusBar: Bool) // display the editor status bar in this window?
+    optional func setShowNavigationBar(showNavigationBar: Bool) // display the navigation bar in this window?
+    optional func setShowPageGuide(showPageGuide: Bool) // display the page guide in this window?
+    optional func setShowTabStops(showTabStops: Bool) // display tab stops in the window's status bar?
+    optional func setShowLineNumbers(showLineNumbers: Bool) // display line numbers next to text in the window?
+    optional func setShowGutter(showGutter: Bool) // display the gutter next to the text in the window?
+    optional func setSourceLanguage(sourceLanguage: String!) // name of the source language, for syntax coloring and function navigation
+    optional func setColorSyntax(colorSyntax: Bool) // color language keywords and other recognized structures?
+    optional func setSplitProportion(splitProportion: Int) // vertical position of split bar, expressed as a percentage of window height
 }
 extension SBObject: TextWranglerTextWindow {}
 
@@ -550,7 +598,8 @@ extension SBObject: TextWranglerScratchpad_window {}
 // MARK: TextWranglerProjectWindow
 @objc public protocol TextWranglerProjectWindow: TextWranglerTextWindow {
     optional var selectedItems: SBObject { get } // list of items selected in the project list
-    optional var filesVisible: Bool { get set } // is the file list visible?
+    optional var filesVisible: Bool { get } // is the file list visible?
+    optional func setFilesVisible(filesVisible: Bool) // is the file list visible?
 }
 extension SBObject: TextWranglerProjectWindow {}
 
@@ -561,16 +610,26 @@ extension SBObject: TextWranglerPerl_reference_window {}
 
 // MARK: TextWranglerCompareOptions
 @objc public protocol TextWranglerCompareOptions: SBObjectProtocol, TextWranglerGenericMethods {
-    optional var ignoreLeadingSpaces: Bool { get set } // ignore leading whitespace on lines?
-    optional var ignoreTrailingSpaces: Bool { get set } // ignore trailing whitespace on lines?
-    optional var ignoreExtraSpaces: Bool { get set } // ignore whitespace runs in lines?
-    optional var ignoreRCSKeywords: Bool { get set } // ignore RCS keywords?
-    optional var caseSensitive: Bool { get set } // honor character case differences when comparing?
-    optional var ignoreCurlyQuotes: Bool { get set } // ignore curly quotes (“, ”, ‘, ’) when comparing?
-    optional var showIdenticalFiles: Bool { get set } // list identical files when doing a multi-file compare?
-    optional var textFilesOnly: Bool { get set } // only compare text files in a multi-file compare?
-    optional var flattenFolders: Bool { get set } // flatten folder hierarchies when comparing folders?
-    optional var skipShieldedFolders: Bool { get set } // skip folders whose names are enclosed in (parentheses)?
+    optional var ignoreLeadingSpaces: Bool { get } // ignore leading whitespace on lines?
+    optional var ignoreTrailingSpaces: Bool { get } // ignore trailing whitespace on lines?
+    optional var ignoreExtraSpaces: Bool { get } // ignore whitespace runs in lines?
+    optional var ignoreRCSKeywords: Bool { get } // ignore RCS keywords?
+    optional var caseSensitive: Bool { get } // honor character case differences when comparing?
+    optional var ignoreCurlyQuotes: Bool { get } // ignore curly quotes (“, ”, ‘, ’) when comparing?
+    optional var showIdenticalFiles: Bool { get } // list identical files when doing a multi-file compare?
+    optional var textFilesOnly: Bool { get } // only compare text files in a multi-file compare?
+    optional var flattenFolders: Bool { get } // flatten folder hierarchies when comparing folders?
+    optional var skipShieldedFolders: Bool { get } // skip folders whose names are enclosed in (parentheses)?
+    optional func setIgnoreLeadingSpaces(ignoreLeadingSpaces: Bool) // ignore leading whitespace on lines?
+    optional func setIgnoreTrailingSpaces(ignoreTrailingSpaces: Bool) // ignore trailing whitespace on lines?
+    optional func setIgnoreExtraSpaces(ignoreExtraSpaces: Bool) // ignore whitespace runs in lines?
+    optional func setIgnoreRCSKeywords(ignoreRCSKeywords: Bool) // ignore RCS keywords?
+    optional func setCaseSensitive(caseSensitive: Bool) // honor character case differences when comparing?
+    optional func setIgnoreCurlyQuotes(ignoreCurlyQuotes: Bool) // ignore curly quotes (“, ”, ‘, ’) when comparing?
+    optional func setShowIdenticalFiles(showIdenticalFiles: Bool) // list identical files when doing a multi-file compare?
+    optional func setTextFilesOnly(textFilesOnly: Bool) // only compare text files in a multi-file compare?
+    optional func setFlattenFolders(flattenFolders: Bool) // flatten folder hierarchies when comparing folders?
+    optional func setSkipShieldedFolders(skipShieldedFolders: Bool) // skip folders whose names are enclosed in (parentheses)?
 }
 extension SBObject: TextWranglerCompareOptions {}
 
@@ -601,34 +660,52 @@ extension SBObject: TextWranglerFTPInfo {}
 @objc public protocol TextWranglerMarkOptions: SBObjectProtocol, TextWranglerGenericMethods {
     optional var searchingFor: String { get } // the search pattern (Grep is implicit)
     optional func using() -> String // the Grep replacement pattern to use for generating the marker name
-    optional var clearingExisting: Bool { get set } // clear existing markers before setting the new ones?
+    optional var clearingExisting: Bool { get } // clear existing markers before setting the new ones?
+    optional func setClearingExisting(clearingExisting: Bool) // clear existing markers before setting the new ones?
 }
 extension SBObject: TextWranglerMarkOptions {}
 
 // MARK: TextWranglerResultEntry
 @objc public protocol TextWranglerResultEntry: SBObjectProtocol, TextWranglerGenericMethods {
-    optional var result_kind: TextWranglerErsl { get set } // the type of result entry
-    optional var result_document: SBObject { get set } // reference to the document, if not on disk
-    optional var result_file: NSURL { get set } // reference to the file, if saved to disk
-    optional var start_offset: Int { get set } // starting offset in the file
-    optional var end_offset: Int { get set } // ending offset in the file
-    optional var result_line: Int { get set } // line in the file (may be -1 if line information is not available)
-    optional var message: String { get set } // explanatory text (line context, if it’s a search result)
-    optional var match_string: String { get set } // for Grep search results, contains the text matched by the pattern
+    optional var result_kind: TextWranglerErsl { get } // the type of result entry
+    optional var result_document: SBObject { get } // reference to the document, if not on disk
+    optional var result_file: NSURL { get } // reference to the file, if saved to disk
+    optional var start_offset: Int { get } // starting offset in the file
+    optional var end_offset: Int { get } // ending offset in the file
+    optional var result_line: Int { get } // line in the file (may be -1 if line information is not available)
+    optional var message: String { get } // explanatory text (line context, if it’s a search result)
+    optional var match_string: String { get } // for Grep search results, contains the text matched by the pattern
+    optional func setResult_kind(result_kind: TextWranglerErsl) // the type of result entry
+    optional func setResult_document(result_document: SBObject!) // reference to the document, if not on disk
+    optional func setResult_file(result_file: NSURL!) // reference to the file, if saved to disk
+    optional func setStart_offset(start_offset: Int) // starting offset in the file
+    optional func setEnd_offset(end_offset: Int) // ending offset in the file
+    optional func setResult_line(result_line: Int) // line in the file (may be -1 if line information is not available)
+    optional func setMessage(message: String!) // explanatory text (line context, if it’s a search result)
+    optional func setMatch_string(match_string: String!) // for Grep search results, contains the text matched by the pattern
 }
 extension SBObject: TextWranglerResultEntry {}
 
 // MARK: TextWranglerSearchOptions
 @objc public protocol TextWranglerSearchOptions: SBObjectProtocol, TextWranglerGenericMethods {
-    optional var searchMode: TextWranglerSMod { get set } // the type of search (literal search if omitted)
-    optional var startingAtTop: Bool { get set } // start from the top of the document? (false if omitted)
-    optional var wrapAround: Bool { get set } // should the search wrap from the end of the document? (false if omitted)
-    optional var backwards: Bool { get set } // should the search proceed backwards? (false if omitted)
-    optional var caseSensitive: Bool { get set } // should the search be case-sensitive? (false if omitted)
-    optional var matchWords: Bool { get set } // should the search only find whole words? (false if omitted)
-    optional var extendSelection: Bool { get set } // should the selection range include the original selection start through the end of the match? (false if omitted)
-    optional var returningResults: Bool { get set } // if performing a batch or multi-file search, return a list of matches? (false if omitted)
-    optional var showingResults: Bool { get set } // if performing a batch or multi-file search, open the list of results? (true if omitted)
+    optional var searchMode: TextWranglerSMod { get } // the type of search (literal search if omitted)
+    optional var startingAtTop: Bool { get } // start from the top of the document? (false if omitted)
+    optional var wrapAround: Bool { get } // should the search wrap from the end of the document? (false if omitted)
+    optional var backwards: Bool { get } // should the search proceed backwards? (false if omitted)
+    optional var caseSensitive: Bool { get } // should the search be case-sensitive? (false if omitted)
+    optional var matchWords: Bool { get } // should the search only find whole words? (false if omitted)
+    optional var extendSelection: Bool { get } // should the selection range include the original selection start through the end of the match? (false if omitted)
+    optional var returningResults: Bool { get } // if performing a batch or multi-file search, return a list of matches? (false if omitted)
+    optional var showingResults: Bool { get } // if performing a batch or multi-file search, open the list of results? (true if omitted)
+    optional func setSearchMode(searchMode: TextWranglerSMod) // the type of search (literal search if omitted)
+    optional func setStartingAtTop(startingAtTop: Bool) // start from the top of the document? (false if omitted)
+    optional func setWrapAround(wrapAround: Bool) // should the search wrap from the end of the document? (false if omitted)
+    optional func setBackwards(backwards: Bool) // should the search proceed backwards? (false if omitted)
+    optional func setCaseSensitive(caseSensitive: Bool) // should the search be case-sensitive? (false if omitted)
+    optional func setMatchWords(matchWords: Bool) // should the search only find whole words? (false if omitted)
+    optional func setExtendSelection(extendSelection: Bool) // should the selection range include the original selection start through the end of the match? (false if omitted)
+    optional func setReturningResults(returningResults: Bool) // if performing a batch or multi-file search, return a list of matches? (false if omitted)
+    optional func setShowingResults(showingResults: Bool) // if performing a batch or multi-file search, open the list of results? (true if omitted)
 }
 extension SBObject: TextWranglerSearchOptions {}
 
@@ -718,7 +795,7 @@ extension SBObject: TextWranglerProcessLinesContainingResults {}
 
 // MARK: TextWranglerText_object
 @objc public protocol TextWranglerText_object: TextWranglerItem {
-    optional var contents: AnyObject { get set } // literal text contents
+    optional var contents: AnyObject { get } // literal text contents
     optional var length: Int { get } // length of text object (in characters)
     optional var characterOffset: Int { get } // offset of a text object from the beginning of the document (first char has offset 1)
     optional var startLine: Int { get } // line number of the first “hard” line containing this text object (first line has number 1)
@@ -727,6 +804,7 @@ extension SBObject: TextWranglerProcessLinesContainingResults {}
     optional var endColumn: Int { get } // character column (1 is first) of the last character of the object
     optional var startDisplayLine: Int { get } // line number of the first display line containing this text object (first line has number 1)
     optional var endDisplayLine: Int { get } // line number of the last display line containing this text object
+    optional func setContents(contents: AnyObject!) // literal text contents
 }
 extension SBObject: TextWranglerText_object {}
 

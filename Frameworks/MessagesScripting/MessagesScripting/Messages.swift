@@ -130,7 +130,8 @@ import ScriptingBridge
 
 // MARK: MessagesItem
 @objc public protocol MessagesItem: SBObjectProtocol, MessagesGenericMethods {
-    optional var properties: [NSObject : AnyObject] { get set } // All of the object's properties.
+    optional var properties: [NSObject : AnyObject] { get } // All of the object's properties.
+    optional func setProperties(properties: [NSObject : AnyObject]!) // All of the object's properties.
 }
 extension SBObject: MessagesItem {}
 
@@ -151,16 +152,21 @@ extension SBObject: MessagesDocument {}
 @objc public protocol MessagesWindow: SBObjectProtocol, MessagesGenericMethods {
     optional var name: String { get } // The full title of the window.
     optional func id() -> Int // The unique identifier of the window.
-    optional var index: Int { get set } // The index of the window, ordered front to back.
-    optional var bounds: NSRect { get set } // The bounding rectangle of the window.
+    optional var index: Int { get } // The index of the window, ordered front to back.
+    optional var bounds: NSRect { get } // The bounding rectangle of the window.
     optional var closeable: Bool { get } // Whether the window has a close box.
     optional var minimizable: Bool { get } // Whether the window can be minimized.
-    optional var minimized: Bool { get set } // Whether the window is currently minimized.
+    optional var minimized: Bool { get } // Whether the window is currently minimized.
     optional var resizable: Bool { get } // Whether the window can be resized.
-    optional var visible: Bool { get set } // Whether the window is currently visible.
+    optional var visible: Bool { get } // Whether the window is currently visible.
     optional var zoomable: Bool { get } // Whether the window can be zoomed.
-    optional var zoomed: Bool { get set } // Whether the window is currently zoomed.
+    optional var zoomed: Bool { get } // Whether the window is currently zoomed.
     optional var document: MessagesDocument { get } // The document whose contents are being displayed in the window.
+    optional func setIndex(index: Int) // The index of the window, ordered front to back.
+    optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
+    optional func setMinimized(minimized: Bool) // Whether the window is currently minimized.
+    optional func setVisible(visible: Bool) // Whether the window is currently visible.
+    optional func setZoomed(zoomed: Bool) // Whether the window is currently zoomed.
 }
 extension SBObject: MessagesWindow {}
 
@@ -171,9 +177,12 @@ extension SBObject: MessagesWindow {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the first character.
-    optional var font: String { get set } // The name of the font of the first character.
-    optional var size: Double { get set } // The size in points of the first character.
+    optional var color: NSColor { get } // The color of the first character.
+    optional var font: String { get } // The name of the font of the first character.
+    optional var size: Double { get } // The size in points of the first character.
+    optional func setColor(color: NSColor!) // The color of the first character.
+    optional func setFont(font: String!) // The name of the font of the first character.
+    optional func setSize(size: Double) // The size in points of the first character.
 }
 extension SBObject: MessagesRichText {}
 
@@ -184,9 +193,12 @@ extension SBObject: MessagesRichText {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the first character.
-    optional var font: String { get set } // The name of the font of the first character.
-    optional var size: Int { get set } // The size in points of the first character.
+    optional var color: NSColor { get } // The color of the first character.
+    optional var font: String { get } // The name of the font of the first character.
+    optional var size: Int { get } // The size in points of the first character.
+    optional func setColor(color: NSColor!) // The color of the first character.
+    optional func setFont(font: String!) // The name of the font of the first character.
+    optional func setSize(size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesCharacter {}
 
@@ -197,9 +209,12 @@ extension SBObject: MessagesCharacter {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the first character.
-    optional var font: String { get set } // The name of the font of the first character.
-    optional var size: Int { get set } // The size in points of the first character.
+    optional var color: NSColor { get } // The color of the first character.
+    optional var font: String { get } // The name of the font of the first character.
+    optional var size: Int { get } // The size in points of the first character.
+    optional func setColor(color: NSColor!) // The color of the first character.
+    optional func setFont(font: String!) // The name of the font of the first character.
+    optional func setSize(size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesParagraph {}
 
@@ -210,9 +225,12 @@ extension SBObject: MessagesParagraph {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the first character.
-    optional var font: String { get set } // The name of the font of the first character.
-    optional var size: Int { get set } // The size in points of the first character.
+    optional var color: NSColor { get } // The color of the first character.
+    optional var font: String { get } // The name of the font of the first character.
+    optional var size: Int { get } // The size in points of the first character.
+    optional func setColor(color: NSColor!) // The color of the first character.
+    optional func setFont(font: String!) // The name of the font of the first character.
+    optional func setSize(size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesWord {}
 
@@ -223,9 +241,12 @@ extension SBObject: MessagesWord {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the first character.
-    optional var font: String { get set } // The name of the font of the first character.
-    optional var size: Int { get set } // The size in points of the first character.
+    optional var color: NSColor { get } // The color of the first character.
+    optional var font: String { get } // The name of the font of the first character.
+    optional var size: Int { get } // The size in points of the first character.
+    optional func setColor(color: NSColor!) // The color of the first character.
+    optional func setFont(font: String!) // The name of the font of the first character.
+    optional func setSize(size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesAttributeRun {}
 
@@ -248,10 +269,10 @@ extension SBObject: MessagesAttachment {}
     optional func documents() -> SBElementArray
     optional func windows() -> SBElementArray
     optional var idleTime: Int { get } // Time in seconds that I have been idle.
-    optional var image: NSImage { get set } // My image as it appears in all services.
-    optional var status: MessagesMyStatus { get set } // My status on all services.
-    optional var statusMessage: String { get set } // My status message, visible to other people while I am online.
-    optional var activeAvChat: MessagesAudioChat { get set } // The currently active audio or video chat.
+    optional var image: NSImage { get } // My image as it appears in all services.
+    optional var status: MessagesMyStatus { get } // My status on all services.
+    optional var statusMessage: String { get } // My status message, visible to other people while I am online.
+    optional var activeAvChat: MessagesAudioChat { get } // The currently active audio or video chat.
     optional var name: String { get } // The name of the application.
     optional var frontmost: Bool { get } // Is this the frontmost (active) application?
     optional var version: String { get } // The version of the application.
@@ -264,6 +285,10 @@ extension SBObject: MessagesAttachment {}
     optional func send(x: AnyObject!, to: AnyObject!) // Sends a message or file to a buddy or to a chat.
     optional func storeRecentPicture() // Stores the currently set buddy picture into your recent pictures.
     optional func showChatChooserFor(for_: MessagesBuddy!) // displays a dialog in Messages to start a new chat with the specified buddy
+    optional func setImage(image: NSImage!) // My image as it appears in all services.
+    optional func setStatus(status: MessagesMyStatus) // My status on all services.
+    optional func setStatusMessage(statusMessage: String!) // My status message, visible to other people while I am online.
+    optional func setActiveAvChat(activeAvChat: MessagesAudioChat!) // The currently active audio or video chat.
 }
 extension SBApplication: MessagesApplication {}
 
@@ -289,14 +314,18 @@ extension SBObject: MessagesBuddy {}
     optional func buddies() -> SBElementArray
     optional func chats() -> SBElementArray
     optional func id() -> String // A guid identifier for this service.
-    optional var name: String { get set } // The name of this service as defined in Account preferences description field
-    optional var enabled: Bool { get set } // Is the service enabled?
+    optional var name: String { get } // The name of this service as defined in Account preferences description field
+    optional var enabled: Bool { get } // Is the service enabled?
     optional var connectionStatus: MessagesConnectionStatus { get } // The connection status for this account.
-    optional var status: MessagesMyStatus { get set } // My status on this service.
-    optional var statusMessage: String { get set } // My status message, visible to other people on this service while I am online.
+    optional var status: MessagesMyStatus { get } // My status on this service.
+    optional var statusMessage: String { get } // My status message, visible to other people on this service while I am online.
     optional var serviceType: MessagesServiceType { get } // The type of protocol for this service
     optional func logIn() // Log in to the specified service, or all services if none is specified. If the account password is not in the keychain the user will be prompted to enter one.
     optional func logOut() // Logs out of a service, or all services if none is specified.
+    optional func setName(name: String!) // The name of this service as defined in Account preferences description field
+    optional func setEnabled(enabled: Bool) // Is the service enabled?
+    optional func setStatus(status: MessagesMyStatus) // My status on this service.
+    optional func setStatusMessage(statusMessage: String!) // My status message, visible to other people on this service while I am online.
 }
 extension SBObject: MessagesService {}
 
@@ -328,19 +357,23 @@ extension SBObject: MessagesTextChat {}
 // MARK: MessagesAudioChat
 @objc public protocol MessagesAudioChat: MessagesChat {
     optional var screenSharing: MessagesScreenSharing { get } // Type of screen sharing session taking place within this chat.
-    optional var muted: Bool { get set } // Is the chat muted?
+    optional var muted: Bool { get } // Is the chat muted?
     optional var avConnectionStatus: MessagesAvConnectionStatus { get } // The connection state for this av chat.
     optional func requestRecording() // Sends a recording request to all participants of an audio or video chat. Recording will not start until all participants have agreed to allow recording.
     optional func stopRecording() // Ends recording of an audio or video chat.
+    optional func setMuted(muted: Bool) // Is the chat muted?
 }
 extension SBObject: MessagesAudioChat {}
 
 // MARK: MessagesVideoChat
 @objc public protocol MessagesVideoChat: MessagesAudioChat {
-    optional var paused: Bool { get set } // Is the chat paused?
-    optional var showingFullScreen: Bool { get set } // Is the chat being displayed in full screen mode?
-    optional var showingLocalVideo: Bool { get set } // Is the local video preview being displayed?
+    optional var paused: Bool { get } // Is the chat paused?
+    optional var showingFullScreen: Bool { get } // Is the chat being displayed in full screen mode?
+    optional var showingLocalVideo: Bool { get } // Is the local video preview being displayed?
     optional func takeSnapshot() // Takes a snapshot of a video chat and saves it to a desktop.
+    optional func setPaused(paused: Bool) // Is the chat paused?
+    optional func setShowingFullScreen(showingFullScreen: Bool) // Is the chat being displayed in full screen mode?
+    optional func setShowingLocalVideo(showingLocalVideo: Bool) // Is the local video preview being displayed?
 }
 extension SBObject: MessagesVideoChat {}
 

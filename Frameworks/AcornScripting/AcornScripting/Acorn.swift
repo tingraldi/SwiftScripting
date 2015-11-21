@@ -117,15 +117,19 @@ extension SBApplication: AcornApplication {}
 @objc public protocol AcornWindow: SBObjectProtocol, AcornGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
-    optional var index: Int { get set } // The index of the window, ordered front to back.
+    optional var index: Int { get } // The index of the window, ordered front to back.
     optional var closeable: Bool { get } // Does the window have a close button?
     optional var miniaturizable: Bool { get } // Does the window have a minimize button?
-    optional var miniaturized: Bool { get set } // Is the window minimized right now?
+    optional var miniaturized: Bool { get } // Is the window minimized right now?
     optional var resizable: Bool { get } // Can the window be resized?
-    optional var visible: Bool { get set } // Is the window visible right now?
+    optional var visible: Bool { get } // Is the window visible right now?
     optional var zoomable: Bool { get } // Does the window have a zoom button?
-    optional var zoomed: Bool { get set } // Is the window zoomed right now?
+    optional var zoomed: Bool { get } // Is the window zoomed right now?
     optional var document: AcornDocument { get } // The document whose contents are displayed in the window.
+    optional func setIndex(index: Int) // The index of the window, ordered front to back.
+    optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
+    optional func setVisible(visible: Bool) // Is the window visible right now?
+    optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
 }
 extension SBObject: AcornWindow {}
 
@@ -136,9 +140,12 @@ extension SBObject: AcornWindow {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the text's first character.
-    optional var font: String { get set } // The name of the font of the text's first character.
-    optional var size: Int { get set } // The size in points of the text's first character.
+    optional var color: NSColor { get } // The color of the text's first character.
+    optional var font: String { get } // The name of the font of the text's first character.
+    optional var size: Int { get } // The size in points of the text's first character.
+    optional func setColor(color: NSColor!) // The color of the text's first character.
+    optional func setFont(font: String!) // The name of the font of the text's first character.
+    optional func setSize(size: Int) // The size in points of the text's first character.
 }
 extension SBObject: AcornRichText {}
 
@@ -149,9 +156,12 @@ extension SBObject: AcornRichText {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // Its color.
-    optional var font: String { get set } // The name of its font.
-    optional var size: Int { get set } // Its size, in points.
+    optional var color: NSColor { get } // Its color.
+    optional var font: String { get } // The name of its font.
+    optional var size: Int { get } // Its size, in points.
+    optional func setColor(color: NSColor!) // Its color.
+    optional func setFont(font: String!) // The name of its font.
+    optional func setSize(size: Int) // Its size, in points.
 }
 extension SBObject: AcornCharacter {}
 
@@ -162,9 +172,12 @@ extension SBObject: AcornCharacter {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the paragraph's first character.
-    optional var font: String { get set } // The name of the font of the paragraph's first character.
-    optional var size: Int { get set } // The size in points of the paragraph's first character.
+    optional var color: NSColor { get } // The color of the paragraph's first character.
+    optional var font: String { get } // The name of the font of the paragraph's first character.
+    optional var size: Int { get } // The size in points of the paragraph's first character.
+    optional func setColor(color: NSColor!) // The color of the paragraph's first character.
+    optional func setFont(font: String!) // The name of the font of the paragraph's first character.
+    optional func setSize(size: Int) // The size in points of the paragraph's first character.
 }
 extension SBObject: AcornParagraph {}
 
@@ -175,9 +188,12 @@ extension SBObject: AcornParagraph {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the word's first character.
-    optional var font: String { get set } // The name of the font of the word's first character.
-    optional var size: Int { get set } // The size in points of the word's first character.
+    optional var color: NSColor { get } // The color of the word's first character.
+    optional var font: String { get } // The name of the font of the word's first character.
+    optional var size: Int { get } // The size in points of the word's first character.
+    optional func setColor(color: NSColor!) // The color of the word's first character.
+    optional func setFont(font: String!) // The name of the font of the word's first character.
+    optional func setSize(size: Int) // The size in points of the word's first character.
 }
 extension SBObject: AcornWord {}
 
@@ -188,15 +204,19 @@ extension SBObject: AcornWord {}
     optional func words() -> SBElementArray
     optional func attributeRuns() -> SBElementArray
     optional func attachments() -> SBElementArray
-    optional var color: NSColor { get set } // Its color.
-    optional var font: String { get set } // The name of its font.
-    optional var size: Int { get set } // Its size, in points.
+    optional var color: NSColor { get } // Its color.
+    optional var font: String { get } // The name of its font.
+    optional var size: Int { get } // Its size, in points.
+    optional func setColor(color: NSColor!) // Its color.
+    optional func setFont(font: String!) // The name of its font.
+    optional func setSize(size: Int) // Its size, in points.
 }
 extension SBObject: AcornAttributeRun {}
 
 // MARK: AcornAttachment
 @objc public protocol AcornAttachment: AcornRichText {
-    optional var fileName: String { get set } // The path to the embedded file.
+    optional var fileName: String { get } // The path to the embedded file.
+    optional func setFileName(fileName: String!) // The path to the embedded file.
 }
 extension SBObject: AcornAttachment {}
 
@@ -209,9 +229,9 @@ extension SBObject: AcornAttachment {}
     optional var name: String { get } // Its name.
     optional var modified: Bool { get } // Has it been modified since the last save?
     optional var file: NSURL { get } // Its location on disk, if it has one.
-    optional var height: Double { get set } // The height of the image in pixels.
-    optional var width: Double { get set } // The width of the image in pixels.
-    optional var currentLayer: AcornLayer { get set } // The Current layer
+    optional var height: Double { get } // The height of the image in pixels.
+    optional var width: Double { get } // The width of the image in pixels.
+    optional var currentLayer: AcornLayer { get } // The Current layer
     optional func cropRect(rect: [AnyObject]!) // Crop an image
     optional func undo() // Undo the last operation
     optional func redo() // Redo the last undone operation.
@@ -237,6 +257,9 @@ extension SBObject: AcornAttachment {}
     optional func addLayerMask() // Add a layer mask to the layer
     optional func rotateCanvasAngle(angle: Double) // Rotates the canvas
     optional func autoLevels() // Perform autolevels for the layer or document
+    optional func setHeight(height: Double) // The height of the image in pixels.
+    optional func setWidth(width: Double) // The width of the image in pixels.
+    optional func setCurrentLayer(currentLayer: AcornLayer!) // The Current layer
 }
 extension SBObject: AcornDocument {}
 
@@ -246,12 +269,17 @@ extension SBObject: AcornDocument {}
     optional func bitmapLayers() -> SBElementArray
     optional func groupLayers() -> SBElementArray
     optional func shapeLayers() -> SBElementArray
-    optional var name: String { get set }
-    optional var opacity: Double { get set }
-    optional var visible: Bool { get set }
+    optional var name: String { get }
+    optional var opacity: Double { get }
+    optional var visible: Bool { get }
     optional var bounds: [AnyObject] { get }
-    optional var blendMode: AcornBlendMode { get set }
-    optional var origin: [AnyObject] { get set }
+    optional var blendMode: AcornBlendMode { get }
+    optional var origin: [AnyObject] { get }
+    optional func setName(name: String!)
+    optional func setOpacity(opacity: Double)
+    optional func setVisible(visible: Bool)
+    optional func setBlendMode(blendMode: AcornBlendMode)
+    optional func setOrigin(origin: [AnyObject]!)
 }
 extension SBObject: AcornLayer {}
 

@@ -167,14 +167,9 @@ class SBHeaderProcessor(object):
         self.swift_file.write(line + '\n')
 
     def emit_property(self, cursor):
-        tokens = cursor.translation_unit.get_tokens(extent=cursor.extent)
-        get_set = 'get set'
-        for word in (x.spelling for x in tokens):
-            if word == 'readonly':
-                get_set = 'get'
         swift_type = type_for_type(cursor.type)
-        self.emit_line('    optional var {}: {} {{ {} }}{}'.format(cursor.spelling, swift_type, get_set,
-                                                                   self.line_comment(cursor)))
+        self.emit_line('    optional var {}: {} {{ get }}{}'.format(cursor.spelling, swift_type,
+                                                                    self.line_comment(cursor)))
 
     def emit_function(self, cursor):
         func_name = safe_name(cursor.spelling.split(':')[0])
@@ -206,8 +201,7 @@ class SBHeaderProcessor(object):
         property_getters = [child.spelling
                             for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, []))
                             if child.kind == CursorKind.OBJC_PROPERTY_DECL]
-        property_setters = ['set{}{}:'.format(getter[0].capitalize(), getter[1:]) for getter in property_getters]
-        function_list = property_getters + property_setters
+        function_list = property_getters
         emitted_properties = []
         implemented_protocols = []
         for child in chain(cursor.get_children(), self.category_dict.get(cursor.spelling, [])):

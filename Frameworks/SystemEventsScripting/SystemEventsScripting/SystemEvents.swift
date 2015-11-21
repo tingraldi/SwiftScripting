@@ -178,23 +178,31 @@ import ScriptingBridge
     optional func clickAt(at: [AnyObject]!) -> AnyObject // cause the target process to behave as if the UI element were clicked
     optional func keyCode(x: AnyObject!, using using_: AnyObject!) // cause the target process to behave as if key codes were entered
     optional func keystroke(x: String!, using using_: AnyObject!) // cause the target process to behave as if keystrokes were entered
-    optional var quitDelay: Int { get set } // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
+    optional var quitDelay: Int { get } // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
     optional var scriptMenuEnabled: Bool { get } // Is the Script menu installed in the menu bar?
+    optional func setQuitDelay(quitDelay: Int) // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
     optional func users() -> SBElementArray
     optional var currentUser: SystemEventsUser { get } // the currently logged in user
-    optional var appearancePreferences: SystemEventsAppearancePreferencesObject { get set } // a collection of appearance preferences
-    optional var CDAndDVDPreferences: SystemEventsCDAndDVDPreferencesObject { get set } // the preferences for the current user when a CD or DVD is inserted
+    optional var appearancePreferences: SystemEventsAppearancePreferencesObject { get } // a collection of appearance preferences
+    optional func setAppearancePreferences(appearancePreferences: SystemEventsAppearancePreferencesObject!) // a collection of appearance preferences
+    optional var CDAndDVDPreferences: SystemEventsCDAndDVDPreferencesObject { get } // the preferences for the current user when a CD or DVD is inserted
+    optional func setCDAndDVDPreferences(CDAndDVDPreferences: SystemEventsCDAndDVDPreferencesObject!) // the preferences for the current user when a CD or DVD is inserted
     optional func desktops() -> SBElementArray
     optional var currentDesktop: SystemEventsDesktop { get } // the primary desktop
-    optional var dockPreferences: SystemEventsDockPreferencesObject { get set } // the preferences for the current user's dock
+    optional var dockPreferences: SystemEventsDockPreferencesObject { get } // the preferences for the current user's dock
+    optional func setDockPreferences(dockPreferences: SystemEventsDockPreferencesObject!) // the preferences for the current user's dock
     optional func loginItems() -> SBElementArray
-    optional var networkPreferences: SystemEventsNetworkPreferencesObject { get set } // the preferences for the current user's network
+    optional var networkPreferences: SystemEventsNetworkPreferencesObject { get } // the preferences for the current user's network
+    optional func setNetworkPreferences(networkPreferences: SystemEventsNetworkPreferencesObject!) // the preferences for the current user's network
     optional func screenSavers() -> SBElementArray
-    optional var currentScreenSaver: SystemEventsScreenSaver { get set } // the currently selected screen saver
-    optional var screenSaverPreferences: SystemEventsScreenSaverPreferencesObject { get set } // the preferences common to all screen savers
+    optional var currentScreenSaver: SystemEventsScreenSaver { get } // the currently selected screen saver
+    optional var screenSaverPreferences: SystemEventsScreenSaverPreferencesObject { get } // the preferences common to all screen savers
+    optional func setCurrentScreenSaver(currentScreenSaver: SystemEventsScreenSaver!) // the currently selected screen saver
+    optional func setScreenSaverPreferences(screenSaverPreferences: SystemEventsScreenSaverPreferencesObject!) // the preferences common to all screen savers
     optional func audioDatas() -> SBElementArray
     optional func audioFiles() -> SBElementArray
-    optional var securityPreferences: SystemEventsSecurityPreferencesObject { get set } // a collection of security preferences
+    optional var securityPreferences: SystemEventsSecurityPreferencesObject { get } // a collection of security preferences
+    optional func setSecurityPreferences(securityPreferences: SystemEventsSecurityPreferencesObject!) // a collection of security preferences
     optional func aliases() -> SBElementArray
     optional func disks() -> SBElementArray
     optional func diskItems() -> SBElementArray
@@ -234,7 +242,8 @@ import ScriptingBridge
     optional var utilitiesFolder: SystemEventsFolder { get } // The Utilities folder
     optional var workflowsFolder: SystemEventsFolder { get } // The Automator Workflows folder
     optional func folderActions() -> SBElementArray
-    optional var folderActionsEnabled: Bool { get set } // Are Folder Actions currently being processed?
+    optional var folderActionsEnabled: Bool { get } // Are Folder Actions currently being processed?
+    optional func setFolderActionsEnabled(folderActionsEnabled: Bool) // Are Folder Actions currently being processed?
     optional func movieDatas() -> SBElementArray
     optional func movieFiles() -> SBElementArray
     optional func applicationProcesses() -> SBElementArray
@@ -264,16 +273,21 @@ extension SBObject: SystemEventsDocument {}
 @objc public protocol SystemEventsWindow: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
-    optional var index: Int { get set } // The index of the window, ordered front to back.
-    optional var bounds: NSRect { get set } // The bounding rectangle of the window.
+    optional var index: Int { get } // The index of the window, ordered front to back.
+    optional var bounds: NSRect { get } // The bounding rectangle of the window.
     optional var closeable: Bool { get } // Does the window have a close button?
     optional var miniaturizable: Bool { get } // Does the window have a minimize button?
-    optional var miniaturized: Bool { get set } // Is the window minimized right now?
+    optional var miniaturized: Bool { get } // Is the window minimized right now?
     optional var resizable: Bool { get } // Can the window be resized?
-    optional var visible: Bool { get set } // Is the window visible right now?
+    optional var visible: Bool { get } // Is the window visible right now?
     optional var zoomable: Bool { get } // Does the window have a zoom button?
-    optional var zoomed: Bool { get set } // Is the window zoomed right now?
+    optional var zoomed: Bool { get } // Is the window zoomed right now?
     optional var document: SystemEventsDocument { get } // The document whose contents are displayed in the window.
+    optional func setIndex(index: Int) // The index of the window, ordered front to back.
+    optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
+    optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
+    optional func setVisible(visible: Bool) // Is the window visible right now?
+    optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
     optional func actions() -> SBElementArray
     optional func attributes() -> SBElementArray
     optional func browsers() -> SBElementArray
@@ -313,19 +327,24 @@ extension SBObject: SystemEventsDocument {}
     optional var objectDescription: AnyObject { get } // the accessibility description, if available; otherwise, the role description
     optional var enabled: AnyObject { get } // Is the window enabled? ( Does it accept clicks? )
     optional var entireContents: [AnyObject] { get } // a list of every UI element contained in this window and its child UI elements, to the limits of the tree
-    optional var focused: AnyObject { get set } // Is the focus on this window?
+    optional var focused: AnyObject { get } // Is the focus on this window?
     optional var help: AnyObject { get } // an elaborate description of the window and its capabilities
     optional var maximumValue: AnyObject { get } // the maximum value that the UI element can take on
     optional var minimumValue: AnyObject { get } // the minimum value that the UI element can take on
     optional var orientation: AnyObject { get } // the orientation of the window
-    optional var position: AnyObject { get set } // the position of the window
+    optional var position: AnyObject { get } // the position of the window
     optional var role: String { get } // an encoded description of the window and its capabilities
     optional var roleDescription: String { get } // a more complete description of the window's role
-    optional var selected: AnyObject { get set } // Is the window selected?
-    optional var size: AnyObject { get set } // the size of the window
+    optional var selected: AnyObject { get } // Is the window selected?
+    optional var size: AnyObject { get } // the size of the window
     optional var subrole: AnyObject { get } // an encoded description of the window and its capabilities
     optional var title: String { get } // the title of the window as it appears on the screen
-    optional var value: AnyObject { get set } // the current value of the window
+    optional var value: AnyObject { get } // the current value of the window
+    optional func setFocused(focused: AnyObject!) // Is the focus on this window?
+    optional func setPosition(position: AnyObject!) // the position of the window
+    optional func setSelected(selected: AnyObject!) // Is the window selected?
+    optional func setSize(size: AnyObject!) // the size of the window
+    optional func setValue(value: AnyObject!) // the current value of the window
 }
 extension SBObject: SystemEventsWindow {}
 
@@ -334,22 +353,33 @@ extension SBObject: SystemEventsWindow {}
     optional var fullName: String { get } // user's full name
     optional var homeDirectory: AnyObject { get } // path to user's home directory
     optional var name: String { get } // user's short name
-    optional var picturePath: AnyObject { get set } // path to user's picture. Can be set for current user only!
+    optional var picturePath: AnyObject { get } // path to user's picture. Can be set for current user only!
+    optional func setPicturePath(picturePath: AnyObject!) // path to user's picture. Can be set for current user only!
 }
 extension SBObject: SystemEventsUser {}
 
 // MARK: SystemEventsAppearancePreferencesObject
 @objc public protocol SystemEventsAppearancePreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var appearance: SystemEventsAppearances { get set } // the overall look of buttons, menus and windows
-    optional var fontSmoothing: Bool { get set } // Is font smoothing on?
-    optional var fontSmoothingStyle: SystemEventsFontSmoothingStyles { get set } // the method used for smoothing fonts
-    optional var highlightColor: AnyObject { get set } // color used for hightlighting selected text and lists
-    optional var recentApplicationsLimit: Int { get set } // the number of recent applications to track
-    optional var recentDocumentsLimit: Int { get set } // the number of recent documents to track
-    optional var recentServersLimit: Int { get set } // the number of recent servers to track
-    optional var scrollBarAction: SystemEventsScrollPageBehaviors { get set } // the action performed by clicking the scroll bar
-    optional var smoothScrolling: Bool { get set } // Is smooth scrolling used?
-    optional var darkMode: Bool { get set } // use dark menu bar and dock
+    optional var appearance: SystemEventsAppearances { get } // the overall look of buttons, menus and windows
+    optional var fontSmoothing: Bool { get } // Is font smoothing on?
+    optional var fontSmoothingStyle: SystemEventsFontSmoothingStyles { get } // the method used for smoothing fonts
+    optional var highlightColor: AnyObject { get } // color used for hightlighting selected text and lists
+    optional var recentApplicationsLimit: Int { get } // the number of recent applications to track
+    optional var recentDocumentsLimit: Int { get } // the number of recent documents to track
+    optional var recentServersLimit: Int { get } // the number of recent servers to track
+    optional var scrollBarAction: SystemEventsScrollPageBehaviors { get } // the action performed by clicking the scroll bar
+    optional var smoothScrolling: Bool { get } // Is smooth scrolling used?
+    optional var darkMode: Bool { get } // use dark menu bar and dock
+    optional func setAppearance(appearance: SystemEventsAppearances) // the overall look of buttons, menus and windows
+    optional func setFontSmoothing(fontSmoothing: Bool) // Is font smoothing on?
+    optional func setFontSmoothingStyle(fontSmoothingStyle: SystemEventsFontSmoothingStyles) // the method used for smoothing fonts
+    optional func setHighlightColor(highlightColor: AnyObject!) // color used for hightlighting selected text and lists
+    optional func setRecentApplicationsLimit(recentApplicationsLimit: Int) // the number of recent applications to track
+    optional func setRecentDocumentsLimit(recentDocumentsLimit: Int) // the number of recent documents to track
+    optional func setRecentServersLimit(recentServersLimit: Int) // the number of recent servers to track
+    optional func setScrollBarAction(scrollBarAction: SystemEventsScrollPageBehaviors) // the action performed by clicking the scroll bar
+    optional func setSmoothScrolling(smoothScrolling: Bool) // Is smooth scrolling used?
+    optional func setDarkMode(darkMode: Bool) // use dark menu bar and dock
 }
 extension SBObject: SystemEventsAppearancePreferencesObject {}
 
@@ -367,9 +397,12 @@ extension SBObject: SystemEventsCDAndDVDPreferencesObject {}
 
 // MARK: SystemEventsInsertionPreference
 @objc public protocol SystemEventsInsertionPreference: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var customApplication: AnyObject { get set } // application to launch or activate on the insertion of media
-    optional var customScript: AnyObject { get set } // AppleScript to launch or activate on the insertion of media
-    optional var insertionAction: SystemEventsDhac { get set } // action to perform on media insertion
+    optional var customApplication: AnyObject { get } // application to launch or activate on the insertion of media
+    optional var customScript: AnyObject { get } // AppleScript to launch or activate on the insertion of media
+    optional var insertionAction: SystemEventsDhac { get } // action to perform on media insertion
+    optional func setCustomApplication(customApplication: AnyObject!) // application to launch or activate on the insertion of media
+    optional func setCustomScript(customScript: AnyObject!) // AppleScript to launch or activate on the insertion of media
+    optional func setInsertionAction(insertionAction: SystemEventsDhac) // action to perform on media insertion
 }
 extension SBObject: SystemEventsInsertionPreference {}
 
@@ -377,58 +410,77 @@ extension SBObject: SystemEventsInsertionPreference {}
 @objc public protocol SystemEventsDesktop: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // name of the desktop
     optional func id() -> Int // unique identifier of the desktop
-    optional var changeInterval: Double { get set } // number of seconds to wait between changing the desktop picture
+    optional var changeInterval: Double { get } // number of seconds to wait between changing the desktop picture
     optional var displayName: String { get } // name of display on which this desktop appears
-    optional var picture: AnyObject { get set } // path to file used as desktop picture
-    optional var pictureRotation: Int { get set } // never, using interval, using login, after sleep
-    optional var picturesFolder: AnyObject { get set } // path to folder containing pictures for changing desktop background
-    optional var randomOrder: Bool { get set } // turn on for random ordering of changing desktop pictures
-    optional var translucentMenuBar: Bool { get set } // indicates whether the menu bar is translucent
+    optional var picture: AnyObject { get } // path to file used as desktop picture
+    optional var pictureRotation: Int { get } // never, using interval, using login, after sleep
+    optional var picturesFolder: AnyObject { get } // path to folder containing pictures for changing desktop background
+    optional var randomOrder: Bool { get } // turn on for random ordering of changing desktop pictures
+    optional var translucentMenuBar: Bool { get } // indicates whether the menu bar is translucent
+    optional func setChangeInterval(changeInterval: Double) // number of seconds to wait between changing the desktop picture
+    optional func setPicture(picture: AnyObject!) // path to file used as desktop picture
+    optional func setPictureRotation(pictureRotation: Int) // never, using interval, using login, after sleep
+    optional func setPicturesFolder(picturesFolder: AnyObject!) // path to folder containing pictures for changing desktop background
+    optional func setRandomOrder(randomOrder: Bool) // turn on for random ordering of changing desktop pictures
+    optional func setTranslucentMenuBar(translucentMenuBar: Bool) // indicates whether the menu bar is translucent
 }
 extension SBObject: SystemEventsDesktop {}
 
 // MARK: SystemEventsDockPreferencesObject
 @objc public protocol SystemEventsDockPreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var animate: Bool { get set } // is the animation of opening applications on or off?
-    optional var autohide: Bool { get set } // is autohiding the dock on or off?
-    optional var dockSize: Double { get set } // size/height of the items (between 0.0 (minimum) and 1.0 (maximum))
-    optional var magnification: Bool { get set } // is magnification on or off?
-    optional var magnificationSize: Double { get set } // maximum magnification size when magnification is on (between 0.0 (minimum) and 1.0 (maximum))
-    optional var minimizeEffect: SystemEventsDpef { get set } // minimization effect
-    optional var screenEdge: SystemEventsDpls { get set } // location on screen
+    optional var animate: Bool { get } // is the animation of opening applications on or off?
+    optional var autohide: Bool { get } // is autohiding the dock on or off?
+    optional var dockSize: Double { get } // size/height of the items (between 0.0 (minimum) and 1.0 (maximum))
+    optional var magnification: Bool { get } // is magnification on or off?
+    optional var magnificationSize: Double { get } // maximum magnification size when magnification is on (between 0.0 (minimum) and 1.0 (maximum))
+    optional var minimizeEffect: SystemEventsDpef { get } // minimization effect
+    optional var screenEdge: SystemEventsDpls { get } // location on screen
+    optional func setAnimate(animate: Bool) // is the animation of opening applications on or off?
+    optional func setAutohide(autohide: Bool) // is autohiding the dock on or off?
+    optional func setDockSize(dockSize: Double) // size/height of the items (between 0.0 (minimum) and 1.0 (maximum))
+    optional func setMagnification(magnification: Bool) // is magnification on or off?
+    optional func setMagnificationSize(magnificationSize: Double) // maximum magnification size when magnification is on (between 0.0 (minimum) and 1.0 (maximum))
+    optional func setMinimizeEffect(minimizeEffect: SystemEventsDpef) // minimization effect
+    optional func setScreenEdge(screenEdge: SystemEventsDpls) // location on screen
 }
 extension SBObject: SystemEventsDockPreferencesObject {}
 
 // MARK: SystemEventsLoginItem
 @objc public protocol SystemEventsLoginItem: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var hidden: Bool { get set } // Is the Login Item hidden when launched?
+    optional var hidden: Bool { get } // Is the Login Item hidden when launched?
     optional var kind: String { get } // the file type of the Login Item
     optional var name: String { get } // the name of the Login Item
     optional var path: String { get } // the file system path to the Login Item
+    optional func setHidden(hidden: Bool) // Is the Login Item hidden when launched?
 }
 extension SBObject: SystemEventsLoginItem {}
 
 // MARK: SystemEventsConfiguration
 @objc public protocol SystemEventsConfiguration: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var accountName: String { get set } // the name used to authenticate
+    optional var accountName: String { get } // the name used to authenticate
     optional var connected: Bool { get } // Is the configuration connected?
     optional func id() -> String // the unique identifier for the configuration
     optional var name: String { get } // the name of the configuration
     optional func connect() -> SystemEventsConfiguration // connect a configuration or service
     optional func disconnect() -> SystemEventsConfiguration // disconnect a configuration or service
+    optional func setAccountName(accountName: String!) // the name used to authenticate
 }
 extension SBObject: SystemEventsConfiguration {}
 
 // MARK: SystemEventsInterface
 @objc public protocol SystemEventsInterface: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var automatic: Bool { get set } // configure the interface speed, duplex, and mtu automatically?
-    optional var duplex: String { get set } // the duplex setting  half | full | full with flow control
+    optional var automatic: Bool { get } // configure the interface speed, duplex, and mtu automatically?
+    optional var duplex: String { get } // the duplex setting  half | full | full with flow control
     optional func id() -> String // the unique identifier for the interface
     optional var kind: String { get } // the type of interface
     optional var MACAddress: String { get } // the MAC address for the interface
-    optional var mtu: Int { get set } // the packet size
+    optional var mtu: Int { get } // the packet size
     optional var name: String { get } // the name of the interface
-    optional var speed: Int { get set } // ethernet speed 10 | 100 | 1000
+    optional var speed: Int { get } // ethernet speed 10 | 100 | 1000
+    optional func setAutomatic(automatic: Bool) // configure the interface speed, duplex, and mtu automatically?
+    optional func setDuplex(duplex: String!) // the duplex setting  half | full | full with flow control
+    optional func setMtu(mtu: Int) // the packet size
+    optional func setSpeed(speed: Int) // ethernet speed 10 | 100 | 1000
 }
 extension SBObject: SystemEventsInterface {}
 
@@ -436,7 +488,8 @@ extension SBObject: SystemEventsInterface {}
 @objc public protocol SystemEventsLocation: SBObjectProtocol, SystemEventsGenericMethods {
     optional func services() -> SBElementArray
     optional func id() -> String // the unique identifier for the location
-    optional var name: String { get set } // the name of the location
+    optional var name: String { get } // the name of the location
+    optional func setName(name: String!) // the name of the location
 }
 extension SBObject: SystemEventsLocation {}
 
@@ -445,7 +498,8 @@ extension SBObject: SystemEventsLocation {}
     optional func interfaces() -> SBElementArray
     optional func locations() -> SBElementArray
     optional func services() -> SBElementArray
-    optional var currentLocation: SystemEventsLocation { get set } // the current location
+    optional var currentLocation: SystemEventsLocation { get } // the current location
+    optional func setCurrentLocation(currentLocation: SystemEventsLocation!) // the current location
 }
 extension SBObject: SystemEventsNetworkPreferencesObject {}
 
@@ -453,13 +507,15 @@ extension SBObject: SystemEventsNetworkPreferencesObject {}
 @objc public protocol SystemEventsService: SBObjectProtocol, SystemEventsGenericMethods {
     optional func configurations() -> SBElementArray
     optional var active: Bool { get } // Is the service active?
-    optional var currentConfiguration: SystemEventsConfiguration { get set } // the currently selected configuration
+    optional var currentConfiguration: SystemEventsConfiguration { get } // the currently selected configuration
     optional func id() -> String // the unique identifier for the service
     optional var interface: SystemEventsInterface { get } // the interface the service is built on
     optional var kind: Int { get } // the type of service
-    optional var name: String { get set } // the name of the service
+    optional var name: String { get } // the name of the service
     optional func connect() -> SystemEventsConfiguration // connect a configuration or service
     optional func disconnect() -> SystemEventsConfiguration // disconnect a configuration or service
+    optional func setCurrentConfiguration(currentConfiguration: SystemEventsConfiguration!) // the currently selected configuration
+    optional func setName(name: String!) // the name of the service
 }
 extension SBObject: SystemEventsService {}
 
@@ -468,31 +524,41 @@ extension SBObject: SystemEventsService {}
     optional var displayedName: String { get } // name of the screen saver module as displayed to the user
     optional var name: String { get } // name of the screen saver module to be displayed
     optional var path: SystemEventsAlias { get } // path to the screen saver module
-    optional var pictureDisplayStyle: String { get set } // effect to use when displaying picture-based screen savers (slideshow, collage, or mosaic)
+    optional var pictureDisplayStyle: String { get } // effect to use when displaying picture-based screen savers (slideshow, collage, or mosaic)
     optional func start() // start the screen saver
     optional func stop() // stop the screen saver
+    optional func setPictureDisplayStyle(pictureDisplayStyle: String!) // effect to use when displaying picture-based screen savers (slideshow, collage, or mosaic)
 }
 extension SBObject: SystemEventsScreenSaver {}
 
 // MARK: SystemEventsScreenSaverPreferencesObject
 @objc public protocol SystemEventsScreenSaverPreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var delayInterval: Int { get set } // number of seconds of idle time before the screen saver starts; zero for never
-    optional var mainScreenOnly: Bool { get set } // should the screen saver be shown only on the main screen?
+    optional var delayInterval: Int { get } // number of seconds of idle time before the screen saver starts; zero for never
+    optional var mainScreenOnly: Bool { get } // should the screen saver be shown only on the main screen?
     optional var running: Bool { get } // is the screen saver running?
-    optional var showClock: Bool { get set } // should a clock appear over the screen saver?
+    optional var showClock: Bool { get } // should a clock appear over the screen saver?
     optional func start() // start the screen saver
     optional func stop() // stop the screen saver
+    optional func setDelayInterval(delayInterval: Int) // number of seconds of idle time before the screen saver starts; zero for never
+    optional func setMainScreenOnly(mainScreenOnly: Bool) // should the screen saver be shown only on the main screen?
+    optional func setShowClock(showClock: Bool) // should a clock appear over the screen saver?
 }
 extension SBObject: SystemEventsScreenSaverPreferencesObject {}
 
 // MARK: SystemEventsSecurityPreferencesObject
 @objc public protocol SystemEventsSecurityPreferencesObject: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var automaticLogin: Bool { get set } // Is automatic login allowed?
-    optional var logOutWhenInactive: Bool { get set } // Will the computer log out when inactive?
-    optional var logOutWhenInactiveInterval: Int { get set } // The interval of inactivity after which the computer will log out
-    optional var requirePasswordToUnlock: Bool { get set } // Is a password required to unlock secure preferences?
-    optional var requirePasswordToWake: Bool { get set } // Is a password required to wake the computer from sleep or screen saver?
-    optional var secureVirtualMemory: Bool { get set } // Is secure virtual memory being used?
+    optional var automaticLogin: Bool { get } // Is automatic login allowed?
+    optional var logOutWhenInactive: Bool { get } // Will the computer log out when inactive?
+    optional var logOutWhenInactiveInterval: Int { get } // The interval of inactivity after which the computer will log out
+    optional var requirePasswordToUnlock: Bool { get } // Is a password required to unlock secure preferences?
+    optional var requirePasswordToWake: Bool { get } // Is a password required to wake the computer from sleep or screen saver?
+    optional var secureVirtualMemory: Bool { get } // Is secure virtual memory being used?
+    optional func setAutomaticLogin(automaticLogin: Bool) // Is automatic login allowed?
+    optional func setLogOutWhenInactive(logOutWhenInactive: Bool) // Will the computer log out when inactive?
+    optional func setLogOutWhenInactiveInterval(logOutWhenInactiveInterval: Int) // The interval of inactivity after which the computer will log out
+    optional func setRequirePasswordToUnlock(requirePasswordToUnlock: Bool) // Is a password required to unlock secure preferences?
+    optional func setRequirePasswordToWake(requirePasswordToWake: Bool) // Is a password required to wake the computer from sleep or screen saver?
+    optional func setSecureVirtualMemory(secureVirtualMemory: Bool) // Is secure virtual memory being used?
 }
 extension SBObject: SystemEventsSecurityPreferencesObject {}
 
@@ -503,8 +569,8 @@ extension SBObject: SystemEventsSecurityPreferencesObject {}
     optional var creationDate: NSDate { get } // the date on which the disk item was created
     optional var displayedName: String { get } // the name of the disk item as displayed in the User Interface
     optional func id() -> String // the unique ID of the disk item
-    optional var modificationDate: NSDate { get set } // the date on which the disk item was last modified
-    optional var name: String { get set } // the name of the disk item
+    optional var modificationDate: NSDate { get } // the date on which the disk item was last modified
+    optional var name: String { get } // the name of the disk item
     optional var nameExtension: String { get } // the extension portion of the name
     optional var packageFolder: Bool { get } // Is the disk item a package?
     optional var path: String { get } // the file system path of the disk item
@@ -512,10 +578,13 @@ extension SBObject: SystemEventsSecurityPreferencesObject {}
     optional var POSIXPath: String { get } // the POSIX file system path of the disk item
     optional var size: Int { get } // the logical size of the disk item
     optional var URL: String { get } // the URL of the disk item
-    optional var visible: Bool { get set } // Is the disk item visible?
+    optional var visible: Bool { get } // Is the disk item visible?
     optional var volume: String { get } // the volume on which the disk item resides
     optional func delete() // Delete disk item(s).
     optional func moveTo(to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
+    optional func setModificationDate(modificationDate: NSDate!) // the date on which the disk item was last modified
+    optional func setName(name: String!) // the name of the disk item
+    optional func setVisible(visible: Bool) // Is the disk item visible?
 }
 extension SBObject: SystemEventsDiskItem {}
 
@@ -526,15 +595,19 @@ extension SBObject: SystemEventsDiskItem {}
     optional func files() -> SBElementArray
     optional func filePackages() -> SBElementArray
     optional func folders() -> SBElementArray
-    optional var creatorType: AnyObject { get set } // the OSType identifying the application that created the alias
-    optional var defaultApplication: AnyObject { get set } // the application that will launch if the alias is opened
-    optional var fileType: AnyObject { get set } // the OSType identifying the type of data contained in the alias
+    optional var creatorType: AnyObject { get } // the OSType identifying the application that created the alias
+    optional var defaultApplication: AnyObject { get } // the application that will launch if the alias is opened
+    optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the alias
     optional var kind: String { get } // The kind of alias, as shown in Finder
     optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
     optional var shortVersion: String { get } // the short version of the application bundle referenced by the alias
-    optional var stationery: Bool { get set } // Is the alias a stationery pad?
+    optional var stationery: Bool { get } // Is the alias a stationery pad?
     optional var typeIdentifier: String { get } // The type identifier of the alias
     optional var version: String { get } // the version of the application bundle referenced by the alias (visible at the bottom of the "Get Info" window)
+    optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the alias
+    optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the alias is opened
+    optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the alias
+    optional func setStationery(stationery: Bool) // Is the alias a stationery pad?
 }
 extension SBObject: SystemEventsAlias {}
 
@@ -549,11 +622,12 @@ extension SBObject: SystemEventsAlias {}
     optional var ejectable: Bool { get } // Can the media be ejected (floppies, CD's, and so on)?
     optional var format: SystemEventsEdfm { get } // the file system format of this disk
     optional var freeSpace: NSNumber { get } // the number of free bytes left on the disk
-    optional var ignorePrivileges: Bool { get set } // Ignore permissions on this disk?
+    optional var ignorePrivileges: Bool { get } // Ignore permissions on this disk?
     optional var localVolume: Bool { get } // Is the media a local volume (as opposed to a file server)?
     optional var server: AnyObject { get } // the server on which the disk resides, AFP volumes only
     optional var startup: Bool { get } // Is this disk the boot disk?
     optional var zone: AnyObject { get } // the zone in which the disk's server resides, AFP volumes only
+    optional func setIgnorePrivileges(ignorePrivileges: Bool) // Ignore permissions on this disk?
 }
 extension SBObject: SystemEventsDisk {}
 
@@ -597,16 +671,20 @@ extension SBObject: SystemEventsClassicDomainObject {}
 
 // MARK: SystemEventsFile
 @objc public protocol SystemEventsFile: SystemEventsDiskItem {
-    optional var creatorType: AnyObject { get set } // the OSType identifying the application that created the file
-    optional var defaultApplication: AnyObject { get set } // the application that will launch if the file is opened
-    optional var fileType: AnyObject { get set } // the OSType identifying the type of data contained in the file
+    optional var creatorType: AnyObject { get } // the OSType identifying the application that created the file
+    optional var defaultApplication: AnyObject { get } // the application that will launch if the file is opened
+    optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the file
     optional var kind: String { get } // The kind of file, as shown in Finder
     optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
     optional var shortVersion: String { get } // the short version of the file
-    optional var stationery: Bool { get set } // Is the file a stationery pad?
+    optional var stationery: Bool { get } // Is the file a stationery pad?
     optional var typeIdentifier: String { get } // The type identifier of the file
     optional var version: String { get } // the version of the file (visible at the bottom of the "Get Info" window)
     optional func open() -> AnyObject // Open a document.
+    optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the file
+    optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the file is opened
+    optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the file
+    optional func setStationery(stationery: Bool) // Is the file a stationery pad?
 }
 extension SBObject: SystemEventsFile {}
 
@@ -668,20 +746,24 @@ extension SBObject: SystemEventsUserDomainObject {}
 // MARK: SystemEventsFolderAction
 @objc public protocol SystemEventsFolderAction: SBObjectProtocol, SystemEventsGenericMethods {
     optional func scripts() -> SBElementArray
-    optional var enabled: Bool { get set } // Is the folder action enabled?
-    optional var name: String { get set } // the name of the folder action, which is also the name of the folder
-    optional var path: AnyObject { get set } // the path to the folder to which the folder action applies
+    optional var enabled: Bool { get } // Is the folder action enabled?
+    optional var name: String { get } // the name of the folder action, which is also the name of the folder
+    optional var path: AnyObject { get } // the path to the folder to which the folder action applies
     optional var volume: String { get } // the volume on which the folder to which the folder action applies resides
     optional func enableProcessNewChanges(processNewChanges: SystemEventsSaveOptions) // Enable a folder action.
+    optional func setEnabled(enabled: Bool) // Is the folder action enabled?
+    optional func setName(name: String!) // the name of the folder action, which is also the name of the folder
+    optional func setPath(path: AnyObject!) // the path to the folder to which the folder action applies
 }
 extension SBObject: SystemEventsFolderAction {}
 
 // MARK: SystemEventsScript
 @objc public protocol SystemEventsScript: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var enabled: Bool { get set } // Is the script enabled?
+    optional var enabled: Bool { get } // Is the script enabled?
     optional var name: String { get } // the name of the script
     optional var path: String { get } // the file system path of the script
     optional var POSIXPath: String { get } // the POSIX file system path of the script
+    optional func setEnabled(enabled: Bool) // Is the script enabled?
 }
 extension SBObject: SystemEventsScript {}
 
@@ -697,7 +779,8 @@ extension SBObject: SystemEventsAction {}
 @objc public protocol SystemEventsAttribute: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // the name of the attribute
     optional var settable: Bool { get } // Can the attribute be set?
-    optional var value: AnyObject { get set } // the current value of the attribute
+    optional var value: AnyObject { get } // the current value of the attribute
+    optional func setValue(value: AnyObject!) // the current value of the attribute
 }
 extension SBObject: SystemEventsAttribute {}
 
@@ -750,22 +833,27 @@ extension SBObject: SystemEventsAttribute {}
     optional var objectDescription: AnyObject { get } // the accessibility description, if available; otherwise, the role description
     optional var enabled: AnyObject { get } // Is the UI element enabled? ( Does it accept clicks? )
     optional var entireContents: [AnyObject] { get } // a list of every UI element contained in this UI element and its child UI elements, to the limits of the tree
-    optional var focused: AnyObject { get set } // Is the focus on this UI element?
+    optional var focused: AnyObject { get } // Is the focus on this UI element?
     optional var help: AnyObject { get } // an elaborate description of the UI element and its capabilities
     optional var maximumValue: AnyObject { get } // the maximum value that the UI element can take on
     optional var minimumValue: AnyObject { get } // the minimum value that the UI element can take on
     optional var name: String { get } // the name of the UI Element, which identifies it within its container
     optional var orientation: AnyObject { get } // the orientation of the UI element
-    optional var position: AnyObject { get set } // the position of the UI element
+    optional var position: AnyObject { get } // the position of the UI element
     optional var role: String { get } // an encoded description of the UI element and its capabilities
     optional var roleDescription: String { get } // a more complete description of the UI element's role
-    optional var selected: AnyObject { get set } // Is the UI element selected?
-    optional var size: AnyObject { get set } // the size of the UI element
+    optional var selected: AnyObject { get } // Is the UI element selected?
+    optional var size: AnyObject { get } // the size of the UI element
     optional var subrole: AnyObject { get } // an encoded description of the UI element and its capabilities
     optional var title: String { get } // the title of the UI element as it appears on the screen
-    optional var value: AnyObject { get set } // the current value of the UI element
+    optional var value: AnyObject { get } // the current value of the UI element
     optional func clickAt(at: [AnyObject]!) -> AnyObject // cause the target process to behave as if the UI element were clicked
     optional func select() -> SystemEventsUIElement // set the selected property of the UI element
+    optional func setFocused(focused: AnyObject!) // Is the focus on this UI element?
+    optional func setPosition(position: AnyObject!) // the position of the UI element
+    optional func setSelected(selected: AnyObject!) // Is the UI element selected?
+    optional func setSize(size: AnyObject!) // the size of the UI element
+    optional func setValue(value: AnyObject!) // the current value of the UI element
 }
 extension SBObject: SystemEventsUIElement {}
 
@@ -895,7 +983,7 @@ extension SBObject: SystemEventsPopUpButton {}
     optional var displayedName: String { get } // the name of the file from which the process was launched, as displayed in the User Interface
     optional var file: AnyObject { get } // the file from which the process was launched
     optional var fileType: String { get } // the OSType of the file type of the process
-    optional var frontmost: Bool { get set } // Is the process the frontmost process
+    optional var frontmost: Bool { get } // Is the process the frontmost process
     optional var hasScriptingTerminology: Bool { get } // Does the process have a scripting terminology, i.e., can it be scripted?
     optional func id() -> Int // The unique identifier of the process
     optional var name: String { get } // the name of the process
@@ -903,7 +991,9 @@ extension SBObject: SystemEventsPopUpButton {}
     optional var shortName: AnyObject { get } // the short name of the file from which the process was launched
     optional var totalPartitionSize: Int { get } // the size of the partition with which the process was launched
     optional var unixId: Int { get } // The Unix process identifier of a process running in the native environment, or -1 for a process running in the Classic environment
-    optional var visible: Bool { get set } // Is the process' layer visible?
+    optional var visible: Bool { get } // Is the process' layer visible?
+    optional func setFrontmost(frontmost: Bool) // Is the process the frontmost process
+    optional func setVisible(visible: Bool) // Is the process' layer visible?
 }
 extension SBObject: SystemEventsProcess {}
 
@@ -1015,7 +1105,8 @@ extension SBObject: SystemEventsValueIndicator {}
 
 // MARK: SystemEventsPropertyListFile
 @objc public protocol SystemEventsPropertyListFile: SystemEventsFile {
-    optional var contents: SystemEventsPropertyListItem { get set } // the contents of the property list file; elements and properties of the property list item may be accessed as if they were elements and properties of the property list file
+    optional var contents: SystemEventsPropertyListItem { get } // the contents of the property list file; elements and properties of the property list item may be accessed as if they were elements and properties of the property list file
+    optional func setContents(contents: SystemEventsPropertyListItem!) // the contents of the property list file; elements and properties of the property list item may be accessed as if they were elements and properties of the property list file
 }
 extension SBObject: SystemEventsPropertyListFile {}
 
@@ -1024,8 +1115,10 @@ extension SBObject: SystemEventsPropertyListFile {}
     optional func propertyListItems() -> SBElementArray
     optional var kind: NSNumber { get } // the kind of data stored in the property list item: boolean/data/date/list/number/record/string
     optional var name: String { get } // the name of the property list item ( if any )
-    optional var text: String { get set } // the text representation of the property list data
-    optional var value: AnyObject { get set } // the value of the property list item
+    optional var text: String { get } // the text representation of the property list data
+    optional var value: AnyObject { get } // the value of the property list item
+    optional func setText(text: String!) // the text representation of the property list data
+    optional func setValue(value: AnyObject!) // the value of the property list item
 }
 extension SBObject: SystemEventsPropertyListItem {}
 
@@ -1104,24 +1197,28 @@ extension SBObject: SystemEventsMovieFile {}
     optional var dataSize: Int { get } // the size of the track data
     optional var dimensions: [AnyObject] { get } // the current dimensions of the track
     optional var duration: Int { get } // the duration of the track, in terms of the time scale
-    optional var enabled: Bool { get set } // should this track be used when the movie is playing?
-    optional var highQuality: Bool { get set } // is the track high quality?
+    optional var enabled: Bool { get } // should this track be used when the movie is playing?
+    optional var highQuality: Bool { get } // is the track high quality?
     optional var href: String { get } // the internet location to open when clicking on the track
     optional var kind: String { get } // the name of the media in the track, in the current language (e.g., 'Sound', 'Video', 'Text', ...)
     optional var modificationTime: NSDate { get } // the modification time of the track
     optional var name: String { get } // the name of the track
-    optional var startTime: Int { get set } // the time delay before this track starts playing
+    optional var startTime: Int { get } // the time delay before this track starts playing
     optional var type: String { get } // the type of media in the track (e.g., 'soun', 'vide', 'text', ...)
     optional var typeClass: String { get } // deprecated: use "type" instead ( included only to resolve a terminology conflict, script text will be updated upon compilation )
     optional var videoDepth: Int { get } // the color depth of the video
     optional var visualCharacteristic: Bool { get } // can the track be seen?
+    optional func setEnabled(enabled: Bool) // should this track be used when the movie is playing?
+    optional func setHighQuality(highQuality: Bool) // is the track high quality?
+    optional func setStartTime(startTime: Int) // the time delay before this track starts playing
 }
 extension SBObject: SystemEventsTrack {}
 
 // MARK: SystemEventsXMLAttribute
 @objc public protocol SystemEventsXMLAttribute: SBObjectProtocol, SystemEventsGenericMethods {
     optional var name: String { get } // the name of the XML attribute
-    optional var value: AnyObject { get set } // the value of the XML attribute
+    optional var value: AnyObject { get } // the value of the XML attribute
+    optional func setValue(value: AnyObject!) // the value of the XML attribute
 }
 extension SBObject: SystemEventsXMLAttribute {}
 
@@ -1129,8 +1226,10 @@ extension SBObject: SystemEventsXMLAttribute {}
 @objc public protocol SystemEventsXMLData: SBObjectProtocol, SystemEventsGenericMethods {
     optional func XMLElements() -> SBElementArray
     optional func id() -> String // the unique identifier of the XML data
-    optional var name: String { get set } // the name of the XML data
-    optional var text: String { get set } // the text representation of the XML data
+    optional var name: String { get } // the name of the XML data
+    optional var text: String { get } // the text representation of the XML data
+    optional func setName(name: String!) // the name of the XML data
+    optional func setText(text: String!) // the text representation of the XML data
 }
 extension SBObject: SystemEventsXMLData {}
 
@@ -1140,28 +1239,40 @@ extension SBObject: SystemEventsXMLData {}
     optional func XMLElements() -> SBElementArray
     optional func id() -> String // the unique identifier of the XML element
     optional var name: String { get } // the name of the XML element
-    optional var value: AnyObject { get set } // the value of the XML element
+    optional var value: AnyObject { get } // the value of the XML element
+    optional func setValue(value: AnyObject!) // the value of the XML element
 }
 extension SBObject: SystemEventsXMLElement {}
 
 // MARK: SystemEventsXMLFile
 @objc public protocol SystemEventsXMLFile: SystemEventsFile {
-    optional var contents: SystemEventsXMLData { get set } // the contents of the XML file; elements and properties of the XML data may be accessed as if they were elements and properties of the XML file
+    optional var contents: SystemEventsXMLData { get } // the contents of the XML file; elements and properties of the XML data may be accessed as if they were elements and properties of the XML file
+    optional func setContents(contents: SystemEventsXMLData!) // the contents of the XML file; elements and properties of the XML data may be accessed as if they were elements and properties of the XML file
 }
 extension SBObject: SystemEventsXMLFile {}
 
 // MARK: SystemEventsPrintSettings
 @objc public protocol SystemEventsPrintSettings: SBObjectProtocol, SystemEventsGenericMethods {
-    optional var copies: Int { get set } // the number of copies of a document to be printed
-    optional var collating: Bool { get set } // Should printed copies be collated?
-    optional var startingPage: Int { get set } // the first page of the document to be printed
-    optional var endingPage: Int { get set } // the last page of the document to be printed
-    optional var pagesAcross: Int { get set } // number of logical pages laid across a physical page
-    optional var pagesDown: Int { get set } // number of logical pages laid out down a physical page
-    optional var requestedPrintTime: NSDate { get set } // the time at which the desktop printer should print the document
-    optional var errorHandling: SystemEventsEnum { get set } // how errors are handled
-    optional var faxNumber: String { get set } // for fax number
-    optional var targetPrinter: String { get set } // for target printer
+    optional var copies: Int { get } // the number of copies of a document to be printed
+    optional var collating: Bool { get } // Should printed copies be collated?
+    optional var startingPage: Int { get } // the first page of the document to be printed
+    optional var endingPage: Int { get } // the last page of the document to be printed
+    optional var pagesAcross: Int { get } // number of logical pages laid across a physical page
+    optional var pagesDown: Int { get } // number of logical pages laid out down a physical page
+    optional var requestedPrintTime: NSDate { get } // the time at which the desktop printer should print the document
+    optional var errorHandling: SystemEventsEnum { get } // how errors are handled
+    optional var faxNumber: String { get } // for fax number
+    optional var targetPrinter: String { get } // for target printer
+    optional func setCopies(copies: Int) // the number of copies of a document to be printed
+    optional func setCollating(collating: Bool) // Should printed copies be collated?
+    optional func setStartingPage(startingPage: Int) // the first page of the document to be printed
+    optional func setEndingPage(endingPage: Int) // the last page of the document to be printed
+    optional func setPagesAcross(pagesAcross: Int) // number of logical pages laid across a physical page
+    optional func setPagesDown(pagesDown: Int) // number of logical pages laid out down a physical page
+    optional func setRequestedPrintTime(requestedPrintTime: NSDate!) // the time at which the desktop printer should print the document
+    optional func setErrorHandling(errorHandling: SystemEventsEnum) // how errors are handled
+    optional func setFaxNumber(faxNumber: String!) // for fax number
+    optional func setTargetPrinter(targetPrinter: String!) // for target printer
 }
 extension SBObject: SystemEventsPrintSettings {}
 

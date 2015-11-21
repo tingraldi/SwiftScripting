@@ -141,9 +141,10 @@ extension SBApplication: PagesApplication {}
     optional func placeholderTexts() -> SBElementArray
     optional func id() -> String // Document ID.
     optional var documentTemplate: PagesTemplate { get } // The template assigned to the document.
-    optional var bodyText: PagesRichText { get set } // The document body text.
+    optional var bodyText: PagesRichText { get } // The document body text.
     optional var documentBody: Bool { get } // Whether the document has body text.
     optional var currentPage: PagesPage { get } // Current page of the document.
+    optional func setBodyText(bodyText: PagesRichText!) // The document body text.
 }
 extension SBObject: PagesDocument {}
 
@@ -151,16 +152,21 @@ extension SBObject: PagesDocument {}
 @objc public protocol PagesWindow: SBObjectProtocol, PagesGenericMethods {
     optional var name: String { get } // The title of the window.
     optional func id() -> Int // The unique identifier of the window.
-    optional var index: Int { get set } // The index of the window, ordered front to back.
-    optional var bounds: NSRect { get set } // The bounding rectangle of the window.
+    optional var index: Int { get } // The index of the window, ordered front to back.
+    optional var bounds: NSRect { get } // The bounding rectangle of the window.
     optional var closeable: Bool { get } // Does the window have a close button?
     optional var miniaturizable: Bool { get } // Does the window have a minimize button?
-    optional var miniaturized: Bool { get set } // Is the window minimized right now?
+    optional var miniaturized: Bool { get } // Is the window minimized right now?
     optional var resizable: Bool { get } // Can the window be resized?
-    optional var visible: Bool { get set } // Is the window visible right now?
+    optional var visible: Bool { get } // Is the window visible right now?
     optional var zoomable: Bool { get } // Does the window have a zoom button?
-    optional var zoomed: Bool { get set } // Is the window zoomed right now?
+    optional var zoomed: Bool { get } // Is the window zoomed right now?
     optional var document: PagesDocument { get } // The document whose contents are displayed in the window.
+    optional func setIndex(index: Int) // The index of the window, ordered front to back.
+    optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
+    optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
+    optional func setVisible(visible: Bool) // Is the window visible right now?
+    optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
 }
 extension SBObject: PagesWindow {}
 
@@ -184,7 +190,8 @@ extension SBObject: PagesTemplate {}
     optional func shapes() -> SBElementArray
     optional func tables() -> SBElementArray
     optional func textItems() -> SBElementArray
-    optional var bodyText: PagesRichText { get set } // The section body text.
+    optional var bodyText: PagesRichText { get } // The section body text.
+    optional func setBodyText(bodyText: PagesRichText!) // The section body text.
 }
 extension SBObject: PagesSection {}
 
@@ -194,9 +201,12 @@ extension SBObject: PagesSection {}
     optional func paragraphs() -> SBElementArray
     optional func words() -> SBElementArray
     optional func placeholderTexts() -> SBElementArray
-    optional var color: NSColor { get set } // The color of the font. Expressed as an RGB value consisting of a list of three color values from 0 to 65535. ex: Blue = {0, 0, 65535}.
-    optional var font: String { get set } // The name of the font.  Can be the PostScript name, such as: “TimesNewRomanPS-ItalicMT”, or display name: “Times New Roman Italic”. TIP: Use the Font Book application get the information about a typeface.
-    optional var size: Int { get set } // The size of the font.
+    optional var color: NSColor { get } // The color of the font. Expressed as an RGB value consisting of a list of three color values from 0 to 65535. ex: Blue = {0, 0, 65535}.
+    optional var font: String { get } // The name of the font.  Can be the PostScript name, such as: “TimesNewRomanPS-ItalicMT”, or display name: “Times New Roman Italic”. TIP: Use the Font Book application get the information about a typeface.
+    optional var size: Int { get } // The size of the font.
+    optional func setColor(color: NSColor!) // The color of the font. Expressed as an RGB value consisting of a list of three color values from 0 to 65535. ex: Blue = {0, 0, 65535}.
+    optional func setFont(font: String!) // The name of the font.  Can be the PostScript name, such as: “TimesNewRomanPS-ItalicMT”, or display name: “Times New Roman Italic”. TIP: Use the Font Book application get the information about a typeface.
+    optional func setSize(size: Int) // The size of the font.
 }
 extension SBObject: PagesRichText {}
 
@@ -221,7 +231,8 @@ extension SBObject: PagesWord {}
 
 // MARK: PagesPlaceholderText
 @objc public protocol PagesPlaceholderText: PagesRichText {
-    optional var tag: String { get set } // Its script tag.
+    optional var tag: String { get } // Its script tag.
+    optional func setTag(tag: String!) // Its script tag.
 }
 extension SBObject: PagesPlaceholderText {}
 
@@ -242,36 +253,49 @@ extension SBObject: PagesIWorkContainer {}
 
 // MARK: PagesPage
 @objc public protocol PagesPage: PagesIWorkContainer {
-    optional var bodyText: PagesRichText { get set } // The page body text.
+    optional var bodyText: PagesRichText { get } // The page body text.
+    optional func setBodyText(bodyText: PagesRichText!) // The page body text.
 }
 extension SBObject: PagesPage {}
 
 // MARK: PagesIWorkItem
 @objc public protocol PagesIWorkItem: SBObjectProtocol, PagesGenericMethods {
-    optional var height: Int { get set } // The height of the iWork item.
-    optional var locked: Bool { get set } // Whether the object is locked.
+    optional var height: Int { get } // The height of the iWork item.
+    optional var locked: Bool { get } // Whether the object is locked.
     optional var parent: PagesIWorkContainer { get } // The iWork container containing this iWork item.
-    optional var position: NSPoint { get set } // The horizontal and vertical coordinates of the top left point of the iWork item.
-    optional var width: Int { get set } // The width of the iWork item.
+    optional var position: NSPoint { get } // The horizontal and vertical coordinates of the top left point of the iWork item.
+    optional var width: Int { get } // The width of the iWork item.
+    optional func setHeight(height: Int) // The height of the iWork item.
+    optional func setLocked(locked: Bool) // Whether the object is locked.
+    optional func setPosition(position: NSPoint) // The horizontal and vertical coordinates of the top left point of the iWork item.
+    optional func setWidth(width: Int) // The width of the iWork item.
 }
 extension SBObject: PagesIWorkItem {}
 
 // MARK: PagesAudioClip
 @objc public protocol PagesAudioClip: PagesIWorkItem {
-    optional var fileName: AnyObject { get set } // The name of the audio file.
-    optional var clipVolume: Int { get set } // The volume setting for the audio clip, from 0 (none) to 100 (full volume).
-    optional var repetitionMethod: PagesPlaybackRepetitionMethod { get set } // If or how the audio clip repeats.
+    optional var fileName: AnyObject { get } // The name of the audio file.
+    optional var clipVolume: Int { get } // The volume setting for the audio clip, from 0 (none) to 100 (full volume).
+    optional var repetitionMethod: PagesPlaybackRepetitionMethod { get } // If or how the audio clip repeats.
+    optional func setFileName(fileName: AnyObject!) // The name of the audio file.
+    optional func setClipVolume(clipVolume: Int) // The volume setting for the audio clip, from 0 (none) to 100 (full volume).
+    optional func setRepetitionMethod(repetitionMethod: PagesPlaybackRepetitionMethod) // If or how the audio clip repeats.
 }
 extension SBObject: PagesAudioClip {}
 
 // MARK: PagesShape
 @objc public protocol PagesShape: PagesIWorkItem {
     optional var backgroundFillType: PagesItemFillOptions { get } // The background, if any, for the shape.
-    optional var objectText: PagesRichText { get set } // The text contained within the shape.
-    optional var reflectionShowing: Bool { get set } // Is the iWork item displaying a reflection?
-    optional var reflectionValue: Int { get set } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
-    optional var rotation: Int { get set } // The rotation of the iWork item, in degrees from 0 to 359.
-    optional var opacity: Int { get set } // The opacity of the object, in percent.
+    optional var objectText: PagesRichText { get } // The text contained within the shape.
+    optional var reflectionShowing: Bool { get } // Is the iWork item displaying a reflection?
+    optional var reflectionValue: Int { get } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional var rotation: Int { get } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional var opacity: Int { get } // The opacity of the object, in percent.
+    optional func setObjectText(objectText: PagesRichText!) // The text contained within the shape.
+    optional func setReflectionShowing(reflectionShowing: Bool) // Is the iWork item displaying a reflection?
+    optional func setReflectionValue(reflectionValue: Int) // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional func setRotation(rotation: Int) // The rotation of the iWork item, in degrees from 0 to 359.
+    optional func setOpacity(opacity: Int) // The opacity of the object, in percent.
 }
 extension SBObject: PagesShape {}
 
@@ -282,45 +306,67 @@ extension SBObject: PagesChart {}
 
 // MARK: PagesImage
 @objc public protocol PagesImage: PagesIWorkItem {
-    optional var objectDescription: String { get set } // Text associated with the image, read aloud by VoiceOver.
+    optional var objectDescription: String { get } // Text associated with the image, read aloud by VoiceOver.
     optional var file: NSURL { get } // The image file.
-    optional var fileName: AnyObject { get set } // The name of the image file.
-    optional var opacity: Int { get set } // The opacity of the object, in percent.
-    optional var reflectionShowing: Bool { get set } // Is the iWork item displaying a reflection?
-    optional var reflectionValue: Int { get set } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
-    optional var rotation: Int { get set } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional var fileName: AnyObject { get } // The name of the image file.
+    optional var opacity: Int { get } // The opacity of the object, in percent.
+    optional var reflectionShowing: Bool { get } // Is the iWork item displaying a reflection?
+    optional var reflectionValue: Int { get } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional var rotation: Int { get } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional func setObjectDescription(objectDescription: String!) // Text associated with the image, read aloud by VoiceOver.
+    optional func setFileName(fileName: AnyObject!) // The name of the image file.
+    optional func setOpacity(opacity: Int) // The opacity of the object, in percent.
+    optional func setReflectionShowing(reflectionShowing: Bool) // Is the iWork item displaying a reflection?
+    optional func setReflectionValue(reflectionValue: Int) // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional func setRotation(rotation: Int) // The rotation of the iWork item, in degrees from 0 to 359.
 }
 extension SBObject: PagesImage {}
 
 // MARK: PagesGroup
 @objc public protocol PagesGroup: PagesIWorkContainer {
-    optional var height: Int { get set } // The height of the iWork item.
+    optional var height: Int { get } // The height of the iWork item.
     optional var parent: PagesIWorkContainer { get } // The iWork container containing this iWork item.
-    optional var position: NSPoint { get set } // The horizontal and vertical coordinates of the top left point of the iWork item.
-    optional var width: Int { get set } // The width of the iWork item.
-    optional var rotation: Int { get set } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional var position: NSPoint { get } // The horizontal and vertical coordinates of the top left point of the iWork item.
+    optional var width: Int { get } // The width of the iWork item.
+    optional var rotation: Int { get } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional func setHeight(height: Int) // The height of the iWork item.
+    optional func setPosition(position: NSPoint) // The horizontal and vertical coordinates of the top left point of the iWork item.
+    optional func setWidth(width: Int) // The width of the iWork item.
+    optional func setRotation(rotation: Int) // The rotation of the iWork item, in degrees from 0 to 359.
 }
 extension SBObject: PagesGroup {}
 
 // MARK: PagesLine
 @objc public protocol PagesLine: PagesIWorkItem {
-    optional var endPoint: NSPoint { get set } // A list of two numbers indicating the horizontal and vertical position of the line ending point.
-    optional var reflectionShowing: Bool { get set } // Is the iWork item displaying a reflection?
-    optional var reflectionValue: Int { get set } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
-    optional var rotation: Int { get set } // The rotation of the iWork item, in degrees from 0 to 359.
-    optional var startPoint: NSPoint { get set } // A list of two numbers indicating the horizontal and vertical position of the line starting point.
+    optional var endPoint: NSPoint { get } // A list of two numbers indicating the horizontal and vertical position of the line ending point.
+    optional var reflectionShowing: Bool { get } // Is the iWork item displaying a reflection?
+    optional var reflectionValue: Int { get } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional var rotation: Int { get } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional var startPoint: NSPoint { get } // A list of two numbers indicating the horizontal and vertical position of the line starting point.
+    optional func setEndPoint(endPoint: NSPoint) // A list of two numbers indicating the horizontal and vertical position of the line ending point.
+    optional func setReflectionShowing(reflectionShowing: Bool) // Is the iWork item displaying a reflection?
+    optional func setReflectionValue(reflectionValue: Int) // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional func setRotation(rotation: Int) // The rotation of the iWork item, in degrees from 0 to 359.
+    optional func setStartPoint(startPoint: NSPoint) // A list of two numbers indicating the horizontal and vertical position of the line starting point.
 }
 extension SBObject: PagesLine {}
 
 // MARK: PagesMovie
 @objc public protocol PagesMovie: PagesIWorkItem {
-    optional var fileName: AnyObject { get set } // The name of the movie file.
-    optional var movieVolume: Int { get set } // The volume setting for the movie, from 0 (none) to 100 (full volume).
-    optional var opacity: Int { get set } // The opacity of the object, in percent.
-    optional var reflectionShowing: Bool { get set } // Is the iWork item displaying a reflection?
-    optional var reflectionValue: Int { get set } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
-    optional var repetitionMethod: PagesPlaybackRepetitionMethod { get set } // If or how the movie repeats.
-    optional var rotation: Int { get set } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional var fileName: AnyObject { get } // The name of the movie file.
+    optional var movieVolume: Int { get } // The volume setting for the movie, from 0 (none) to 100 (full volume).
+    optional var opacity: Int { get } // The opacity of the object, in percent.
+    optional var reflectionShowing: Bool { get } // Is the iWork item displaying a reflection?
+    optional var reflectionValue: Int { get } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional var repetitionMethod: PagesPlaybackRepetitionMethod { get } // If or how the movie repeats.
+    optional var rotation: Int { get } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional func setFileName(fileName: AnyObject!) // The name of the movie file.
+    optional func setMovieVolume(movieVolume: Int) // The volume setting for the movie, from 0 (none) to 100 (full volume).
+    optional func setOpacity(opacity: Int) // The opacity of the object, in percent.
+    optional func setReflectionShowing(reflectionShowing: Bool) // Is the iWork item displaying a reflection?
+    optional func setReflectionValue(reflectionValue: Int) // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional func setRepetitionMethod(repetitionMethod: PagesPlaybackRepetitionMethod) // If or how the movie repeats.
+    optional func setRotation(rotation: Int) // The rotation of the iWork item, in degrees from 0 to 359.
 }
 extension SBObject: PagesMovie {}
 
@@ -330,26 +376,38 @@ extension SBObject: PagesMovie {}
     optional func rows() -> SBElementArray
     optional func columns() -> SBElementArray
     optional func ranges() -> SBElementArray
-    optional var name: String { get set } // The item's name.
+    optional var name: String { get } // The item's name.
     optional var cellRange: PagesRange { get } // The range describing every cell in the table.
-    optional var selectionRange: PagesRange { get set } // The cells currently selected in the table.
-    optional var rowCount: Int { get set } // The number of rows in the table.
-    optional var columnCount: Int { get set } // The number of columns in the table.
-    optional var headerRowCount: Int { get set } // The number of header rows in the table.
-    optional var headerColumnCount: Int { get set } // The number of header columns in the table.
-    optional var footerRowCount: Int { get set } // The number of footer rows in the table.
+    optional var selectionRange: PagesRange { get } // The cells currently selected in the table.
+    optional var rowCount: Int { get } // The number of rows in the table.
+    optional var columnCount: Int { get } // The number of columns in the table.
+    optional var headerRowCount: Int { get } // The number of header rows in the table.
+    optional var headerColumnCount: Int { get } // The number of header columns in the table.
+    optional var footerRowCount: Int { get } // The number of footer rows in the table.
     optional func sortBy(by: PagesColumn!, direction: PagesNMSD, inRows: PagesRange!) // Sort the rows of the table.
+    optional func setName(name: String!) // The item's name.
+    optional func setSelectionRange(selectionRange: PagesRange!) // The cells currently selected in the table.
+    optional func setRowCount(rowCount: Int) // The number of rows in the table.
+    optional func setColumnCount(columnCount: Int) // The number of columns in the table.
+    optional func setHeaderRowCount(headerRowCount: Int) // The number of header rows in the table.
+    optional func setHeaderColumnCount(headerColumnCount: Int) // The number of header columns in the table.
+    optional func setFooterRowCount(footerRowCount: Int) // The number of footer rows in the table.
 }
 extension SBObject: PagesTable {}
 
 // MARK: PagesTextItem
 @objc public protocol PagesTextItem: PagesIWorkItem {
     optional var backgroundFillType: PagesItemFillOptions { get } // The background, if any, for the text item.
-    optional var objectText: PagesRichText { get set } // The text contained within the text item.
-    optional var opacity: Int { get set } // The opacity of the object, in percent.
-    optional var reflectionShowing: Bool { get set } // Is the iWork item displaying a reflection?
-    optional var reflectionValue: Int { get set } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
-    optional var rotation: Int { get set } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional var objectText: PagesRichText { get } // The text contained within the text item.
+    optional var opacity: Int { get } // The opacity of the object, in percent.
+    optional var reflectionShowing: Bool { get } // Is the iWork item displaying a reflection?
+    optional var reflectionValue: Int { get } // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional var rotation: Int { get } // The rotation of the iWork item, in degrees from 0 to 359.
+    optional func setObjectText(objectText: PagesRichText!) // The text contained within the text item.
+    optional func setOpacity(opacity: Int) // The opacity of the object, in percent.
+    optional func setReflectionShowing(reflectionShowing: Bool) // Is the iWork item displaying a reflection?
+    optional func setReflectionValue(reflectionValue: Int) // The percentage of reflection of the iWork item, from 0 (none) to 100 (full).
+    optional func setRotation(rotation: Int) // The rotation of the iWork item, in degrees from 0 to 359.
 }
 extension SBObject: PagesTextItem {}
 
@@ -358,18 +416,26 @@ extension SBObject: PagesTextItem {}
     optional func cells() -> SBElementArray
     optional func columns() -> SBElementArray
     optional func rows() -> SBElementArray
-    optional var fontName: String { get set } // The font of the range's cells.
-    optional var fontSize: Double { get set } // The font size of the range's cells.
-    optional var format: PagesNMCT { get set } // The format of the range's cells.
-    optional var alignment: PagesTAHT { get set } // The horizontal alignment of content in the range's cells.
+    optional var fontName: String { get } // The font of the range's cells.
+    optional var fontSize: Double { get } // The font size of the range's cells.
+    optional var format: PagesNMCT { get } // The format of the range's cells.
+    optional var alignment: PagesTAHT { get } // The horizontal alignment of content in the range's cells.
     optional var name: String { get } // The range's coordinates.
-    optional var textColor: NSColor { get set } // The text color of the range's cells.
-    optional var textWrap: Bool { get set } // Whether text should wrap in the range's cells.
-    optional var backgroundColor: NSColor { get set } // The background color of the range's cells.
-    optional var verticalAlignment: PagesTAVT { get set } // The vertical alignment of content in the range's cells.
+    optional var textColor: NSColor { get } // The text color of the range's cells.
+    optional var textWrap: Bool { get } // Whether text should wrap in the range's cells.
+    optional var backgroundColor: NSColor { get } // The background color of the range's cells.
+    optional var verticalAlignment: PagesTAVT { get } // The vertical alignment of content in the range's cells.
     optional func clear() // Clear the contents of a specified range of cells. Only content is removed; formatting and style are preserved.
     optional func merge() // Merge a specified range of cells.
     optional func unmerge() // Unmerge all merged cells in a specified range.
+    optional func setFontName(fontName: String!) // The font of the range's cells.
+    optional func setFontSize(fontSize: Double) // The font size of the range's cells.
+    optional func setFormat(format: PagesNMCT) // The format of the range's cells.
+    optional func setAlignment(alignment: PagesTAHT) // The horizontal alignment of content in the range's cells.
+    optional func setTextColor(textColor: NSColor!) // The text color of the range's cells.
+    optional func setTextWrap(textWrap: Bool) // Whether text should wrap in the range's cells.
+    optional func setBackgroundColor(backgroundColor: NSColor!) // The background color of the range's cells.
+    optional func setVerticalAlignment(verticalAlignment: PagesTAVT) // The vertical alignment of content in the range's cells.
 }
 extension SBObject: PagesRange {}
 
@@ -377,23 +443,26 @@ extension SBObject: PagesRange {}
 @objc public protocol PagesCell: PagesRange {
     optional var column: PagesColumn { get } // The cell's column.
     optional var row: PagesRow { get } // The cell's row.
-    optional var value: AnyObject { get set } // The actual value in the cell, or missing value if the cell is empty.
+    optional var value: AnyObject { get } // The actual value in the cell, or missing value if the cell is empty.
     optional var formattedValue: String { get } // The formatted value in the cell, or missing value if the cell is empty.
     optional var formula: String { get } // The formula in the cell, as text, e.g. =SUM(40+2). If the cell does not contain a formula, returns missing value. To set the value of a cell to a formula as text, use the value property.
+    optional func setValue(value: AnyObject!) // The actual value in the cell, or missing value if the cell is empty.
 }
 extension SBObject: PagesCell {}
 
 // MARK: PagesRow
 @objc public protocol PagesRow: PagesRange {
     optional var address: Int { get } // The row's index in the table (e.g., the second row has address 2).
-    optional var height: Double { get set } // The height of the row.
+    optional var height: Double { get } // The height of the row.
+    optional func setHeight(height: Double) // The height of the row.
 }
 extension SBObject: PagesRow {}
 
 // MARK: PagesColumn
 @objc public protocol PagesColumn: PagesRange {
     optional var address: Int { get } // The column's index in the table (e.g., the second column has address 2).
-    optional var width: Double { get set } // The width of the column.
+    optional var width: Double { get } // The width of the column.
+    optional func setWidth(width: Double) // The width of the column.
 }
 extension SBObject: PagesColumn {}
 
