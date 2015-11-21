@@ -35,6 +35,7 @@
 
 import sys
 import struct
+import re
 
 from itertools import chain
 
@@ -78,6 +79,8 @@ base_protocols = """
 }
 """
 
+generic_pattern = re.compile(r'(.*)<(.*)>.*')
+
 
 def safe_name(name):
     return '`{}`'.format(name) if name in keywords else name
@@ -91,12 +94,29 @@ def arg_name(name, position=0):
         return safe_name(name)
 
 
+def type_for_spelling(spelling):
+    obj_type_string = spelling.strip().split(" ")[0]
+    return type_dict.get(obj_type_string, obj_type_string)
+
+
 def type_for_type(objc_type, as_arg=False):
-    obj_type_string = objc_type.spelling.split(" ")[0]
-    mapped_type = type_dict.get(obj_type_string, obj_type_string)
+    generic_match = generic_pattern.match(objc_type.spelling)
+    if generic_match:
+        #
+        # This is rudimentary support for lightweight generic declarations
+        # of NSArray, NSDictionary, and NSSet objects
+        #
+        base_type = generic_match.groups()[0]
+        opening, closing = {'NSSet': ('Set<', '>')}.get(base_type, ('[', ']'))
+        generic_parts = generic_match.groups()[1].split(",")
+        mapped_parts = [type_for_spelling(generic_part) for generic_part in generic_parts]
+        result_type = opening + " : ".join(mapped_parts) + closing
+    else:
+        result_type = type_for_spelling(objc_type.spelling)
+
     if as_arg and objc_type.kind in object_kinds:
-        mapped_type += '!'
-    return mapped_type
+        result_type += '!'
+    return result_type
 
 
 def name_from_path(path):
