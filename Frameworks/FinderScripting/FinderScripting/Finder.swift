@@ -167,7 +167,7 @@ import ScriptingBridge
     optional var trash: FinderTrashObject { get } // the trash
     optional var home: FinderFolder { get } // the home directory
     optional var computerContainer: FinderComputerObject { get } // the computer location (as in Go > Computer)
-    optional var FinderPreferences: FinderPreferences { get } // Various preferences that apply to the Finder as a whole
+    optional var FinderPreferences: SBObject { get } // Various preferences that apply to the Finder as a whole
     optional func quit() // Quit the Finder
     optional func activate() // Activate the specified window (or the Finder)
     optional func copy() // (NOT AVAILABLE YET) Copy the selected items to the clipboard (the Finder must be the front application)
