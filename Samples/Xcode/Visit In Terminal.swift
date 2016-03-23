@@ -44,8 +44,8 @@ let terminalWindow = terminal.windows!().objectAtLocation(1) as! TerminalWindow
 let tab = terminalWindow.selectedTab! as TerminalTab
 
 if !terminalWindow.frontmost! || tab.busy! {
-    terminal.doScript!(script, `in`:nil)
+    terminal.doScript!(script, in:nil)
 } else {
-    terminal.doScript!(script, `in`:terminalWindow)
+    terminal.doScript!(script, in:terminalWindow)
 }
 

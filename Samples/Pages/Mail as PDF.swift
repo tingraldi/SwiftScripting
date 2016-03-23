@@ -39,7 +39,7 @@ let tempDirectory = NSURL(fileURLWithPath: "/tmp")
 let pdfName = "\((document.name! as NSString).stringByDeletingPathExtension).pdf"
 let pdfURL = tempDirectory.URLByAppendingPathComponent(pdfName)
 
-document.exportTo!(pdfURL, `as`: .PDF, withProperties: nil)
+document.exportTo!(pdfURL, as: .PDF, withProperties: nil)
 
 let futureMessage = objectWithApplication(mail, scriptingClass: MailScripting.OutgoingMessage)
 mail.outgoingMessages!().addObject(futureMessage)
