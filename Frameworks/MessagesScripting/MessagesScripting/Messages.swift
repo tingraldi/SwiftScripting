@@ -120,18 +120,18 @@ import ScriptingBridge
 
 // MARK: MessagesGenericMethods
 @objc public protocol MessagesGenericMethods {
-    optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
-    optional func exists() -> Bool // Verify if an object exists.
-    optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
+    @objc optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
+    @objc optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
+    @objc optional func delete() // Delete an object.
+    @objc optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
+    @objc optional func exists() -> Bool // Verify if an object exists.
+    @objc optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 
 // MARK: MessagesItem
 @objc public protocol MessagesItem: SBObjectProtocol, MessagesGenericMethods {
-    optional var properties: [NSObject : AnyObject] { get } // All of the object's properties.
-    optional func setProperties(properties: [NSObject : AnyObject]!) // All of the object's properties.
+    @objc optional var properties: [NSObject : AnyObject] { get } // All of the object's properties.
+    @objc optional func setProperties(properties: [NSObject : AnyObject]!) // All of the object's properties.
 }
 extension SBObject: MessagesItem {}
 
@@ -142,264 +142,264 @@ extension SBObject: MessagesColor {}
 
 // MARK: MessagesDocument
 @objc public protocol MessagesDocument: SBObjectProtocol, MessagesGenericMethods {
-    optional var name: String { get } // The document's name.
-    optional var modified: Bool { get } // Has the document been modified since the last save?
-    optional var file: NSURL { get } // The document's location on disk.
+    @objc optional var name: String { get } // The document's name.
+    @objc optional var modified: Bool { get } // Has the document been modified since the last save?
+    @objc optional var file: NSURL { get } // The document's location on disk.
 }
 extension SBObject: MessagesDocument {}
 
 // MARK: MessagesWindow
 @objc public protocol MessagesWindow: SBObjectProtocol, MessagesGenericMethods {
-    optional var name: String { get } // The full title of the window.
-    optional func id() -> Int // The unique identifier of the window.
-    optional var index: Int { get } // The index of the window, ordered front to back.
-    optional var bounds: NSRect { get } // The bounding rectangle of the window.
-    optional var closeable: Bool { get } // Whether the window has a close box.
-    optional var minimizable: Bool { get } // Whether the window can be minimized.
-    optional var minimized: Bool { get } // Whether the window is currently minimized.
-    optional var resizable: Bool { get } // Whether the window can be resized.
-    optional var visible: Bool { get } // Whether the window is currently visible.
-    optional var zoomable: Bool { get } // Whether the window can be zoomed.
-    optional var zoomed: Bool { get } // Whether the window is currently zoomed.
-    optional var document: MessagesDocument { get } // The document whose contents are being displayed in the window.
-    optional func setIndex(index: Int) // The index of the window, ordered front to back.
-    optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
-    optional func setMinimized(minimized: Bool) // Whether the window is currently minimized.
-    optional func setVisible(visible: Bool) // Whether the window is currently visible.
-    optional func setZoomed(zoomed: Bool) // Whether the window is currently zoomed.
+    @objc optional var name: String { get } // The full title of the window.
+    @objc optional func id() -> Int // The unique identifier of the window.
+    @objc optional var index: Int { get } // The index of the window, ordered front to back.
+    @objc optional var bounds: NSRect { get } // The bounding rectangle of the window.
+    @objc optional var closeable: Bool { get } // Whether the window has a close box.
+    @objc optional var minimizable: Bool { get } // Whether the window can be minimized.
+    @objc optional var minimized: Bool { get } // Whether the window is currently minimized.
+    @objc optional var resizable: Bool { get } // Whether the window can be resized.
+    @objc optional var visible: Bool { get } // Whether the window is currently visible.
+    @objc optional var zoomable: Bool { get } // Whether the window can be zoomed.
+    @objc optional var zoomed: Bool { get } // Whether the window is currently zoomed.
+    @objc optional var document: MessagesDocument { get } // The document whose contents are being displayed in the window.
+    @objc optional func setIndex(index: Int) // The index of the window, ordered front to back.
+    @objc optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
+    @objc optional func setMinimized(minimized: Bool) // Whether the window is currently minimized.
+    @objc optional func setVisible(visible: Bool) // Whether the window is currently visible.
+    @objc optional func setZoomed(zoomed: Bool) // Whether the window is currently zoomed.
 }
 extension SBObject: MessagesWindow {}
 
 // MARK: MessagesRichText
 @objc public protocol MessagesRichText: SBObjectProtocol, MessagesGenericMethods {
-    optional func characters() -> SBElementArray
-    optional func paragraphs() -> SBElementArray
-    optional func words() -> SBElementArray
-    optional func attributeRuns() -> SBElementArray
-    optional func attachments() -> SBElementArray
-    optional var color: NSColor { get } // The color of the first character.
-    optional var font: String { get } // The name of the font of the first character.
-    optional var size: Double { get } // The size in points of the first character.
-    optional func setColor(color: NSColor!) // The color of the first character.
-    optional func setFont(font: String!) // The name of the font of the first character.
-    optional func setSize(size: Double) // The size in points of the first character.
+    @objc optional func characters() -> SBElementArray
+    @objc optional func paragraphs() -> SBElementArray
+    @objc optional func words() -> SBElementArray
+    @objc optional func attributeRuns() -> SBElementArray
+    @objc optional func attachments() -> SBElementArray
+    @objc optional var color: NSColor { get } // The color of the first character.
+    @objc optional var font: String { get } // The name of the font of the first character.
+    @objc optional var size: Double { get } // The size in points of the first character.
+    @objc optional func setColor(color: NSColor!) // The color of the first character.
+    @objc optional func setFont(font: String!) // The name of the font of the first character.
+    @objc optional func setSize(size: Double) // The size in points of the first character.
 }
 extension SBObject: MessagesRichText {}
 
 // MARK: MessagesCharacter
 @objc public protocol MessagesCharacter: SBObjectProtocol, MessagesGenericMethods {
-    optional func characters() -> SBElementArray
-    optional func paragraphs() -> SBElementArray
-    optional func words() -> SBElementArray
-    optional func attributeRuns() -> SBElementArray
-    optional func attachments() -> SBElementArray
-    optional var color: NSColor { get } // The color of the first character.
-    optional var font: String { get } // The name of the font of the first character.
-    optional var size: Int { get } // The size in points of the first character.
-    optional func setColor(color: NSColor!) // The color of the first character.
-    optional func setFont(font: String!) // The name of the font of the first character.
-    optional func setSize(size: Int) // The size in points of the first character.
+    @objc optional func characters() -> SBElementArray
+    @objc optional func paragraphs() -> SBElementArray
+    @objc optional func words() -> SBElementArray
+    @objc optional func attributeRuns() -> SBElementArray
+    @objc optional func attachments() -> SBElementArray
+    @objc optional var color: NSColor { get } // The color of the first character.
+    @objc optional var font: String { get } // The name of the font of the first character.
+    @objc optional var size: Int { get } // The size in points of the first character.
+    @objc optional func setColor(color: NSColor!) // The color of the first character.
+    @objc optional func setFont(font: String!) // The name of the font of the first character.
+    @objc optional func setSize(size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesCharacter {}
 
 // MARK: MessagesParagraph
 @objc public protocol MessagesParagraph: SBObjectProtocol, MessagesGenericMethods {
-    optional func characters() -> SBElementArray
-    optional func paragraphs() -> SBElementArray
-    optional func words() -> SBElementArray
-    optional func attributeRuns() -> SBElementArray
-    optional func attachments() -> SBElementArray
-    optional var color: NSColor { get } // The color of the first character.
-    optional var font: String { get } // The name of the font of the first character.
-    optional var size: Int { get } // The size in points of the first character.
-    optional func setColor(color: NSColor!) // The color of the first character.
-    optional func setFont(font: String!) // The name of the font of the first character.
-    optional func setSize(size: Int) // The size in points of the first character.
+    @objc optional func characters() -> SBElementArray
+    @objc optional func paragraphs() -> SBElementArray
+    @objc optional func words() -> SBElementArray
+    @objc optional func attributeRuns() -> SBElementArray
+    @objc optional func attachments() -> SBElementArray
+    @objc optional var color: NSColor { get } // The color of the first character.
+    @objc optional var font: String { get } // The name of the font of the first character.
+    @objc optional var size: Int { get } // The size in points of the first character.
+    @objc optional func setColor(color: NSColor!) // The color of the first character.
+    @objc optional func setFont(font: String!) // The name of the font of the first character.
+    @objc optional func setSize(size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesParagraph {}
 
 // MARK: MessagesWord
 @objc public protocol MessagesWord: SBObjectProtocol, MessagesGenericMethods {
-    optional func characters() -> SBElementArray
-    optional func paragraphs() -> SBElementArray
-    optional func words() -> SBElementArray
-    optional func attributeRuns() -> SBElementArray
-    optional func attachments() -> SBElementArray
-    optional var color: NSColor { get } // The color of the first character.
-    optional var font: String { get } // The name of the font of the first character.
-    optional var size: Int { get } // The size in points of the first character.
-    optional func setColor(color: NSColor!) // The color of the first character.
-    optional func setFont(font: String!) // The name of the font of the first character.
-    optional func setSize(size: Int) // The size in points of the first character.
+    @objc optional func characters() -> SBElementArray
+    @objc optional func paragraphs() -> SBElementArray
+    @objc optional func words() -> SBElementArray
+    @objc optional func attributeRuns() -> SBElementArray
+    @objc optional func attachments() -> SBElementArray
+    @objc optional var color: NSColor { get } // The color of the first character.
+    @objc optional var font: String { get } // The name of the font of the first character.
+    @objc optional var size: Int { get } // The size in points of the first character.
+    @objc optional func setColor(color: NSColor!) // The color of the first character.
+    @objc optional func setFont(font: String!) // The name of the font of the first character.
+    @objc optional func setSize(size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesWord {}
 
 // MARK: MessagesAttributeRun
 @objc public protocol MessagesAttributeRun: SBObjectProtocol, MessagesGenericMethods {
-    optional func characters() -> SBElementArray
-    optional func paragraphs() -> SBElementArray
-    optional func words() -> SBElementArray
-    optional func attributeRuns() -> SBElementArray
-    optional func attachments() -> SBElementArray
-    optional var color: NSColor { get } // The color of the first character.
-    optional var font: String { get } // The name of the font of the first character.
-    optional var size: Int { get } // The size in points of the first character.
-    optional func setColor(color: NSColor!) // The color of the first character.
-    optional func setFont(font: String!) // The name of the font of the first character.
-    optional func setSize(size: Int) // The size in points of the first character.
+    @objc optional func characters() -> SBElementArray
+    @objc optional func paragraphs() -> SBElementArray
+    @objc optional func words() -> SBElementArray
+    @objc optional func attributeRuns() -> SBElementArray
+    @objc optional func attachments() -> SBElementArray
+    @objc optional var color: NSColor { get } // The color of the first character.
+    @objc optional var font: String { get } // The name of the font of the first character.
+    @objc optional var size: Int { get } // The size in points of the first character.
+    @objc optional func setColor(color: NSColor!) // The color of the first character.
+    @objc optional func setFont(font: String!) // The name of the font of the first character.
+    @objc optional func setSize(size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesAttributeRun {}
 
 // MARK: MessagesAttachment
 @objc public protocol MessagesAttachment: MessagesRichText {
-    optional var file: NSURL { get } // The path to the file for the attachment
+    @objc optional var file: NSURL { get } // The path to the file for the attachment
 }
 extension SBObject: MessagesAttachment {}
 
 // MARK: MessagesApplication
 @objc public protocol MessagesApplication: SBApplicationProtocol {
-    optional func buddies() -> SBElementArray
-    optional func services() -> SBElementArray
-    optional func fileTransfers() -> SBElementArray
-    optional func chats() -> SBElementArray
-    optional func textChats() -> SBElementArray
-    optional func audioChats() -> SBElementArray
-    optional func videoChats() -> SBElementArray
-    optional func authorizationRequests() -> SBElementArray
-    optional func documents() -> SBElementArray
-    optional func windows() -> SBElementArray
-    optional var idleTime: Int { get } // Time in seconds that I have been idle.
-    optional var image: NSImage { get } // My image as it appears in all services.
-    optional var status: MessagesMyStatus { get } // My status on all services.
-    optional var statusMessage: String { get } // My status message, visible to other people while I am online.
-    optional var activeAvChat: MessagesAudioChat { get } // The currently active audio or video chat.
-    optional var name: String { get } // The name of the application.
-    optional var frontmost: Bool { get } // Is this the frontmost (active) application?
-    optional var version: String { get } // The version of the application.
-    optional func open(x: [AnyObject]!) // Open a document.
-    optional func print(x: NSURL!) // Print an object.
-    optional func quitSaving(saving: MessagesSaveOptions) // Quit the application.
-    optional func invite(x: [AnyObject]!, to: AnyObject!, withMessage: String!) // Invites a buddy to join an existing chat.
-    optional func logIn() // Log in to the specified service, or all services if none is specified. If the account password is not in the keychain the user will be prompted to enter one.
-    optional func logOut() // Logs out of a service, or all services if none is specified.
-    optional func send(x: AnyObject!, to: AnyObject!) // Sends a message or file to a buddy or to a chat.
-    optional func storeRecentPicture() // Stores the currently set buddy picture into your recent pictures.
-    optional func showChatChooserFor(for_: MessagesBuddy!) // displays a dialog in Messages to start a new chat with the specified buddy
-    optional func setImage(image: NSImage!) // My image as it appears in all services.
-    optional func setStatus(status: MessagesMyStatus) // My status on all services.
-    optional func setStatusMessage(statusMessage: String!) // My status message, visible to other people while I am online.
-    optional func setActiveAvChat(activeAvChat: MessagesAudioChat!) // The currently active audio or video chat.
+    @objc optional func buddies() -> SBElementArray
+    @objc optional func services() -> SBElementArray
+    @objc optional func fileTransfers() -> SBElementArray
+    @objc optional func chats() -> SBElementArray
+    @objc optional func textChats() -> SBElementArray
+    @objc optional func audioChats() -> SBElementArray
+    @objc optional func videoChats() -> SBElementArray
+    @objc optional func authorizationRequests() -> SBElementArray
+    @objc optional func documents() -> SBElementArray
+    @objc optional func windows() -> SBElementArray
+    @objc optional var idleTime: Int { get } // Time in seconds that I have been idle.
+    @objc optional var image: NSImage { get } // My image as it appears in all services.
+    @objc optional var status: MessagesMyStatus { get } // My status on all services.
+    @objc optional var statusMessage: String { get } // My status message, visible to other people while I am online.
+    @objc optional var activeAvChat: MessagesAudioChat { get } // The currently active audio or video chat.
+    @objc optional var name: String { get } // The name of the application.
+    @objc optional var frontmost: Bool { get } // Is this the frontmost (active) application?
+    @objc optional var version: String { get } // The version of the application.
+    @objc optional func open(x: [NSURL]!) // Open a document.
+    @objc optional func print(x: NSURL!) // Print an object.
+    @objc optional func quitSaving(saving: MessagesSaveOptions) // Quit the application.
+    @objc optional func invite(x: [MessagesBuddy]!, to: AnyObject!, withMessage: String!) // Invites a buddy to join an existing chat.
+    @objc optional func logIn() // Log in to the specified service, or all services if none is specified. If the account password is not in the keychain the user will be prompted to enter one.
+    @objc optional func logOut() // Logs out of a service, or all services if none is specified.
+    @objc optional func send(x: AnyObject!, to: AnyObject!) // Sends a message or file to a buddy or to a chat.
+    @objc optional func storeRecentPicture() // Stores the currently set buddy picture into your recent pictures.
+    @objc optional func showChatChooserFor(for_: MessagesBuddy!) // displays a dialog in Messages to start a new chat with the specified buddy
+    @objc optional func setImage(image: NSImage!) // My image as it appears in all services.
+    @objc optional func setStatus(status: MessagesMyStatus) // My status on all services.
+    @objc optional func setStatusMessage(statusMessage: String!) // My status message, visible to other people while I am online.
+    @objc optional func setActiveAvChat(activeAvChat: MessagesAudioChat!) // The currently active audio or video chat.
 }
 extension SBApplication: MessagesApplication {}
 
 // MARK: MessagesBuddy
 @objc public protocol MessagesBuddy: MessagesItem {
-    optional func id() -> String // The buddy's service and handle. For example: AIM:JohnDoe007
-    optional var service: MessagesService { get } // The service on which this buddy exists.
-    optional var name: String { get } // The buddy's name as it appears in the buddy list.
-    optional var handle: String { get } // The buddy's online account name.
-    optional var status: MessagesAccountStatus { get } // The buddy's current status.
-    optional var statusMessage: String { get } // The buddy's current status message.
-    optional var idleTime: Int { get } // The time in seconds the buddy has been idle.
-    optional var capabilities: [AnyObject] { get } // The buddy's messaging capabilities.
-    optional var image: NSImage { get } // The buddy's custom image.
-    optional var firstName: String { get } // The first name from this buddy's Contacts card, if available
-    optional var lastName: String { get } // The last name from this buddy's Contacts card, if available
-    optional var fullName: String { get } // The full name from this buddy's Contacts card, if available
+    @objc optional func id() -> String // The buddy's service and handle. For example: AIM:JohnDoe007
+    @objc optional var service: MessagesService { get } // The service on which this buddy exists.
+    @objc optional var name: String { get } // The buddy's name as it appears in the buddy list.
+    @objc optional var handle: String { get } // The buddy's online account name.
+    @objc optional var status: MessagesAccountStatus { get } // The buddy's current status.
+    @objc optional var statusMessage: String { get } // The buddy's current status message.
+    @objc optional var idleTime: Int { get } // The time in seconds the buddy has been idle.
+    @objc optional var capabilities: [NSAppleEventDescriptor] { get } // The buddy's messaging capabilities.
+    @objc optional var image: NSImage { get } // The buddy's custom image.
+    @objc optional var firstName: String { get } // The first name from this buddy's Contacts card, if available
+    @objc optional var lastName: String { get } // The last name from this buddy's Contacts card, if available
+    @objc optional var fullName: String { get } // The full name from this buddy's Contacts card, if available
 }
 extension SBObject: MessagesBuddy {}
 
 // MARK: MessagesService
 @objc public protocol MessagesService: MessagesItem {
-    optional func buddies() -> SBElementArray
-    optional func chats() -> SBElementArray
-    optional func id() -> String // A guid identifier for this service.
-    optional var name: String { get } // The name of this service as defined in Account preferences description field
-    optional var enabled: Bool { get } // Is the service enabled?
-    optional var connectionStatus: MessagesConnectionStatus { get } // The connection status for this account.
-    optional var status: MessagesMyStatus { get } // My status on this service.
-    optional var statusMessage: String { get } // My status message, visible to other people on this service while I am online.
-    optional var serviceType: MessagesServiceType { get } // The type of protocol for this service
-    optional func logIn() // Log in to the specified service, or all services if none is specified. If the account password is not in the keychain the user will be prompted to enter one.
-    optional func logOut() // Logs out of a service, or all services if none is specified.
-    optional func setName(name: String!) // The name of this service as defined in Account preferences description field
-    optional func setEnabled(enabled: Bool) // Is the service enabled?
-    optional func setStatus(status: MessagesMyStatus) // My status on this service.
-    optional func setStatusMessage(statusMessage: String!) // My status message, visible to other people on this service while I am online.
+    @objc optional func buddies() -> SBElementArray
+    @objc optional func chats() -> SBElementArray
+    @objc optional func id() -> String // A guid identifier for this service.
+    @objc optional var name: String { get } // The name of this service as defined in Account preferences description field
+    @objc optional var enabled: Bool { get } // Is the service enabled?
+    @objc optional var connectionStatus: MessagesConnectionStatus { get } // The connection status for this account.
+    @objc optional var status: MessagesMyStatus { get } // My status on this service.
+    @objc optional var statusMessage: String { get } // My status message, visible to other people on this service while I am online.
+    @objc optional var serviceType: MessagesServiceType { get } // The type of protocol for this service
+    @objc optional func logIn() // Log in to the specified service, or all services if none is specified. If the account password is not in the keychain the user will be prompted to enter one.
+    @objc optional func logOut() // Logs out of a service, or all services if none is specified.
+    @objc optional func setName(name: String!) // The name of this service as defined in Account preferences description field
+    @objc optional func setEnabled(enabled: Bool) // Is the service enabled?
+    @objc optional func setStatus(status: MessagesMyStatus) // My status on this service.
+    @objc optional func setStatusMessage(statusMessage: String!) // My status message, visible to other people on this service while I am online.
 }
 extension SBObject: MessagesService {}
 
 // MARK: MessagesChat
 @objc public protocol MessagesChat: SBObjectProtocol, MessagesGenericMethods {
-    optional func id() -> String // A guid identifier for this chat.
-    optional var service: MessagesService { get } // The service which is participating in this chat.
-    optional var participants: [AnyObject] { get } // Other participants of this chat. This property may be specified at time of creation.
-    optional var secure: Bool { get } // Is this chat secure?
-    optional var invitation: Bool { get } // Is this an invitation to a chat?
-    optional var active: Bool { get } // Is this chat currently active?
-    optional var started: NSDate { get } // The date on which this chat started.
-    optional var updated: NSDate { get } // The date when this chat was last updated.
-    optional func accept() // Accepts an incoming text, audio, or video chat invitation, or file transfer
-    optional func decline() // Declines an incoming text, audio, or video chat invitation, or file transfer
+    @objc optional func id() -> String // A guid identifier for this chat.
+    @objc optional var service: MessagesService { get } // The service which is participating in this chat.
+    @objc optional var participants: [MessagesBuddy] { get } // Other participants of this chat. This property may be specified at time of creation.
+    @objc optional var secure: Bool { get } // Is this chat secure?
+    @objc optional var invitation: Bool { get } // Is this an invitation to a chat?
+    @objc optional var active: Bool { get } // Is this chat currently active?
+    @objc optional var started: NSDate { get } // The date on which this chat started.
+    @objc optional var updated: NSDate { get } // The date when this chat was last updated.
+    @objc optional func accept() // Accepts an incoming text, audio, or video chat invitation, or file transfer
+    @objc optional func decline() // Declines an incoming text, audio, or video chat invitation, or file transfer
 }
 extension SBObject: MessagesChat {}
 
 // MARK: MessagesTextChat
 @objc public protocol MessagesTextChat: MessagesChat {
-    optional var subject: String { get } // The subject of this chat, if available.
-    optional var invitationMessage: String { get } // An invitation message. This may only be specified at the time of creation. This message will be sent to chat participants when the chat is created.
-    optional var joinState: MessagesJoinState { get } // How you are joined to this chat
-    optional var name: String { get } // The address or room name of this chat. This property may be specified at time of creation.
-    optional var chatType: MessagesChatType { get } // The type of this chat.
+    @objc optional var subject: String { get } // The subject of this chat, if available.
+    @objc optional var invitationMessage: String { get } // An invitation message. This may only be specified at the time of creation. This message will be sent to chat participants when the chat is created.
+    @objc optional var joinState: MessagesJoinState { get } // How you are joined to this chat
+    @objc optional var name: String { get } // The address or room name of this chat. This property may be specified at time of creation.
+    @objc optional var chatType: MessagesChatType { get } // The type of this chat.
 }
 extension SBObject: MessagesTextChat {}
 
 // MARK: MessagesAudioChat
 @objc public protocol MessagesAudioChat: MessagesChat {
-    optional var screenSharing: MessagesScreenSharing { get } // Type of screen sharing session taking place within this chat.
-    optional var muted: Bool { get } // Is the chat muted?
-    optional var avConnectionStatus: MessagesAvConnectionStatus { get } // The connection state for this av chat.
-    optional func requestRecording() // Sends a recording request to all participants of an audio or video chat. Recording will not start until all participants have agreed to allow recording.
-    optional func stopRecording() // Ends recording of an audio or video chat.
-    optional func setMuted(muted: Bool) // Is the chat muted?
+    @objc optional var screenSharing: MessagesScreenSharing { get } // Type of screen sharing session taking place within this chat.
+    @objc optional var muted: Bool { get } // Is the chat muted?
+    @objc optional var avConnectionStatus: MessagesAvConnectionStatus { get } // The connection state for this av chat.
+    @objc optional func requestRecording() // Sends a recording request to all participants of an audio or video chat. Recording will not start until all participants have agreed to allow recording.
+    @objc optional func stopRecording() // Ends recording of an audio or video chat.
+    @objc optional func setMuted(muted: Bool) // Is the chat muted?
 }
 extension SBObject: MessagesAudioChat {}
 
 // MARK: MessagesVideoChat
 @objc public protocol MessagesVideoChat: MessagesAudioChat {
-    optional var paused: Bool { get } // Is the chat paused?
-    optional var showingFullScreen: Bool { get } // Is the chat being displayed in full screen mode?
-    optional var showingLocalVideo: Bool { get } // Is the local video preview being displayed?
-    optional func takeSnapshot() // Takes a snapshot of a video chat and saves it to a desktop.
-    optional func setPaused(paused: Bool) // Is the chat paused?
-    optional func setShowingFullScreen(showingFullScreen: Bool) // Is the chat being displayed in full screen mode?
-    optional func setShowingLocalVideo(showingLocalVideo: Bool) // Is the local video preview being displayed?
+    @objc optional var paused: Bool { get } // Is the chat paused?
+    @objc optional var showingFullScreen: Bool { get } // Is the chat being displayed in full screen mode?
+    @objc optional var showingLocalVideo: Bool { get } // Is the local video preview being displayed?
+    @objc optional func takeSnapshot() // Takes a snapshot of a video chat and saves it to a desktop.
+    @objc optional func setPaused(paused: Bool) // Is the chat paused?
+    @objc optional func setShowingFullScreen(showingFullScreen: Bool) // Is the chat being displayed in full screen mode?
+    @objc optional func setShowingLocalVideo(showingLocalVideo: Bool) // Is the local video preview being displayed?
 }
 extension SBObject: MessagesVideoChat {}
 
 // MARK: MessagesAuthorizationRequest
 @objc public protocol MessagesAuthorizationRequest: MessagesItem {
-    optional func id() -> String // The guid for this authorization request
-    optional var service: MessagesService { get } // The service on which authorization was requested.
-    optional var buddy: MessagesBuddy { get } // The buddy requesting authorization
+    @objc optional func id() -> String // The guid for this authorization request
+    @objc optional var service: MessagesService { get } // The service on which authorization was requested.
+    @objc optional var buddy: MessagesBuddy { get } // The buddy requesting authorization
 }
 extension SBObject: MessagesAuthorizationRequest {}
 
 // MARK: MessagesFileTransfer
 @objc public protocol MessagesFileTransfer: MessagesItem {
-    optional func id() -> String // The guid for this file transfer
-    optional var name: String { get } // The name of this file
-    optional var file: NSURL { get } // The local path to this file transfer
-    optional var direction: MessagesDirection { get } // The direction in which this file is being sent
-    optional var service: MessagesService { get } // The service on which this file transfer is taking place
-    optional var buddy: MessagesBuddy { get } // The account participating in this file transfer
-    optional var secure: Bool { get } // Is this file transfer secure?
-    optional var fileSize: Int { get } // The total size in bytes of the completed file transfer
-    optional var fileProgress: Int { get } // The number of bytes that have been transferred
-    optional var transferStatus: MessagesTransferStatus { get } // The current status of this file transfer
-    optional var started: NSDate { get } // The date that this file transfer started
-    optional func accept() // Accepts an incoming text, audio, or video chat invitation, or file transfer
-    optional func decline() // Declines an incoming text, audio, or video chat invitation, or file transfer
+    @objc optional func id() -> String // The guid for this file transfer
+    @objc optional var name: String { get } // The name of this file
+    @objc optional var file: NSURL { get } // The local path to this file transfer
+    @objc optional var direction: MessagesDirection { get } // The direction in which this file is being sent
+    @objc optional var service: MessagesService { get } // The service on which this file transfer is taking place
+    @objc optional var buddy: MessagesBuddy { get } // The account participating in this file transfer
+    @objc optional var secure: Bool { get } // Is this file transfer secure?
+    @objc optional var fileSize: Int { get } // The total size in bytes of the completed file transfer
+    @objc optional var fileProgress: Int { get } // The number of bytes that have been transferred
+    @objc optional var transferStatus: MessagesTransferStatus { get } // The current status of this file transfer
+    @objc optional var started: NSDate { get } // The date that this file transfer started
+    @objc optional func accept() // Accepts an incoming text, audio, or video chat invitation, or file transfer
+    @objc optional func decline() // Declines an incoming text, audio, or video chat invitation, or file transfer
 }
 extension SBObject: MessagesFileTransfer {}
 

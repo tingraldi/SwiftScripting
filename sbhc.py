@@ -168,7 +168,7 @@ class SBHeaderProcessor(object):
 
     def emit_property(self, cursor):
         swift_type = type_for_type(cursor.type)
-        self.emit_line('    optional var {}: {} {{ get }}{}'.format(cursor.spelling, swift_type,
+        self.emit_line('    @objc optional var {}: {} {{ get }}{}'.format(cursor.spelling, swift_type,
                                                                     self.line_comment(cursor)))
 
     def emit_function(self, cursor):
@@ -181,7 +181,7 @@ class SBHeaderProcessor(object):
             return_string = ' -> {}'.format(type_for_type(return_type[0]))
         else:
             return_string = ''
-        self.emit_line('    optional func {}({}){}{}'.format(
+        self.emit_line('    @objc optional func {}({}){}{}'.format(
             func_name, ", ".join(parameters), return_string, self.line_comment(cursor)))
 
     def emit_protocol(self, cursor):

@@ -169,367 +169,367 @@ import ScriptingBridge
 
 // MARK: ImageEventsGenericMethods
 @objc public protocol ImageEventsGenericMethods {
-    optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func delete() // Delete an object.
-    optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    optional func moveTo(to: SBObject!) // Move an object to a new location.
-    optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    optional func cropToDimensions(toDimensions: [AnyObject]!) // Crop an image
-    optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    optional func padToDimensions(toDimensions: [AnyObject]!, withPadColor: [AnyObject]!) // Pad an image
-    optional func rotateToAngle(toAngle: Double) // Rotate an image
-    optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
-    optional func unembed() // Remove any embedded ICC profiles from an image
+    @objc optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
+    @objc optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+    @objc optional func delete() // Delete an object.
+    @objc optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
+    @objc optional func moveTo(to: SBObject!) // Move an object to a new location.
+    @objc optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
+    @objc optional func cropToDimensions(toDimensions: [NSNumber]!) // Crop an image
+    @objc optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
+    @objc optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
+    @objc optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
+    @objc optional func padToDimensions(toDimensions: [NSNumber]!, withPadColor: [NSNumber]!) // Pad an image
+    @objc optional func rotateToAngle(toAngle: Double) // Rotate an image
+    @objc optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
+    @objc optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
+    @objc optional func unembed() // Remove any embedded ICC profiles from an image
 }
 
 // MARK: ImageEventsApplication
 @objc public protocol ImageEventsApplication: SBApplicationProtocol {
-    optional func documents() -> SBElementArray
-    optional func windows() -> SBElementArray
-    optional var name: String { get } // The name of the application.
-    optional var frontmost: Bool { get } // Is this the active application?
-    optional var version: String { get } // The version number of the application.
-    optional func open(x: AnyObject!) -> AnyObject // Open a document.
-    optional func print(x: AnyObject!, withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    optional func quitSaving(saving: ImageEventsSaveOptions) // Quit the application.
-    optional func exists(x: AnyObject!) -> Bool // Verify that an object exists.
-    optional func move(x: AnyObject!, to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
-    optional func aliases() -> SBElementArray
-    optional func disks() -> SBElementArray
-    optional func diskItems() -> SBElementArray
-    optional func domains() -> SBElementArray
-    optional func files() -> SBElementArray
-    optional func filePackages() -> SBElementArray
-    optional func folders() -> SBElementArray
-    optional var applicationSupportFolder: ImageEventsFolder { get } // The Application Support folder
-    optional var applicationsFolder: ImageEventsFolder { get } // The user's Applications folder
-    optional var ClassicDomain: ImageEventsClassicDomainObject { get } // the collection of folders belonging to the Classic System
-    optional var desktopFolder: ImageEventsFolder { get } // The user's Desktop folder
-    optional var desktopPicturesFolder: ImageEventsFolder { get } // The Desktop Pictures folder
-    optional var documentsFolder: ImageEventsFolder { get } // The user's Documents folder
-    optional var downloadsFolder: ImageEventsFolder { get } // The user's Downloads folder
-    optional var favoritesFolder: ImageEventsFolder { get } // The user's Favorites folder
-    optional var FolderActionScriptsFolder: ImageEventsFolder { get } // The user's Folder Action Scripts folder
-    optional var fontsFolder: ImageEventsFolder { get } // The Fonts folder
-    optional var homeFolder: ImageEventsFolder { get } // The Home folder of the currently logged in user
-    optional var libraryFolder: ImageEventsFolder { get } // The Library folder
-    optional var localDomain: ImageEventsLocalDomainObject { get } // the collection of folders residing on the Local machine
-    optional var moviesFolder: ImageEventsFolder { get } // The user's Movies folder
-    optional var musicFolder: ImageEventsFolder { get } // The user's Music folder
-    optional var networkDomain: ImageEventsNetworkDomainObject { get } // the collection of folders residing on the Network
-    optional var picturesFolder: ImageEventsFolder { get } // The user's Pictures folder
-    optional var preferencesFolder: ImageEventsFolder { get } // The user's Preferences folder
-    optional var publicFolder: ImageEventsFolder { get } // The user's Public folder
-    optional var scriptingAdditionsFolder: ImageEventsFolder { get } // The Scripting Additions folder
-    optional var scriptsFolder: ImageEventsFolder { get } // The user's Scripts folder
-    optional var sharedDocumentsFolder: ImageEventsFolder { get } // The Shared Documents folder
-    optional var sitesFolder: ImageEventsFolder { get } // The user's Sites folder
-    optional var speakableItemsFolder: ImageEventsFolder { get } // The Speakable Items folder
-    optional var startupDisk: ImageEventsDisk { get } // the disk from which Mac OS X was loaded
-    optional var systemDomain: ImageEventsSystemDomainObject { get } // the collection of folders belonging to the System
-    optional var temporaryItemsFolder: ImageEventsFolder { get } // The Temporary Items folder
-    optional var trash: ImageEventsFolder { get } // The user's Trash folder
-    optional var userDomain: ImageEventsUserDomainObject { get } // the collection of folders belonging to the User
-    optional var utilitiesFolder: ImageEventsFolder { get } // The Utilities folder
-    optional var workflowsFolder: ImageEventsFolder { get } // The Automator Workflows folder
-    optional func displays() -> SBElementArray
-    optional func images() -> SBElementArray
-    optional func profiles() -> SBElementArray
-    optional var defaultCMYKProfile: ImageEventsProfile { get } // the default CMYK profile
-    optional var defaultCMYKProfileLocation: ImageEventsFile { get } // the default CMYK profile location
-    optional var defaultGrayProfile: ImageEventsProfile { get } // the default Gray profile
-    optional var defaultGrayProfileLocation: ImageEventsFile { get } // the default Gray profile location
-    optional var defaultLabProfile: ImageEventsProfile { get } // the default Lab profile
-    optional var defaultLabProfileLocation: ImageEventsFile { get } // the default Lab profile location
-    optional var defaultRGBProfile: ImageEventsProfile { get } // the default RGB profile
-    optional var defaultRGBProfileLocation: ImageEventsFile { get } // the default RGB profile location
-    optional var defaultXYZProfile: ImageEventsProfile { get } // the default XYZ profile
-    optional var defaultXYZProfileLocation: ImageEventsFile { get } // the default XYZ profile location
-    optional var preferredCMM: String { get } // specifies preferred Color Management Module to use, or "automatic"
-    optional var profileFolder: AnyObject { get } // the ColorSync profile folder
-    optional var quitDelay: Int { get } // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
-    optional var systemProfile: ImageEventsProfile { get } // the default system profile
-    optional var systemProfileLocation: ImageEventsFile { get } // the default system profile location
-    optional func setDefaultCMYKProfile(defaultCMYKProfile: ImageEventsProfile!) // the default CMYK profile
-    optional func setDefaultCMYKProfileLocation(defaultCMYKProfileLocation: ImageEventsFile!) // the default CMYK profile location
-    optional func setDefaultGrayProfile(defaultGrayProfile: ImageEventsProfile!) // the default Gray profile
-    optional func setDefaultGrayProfileLocation(defaultGrayProfileLocation: ImageEventsFile!) // the default Gray profile location
-    optional func setDefaultLabProfile(defaultLabProfile: ImageEventsProfile!) // the default Lab profile
-    optional func setDefaultLabProfileLocation(defaultLabProfileLocation: ImageEventsFile!) // the default Lab profile location
-    optional func setDefaultRGBProfile(defaultRGBProfile: ImageEventsProfile!) // the default RGB profile
-    optional func setDefaultRGBProfileLocation(defaultRGBProfileLocation: ImageEventsFile!) // the default RGB profile location
-    optional func setDefaultXYZProfile(defaultXYZProfile: ImageEventsProfile!) // the default XYZ profile
-    optional func setDefaultXYZProfileLocation(defaultXYZProfileLocation: ImageEventsFile!) // the default XYZ profile location
-    optional func setPreferredCMM(preferredCMM: String!) // specifies preferred Color Management Module to use, or "automatic"
-    optional func setQuitDelay(quitDelay: Int) // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
-    optional func setSystemProfile(systemProfile: ImageEventsProfile!) // the default system profile
-    optional func setSystemProfileLocation(systemProfileLocation: ImageEventsFile!) // the default system profile location
+    @objc optional func documents() -> SBElementArray
+    @objc optional func windows() -> SBElementArray
+    @objc optional var name: String { get } // The name of the application.
+    @objc optional var frontmost: Bool { get } // Is this the active application?
+    @objc optional var version: String { get } // The version number of the application.
+    @objc optional func open(x: AnyObject!) -> AnyObject // Open a document.
+    @objc optional func print(x: AnyObject!, withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+    @objc optional func quitSaving(saving: ImageEventsSaveOptions) // Quit the application.
+    @objc optional func exists(x: AnyObject!) -> Bool // Verify that an object exists.
+    @objc optional func move(x: AnyObject!, to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
+    @objc optional func aliases() -> SBElementArray
+    @objc optional func disks() -> SBElementArray
+    @objc optional func diskItems() -> SBElementArray
+    @objc optional func domains() -> SBElementArray
+    @objc optional func files() -> SBElementArray
+    @objc optional func filePackages() -> SBElementArray
+    @objc optional func folders() -> SBElementArray
+    @objc optional var applicationSupportFolder: ImageEventsFolder { get } // The Application Support folder
+    @objc optional var applicationsFolder: ImageEventsFolder { get } // The user's Applications folder
+    @objc optional var ClassicDomain: ImageEventsClassicDomainObject { get } // the collection of folders belonging to the Classic System
+    @objc optional var desktopFolder: ImageEventsFolder { get } // The user's Desktop folder
+    @objc optional var desktopPicturesFolder: ImageEventsFolder { get } // The Desktop Pictures folder
+    @objc optional var documentsFolder: ImageEventsFolder { get } // The user's Documents folder
+    @objc optional var downloadsFolder: ImageEventsFolder { get } // The user's Downloads folder
+    @objc optional var favoritesFolder: ImageEventsFolder { get } // The user's Favorites folder
+    @objc optional var FolderActionScriptsFolder: ImageEventsFolder { get } // The user's Folder Action Scripts folder
+    @objc optional var fontsFolder: ImageEventsFolder { get } // The Fonts folder
+    @objc optional var homeFolder: ImageEventsFolder { get } // The Home folder of the currently logged in user
+    @objc optional var libraryFolder: ImageEventsFolder { get } // The Library folder
+    @objc optional var localDomain: ImageEventsLocalDomainObject { get } // the collection of folders residing on the Local machine
+    @objc optional var moviesFolder: ImageEventsFolder { get } // The user's Movies folder
+    @objc optional var musicFolder: ImageEventsFolder { get } // The user's Music folder
+    @objc optional var networkDomain: ImageEventsNetworkDomainObject { get } // the collection of folders residing on the Network
+    @objc optional var picturesFolder: ImageEventsFolder { get } // The user's Pictures folder
+    @objc optional var preferencesFolder: ImageEventsFolder { get } // The user's Preferences folder
+    @objc optional var publicFolder: ImageEventsFolder { get } // The user's Public folder
+    @objc optional var scriptingAdditionsFolder: ImageEventsFolder { get } // The Scripting Additions folder
+    @objc optional var scriptsFolder: ImageEventsFolder { get } // The user's Scripts folder
+    @objc optional var sharedDocumentsFolder: ImageEventsFolder { get } // The Shared Documents folder
+    @objc optional var sitesFolder: ImageEventsFolder { get } // The user's Sites folder
+    @objc optional var speakableItemsFolder: ImageEventsFolder { get } // The Speakable Items folder
+    @objc optional var startupDisk: ImageEventsDisk { get } // the disk from which Mac OS X was loaded
+    @objc optional var systemDomain: ImageEventsSystemDomainObject { get } // the collection of folders belonging to the System
+    @objc optional var temporaryItemsFolder: ImageEventsFolder { get } // The Temporary Items folder
+    @objc optional var trash: ImageEventsFolder { get } // The user's Trash folder
+    @objc optional var userDomain: ImageEventsUserDomainObject { get } // the collection of folders belonging to the User
+    @objc optional var utilitiesFolder: ImageEventsFolder { get } // The Utilities folder
+    @objc optional var workflowsFolder: ImageEventsFolder { get } // The Automator Workflows folder
+    @objc optional func displays() -> SBElementArray
+    @objc optional func images() -> SBElementArray
+    @objc optional func profiles() -> SBElementArray
+    @objc optional var defaultCMYKProfile: ImageEventsProfile { get } // the default CMYK profile
+    @objc optional var defaultCMYKProfileLocation: ImageEventsFile { get } // the default CMYK profile location
+    @objc optional var defaultGrayProfile: ImageEventsProfile { get } // the default Gray profile
+    @objc optional var defaultGrayProfileLocation: ImageEventsFile { get } // the default Gray profile location
+    @objc optional var defaultLabProfile: ImageEventsProfile { get } // the default Lab profile
+    @objc optional var defaultLabProfileLocation: ImageEventsFile { get } // the default Lab profile location
+    @objc optional var defaultRGBProfile: ImageEventsProfile { get } // the default RGB profile
+    @objc optional var defaultRGBProfileLocation: ImageEventsFile { get } // the default RGB profile location
+    @objc optional var defaultXYZProfile: ImageEventsProfile { get } // the default XYZ profile
+    @objc optional var defaultXYZProfileLocation: ImageEventsFile { get } // the default XYZ profile location
+    @objc optional var preferredCMM: String { get } // specifies preferred Color Management Module to use, or "automatic"
+    @objc optional var profileFolder: AnyObject { get } // the ColorSync profile folder
+    @objc optional var quitDelay: Int { get } // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
+    @objc optional var systemProfile: ImageEventsProfile { get } // the default system profile
+    @objc optional var systemProfileLocation: ImageEventsFile { get } // the default system profile location
+    @objc optional func setDefaultCMYKProfile(defaultCMYKProfile: ImageEventsProfile!) // the default CMYK profile
+    @objc optional func setDefaultCMYKProfileLocation(defaultCMYKProfileLocation: ImageEventsFile!) // the default CMYK profile location
+    @objc optional func setDefaultGrayProfile(defaultGrayProfile: ImageEventsProfile!) // the default Gray profile
+    @objc optional func setDefaultGrayProfileLocation(defaultGrayProfileLocation: ImageEventsFile!) // the default Gray profile location
+    @objc optional func setDefaultLabProfile(defaultLabProfile: ImageEventsProfile!) // the default Lab profile
+    @objc optional func setDefaultLabProfileLocation(defaultLabProfileLocation: ImageEventsFile!) // the default Lab profile location
+    @objc optional func setDefaultRGBProfile(defaultRGBProfile: ImageEventsProfile!) // the default RGB profile
+    @objc optional func setDefaultRGBProfileLocation(defaultRGBProfileLocation: ImageEventsFile!) // the default RGB profile location
+    @objc optional func setDefaultXYZProfile(defaultXYZProfile: ImageEventsProfile!) // the default XYZ profile
+    @objc optional func setDefaultXYZProfileLocation(defaultXYZProfileLocation: ImageEventsFile!) // the default XYZ profile location
+    @objc optional func setPreferredCMM(preferredCMM: String!) // specifies preferred Color Management Module to use, or "automatic"
+    @objc optional func setQuitDelay(quitDelay: Int) // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
+    @objc optional func setSystemProfile(systemProfile: ImageEventsProfile!) // the default system profile
+    @objc optional func setSystemProfileLocation(systemProfileLocation: ImageEventsFile!) // the default system profile location
 }
 extension SBApplication: ImageEventsApplication {}
 
 // MARK: ImageEventsDocument
 @objc public protocol ImageEventsDocument: SBObjectProtocol, ImageEventsGenericMethods {
-    optional var name: String { get } // Its name.
-    optional var modified: Bool { get } // Has it been modified since the last save?
-    optional var file: ImageEventsFile { get } // Its location on disk, if it has one.
+    @objc optional var name: String { get } // Its name.
+    @objc optional var modified: Bool { get } // Has it been modified since the last save?
+    @objc optional var file: ImageEventsFile { get } // Its location on disk, if it has one.
 }
 extension SBObject: ImageEventsDocument {}
 
 // MARK: ImageEventsWindow
 @objc public protocol ImageEventsWindow: SBObjectProtocol, ImageEventsGenericMethods {
-    optional var name: String { get } // The title of the window.
-    optional func id() -> Int // The unique identifier of the window.
-    optional var index: Int { get } // The index of the window, ordered front to back.
-    optional var bounds: NSRect { get } // The bounding rectangle of the window.
-    optional var closeable: Bool { get } // Does the window have a close button?
-    optional var miniaturizable: Bool { get } // Does the window have a minimize button?
-    optional var miniaturized: Bool { get } // Is the window minimized right now?
-    optional var resizable: Bool { get } // Can the window be resized?
-    optional var visible: Bool { get } // Is the window visible right now?
-    optional var zoomable: Bool { get } // Does the window have a zoom button?
-    optional var zoomed: Bool { get } // Is the window zoomed right now?
-    optional var document: ImageEventsDocument { get } // The document whose contents are displayed in the window.
-    optional func setIndex(index: Int) // The index of the window, ordered front to back.
-    optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
-    optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
-    optional func setVisible(visible: Bool) // Is the window visible right now?
-    optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
+    @objc optional var name: String { get } // The title of the window.
+    @objc optional func id() -> Int // The unique identifier of the window.
+    @objc optional var index: Int { get } // The index of the window, ordered front to back.
+    @objc optional var bounds: NSRect { get } // The bounding rectangle of the window.
+    @objc optional var closeable: Bool { get } // Does the window have a close button?
+    @objc optional var miniaturizable: Bool { get } // Does the window have a minimize button?
+    @objc optional var miniaturized: Bool { get } // Is the window minimized right now?
+    @objc optional var resizable: Bool { get } // Can the window be resized?
+    @objc optional var visible: Bool { get } // Is the window visible right now?
+    @objc optional var zoomable: Bool { get } // Does the window have a zoom button?
+    @objc optional var zoomed: Bool { get } // Is the window zoomed right now?
+    @objc optional var document: ImageEventsDocument { get } // The document whose contents are displayed in the window.
+    @objc optional func setIndex(index: Int) // The index of the window, ordered front to back.
+    @objc optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
+    @objc optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
+    @objc optional func setVisible(visible: Bool) // Is the window visible right now?
+    @objc optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
 }
 extension SBObject: ImageEventsWindow {}
 
 // MARK: ImageEventsDiskItem
 @objc public protocol ImageEventsDiskItem: SBObjectProtocol, ImageEventsGenericMethods {
-    optional var busyStatus: Bool { get } // Is the disk item busy?
-    optional var container: ImageEventsDiskItem { get } // the folder or disk which has this disk item as an element
-    optional var creationDate: NSDate { get } // the date on which the disk item was created
-    optional var displayedName: String { get } // the name of the disk item as displayed in the User Interface
-    optional func id() -> String // the unique ID of the disk item
-    optional var modificationDate: NSDate { get } // the date on which the disk item was last modified
-    optional var name: String { get } // the name of the disk item
-    optional var nameExtension: String { get } // the extension portion of the name
-    optional var packageFolder: Bool { get } // Is the disk item a package?
-    optional var path: String { get } // the file system path of the disk item
-    optional var physicalSize: Int { get } // the actual space used by the disk item on disk
-    optional var POSIXPath: String { get } // the POSIX file system path of the disk item
-    optional var size: Int { get } // the logical size of the disk item
-    optional var URL: String { get } // the URL of the disk item
-    optional var visible: Bool { get } // Is the disk item visible?
-    optional var volume: String { get } // the volume on which the disk item resides
-    optional func delete() // Delete disk item(s).
-    optional func moveTo(to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
-    optional func setModificationDate(modificationDate: NSDate!) // the date on which the disk item was last modified
-    optional func setName(name: String!) // the name of the disk item
-    optional func setVisible(visible: Bool) // Is the disk item visible?
+    @objc optional var busyStatus: Bool { get } // Is the disk item busy?
+    @objc optional var container: ImageEventsDiskItem { get } // the folder or disk which has this disk item as an element
+    @objc optional var creationDate: NSDate { get } // the date on which the disk item was created
+    @objc optional var displayedName: String { get } // the name of the disk item as displayed in the User Interface
+    @objc optional func id() -> String // the unique ID of the disk item
+    @objc optional var modificationDate: NSDate { get } // the date on which the disk item was last modified
+    @objc optional var name: String { get } // the name of the disk item
+    @objc optional var nameExtension: String { get } // the extension portion of the name
+    @objc optional var packageFolder: Bool { get } // Is the disk item a package?
+    @objc optional var path: String { get } // the file system path of the disk item
+    @objc optional var physicalSize: Int { get } // the actual space used by the disk item on disk
+    @objc optional var POSIXPath: String { get } // the POSIX file system path of the disk item
+    @objc optional var size: Int { get } // the logical size of the disk item
+    @objc optional var URL: String { get } // the URL of the disk item
+    @objc optional var visible: Bool { get } // Is the disk item visible?
+    @objc optional var volume: String { get } // the volume on which the disk item resides
+    @objc optional func delete() // Delete disk item(s).
+    @objc optional func moveTo(to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
+    @objc optional func setModificationDate(modificationDate: NSDate!) // the date on which the disk item was last modified
+    @objc optional func setName(name: String!) // the name of the disk item
+    @objc optional func setVisible(visible: Bool) // Is the disk item visible?
 }
 extension SBObject: ImageEventsDiskItem {}
 
 // MARK: ImageEventsAlias
 @objc public protocol ImageEventsAlias: ImageEventsDiskItem {
-    optional func aliases() -> SBElementArray
-    optional func diskItems() -> SBElementArray
-    optional func files() -> SBElementArray
-    optional func filePackages() -> SBElementArray
-    optional func folders() -> SBElementArray
-    optional var creatorType: AnyObject { get } // the OSType identifying the application that created the alias
-    optional var defaultApplication: AnyObject { get } // the application that will launch if the alias is opened
-    optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the alias
-    optional var kind: String { get } // The kind of alias, as shown in Finder
-    optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
-    optional var shortVersion: String { get } // the short version of the application bundle referenced by the alias
-    optional var stationery: Bool { get } // Is the alias a stationery pad?
-    optional var typeIdentifier: String { get } // The type identifier of the alias
-    optional var version: String { get } // the version of the application bundle referenced by the alias (visible at the bottom of the "Get Info" window)
-    optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the alias
-    optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the alias is opened
-    optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the alias
-    optional func setStationery(stationery: Bool) // Is the alias a stationery pad?
+    @objc optional func aliases() -> SBElementArray
+    @objc optional func diskItems() -> SBElementArray
+    @objc optional func files() -> SBElementArray
+    @objc optional func filePackages() -> SBElementArray
+    @objc optional func folders() -> SBElementArray
+    @objc optional var creatorType: AnyObject { get } // the OSType identifying the application that created the alias
+    @objc optional var defaultApplication: AnyObject { get } // the application that will launch if the alias is opened
+    @objc optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the alias
+    @objc optional var kind: String { get } // The kind of alias, as shown in Finder
+    @objc optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
+    @objc optional var shortVersion: String { get } // the short version of the application bundle referenced by the alias
+    @objc optional var stationery: Bool { get } // Is the alias a stationery pad?
+    @objc optional var typeIdentifier: String { get } // The type identifier of the alias
+    @objc optional var version: String { get } // the version of the application bundle referenced by the alias (visible at the bottom of the "Get Info" window)
+    @objc optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the alias
+    @objc optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the alias is opened
+    @objc optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the alias
+    @objc optional func setStationery(stationery: Bool) // Is the alias a stationery pad?
 }
 extension SBObject: ImageEventsAlias {}
 
 // MARK: ImageEventsDisk
 @objc public protocol ImageEventsDisk: ImageEventsDiskItem {
-    optional func aliases() -> SBElementArray
-    optional func diskItems() -> SBElementArray
-    optional func files() -> SBElementArray
-    optional func filePackages() -> SBElementArray
-    optional func folders() -> SBElementArray
-    optional var capacity: NSNumber { get } // the total number of bytes (free or used) on the disk
-    optional var ejectable: Bool { get } // Can the media be ejected (floppies, CD's, and so on)?
-    optional var format: ImageEventsEdfm { get } // the file system format of this disk
-    optional var freeSpace: NSNumber { get } // the number of free bytes left on the disk
-    optional var ignorePrivileges: Bool { get } // Ignore permissions on this disk?
-    optional var localVolume: Bool { get } // Is the media a local volume (as opposed to a file server)?
-    optional var server: AnyObject { get } // the server on which the disk resides, AFP volumes only
-    optional var startup: Bool { get } // Is this disk the boot disk?
-    optional var zone: AnyObject { get } // the zone in which the disk's server resides, AFP volumes only
-    optional func setIgnorePrivileges(ignorePrivileges: Bool) // Ignore permissions on this disk?
+    @objc optional func aliases() -> SBElementArray
+    @objc optional func diskItems() -> SBElementArray
+    @objc optional func files() -> SBElementArray
+    @objc optional func filePackages() -> SBElementArray
+    @objc optional func folders() -> SBElementArray
+    @objc optional var capacity: NSNumber { get } // the total number of bytes (free or used) on the disk
+    @objc optional var ejectable: Bool { get } // Can the media be ejected (floppies, CD's, and so on)?
+    @objc optional var format: ImageEventsEdfm { get } // the file system format of this disk
+    @objc optional var freeSpace: NSNumber { get } // the number of free bytes left on the disk
+    @objc optional var ignorePrivileges: Bool { get } // Ignore permissions on this disk?
+    @objc optional var localVolume: Bool { get } // Is the media a local volume (as opposed to a file server)?
+    @objc optional var server: AnyObject { get } // the server on which the disk resides, AFP volumes only
+    @objc optional var startup: Bool { get } // Is this disk the boot disk?
+    @objc optional var zone: AnyObject { get } // the zone in which the disk's server resides, AFP volumes only
+    @objc optional func setIgnorePrivileges(ignorePrivileges: Bool) // Ignore permissions on this disk?
 }
 extension SBObject: ImageEventsDisk {}
 
 // MARK: ImageEventsDomain
 @objc public protocol ImageEventsDomain: SBObjectProtocol, ImageEventsGenericMethods {
-    optional func folders() -> SBElementArray
-    optional var applicationSupportFolder: ImageEventsFolder { get } // The Application Support folder
-    optional var applicationsFolder: ImageEventsFolder { get } // The Applications folder
-    optional var desktopPicturesFolder: ImageEventsFolder { get } // The Desktop Pictures folder
-    optional var FolderActionScriptsFolder: ImageEventsFolder { get } // The Folder Action Scripts folder
-    optional var fontsFolder: ImageEventsFolder { get } // The Fonts folder
-    optional func id() -> String // the unique identifier of the domain
-    optional var libraryFolder: ImageEventsFolder { get } // The Library folder
-    optional var name: String { get } // the name of the domain
-    optional var preferencesFolder: ImageEventsFolder { get } // The Preferences folder
-    optional var scriptingAdditionsFolder: ImageEventsFolder { get } // The Scripting Additions folder
-    optional var scriptsFolder: ImageEventsFolder { get } // The Scripts folder
-    optional var sharedDocumentsFolder: ImageEventsFolder { get } // The Shared Documents folder
-    optional var speakableItemsFolder: ImageEventsFolder { get } // The Speakable Items folder
-    optional var utilitiesFolder: ImageEventsFolder { get } // The Utilities folder
-    optional var workflowsFolder: ImageEventsFolder { get } // The Automator Workflows folder
+    @objc optional func folders() -> SBElementArray
+    @objc optional var applicationSupportFolder: ImageEventsFolder { get } // The Application Support folder
+    @objc optional var applicationsFolder: ImageEventsFolder { get } // The Applications folder
+    @objc optional var desktopPicturesFolder: ImageEventsFolder { get } // The Desktop Pictures folder
+    @objc optional var FolderActionScriptsFolder: ImageEventsFolder { get } // The Folder Action Scripts folder
+    @objc optional var fontsFolder: ImageEventsFolder { get } // The Fonts folder
+    @objc optional func id() -> String // the unique identifier of the domain
+    @objc optional var libraryFolder: ImageEventsFolder { get } // The Library folder
+    @objc optional var name: String { get } // the name of the domain
+    @objc optional var preferencesFolder: ImageEventsFolder { get } // The Preferences folder
+    @objc optional var scriptingAdditionsFolder: ImageEventsFolder { get } // The Scripting Additions folder
+    @objc optional var scriptsFolder: ImageEventsFolder { get } // The Scripts folder
+    @objc optional var sharedDocumentsFolder: ImageEventsFolder { get } // The Shared Documents folder
+    @objc optional var speakableItemsFolder: ImageEventsFolder { get } // The Speakable Items folder
+    @objc optional var utilitiesFolder: ImageEventsFolder { get } // The Utilities folder
+    @objc optional var workflowsFolder: ImageEventsFolder { get } // The Automator Workflows folder
 }
 extension SBObject: ImageEventsDomain {}
 
 // MARK: ImageEventsClassicDomainObject
 @objc public protocol ImageEventsClassicDomainObject: ImageEventsDomain {
-    optional func folders() -> SBElementArray
-    optional var appleMenuFolder: ImageEventsFolder { get } // The Apple Menu Items folder
-    optional var controlPanelsFolder: ImageEventsFolder { get } // The Control Panels folder
-    optional var controlStripModulesFolder: ImageEventsFolder { get } // The Control Strip Modules folder
-    optional var desktopFolder: ImageEventsFolder { get } // The Classic Desktop folder
-    optional var extensionsFolder: ImageEventsFolder { get } // The Extensions folder
-    optional var fontsFolder: ImageEventsFolder { get } // The Fonts folder
-    optional var launcherItemsFolder: ImageEventsFolder { get } // The Launcher Items folder
-    optional var preferencesFolder: ImageEventsFolder { get } // The Classic Preferences folder
-    optional var shutdownFolder: ImageEventsFolder { get } // The Shutdown Items folder
-    optional var startupItemsFolder: ImageEventsFolder { get } // The StartupItems folder
-    optional var systemFolder: ImageEventsFolder { get } // The System folder
+    @objc optional func folders() -> SBElementArray
+    @objc optional var appleMenuFolder: ImageEventsFolder { get } // The Apple Menu Items folder
+    @objc optional var controlPanelsFolder: ImageEventsFolder { get } // The Control Panels folder
+    @objc optional var controlStripModulesFolder: ImageEventsFolder { get } // The Control Strip Modules folder
+    @objc optional var desktopFolder: ImageEventsFolder { get } // The Classic Desktop folder
+    @objc optional var extensionsFolder: ImageEventsFolder { get } // The Extensions folder
+    @objc optional var fontsFolder: ImageEventsFolder { get } // The Fonts folder
+    @objc optional var launcherItemsFolder: ImageEventsFolder { get } // The Launcher Items folder
+    @objc optional var preferencesFolder: ImageEventsFolder { get } // The Classic Preferences folder
+    @objc optional var shutdownFolder: ImageEventsFolder { get } // The Shutdown Items folder
+    @objc optional var startupItemsFolder: ImageEventsFolder { get } // The StartupItems folder
+    @objc optional var systemFolder: ImageEventsFolder { get } // The System folder
 }
 extension SBObject: ImageEventsClassicDomainObject {}
 
 // MARK: ImageEventsFile
 @objc public protocol ImageEventsFile: ImageEventsDiskItem {
-    optional var creatorType: AnyObject { get } // the OSType identifying the application that created the file
-    optional var defaultApplication: AnyObject { get } // the application that will launch if the file is opened
-    optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the file
-    optional var kind: String { get } // The kind of file, as shown in Finder
-    optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
-    optional var shortVersion: String { get } // the short version of the file
-    optional var stationery: Bool { get } // Is the file a stationery pad?
-    optional var typeIdentifier: String { get } // The type identifier of the file
-    optional var version: String { get } // the version of the file (visible at the bottom of the "Get Info" window)
-    optional func open() -> AnyObject // Open a document.
-    optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the file
-    optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the file is opened
-    optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the file
-    optional func setStationery(stationery: Bool) // Is the file a stationery pad?
+    @objc optional var creatorType: AnyObject { get } // the OSType identifying the application that created the file
+    @objc optional var defaultApplication: AnyObject { get } // the application that will launch if the file is opened
+    @objc optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the file
+    @objc optional var kind: String { get } // The kind of file, as shown in Finder
+    @objc optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
+    @objc optional var shortVersion: String { get } // the short version of the file
+    @objc optional var stationery: Bool { get } // Is the file a stationery pad?
+    @objc optional var typeIdentifier: String { get } // The type identifier of the file
+    @objc optional var version: String { get } // the version of the file (visible at the bottom of the "Get Info" window)
+    @objc optional func open() -> AnyObject // Open a document.
+    @objc optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the file
+    @objc optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the file is opened
+    @objc optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the file
+    @objc optional func setStationery(stationery: Bool) // Is the file a stationery pad?
 }
 extension SBObject: ImageEventsFile {}
 
 // MARK: ImageEventsFilePackage
 @objc public protocol ImageEventsFilePackage: ImageEventsFile {
-    optional func aliases() -> SBElementArray
-    optional func diskItems() -> SBElementArray
-    optional func files() -> SBElementArray
-    optional func filePackages() -> SBElementArray
-    optional func folders() -> SBElementArray
+    @objc optional func aliases() -> SBElementArray
+    @objc optional func diskItems() -> SBElementArray
+    @objc optional func files() -> SBElementArray
+    @objc optional func filePackages() -> SBElementArray
+    @objc optional func folders() -> SBElementArray
 }
 extension SBObject: ImageEventsFilePackage {}
 
 // MARK: ImageEventsFolder
 @objc public protocol ImageEventsFolder: ImageEventsDiskItem {
-    optional func aliases() -> SBElementArray
-    optional func diskItems() -> SBElementArray
-    optional func files() -> SBElementArray
-    optional func filePackages() -> SBElementArray
-    optional func folders() -> SBElementArray
+    @objc optional func aliases() -> SBElementArray
+    @objc optional func diskItems() -> SBElementArray
+    @objc optional func files() -> SBElementArray
+    @objc optional func filePackages() -> SBElementArray
+    @objc optional func folders() -> SBElementArray
 }
 extension SBObject: ImageEventsFolder {}
 
 // MARK: ImageEventsLocalDomainObject
 @objc public protocol ImageEventsLocalDomainObject: ImageEventsDomain {
-    optional func folders() -> SBElementArray
+    @objc optional func folders() -> SBElementArray
 }
 extension SBObject: ImageEventsLocalDomainObject {}
 
 // MARK: ImageEventsNetworkDomainObject
 @objc public protocol ImageEventsNetworkDomainObject: ImageEventsDomain {
-    optional func folders() -> SBElementArray
+    @objc optional func folders() -> SBElementArray
 }
 extension SBObject: ImageEventsNetworkDomainObject {}
 
 // MARK: ImageEventsSystemDomainObject
 @objc public protocol ImageEventsSystemDomainObject: ImageEventsDomain {
-    optional func folders() -> SBElementArray
+    @objc optional func folders() -> SBElementArray
 }
 extension SBObject: ImageEventsSystemDomainObject {}
 
 // MARK: ImageEventsUserDomainObject
 @objc public protocol ImageEventsUserDomainObject: ImageEventsDomain {
-    optional func folders() -> SBElementArray
-    optional var desktopFolder: ImageEventsFolder { get } // The user's Desktop folder
-    optional var documentsFolder: ImageEventsFolder { get } // The user's Documents folder
-    optional var downloadsFolder: ImageEventsFolder { get } // The user's Downloads folder
-    optional var favoritesFolder: ImageEventsFolder { get } // The user's Favorites folder
-    optional var homeFolder: ImageEventsFolder { get } // The user's Home folder
-    optional var moviesFolder: ImageEventsFolder { get } // The user's Movies folder
-    optional var musicFolder: ImageEventsFolder { get } // The user's Music folder
-    optional var picturesFolder: ImageEventsFolder { get } // The user's Pictures folder
-    optional var publicFolder: ImageEventsFolder { get } // The user's Public folder
-    optional var sitesFolder: ImageEventsFolder { get } // The user's Sites folder
-    optional var temporaryItemsFolder: ImageEventsFolder { get } // The Temporary Items folder
+    @objc optional func folders() -> SBElementArray
+    @objc optional var desktopFolder: ImageEventsFolder { get } // The user's Desktop folder
+    @objc optional var documentsFolder: ImageEventsFolder { get } // The user's Documents folder
+    @objc optional var downloadsFolder: ImageEventsFolder { get } // The user's Downloads folder
+    @objc optional var favoritesFolder: ImageEventsFolder { get } // The user's Favorites folder
+    @objc optional var homeFolder: ImageEventsFolder { get } // The user's Home folder
+    @objc optional var moviesFolder: ImageEventsFolder { get } // The user's Movies folder
+    @objc optional var musicFolder: ImageEventsFolder { get } // The user's Music folder
+    @objc optional var picturesFolder: ImageEventsFolder { get } // The user's Pictures folder
+    @objc optional var publicFolder: ImageEventsFolder { get } // The user's Public folder
+    @objc optional var sitesFolder: ImageEventsFolder { get } // The user's Sites folder
+    @objc optional var temporaryItemsFolder: ImageEventsFolder { get } // The Temporary Items folder
 }
 extension SBObject: ImageEventsUserDomainObject {}
 
 // MARK: ImageEventsDisplay
 @objc public protocol ImageEventsDisplay: SBObjectProtocol, ImageEventsGenericMethods {
-    optional var displayNumber: Int { get } // the number of the display
-    optional var displayProfile: ImageEventsProfile { get } // the profile for the display
-    optional var name: String { get } // the name of the display
+    @objc optional var displayNumber: Int { get } // the number of the display
+    @objc optional var displayProfile: ImageEventsProfile { get } // the profile for the display
+    @objc optional var name: String { get } // the name of the display
 }
 extension SBObject: ImageEventsDisplay {}
 
 // MARK: ImageEventsImage
 @objc public protocol ImageEventsImage: SBObjectProtocol, ImageEventsGenericMethods {
-    optional func metadataTags() -> SBElementArray
-    optional func profiles() -> SBElementArray
-    optional var bitDepth: ImageEventsBitz { get } // bit depth of the image's color representation
-    optional var colorSpace: ImageEventsPSpc { get } // color space of the image's color representation
-    optional var dimensions: [AnyObject] { get } // the width and height of the image, respectively, in pixels
-    optional var embeddedProfile: ImageEventsProfile { get } // the profile, if any, embedded in the image
-    optional var fileType: AnyObject { get } // file type of the image's file
-    optional var imageFile: ImageEventsFile { get } // the file that contains the image
-    optional var location: ImageEventsDiskItem { get } // the folder or disk that encloses the file that contains the image
-    optional var name: String { get } // the name of the image
-    optional var resolution: [AnyObject] { get } // the horizontal and vertical pixel density of the image, respectively, in dots per inch
+    @objc optional func metadataTags() -> SBElementArray
+    @objc optional func profiles() -> SBElementArray
+    @objc optional var bitDepth: ImageEventsBitz { get } // bit depth of the image's color representation
+    @objc optional var colorSpace: ImageEventsPSpc { get } // color space of the image's color representation
+    @objc optional var dimensions: [NSNumber] { get } // the width and height of the image, respectively, in pixels
+    @objc optional var embeddedProfile: ImageEventsProfile { get } // the profile, if any, embedded in the image
+    @objc optional var fileType: AnyObject { get } // file type of the image's file
+    @objc optional var imageFile: ImageEventsFile { get } // the file that contains the image
+    @objc optional var location: ImageEventsDiskItem { get } // the folder or disk that encloses the file that contains the image
+    @objc optional var name: String { get } // the name of the image
+    @objc optional var resolution: [NSNumber] { get } // the horizontal and vertical pixel density of the image, respectively, in dots per inch
 }
 extension SBObject: ImageEventsImage {}
 
 // MARK: ImageEventsMetadataTag
 @objc public protocol ImageEventsMetadataTag: SBObjectProtocol, ImageEventsGenericMethods {
-    optional var name: String { get } // the name of the tag
-    optional var value: AnyObject { get } // the current setting of the tag
+    @objc optional var name: String { get } // the name of the tag
+    @objc optional var value: AnyObject { get } // the current setting of the tag
 }
 extension SBObject: ImageEventsMetadataTag {}
 
 // MARK: ImageEventsProfile
 @objc public protocol ImageEventsProfile: SBObjectProtocol, ImageEventsGenericMethods {
-    optional var colorSpace: ImageEventsPSpc { get } // the color space of the profile
-    optional var connectionSpace: ImageEventsPPCS { get } // the connection space of the profile
-    optional var creationDate: NSDate { get } // the creation date of the profile
-    optional var creator: String { get } // the creator type of the profile
-    optional var deviceClass: ImageEventsPCla { get } // the device class of the profile
-    optional var deviceManufacturer: String { get } // the device manufacturer of the profile
-    optional var deviceModel: Int { get } // the device model of the profile
-    optional var location: AnyObject { get } // the file location of the profile
-    optional var name: String { get } // the description text of the profile
-    optional var platform: String { get } // the intended platform of the profile
-    optional var preferredCMM: String { get } // the preferred CMM of the profile
-    optional var quality: ImageEventsPQua { get } // the quality of the profile
-    optional var renderingIntent: ImageEventsPRdr { get } // the rendering intent of the profile
-    optional var size: Int { get } // the size of the profile in bytes
-    optional var version: String { get } // the version number of the profile
+    @objc optional var colorSpace: ImageEventsPSpc { get } // the color space of the profile
+    @objc optional var connectionSpace: ImageEventsPPCS { get } // the connection space of the profile
+    @objc optional var creationDate: NSDate { get } // the creation date of the profile
+    @objc optional var creator: String { get } // the creator type of the profile
+    @objc optional var deviceClass: ImageEventsPCla { get } // the device class of the profile
+    @objc optional var deviceManufacturer: String { get } // the device manufacturer of the profile
+    @objc optional var deviceModel: Int { get } // the device model of the profile
+    @objc optional var location: AnyObject { get } // the file location of the profile
+    @objc optional var name: String { get } // the description text of the profile
+    @objc optional var platform: String { get } // the intended platform of the profile
+    @objc optional var preferredCMM: String { get } // the preferred CMM of the profile
+    @objc optional var quality: ImageEventsPQua { get } // the quality of the profile
+    @objc optional var renderingIntent: ImageEventsPRdr { get } // the rendering intent of the profile
+    @objc optional var size: Int { get } // the size of the profile in bytes
+    @objc optional var version: String { get } // the version number of the profile
 }
 extension SBObject: ImageEventsProfile {}
 
