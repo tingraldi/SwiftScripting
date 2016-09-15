@@ -1,4 +1,4 @@
-#!/usr/bin/xcrun swift -F /Library/Frameworks
+#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -54,7 +54,7 @@ let name = (document.name! as NSString).stringByDeletingPathExtension
 
 for (scale, suffix) in [1.0 : "@3x", 0.66 : "@2x", 0.33 : ""] {
     let fileName = "\(name)\(suffix).png"
-    let fileURL: NSURL = imageFolderURL.URLByAppendingPathComponent(fileName)
+    let fileURL: NSURL! = imageFolderURL.URLByAppendingPathComponent(fileName)
     let scaledWidth = Int(scale * document.width!)
     let scaledHeight = Int(scale * document.height!)
     document.webExportIn!(fileURL, 

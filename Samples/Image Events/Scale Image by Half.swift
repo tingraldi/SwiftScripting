@@ -1,4 +1,4 @@
-#!/usr/bin/swift -F /Library/Frameworks
+#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -42,7 +42,7 @@ for item in (finder.selection!.get() as! NSArray) {
             let fileURL = NSURL(string: file.URL!)
             let outputDirectory = fileURL!.URLByDeletingLastPathComponent!
             let outputFilename = "\((file.name! as NSString).stringByDeletingPathExtension) (half-scale).\(fileExtension)"
-            let outputURL = outputDirectory.URLByAppendingPathComponent(outputFilename)
+            let outputURL: NSURL! = outputDirectory.URLByAppendingPathComponent(outputFilename)
             
             let image = imageEvents.open!(fileURL!) as! ImageEventsImage
             image.scaleByFactor!(0.5, toSize: 0)

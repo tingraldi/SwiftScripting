@@ -1,4 +1,4 @@
-#!/usr/bin/swift -F /Library/Frameworks
+#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -37,7 +37,7 @@ let mail = application(name: "Mail") as! MailApplication
 let document = pages.documents!().objectAtLocation(1) as! PagesDocument
 let tempDirectory = NSURL(fileURLWithPath: "/tmp")
 let pdfName = "\((document.name! as NSString).stringByDeletingPathExtension).pdf"
-let pdfURL = tempDirectory.URLByAppendingPathComponent(pdfName)
+let pdfURL: NSURL! = tempDirectory.URLByAppendingPathComponent(pdfName)
 
 document.exportTo!(pdfURL, as: .PDF, withProperties: nil)
 

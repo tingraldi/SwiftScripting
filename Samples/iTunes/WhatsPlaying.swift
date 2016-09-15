@@ -1,4 +1,4 @@
-#!/usr/bin/xcrun swift -F /Library/Frameworks
+#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2016 Majesty Software.
 //
