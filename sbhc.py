@@ -161,7 +161,7 @@ class SBHeaderProcessor(object):
                 self.emit_line('    case {} = {} /* {} */'.format(
                     strip_prefix(cursor.spelling, decl.spelling),
                     hex(decl.enum_value),
-                    repr(struct.pack('!I', decl.enum_value))))
+                    repr(struct.pack('!i', decl.enum_value))))
             self.emit_line('}\n')
 
     def emit_line(self, line=''):
