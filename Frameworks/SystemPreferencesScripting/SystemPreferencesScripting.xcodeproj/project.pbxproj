@@ -8,31 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		E6A054811AB45A8700CAF2F7 /* SystemPreferencesScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6A054801AB45A8700CAF2F7 /* SystemPreferencesScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6A054871AB45A8700CAF2F7 /* SystemPreferencesScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A0547B1AB45A8700CAF2F7 /* SystemPreferencesScripting.framework */; };
-		E6A0548E1AB45A8700CAF2F7 /* SystemPreferencesScriptingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A0548D1AB45A8700CAF2F7 /* SystemPreferencesScriptingTests.swift */; };
 		E6A0549A1AB45CF400CAF2F7 /* SystemPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = E6A054981AB45CF400CAF2F7 /* SystemPreferences.h */; };
 		E6A0549B1AB45CF400CAF2F7 /* SystemPreferences.sdef in Resources */ = {isa = PBXBuildFile; fileRef = E6A054991AB45CF400CAF2F7 /* SystemPreferences.sdef */; };
 		E6A0549F1AB45D2600CAF2F7 /* SystemPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A0549C1AB45D2600CAF2F7 /* SystemPreferences.swift */; };
 		E6A054A11AB45D2600CAF2F7 /* SystemPreferencesScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A0549E1AB45D2600CAF2F7 /* SystemPreferencesScripting.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E6A054881AB45A8700CAF2F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6A054721AB45A8700CAF2F7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6A0547A1AB45A8700CAF2F7;
-			remoteInfo = SystemPreferencesScripting;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		E6A0547B1AB45A8700CAF2F7 /* SystemPreferencesScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SystemPreferencesScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A0547F1AB45A8700CAF2F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6A054801AB45A8700CAF2F7 /* SystemPreferencesScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemPreferencesScripting.h; sourceTree = "<group>"; };
-		E6A054861AB45A8700CAF2F7 /* SystemPreferencesScriptingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SystemPreferencesScriptingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6A0548C1AB45A8700CAF2F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6A0548D1AB45A8700CAF2F7 /* SystemPreferencesScriptingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemPreferencesScriptingTests.swift; sourceTree = "<group>"; };
 		E6A054981AB45CF400CAF2F7 /* SystemPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemPreferences.h; sourceTree = "<group>"; };
 		E6A054991AB45CF400CAF2F7 /* SystemPreferences.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SystemPreferences.sdef; sourceTree = "<group>"; };
 		E6A0549C1AB45D2600CAF2F7 /* SystemPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPreferences.swift; sourceTree = "<group>"; };
@@ -47,14 +32,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6A054831AB45A8700CAF2F7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6A054871AB45A8700CAF2F7 /* SystemPreferencesScripting.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -62,7 +39,6 @@
 			isa = PBXGroup;
 			children = (
 				E6A0547D1AB45A8700CAF2F7 /* SystemPreferencesScripting */,
-				E6A0548A1AB45A8700CAF2F7 /* SystemPreferencesScriptingTests */,
 				E6A0547C1AB45A8700CAF2F7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,7 +47,6 @@
 			isa = PBXGroup;
 			children = (
 				E6A0547B1AB45A8700CAF2F7 /* SystemPreferencesScripting.framework */,
-				E6A054861AB45A8700CAF2F7 /* SystemPreferencesScriptingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,23 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				E6A0547F1AB45A8700CAF2F7 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E6A0548A1AB45A8700CAF2F7 /* SystemPreferencesScriptingTests */ = {
-			isa = PBXGroup;
-			children = (
-				E6A0548D1AB45A8700CAF2F7 /* SystemPreferencesScriptingTests.swift */,
-				E6A0548B1AB45A8700CAF2F7 /* Supporting Files */,
-			);
-			path = SystemPreferencesScriptingTests;
-			sourceTree = "<group>";
-		};
-		E6A0548B1AB45A8700CAF2F7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E6A0548C1AB45A8700CAF2F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -155,24 +113,6 @@
 			productReference = E6A0547B1AB45A8700CAF2F7 /* SystemPreferencesScripting.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E6A054851AB45A8700CAF2F7 /* SystemPreferencesScriptingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6A054941AB45A8700CAF2F7 /* Build configuration list for PBXNativeTarget "SystemPreferencesScriptingTests" */;
-			buildPhases = (
-				E6A054821AB45A8700CAF2F7 /* Sources */,
-				E6A054831AB45A8700CAF2F7 /* Frameworks */,
-				E6A054841AB45A8700CAF2F7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E6A054891AB45A8700CAF2F7 /* PBXTargetDependency */,
-			);
-			name = SystemPreferencesScriptingTests;
-			productName = SystemPreferencesScriptingTests;
-			productReference = E6A054861AB45A8700CAF2F7 /* SystemPreferencesScriptingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,10 +124,6 @@
 				ORGANIZATIONNAME = "Majesty Software";
 				TargetAttributes = {
 					E6A0547A1AB45A8700CAF2F7 = {
-						CreatedOnToolsVersion = 6.3;
-						LastSwiftMigration = 0800;
-					};
-					E6A054851AB45A8700CAF2F7 = {
 						CreatedOnToolsVersion = 6.3;
 						LastSwiftMigration = 0800;
 					};
@@ -206,7 +142,6 @@
 			projectRoot = "";
 			targets = (
 				E6A0547A1AB45A8700CAF2F7 /* SystemPreferencesScripting */,
-				E6A054851AB45A8700CAF2F7 /* SystemPreferencesScriptingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -217,13 +152,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6A0549B1AB45CF400CAF2F7 /* SystemPreferences.sdef in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6A054841AB45A8700CAF2F7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,23 +167,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6A054821AB45A8700CAF2F7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6A0548E1AB45A8700CAF2F7 /* SystemPreferencesScriptingTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E6A054891AB45A8700CAF2F7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6A0547A1AB45A8700CAF2F7 /* SystemPreferencesScripting */;
-			targetProxy = E6A054881AB45A8700CAF2F7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E6A0548F1AB45A8700CAF2F7 /* Debug */ = {
@@ -358,7 +270,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -377,43 +289,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-			};
-			name = Release;
-		};
-		E6A054951AB45A8700CAF2F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SystemPreferencesScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
-			};
-			name = Debug;
-		};
-		E6A054961AB45A8700CAF2F7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SystemPreferencesScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -434,15 +310,6 @@
 			buildConfigurations = (
 				E6A054921AB45A8700CAF2F7 /* Debug */,
 				E6A054931AB45A8700CAF2F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E6A054941AB45A8700CAF2F7 /* Build configuration list for PBXNativeTarget "SystemPreferencesScriptingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6A054951AB45A8700CAF2F7 /* Debug */,
-				E6A054961AB45A8700CAF2F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

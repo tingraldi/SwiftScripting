@@ -2,7 +2,7 @@ import AppKit
 import ScriptingBridge
 
 @objc public protocol SBObjectProtocol: NSObjectProtocol {
-    func get() -> AnyObject!
+    func get() -> Any!
 }
 
 @objc public protocol SBApplicationProtocol: SBObjectProtocol {
@@ -13,21 +13,21 @@ import ScriptingBridge
 
 // MARK: SystemPreferencesSaveOptions
 @objc public enum SystemPreferencesSaveOptions : AEKeyword {
-    case Yes = 0x79657320 /* 'yes ' */
-    case No = 0x6e6f2020 /* 'no  ' */
-    case Ask = 0x61736b20 /* 'ask ' */
+    case yes = 0x79657320 /* 'yes ' */
+    case no = 0x6e6f2020 /* 'no  ' */
+    case ask = 0x61736b20 /* 'ask ' */
 }
 
 // MARK: SystemPreferencesPrintingErrorHandling
 @objc public enum SystemPreferencesPrintingErrorHandling : AEKeyword {
-    case Standard = 0x6c777374 /* 'lwst' */
-    case Detailed = 0x6c776474 /* 'lwdt' */
+    case standard = 0x6c777374 /* 'lwst' */
+    case detailed = 0x6c776474 /* 'lwdt' */
 }
 
 // MARK: SystemPreferencesGenericMethods
 @objc public protocol SystemPreferencesGenericMethods {
-    @objc optional func closeSaving(saving: SystemPreferencesSaveOptions, savingIn: NSURL!) // Close a document.
-    @objc optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+    @objc optional func closeSaving(_ saving: SystemPreferencesSaveOptions, savingIn: URL!) // Close a document.
+    @objc optional func printWithProperties(_ withProperties: [AnyHashable : Any]!, printDialog: Bool) // Print a document.
 }
 
 // MARK: SystemPreferencesApplication
@@ -37,16 +37,16 @@ import ScriptingBridge
     @objc optional var name: String { get } // The name of the application.
     @objc optional var frontmost: Bool { get } // Is this the active application?
     @objc optional var version: String { get } // The version number of the application.
-    @objc optional func open(x: AnyObject!) -> AnyObject // Open a document.
-    @objc optional func print(x: AnyObject!, withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    @objc optional func quitSaving(saving: SystemPreferencesSaveOptions) // Quit the application.
-    @objc optional func exists(x: AnyObject!) -> Bool // Verify that an object exists.
+    @objc optional func `open`(_ x: Any!) -> Any // Open a document.
+    @objc optional func print(_ x: Any!, withProperties: [AnyHashable : Any]!, printDialog: Bool) // Print a document.
+    @objc optional func quitSaving(_ saving: SystemPreferencesSaveOptions) // Quit the application.
+    @objc optional func exists(_ x: Any!) -> Bool // Verify that an object exists.
     @objc optional func panes() -> SBElementArray
     @objc optional var currentPane: SystemPreferencesPane { get } // the currently selected pane
     @objc optional var preferencesWindow: SystemPreferencesWindow { get } // the main preferences window
     @objc optional var showAll: Bool { get } // Is SystemPrefs in show all view. (Setting to false will do nothing)
-    @objc optional func setCurrentPane(currentPane: SystemPreferencesPane!) // the currently selected pane
-    @objc optional func setShowAll(showAll: Bool) // Is SystemPrefs in show all view. (Setting to false will do nothing)
+    @objc optional func setCurrentPane(_ currentPane: SystemPreferencesPane!) // the currently selected pane
+    @objc optional func setShowAll(_ showAll: Bool) // Is SystemPrefs in show all view. (Setting to false will do nothing)
 }
 extension SBApplication: SystemPreferencesApplication {}
 
@@ -54,7 +54,7 @@ extension SBApplication: SystemPreferencesApplication {}
 @objc public protocol SystemPreferencesDocument: SBObjectProtocol, SystemPreferencesGenericMethods {
     @objc optional var name: String { get } // Its name.
     @objc optional var modified: Bool { get } // Has it been modified since the last save?
-    @objc optional var file: NSURL { get } // Its location on disk, if it has one.
+    @objc optional var file: URL { get } // Its location on disk, if it has one.
 }
 extension SBObject: SystemPreferencesDocument {}
 
@@ -72,11 +72,11 @@ extension SBObject: SystemPreferencesDocument {}
     @objc optional var zoomable: Bool { get } // Does the window have a zoom button?
     @objc optional var zoomed: Bool { get } // Is the window zoomed right now?
     @objc optional var document: SystemPreferencesDocument { get } // The document whose contents are displayed in the window.
-    @objc optional func setIndex(index: Int) // The index of the window, ordered front to back.
-    @objc optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
-    @objc optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
-    @objc optional func setVisible(visible: Bool) // Is the window visible right now?
-    @objc optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
+    @objc optional func setIndex(_ index: Int) // The index of the window, ordered front to back.
+    @objc optional func setBounds(_ bounds: NSRect) // The bounding rectangle of the window.
+    @objc optional func setMiniaturized(_ miniaturized: Bool) // Is the window minimized right now?
+    @objc optional func setVisible(_ visible: Bool) // Is the window visible right now?
+    @objc optional func setZoomed(_ zoomed: Bool) // Is the window zoomed right now?
 }
 extension SBObject: SystemPreferencesWindow {}
 
@@ -86,7 +86,7 @@ extension SBObject: SystemPreferencesWindow {}
     @objc optional func id() -> String // locale independent name of the preference pane; can refer to a pane using the expression: pane id "<name>"
     @objc optional var localizedName: String { get } // localized name of the preference pane
     @objc optional var name: String { get } // name of the preference pane as it appears in the title bar; can refer to a pane using the expression: pane "<name>"
-    @objc optional func reveal() -> AnyObject // Reveals an anchor within a preference pane or preference pane itself
+    @objc optional func reveal() -> Any // Reveals an anchor within a preference pane or preference pane itself
     @objc optional func authorize() -> SystemPreferencesPane // Prompt authorization for given preference pane
 }
 extension SBObject: SystemPreferencesPane {}
@@ -94,7 +94,7 @@ extension SBObject: SystemPreferencesPane {}
 // MARK: SystemPreferencesAnchor
 @objc public protocol SystemPreferencesAnchor: SBObjectProtocol, SystemPreferencesGenericMethods {
     @objc optional var name: String { get } // name of the anchor within a preference pane
-    @objc optional func reveal() -> AnyObject // Reveals an anchor within a preference pane or preference pane itself
+    @objc optional func reveal() -> Any // Reveals an anchor within a preference pane or preference pane itself
 }
 extension SBObject: SystemPreferencesAnchor {}
 

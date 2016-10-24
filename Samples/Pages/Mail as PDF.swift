@@ -1,4 +1,4 @@
-#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
+#!/usr/bin/xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -34,18 +34,17 @@ import PagesScripting
 let pages = application(name: "Pages") as! PagesApplication
 let mail = application(name: "Mail") as! MailApplication
 
-let document = pages.documents!().objectAtLocation(1) as! PagesDocument
+let document = pages.documents!().object(atLocation: 1) as! PagesDocument
 let tempDirectory = NSURL(fileURLWithPath: "/tmp")
-let pdfName = "\((document.name! as NSString).stringByDeletingPathExtension).pdf"
-let pdfURL: NSURL! = tempDirectory.URLByAppendingPathComponent(pdfName)
+let pdfName = "\((document.name! as NSString).deletingPathExtension).pdf"
+let pdfURL: URL! = tempDirectory.appendingPathComponent(pdfName)
 
-document.exportTo!(pdfURL, as: .PDF, withProperties: nil)
+document.exportTo!(pdfURL, as: .pdf, withProperties: nil)
 
-let futureMessage = objectWithApplication(mail, scriptingClass: MailScripting.OutgoingMessage)
-mail.outgoingMessages!().addObject(futureMessage)
-let message = futureMessage as MailOutgoingMessage
+let futureMessage = objectWithApplication(mail, scriptingClass: MailScripting.outgoingMessage)
+mail.outgoingMessages!().add(futureMessage!)
+let message = futureMessage as! MailOutgoingMessage
 
-let futureAttachment = objectWithApplication(mail, scriptingClass: MailScripting.Attachment, properties: ["fileName": pdfURL])
-message.content!.attachments!().addObject(futureAttachment)
-
+let futureAttachment = objectWithApplication(mail, scriptingClass: MailScripting.attachment, properties: ["fileName": pdfURL])
+message.content!.attachments!().add(futureAttachment!)
 mail.activate()

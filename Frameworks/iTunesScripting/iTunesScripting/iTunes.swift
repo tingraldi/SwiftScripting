@@ -2,7 +2,7 @@ import AppKit
 import ScriptingBridge
 
 @objc public protocol SBObjectProtocol: NSObjectProtocol {
-    func get() -> AnyObject!
+    func get() -> Any!
 }
 
 @objc public protocol SBApplicationProtocol: SBObjectProtocol {
@@ -13,150 +13,150 @@ import ScriptingBridge
 
 // MARK: iTunesEKnd
 @objc public enum iTunesEKnd : AEKeyword {
-    case TrackListing = 0x6b54726b /* 'kTrk' */
-    case AlbumListing = 0x6b416c62 /* 'kAlb' */
-    case CdInsert = 0x6b434469 /* 'kCDi' */
+    case trackListing = 0x6b54726b /* 'kTrk' */
+    case albumListing = 0x6b416c62 /* 'kAlb' */
+    case cdInsert = 0x6b434469 /* 'kCDi' */
 }
 
 // MARK: iTunesEnum
 @objc public enum iTunesEnum : AEKeyword {
-    case Standard = 0x6c777374 /* 'lwst' */
-    case Detailed = 0x6c776474 /* 'lwdt' */
+    case standard = 0x6c777374 /* 'lwst' */
+    case detailed = 0x6c776474 /* 'lwdt' */
 }
 
 // MARK: iTunesEPlS
 @objc public enum iTunesEPlS : AEKeyword {
-    case Stopped = 0x6b505353 /* 'kPSS' */
-    case Playing = 0x6b505350 /* 'kPSP' */
-    case Paused = 0x6b505370 /* 'kPSp' */
-    case FastForwarding = 0x6b505346 /* 'kPSF' */
-    case Rewinding = 0x6b505352 /* 'kPSR' */
+    case stopped = 0x6b505353 /* 'kPSS' */
+    case playing = 0x6b505350 /* 'kPSP' */
+    case paused = 0x6b505370 /* 'kPSp' */
+    case fastForwarding = 0x6b505346 /* 'kPSF' */
+    case rewinding = 0x6b505352 /* 'kPSR' */
 }
 
 // MARK: iTunesERpt
 @objc public enum iTunesERpt : AEKeyword {
-    case Off = 0x6b52704f /* 'kRpO' */
-    case One = 0x6b527031 /* 'kRp1' */
-    case All = 0x6b416c6c /* 'kAll' */
+    case off = 0x6b52704f /* 'kRpO' */
+    case one = 0x6b527031 /* 'kRp1' */
+    case all = 0x6b416c6c /* 'kAll' */
 }
 
 // MARK: iTunesEShM
 @objc public enum iTunesEShM : AEKeyword {
-    case Songs = 0x6b536853 /* 'kShS' */
-    case Albums = 0x6b536841 /* 'kShA' */
-    case Groupings = 0x6b536847 /* 'kShG' */
+    case songs = 0x6b536853 /* 'kShS' */
+    case albums = 0x6b536841 /* 'kShA' */
+    case groupings = 0x6b536847 /* 'kShG' */
 }
 
 // MARK: iTunesEVSz
 @objc public enum iTunesEVSz : AEKeyword {
-    case Small = 0x6b565353 /* 'kVSS' */
-    case Medium = 0x6b56534d /* 'kVSM' */
-    case Large = 0x6b56534c /* 'kVSL' */
+    case small = 0x6b565353 /* 'kVSS' */
+    case medium = 0x6b56534d /* 'kVSM' */
+    case large = 0x6b56534c /* 'kVSL' */
 }
 
 // MARK: iTunesESrc
 @objc public enum iTunesESrc : AEKeyword {
-    case Library = 0x6b4c6962 /* 'kLib' */
-    case IPod = 0x6b506f64 /* 'kPod' */
-    case AudioCD = 0x6b414344 /* 'kACD' */
-    case MP3CD = 0x6b4d4344 /* 'kMCD' */
-    case RadioTuner = 0x6b54756e /* 'kTun' */
-    case SharedLibrary = 0x6b536864 /* 'kShd' */
-    case ITunesStore = 0x6b495453 /* 'kITS' */
-    case Unknown = 0x6b556e6b /* 'kUnk' */
+    case library = 0x6b4c6962 /* 'kLib' */
+    case iPod = 0x6b506f64 /* 'kPod' */
+    case audioCD = 0x6b414344 /* 'kACD' */
+    case mp3CD = 0x6b4d4344 /* 'kMCD' */
+    case radioTuner = 0x6b54756e /* 'kTun' */
+    case sharedLibrary = 0x6b536864 /* 'kShd' */
+    case iTunesStore = 0x6b495453 /* 'kITS' */
+    case unknown = 0x6b556e6b /* 'kUnk' */
 }
 
 // MARK: iTunesESrA
 @objc public enum iTunesESrA : AEKeyword {
-    case Albums = 0x6b53724c /* 'kSrL' */
-    case All = 0x6b416c6c /* 'kAll' */
-    case Artists = 0x6b537252 /* 'kSrR' */
-    case Composers = 0x6b537243 /* 'kSrC' */
-    case Displayed = 0x6b537256 /* 'kSrV' */
-    case Songs = 0x6b537253 /* 'kSrS' */
+    case albums = 0x6b53724c /* 'kSrL' */
+    case all = 0x6b416c6c /* 'kAll' */
+    case artists = 0x6b537252 /* 'kSrR' */
+    case composers = 0x6b537243 /* 'kSrC' */
+    case displayed = 0x6b537256 /* 'kSrV' */
+    case songs = 0x6b537253 /* 'kSrS' */
 }
 
 // MARK: iTunesESpK
 @objc public enum iTunesESpK : AEKeyword {
-    case None = 0x6b4e6f6e /* 'kNon' */
-    case Books = 0x6b537041 /* 'kSpA' */
-    case Folder = 0x6b537046 /* 'kSpF' */
-    case Genius = 0x6b537047 /* 'kSpG' */
-    case ITunesU = 0x6b537055 /* 'kSpU' */
-    case Library = 0x6b53704c /* 'kSpL' */
-    case Movies = 0x6b537049 /* 'kSpI' */
-    case Music = 0x6b53705a /* 'kSpZ' */
-    case Podcasts = 0x6b537050 /* 'kSpP' */
-    case PurchasedMusic = 0x6b53704d /* 'kSpM' */
-    case TVShows = 0x6b537054 /* 'kSpT' */
+    case none = 0x6b4e6f6e /* 'kNon' */
+    case books = 0x6b537041 /* 'kSpA' */
+    case folder = 0x6b537046 /* 'kSpF' */
+    case genius = 0x6b537047 /* 'kSpG' */
+    case iTunesU = 0x6b537055 /* 'kSpU' */
+    case library = 0x6b53704c /* 'kSpL' */
+    case movies = 0x6b537049 /* 'kSpI' */
+    case music = 0x6b53705a /* 'kSpZ' */
+    case podcasts = 0x6b537050 /* 'kSpP' */
+    case purchasedMusic = 0x6b53704d /* 'kSpM' */
+    case tvShows = 0x6b537054 /* 'kSpT' */
 }
 
 // MARK: iTunesEMdK
 @objc public enum iTunesEMdK : AEKeyword {
-    case AlertTone = 0x6b4d644c /* 'kMdL' */
-    case Audiobook = 0x6b4d6441 /* 'kMdA' */
-    case Book = 0x6b4d6442 /* 'kMdB' */
-    case HomeVideo = 0x6b4d6448 /* 'kMdH' */
-    case ITunesU = 0x6b4d6449 /* 'kMdI' */
-    case Movie = 0x6b4d644d /* 'kMdM' */
-    case Music = 0x6b4d6453 /* 'kMdS' */
-    case MusicVideo = 0x6b4d6456 /* 'kMdV' */
-    case Podcast = 0x6b4d6450 /* 'kMdP' */
-    case Ringtone = 0x6b4d6452 /* 'kMdR' */
-    case TVShow = 0x6b4d6454 /* 'kMdT' */
-    case VoiceMemo = 0x6b4d644f /* 'kMdO' */
-    case Unknown = 0x6b556e6b /* 'kUnk' */
+    case alertTone = 0x6b4d644c /* 'kMdL' */
+    case audiobook = 0x6b4d6441 /* 'kMdA' */
+    case book = 0x6b4d6442 /* 'kMdB' */
+    case homeVideo = 0x6b4d6448 /* 'kMdH' */
+    case iTunesU = 0x6b4d6449 /* 'kMdI' */
+    case movie = 0x6b4d644d /* 'kMdM' */
+    case music = 0x6b4d6453 /* 'kMdS' */
+    case musicVideo = 0x6b4d6456 /* 'kMdV' */
+    case podcast = 0x6b4d6450 /* 'kMdP' */
+    case ringtone = 0x6b4d6452 /* 'kMdR' */
+    case tvShow = 0x6b4d6454 /* 'kMdT' */
+    case voiceMemo = 0x6b4d644f /* 'kMdO' */
+    case unknown = 0x6b556e6b /* 'kUnk' */
 }
 
 // MARK: iTunesEVdK
 @objc public enum iTunesEVdK : AEKeyword {
-    case None = 0x6b4e6f6e /* 'kNon' */
-    case HomeVideo = 0x6b566448 /* 'kVdH' */
-    case Movie = 0x6b56644d /* 'kVdM' */
-    case MusicVideo = 0x6b566456 /* 'kVdV' */
-    case TVShow = 0x6b566454 /* 'kVdT' */
+    case none = 0x6b4e6f6e /* 'kNon' */
+    case homeVideo = 0x6b566448 /* 'kVdH' */
+    case movie = 0x6b56644d /* 'kVdM' */
+    case musicVideo = 0x6b566456 /* 'kVdV' */
+    case tvShow = 0x6b566454 /* 'kVdT' */
 }
 
 // MARK: iTunesERtK
 @objc public enum iTunesERtK : AEKeyword {
-    case User = 0x6b527455 /* 'kRtU' */
-    case Computed = 0x6b527443 /* 'kRtC' */
+    case user = 0x6b527455 /* 'kRtU' */
+    case computed = 0x6b527443 /* 'kRtC' */
 }
 
 // MARK: iTunesEAPD
 @objc public enum iTunesEAPD : AEKeyword {
-    case Computer = 0x6b415043 /* 'kAPC' */
-    case AirPortExpress = 0x6b415058 /* 'kAPX' */
-    case AppleTV = 0x6b415054 /* 'kAPT' */
-    case AirPlayDevice = 0x6b41504f /* 'kAPO' */
-    case Unknown = 0x6b415055 /* 'kAPU' */
+    case computer = 0x6b415043 /* 'kAPC' */
+    case airPortExpress = 0x6b415058 /* 'kAPX' */
+    case appleTV = 0x6b415054 /* 'kAPT' */
+    case airPlayDevice = 0x6b41504f /* 'kAPO' */
+    case unknown = 0x6b415055 /* 'kAPU' */
 }
 
 // MARK: iTunesEClS
 @objc public enum iTunesEClS : AEKeyword {
-    case Unknown = 0x6b556e6b /* 'kUnk' */
-    case Purchased = 0x6b507572 /* 'kPur' */
-    case Matched = 0x6b4d6174 /* 'kMat' */
-    case Uploaded = 0x6b55706c /* 'kUpl' */
-    case Ineligible = 0x6b52656a /* 'kRej' */
-    case Removed = 0x6b52656d /* 'kRem' */
-    case Error = 0x6b457272 /* 'kErr' */
-    case Duplicate = 0x6b447570 /* 'kDup' */
-    case Subscription = 0x6b537562 /* 'kSub' */
-    case NoLongerAvailable = 0x6b526576 /* 'kRev' */
-    case NotUploaded = 0x6b557050 /* 'kUpP' */
+    case unknown = 0x6b556e6b /* 'kUnk' */
+    case purchased = 0x6b507572 /* 'kPur' */
+    case matched = 0x6b4d6174 /* 'kMat' */
+    case uploaded = 0x6b55706c /* 'kUpl' */
+    case ineligible = 0x6b52656a /* 'kRej' */
+    case removed = 0x6b52656d /* 'kRem' */
+    case error = 0x6b457272 /* 'kErr' */
+    case duplicate = 0x6b447570 /* 'kDup' */
+    case subscription = 0x6b537562 /* 'kSub' */
+    case noLongerAvailable = 0x6b526576 /* 'kRev' */
+    case notUploaded = 0x6b557050 /* 'kUpP' */
 }
 
 // MARK: iTunesGenericMethods
 @objc public protocol iTunesGenericMethods {
-    @objc optional func printPrintDialog(printDialog: Bool, withProperties: iTunesPrintSettings!, kind: iTunesEKnd, theme: String!) // Print the specified object(s)
+    @objc optional func printPrintDialog(_ printDialog: Bool, withProperties: iTunesPrintSettings!, kind: iTunesEKnd, theme: String!) // Print the specified object(s)
     @objc optional func close() // Close an object
     @objc optional func delete() // Delete an element from an object
-    @objc optional func duplicateTo(to: SBObject!) -> SBObject // Duplicate one or more object(s)
+    @objc optional func duplicateTo(_ to: SBObject!) -> SBObject // Duplicate one or more object(s)
     @objc optional func exists() -> Bool // Verify if an object exists
-    @objc optional func open() // Open the specified object(s)
+    @objc optional func `open`() // Open the specified object(s)
     @objc optional func save() // Save the specified object(s)
-    @objc optional func playOnce(once: Bool) // play the current track or the specified track or file.
+    @objc optional func playOnce(_ once: Bool) // play the current track or the specified track or file.
     @objc optional func select() // select the specified object(s)
 }
 
@@ -169,8 +169,8 @@ import ScriptingBridge
     @objc optional var pagesAcross: Int { get } // number of logical pages laid across a physical page
     @objc optional var pagesDown: Int { get } // number of logical pages laid out down a physical page
     @objc optional var errorHandling: iTunesEnum { get } // how errors are handled
-    @objc optional var requestedPrintTime: NSDate { get } // the time at which the desktop printer should print the document
-    @objc optional var printerFeatures: [AnyObject] { get } // printer specific options
+    @objc optional var requestedPrintTime: Date { get } // the time at which the desktop printer should print the document
+    @objc optional var printerFeatures: [Any] { get } // printer specific options
     @objc optional var faxNumber: String { get } // for fax number
     @objc optional var targetPrinter: String { get } // for target printer
 }
@@ -215,43 +215,43 @@ extension SBObject: iTunesPrintSettings {}
     @objc optional var version: String { get } // the version of iTunes
     @objc optional var visualsEnabled: Bool { get } // are visuals currently being displayed?
     @objc optional var visualSize: iTunesEVSz { get } // the size of the displayed visual
-    @objc optional func printPrintDialog(printDialog: Bool, withProperties: iTunesPrintSettings!, kind: iTunesEKnd, theme: String!) // Print the specified object(s)
+    @objc optional func printPrintDialog(_ printDialog: Bool, withProperties: iTunesPrintSettings!, kind: iTunesEKnd, theme: String!) // Print the specified object(s)
     @objc optional func run() // Run iTunes
     @objc optional func quit() // Quit iTunes
-    @objc optional func add(x: [NSURL]!, to: SBObject!) -> iTunesTrack // add one or more files to a playlist
+    @objc optional func add(_ x: [URL]!, to: SBObject!) -> iTunesTrack // add one or more files to a playlist
     @objc optional func backTrack() // reposition to beginning of current track or go to previous track if already at start of current track
-    @objc optional func convert(x: [SBObject]!) -> iTunesTrack // convert one or more files or tracks
+    @objc optional func convert(_ x: [SBObject]!) -> iTunesTrack // convert one or more files or tracks
     @objc optional func eject() // eject the specified iPod
     @objc optional func fastForward() // skip forward in a playing track
     @objc optional func nextTrack() // advance to the next track in the current playlist
     @objc optional func pause() // pause playback
-    @objc optional func playOnce(once: Bool) // play the current track or the specified track or file.
+    @objc optional func playOnce(_ once: Bool) // play the current track or the specified track or file.
     @objc optional func playpause() // toggle the playing/paused state of the current track
     @objc optional func previousTrack() // return to the previous track in the current playlist
     @objc optional func resume() // disable fast forward/rewind and resume playback, if playing.
     @objc optional func rewind() // skip backwards in a playing track
     @objc optional func stop() // stop playback
-    @objc optional func subscribe(x: String!) // subscribe to a podcast feed
+    @objc optional func subscribe(_ x: String!) // subscribe to a podcast feed
     @objc optional func update() // update the specified iPod
     @objc optional func updateAllPodcasts() // update all subscribed podcast feeds
     @objc optional func updatePodcast() // update podcast feed
-    @objc optional func openLocation(x: String!) // Opens a Music Store or audio stream URL
-    @objc optional func setCurrentAirPlayDevices(currentAirPlayDevices: [iTunesAirPlayDevice]!) // the currently selected AirPlay device(s)
-    @objc optional func setCurrentEncoder(currentEncoder: iTunesEncoder!) // the currently selected encoder (MP3, AIFF, WAV, etc.)
-    @objc optional func setCurrentEQPreset(currentEQPreset: iTunesEQPreset!) // the currently selected equalizer preset
-    @objc optional func setCurrentVisual(currentVisual: iTunesVisual!) // the currently selected visual plug-in
-    @objc optional func setEQEnabled(EQEnabled: Bool) // is the equalizer enabled?
-    @objc optional func setFixedIndexing(fixedIndexing: Bool) // true if all AppleScript track indices should be independent of the play order of the owning playlist.
-    @objc optional func setFrontmost(frontmost: Bool) // is iTunes the frontmost application?
-    @objc optional func setFullScreen(fullScreen: Bool) // are visuals displayed using the entire screen?
-    @objc optional func setMute(mute: Bool) // has the sound output been muted?
-    @objc optional func setPlayerPosition(playerPosition: Double) // the player’s position within the currently playing track in seconds.
-    @objc optional func setShuffleEnabled(shuffleEnabled: Bool) // are songs played in random order?
-    @objc optional func setShuffleMode(shuffleMode: iTunesEShM) // the playback shuffle mode
-    @objc optional func setSongRepeat(songRepeat: iTunesERpt) // the playback repeat mode
-    @objc optional func setSoundVolume(soundVolume: Int) // the sound output volume (0 = minimum, 100 = maximum)
-    @objc optional func setVisualsEnabled(visualsEnabled: Bool) // are visuals currently being displayed?
-    @objc optional func setVisualSize(visualSize: iTunesEVSz) // the size of the displayed visual
+    @objc optional func openLocation(_ x: String!) // Opens a Music Store or audio stream URL
+    @objc optional func setCurrentAirPlayDevices(_ currentAirPlayDevices: [iTunesAirPlayDevice]!) // the currently selected AirPlay device(s)
+    @objc optional func setCurrentEncoder(_ currentEncoder: iTunesEncoder!) // the currently selected encoder (MP3, AIFF, WAV, etc.)
+    @objc optional func setCurrentEQPreset(_ currentEQPreset: iTunesEQPreset!) // the currently selected equalizer preset
+    @objc optional func setCurrentVisual(_ currentVisual: iTunesVisual!) // the currently selected visual plug-in
+    @objc optional func setEQEnabled(_ EQEnabled: Bool) // is the equalizer enabled?
+    @objc optional func setFixedIndexing(_ fixedIndexing: Bool) // true if all AppleScript track indices should be independent of the play order of the owning playlist.
+    @objc optional func setFrontmost(_ frontmost: Bool) // is iTunes the frontmost application?
+    @objc optional func setFullScreen(_ fullScreen: Bool) // are visuals displayed using the entire screen?
+    @objc optional func setMute(_ mute: Bool) // has the sound output been muted?
+    @objc optional func setPlayerPosition(_ playerPosition: Double) // the player’s position within the currently playing track in seconds.
+    @objc optional func setShuffleEnabled(_ shuffleEnabled: Bool) // are songs played in random order?
+    @objc optional func setShuffleMode(_ shuffleMode: iTunesEShM) // the playback shuffle mode
+    @objc optional func setSongRepeat(_ songRepeat: iTunesERpt) // the playback repeat mode
+    @objc optional func setSoundVolume(_ soundVolume: Int) // the sound output volume (0 = minimum, 100 = maximum)
+    @objc optional func setVisualsEnabled(_ visualsEnabled: Bool) // are visuals currently being displayed?
+    @objc optional func setVisualSize(_ visualSize: iTunesEVSz) // the size of the displayed visual
 }
 extension SBApplication: iTunesApplication {}
 
@@ -262,11 +262,11 @@ extension SBApplication: iTunesApplication {}
     @objc optional var index: Int { get } // The index of the item in internal application order.
     @objc optional var name: String { get } // the name of the item
     @objc optional var persistentID: String { get } // the id of the item as a hexadecimal string. This id does not change over time.
-    @objc optional var properties: [NSObject : AnyObject] { get } // every property of the item
+    @objc optional var properties: [AnyHashable : Any] { get } // every property of the item
     @objc optional func download() // download a cloud track or playlist, or a podcast episode
     @objc optional func reveal() // reveal and select a track or playlist
-    @objc optional func setName(name: String!) // the name of the item
-    @objc optional func setProperties(properties: [NSObject : AnyObject]!) // every property of the item
+    @objc optional func setName(_ name: String!) // the name of the item
+    @objc optional func setProperties(_ properties: [AnyHashable : Any]!) // every property of the item
 }
 extension SBObject: iTunesItem {}
 
@@ -281,8 +281,8 @@ extension SBObject: iTunesItem {}
     @objc optional var supportsAudio: Bool { get } // does the device support audio playback?
     @objc optional var supportsVideo: Bool { get } // does the device support video playback?
     @objc optional var soundVolume: Int { get } // the output volume for the device (0 = minimum, 100 = maximum)
-    @objc optional func setSelected(selected: Bool) // is the device currently selected?
-    @objc optional func setSoundVolume(soundVolume: Int) // the output volume for the device (0 = minimum, 100 = maximum)
+    @objc optional func setSelected(_ selected: Bool) // is the device currently selected?
+    @objc optional func setSoundVolume(_ soundVolume: Int) // the output volume for the device (0 = minimum, 100 = maximum)
 }
 extension SBObject: iTunesAirPlayDevice {}
 
@@ -293,11 +293,11 @@ extension SBObject: iTunesAirPlayDevice {}
     @objc optional var downloaded: Bool { get } // was this artwork downloaded by iTunes?
     @objc optional var format: NSNumber { get } // the data format for this piece of artwork
     @objc optional var kind: Int { get } // kind or purpose of this piece of artwork
-    @objc optional var rawData: NSData { get } // data for this artwork, in original format
-    @objc optional func setData(data: NSImage!) // data for this artwork, in the form of a picture
-    @objc optional func setObjectDescription(objectDescription: String!) // description of artwork as a string
-    @objc optional func setKind(kind: Int) // kind or purpose of this piece of artwork
-    @objc optional func setRawData(rawData: NSData!) // data for this artwork, in original format
+    @objc optional var rawData: Data { get } // data for this artwork, in original format
+    @objc optional func setData(_ data: NSImage!) // data for this artwork, in the form of a picture
+    @objc optional func setObjectDescription(_ objectDescription: String!) // description of artwork as a string
+    @objc optional func setKind(_ kind: Int) // kind or purpose of this piece of artwork
+    @objc optional func setRawData(_ rawData: Data!) // data for this artwork, in original format
 }
 extension SBObject: iTunesArtwork {}
 
@@ -322,18 +322,18 @@ extension SBObject: iTunesEncoder {}
     @objc optional var modifiable: Bool { get } // can this preset be modified?
     @objc optional var preamp: Double { get } // the equalizer preamp level (-12.0 dB to +12.0 dB)
     @objc optional var updateTracks: Bool { get } // should tracks which refer to this preset be updated when the preset is renamed or deleted?
-    @objc optional func setBand1(band1: Double) // the equalizer 32 Hz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand2(band2: Double) // the equalizer 64 Hz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand3(band3: Double) // the equalizer 125 Hz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand4(band4: Double) // the equalizer 250 Hz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand5(band5: Double) // the equalizer 500 Hz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand6(band6: Double) // the equalizer 1 kHz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand7(band7: Double) // the equalizer 2 kHz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand8(band8: Double) // the equalizer 4 kHz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand9(band9: Double) // the equalizer 8 kHz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setBand10(band10: Double) // the equalizer 16 kHz band level (-12.0 dB to +12.0 dB)
-    @objc optional func setPreamp(preamp: Double) // the equalizer preamp level (-12.0 dB to +12.0 dB)
-    @objc optional func setUpdateTracks(updateTracks: Bool) // should tracks which refer to this preset be updated when the preset is renamed or deleted?
+    @objc optional func setBand1(_ band1: Double) // the equalizer 32 Hz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand2(_ band2: Double) // the equalizer 64 Hz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand3(_ band3: Double) // the equalizer 125 Hz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand4(_ band4: Double) // the equalizer 250 Hz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand5(_ band5: Double) // the equalizer 500 Hz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand6(_ band6: Double) // the equalizer 1 kHz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand7(_ band7: Double) // the equalizer 2 kHz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand8(_ band8: Double) // the equalizer 4 kHz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand9(_ band9: Double) // the equalizer 8 kHz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setBand10(_ band10: Double) // the equalizer 16 kHz band level (-12.0 dB to +12.0 dB)
+    @objc optional func setPreamp(_ preamp: Double) // the equalizer preamp level (-12.0 dB to +12.0 dB)
+    @objc optional func setUpdateTracks(_ updateTracks: Bool) // should tracks which refer to this preset be updated when the preset is renamed or deleted?
 }
 extension SBObject: iTunesEQPreset {}
 
@@ -350,11 +350,11 @@ extension SBObject: iTunesEQPreset {}
     @objc optional var specialKind: iTunesESpK { get } // special playlist kind
     @objc optional var time: String { get } // the length of all songs in MM:SS format
     @objc optional var visible: Bool { get } // is this playlist visible in the Source list?
-    @objc optional func moveTo(to: SBObject!) // Move playlist(s) to a new location
-    @objc optional func searchFor(for_: String!, only: iTunesESrA) -> iTunesTrack // search a playlist for tracks matching the search string. Identical to entering search text in the Search field in iTunes.
-    @objc optional func setObjectDescription(objectDescription: String!) // the description of the playlist
-    @objc optional func setName(name: String!) // the name of the playlist
-    @objc optional func setLoved(loved: Bool) // is this playlist loved?
+    @objc optional func moveTo(_ to: SBObject!) // Move playlist(s) to a new location
+    @objc optional func searchFor(_ for_: String!, only: iTunesESrA) -> iTunesTrack // search a playlist for tracks matching the search string. Identical to entering search text in the Search field in iTunes.
+    @objc optional func setObjectDescription(_ objectDescription: String!) // the description of the playlist
+    @objc optional func setName(_ name: String!) // the name of the playlist
+    @objc optional func setLoved(_ loved: Bool) // is this playlist loved?
 }
 extension SBObject: iTunesPlaylist {}
 
@@ -368,13 +368,13 @@ extension SBObject: iTunesPlaylist {}
     @objc optional var discNumber: Int { get } // the index of this CD disc in the source album
     @objc optional var genre: String { get } // the genre of the CD
     @objc optional var year: Int { get } // the year the album was recorded/released
-    @objc optional func setArtist(artist: String!) // the artist of the CD
-    @objc optional func setCompilation(compilation: Bool) // is this CD a compilation album?
-    @objc optional func setComposer(composer: String!) // the composer of the CD
-    @objc optional func setDiscCount(discCount: Int) // the total number of discs in this CD’s album
-    @objc optional func setDiscNumber(discNumber: Int) // the index of this CD disc in the source album
-    @objc optional func setGenre(genre: String!) // the genre of the CD
-    @objc optional func setYear(year: Int) // the year the album was recorded/released
+    @objc optional func setArtist(_ artist: String!) // the artist of the CD
+    @objc optional func setCompilation(_ compilation: Bool) // is this CD a compilation album?
+    @objc optional func setComposer(_ composer: String!) // the composer of the CD
+    @objc optional func setDiscCount(_ discCount: Int) // the total number of discs in this CD’s album
+    @objc optional func setDiscNumber(_ discNumber: Int) // the index of this CD disc in the source album
+    @objc optional func setGenre(_ genre: String!) // the genre of the CD
+    @objc optional func setYear(_ year: Int) // the year the album was recorded/released
 }
 extension SBObject: iTunesAudioCDPlaylist {}
 
@@ -434,7 +434,7 @@ extension SBObject: iTunesSubscriptionPlaylist {}
     @objc optional var compilation: Bool { get } // is this track from a compilation album?
     @objc optional var composer: String { get } // the composer of the track
     @objc optional var databaseID: Int { get } // the common, unique ID for this track. If two tracks in different playlists have the same database ID, they are sharing the same data.
-    @objc optional var dateAdded: NSDate { get } // the date the track was added to the playlist
+    @objc optional var dateAdded: Date { get } // the date the track was added to the playlist
     @objc optional var objectDescription: String { get } // the description of the track
     @objc optional var discCount: Int { get } // the total number of discs in the source album
     @objc optional var discNumber: Int { get } // the index of the disc containing this track on the source album
@@ -454,19 +454,19 @@ extension SBObject: iTunesSubscriptionPlaylist {}
     @objc optional var loved: Bool { get } // is this track loved?
     @objc optional var lyrics: String { get } // the lyrics of the track
     @objc optional var mediaKind: iTunesEMdK { get } // the media kind of the track
-    @objc optional var modificationDate: NSDate { get } // the modification date of the content of this track
+    @objc optional var modificationDate: Date { get } // the modification date of the content of this track
     @objc optional var playedCount: Int { get } // number of times this track has been played
-    @objc optional var playedDate: NSDate { get } // the date and time this track was last played
+    @objc optional var playedDate: Date { get } // the date and time this track was last played
     @objc optional var purchaserAppleID: String { get } // the Apple ID of the person who purchased this track
     @objc optional var purchaserName: String { get } // the name of the person who purchased this track
     @objc optional var rating: Int { get } // the rating of this track (0 to 100)
     @objc optional var ratingKind: iTunesERtK { get } // the rating kind of this track
-    @objc optional var releaseDate: NSDate { get } // the release date of this track
+    @objc optional var releaseDate: Date { get } // the release date of this track
     @objc optional var sampleRate: Int { get } // the sample rate of the track (in Hz)
     @objc optional var seasonNumber: Int { get } // the season number of the track
     @objc optional var shufflable: Bool { get } // is this track included when shuffling?
     @objc optional var skippedCount: Int { get } // number of times this track has been skipped
-    @objc optional var skippedDate: NSDate { get } // the date and time this track was last skipped
+    @objc optional var skippedDate: Date { get } // the date and time this track was last skipped
     @objc optional var show: String { get } // the show name of the track
     @objc optional var sortAlbum: String { get } // override string to use for the track when sorting by album
     @objc optional var sortArtist: String { get } // override string to use for the track when sorting by artist
@@ -483,68 +483,68 @@ extension SBObject: iTunesSubscriptionPlaylist {}
     @objc optional var videoKind: iTunesEVdK { get } // kind of video track
     @objc optional var volumeAdjustment: Int { get } // relative volume adjustment of the track (-100% to 100%)
     @objc optional var year: Int { get } // the year the track was recorded/released
-    @objc optional func setAlbum(album: String!) // the album name of the track
-    @objc optional func setAlbumArtist(albumArtist: String!) // the album artist of the track
-    @objc optional func setAlbumLoved(albumLoved: Bool) // is the album for this track loved?
-    @objc optional func setAlbumRating(albumRating: Int) // the rating of the album for this track (0 to 100)
-    @objc optional func setArtist(artist: String!) // the artist/source of the track
-    @objc optional func setBookmark(bookmark: Double) // the bookmark time of the track in seconds
-    @objc optional func setBookmarkable(bookmarkable: Bool) // is the playback position for this track remembered?
-    @objc optional func setBpm(bpm: Int) // the tempo of this track in beats per minute
-    @objc optional func setCategory(category: String!) // the category of the track
-    @objc optional func setComment(comment: String!) // freeform notes about the track
-    @objc optional func setCompilation(compilation: Bool) // is this track from a compilation album?
-    @objc optional func setComposer(composer: String!) // the composer of the track
-    @objc optional func setObjectDescription(objectDescription: String!) // the description of the track
-    @objc optional func setDiscCount(discCount: Int) // the total number of discs in the source album
-    @objc optional func setDiscNumber(discNumber: Int) // the index of the disc containing this track on the source album
-    @objc optional func setEnabled(enabled: Bool) // is this track checked for playback?
-    @objc optional func setEpisodeID(episodeID: String!) // the episode ID of the track
-    @objc optional func setEpisodeNumber(episodeNumber: Int) // the episode number of the track
-    @objc optional func setEQ(EQ: String!) // the name of the EQ preset of the track
-    @objc optional func setFinish(finish: Double) // the stop time of the track in seconds
-    @objc optional func setGapless(gapless: Bool) // is this track from a gapless album?
-    @objc optional func setGenre(genre: String!) // the music/audio genre (category) of the track
-    @objc optional func setGrouping(grouping: String!) // the grouping (piece) of the track. Generally used to denote movements within a classical work.
-    @objc optional func setLongDescription(longDescription: String!)
-    @objc optional func setLoved(loved: Bool) // is this track loved?
-    @objc optional func setLyrics(lyrics: String!) // the lyrics of the track
-    @objc optional func setMediaKind(mediaKind: iTunesEMdK) // the media kind of the track
-    @objc optional func setPlayedCount(playedCount: Int) // number of times this track has been played
-    @objc optional func setPlayedDate(playedDate: NSDate!) // the date and time this track was last played
-    @objc optional func setRating(rating: Int) // the rating of this track (0 to 100)
-    @objc optional func setSeasonNumber(seasonNumber: Int) // the season number of the track
-    @objc optional func setShufflable(shufflable: Bool) // is this track included when shuffling?
-    @objc optional func setSkippedCount(skippedCount: Int) // number of times this track has been skipped
-    @objc optional func setSkippedDate(skippedDate: NSDate!) // the date and time this track was last skipped
-    @objc optional func setShow(show: String!) // the show name of the track
-    @objc optional func setSortAlbum(sortAlbum: String!) // override string to use for the track when sorting by album
-    @objc optional func setSortArtist(sortArtist: String!) // override string to use for the track when sorting by artist
-    @objc optional func setSortAlbumArtist(sortAlbumArtist: String!) // override string to use for the track when sorting by album artist
-    @objc optional func setSortName(sortName: String!) // override string to use for the track when sorting by name
-    @objc optional func setSortComposer(sortComposer: String!) // override string to use for the track when sorting by composer
-    @objc optional func setSortShow(sortShow: String!) // override string to use for the track when sorting by show name
-    @objc optional func setStart(start: Double) // the start time of the track in seconds
-    @objc optional func setTrackCount(trackCount: Int) // the total number of tracks on the source album
-    @objc optional func setTrackNumber(trackNumber: Int) // the index of the track on the source album
-    @objc optional func setUnplayed(unplayed: Bool) // is this track unplayed?
-    @objc optional func setVideoKind(videoKind: iTunesEVdK) // kind of video track
-    @objc optional func setVolumeAdjustment(volumeAdjustment: Int) // relative volume adjustment of the track (-100% to 100%)
-    @objc optional func setYear(year: Int) // the year the track was recorded/released
+    @objc optional func setAlbum(_ album: String!) // the album name of the track
+    @objc optional func setAlbumArtist(_ albumArtist: String!) // the album artist of the track
+    @objc optional func setAlbumLoved(_ albumLoved: Bool) // is the album for this track loved?
+    @objc optional func setAlbumRating(_ albumRating: Int) // the rating of the album for this track (0 to 100)
+    @objc optional func setArtist(_ artist: String!) // the artist/source of the track
+    @objc optional func setBookmark(_ bookmark: Double) // the bookmark time of the track in seconds
+    @objc optional func setBookmarkable(_ bookmarkable: Bool) // is the playback position for this track remembered?
+    @objc optional func setBpm(_ bpm: Int) // the tempo of this track in beats per minute
+    @objc optional func setCategory(_ category: String!) // the category of the track
+    @objc optional func setComment(_ comment: String!) // freeform notes about the track
+    @objc optional func setCompilation(_ compilation: Bool) // is this track from a compilation album?
+    @objc optional func setComposer(_ composer: String!) // the composer of the track
+    @objc optional func setObjectDescription(_ objectDescription: String!) // the description of the track
+    @objc optional func setDiscCount(_ discCount: Int) // the total number of discs in the source album
+    @objc optional func setDiscNumber(_ discNumber: Int) // the index of the disc containing this track on the source album
+    @objc optional func setEnabled(_ enabled: Bool) // is this track checked for playback?
+    @objc optional func setEpisodeID(_ episodeID: String!) // the episode ID of the track
+    @objc optional func setEpisodeNumber(_ episodeNumber: Int) // the episode number of the track
+    @objc optional func setEQ(_ EQ: String!) // the name of the EQ preset of the track
+    @objc optional func setFinish(_ finish: Double) // the stop time of the track in seconds
+    @objc optional func setGapless(_ gapless: Bool) // is this track from a gapless album?
+    @objc optional func setGenre(_ genre: String!) // the music/audio genre (category) of the track
+    @objc optional func setGrouping(_ grouping: String!) // the grouping (piece) of the track. Generally used to denote movements within a classical work.
+    @objc optional func setLongDescription(_ longDescription: String!)
+    @objc optional func setLoved(_ loved: Bool) // is this track loved?
+    @objc optional func setLyrics(_ lyrics: String!) // the lyrics of the track
+    @objc optional func setMediaKind(_ mediaKind: iTunesEMdK) // the media kind of the track
+    @objc optional func setPlayedCount(_ playedCount: Int) // number of times this track has been played
+    @objc optional func setPlayedDate(_ playedDate: Date!) // the date and time this track was last played
+    @objc optional func setRating(_ rating: Int) // the rating of this track (0 to 100)
+    @objc optional func setSeasonNumber(_ seasonNumber: Int) // the season number of the track
+    @objc optional func setShufflable(_ shufflable: Bool) // is this track included when shuffling?
+    @objc optional func setSkippedCount(_ skippedCount: Int) // number of times this track has been skipped
+    @objc optional func setSkippedDate(_ skippedDate: Date!) // the date and time this track was last skipped
+    @objc optional func setShow(_ show: String!) // the show name of the track
+    @objc optional func setSortAlbum(_ sortAlbum: String!) // override string to use for the track when sorting by album
+    @objc optional func setSortArtist(_ sortArtist: String!) // override string to use for the track when sorting by artist
+    @objc optional func setSortAlbumArtist(_ sortAlbumArtist: String!) // override string to use for the track when sorting by album artist
+    @objc optional func setSortName(_ sortName: String!) // override string to use for the track when sorting by name
+    @objc optional func setSortComposer(_ sortComposer: String!) // override string to use for the track when sorting by composer
+    @objc optional func setSortShow(_ sortShow: String!) // override string to use for the track when sorting by show name
+    @objc optional func setStart(_ start: Double) // the start time of the track in seconds
+    @objc optional func setTrackCount(_ trackCount: Int) // the total number of tracks on the source album
+    @objc optional func setTrackNumber(_ trackNumber: Int) // the index of the track on the source album
+    @objc optional func setUnplayed(_ unplayed: Bool) // is this track unplayed?
+    @objc optional func setVideoKind(_ videoKind: iTunesEVdK) // kind of video track
+    @objc optional func setVolumeAdjustment(_ volumeAdjustment: Int) // relative volume adjustment of the track (-100% to 100%)
+    @objc optional func setYear(_ year: Int) // the year the track was recorded/released
 }
 extension SBObject: iTunesTrack {}
 
 // MARK: iTunesAudioCDTrack
 @objc public protocol iTunesAudioCDTrack: iTunesTrack {
-    @objc optional var location: NSURL { get } // the location of the file represented by this track
+    @objc optional var location: URL { get } // the location of the file represented by this track
 }
 extension SBObject: iTunesAudioCDTrack {}
 
 // MARK: iTunesFileTrack
 @objc public protocol iTunesFileTrack: iTunesTrack {
-    @objc optional var location: NSURL { get } // the location of the file represented by this track
+    @objc optional var location: URL { get } // the location of the file represented by this track
     @objc optional func refresh() // update file track information from the current information in the track’s file
-    @objc optional func setLocation(location: NSURL!) // the location of the file represented by this track
+    @objc optional func setLocation(_ location: URL!) // the location of the file represented by this track
 }
 extension SBObject: iTunesFileTrack {}
 
@@ -556,7 +556,7 @@ extension SBObject: iTunesSharedTrack {}
 // MARK: iTunesURLTrack
 @objc public protocol iTunesURLTrack: iTunesTrack {
     @objc optional var address: String { get } // the URL for this track
-    @objc optional func setAddress(address: String!) // the URL for this track
+    @objc optional func setAddress(_ address: String!) // the URL for this track
 }
 extension SBObject: iTunesURLTrack {}
 
@@ -568,7 +568,7 @@ extension SBObject: iTunesURLTrack {}
     @objc optional var shared: Bool { get } // is this playlist shared?
     @objc optional var smart: Bool { get } // is this a Smart Playlist?
     @objc optional var genius: Bool { get } // is this a Genius Playlist?
-    @objc optional func setShared(shared: Bool) // is this playlist shared?
+    @objc optional func setShared(_ shared: Bool) // is this playlist shared?
 }
 extension SBObject: iTunesUserPlaylist {}
 
@@ -594,12 +594,12 @@ extension SBObject: iTunesVisual {}
     @objc optional var visible: Bool { get } // is the window visible?
     @objc optional var zoomable: Bool { get } // is the window zoomable?
     @objc optional var zoomed: Bool { get } // is the window zoomed?
-    @objc optional func setBounds(bounds: NSRect) // the boundary rectangle for the window
-    @objc optional func setCollapsed(collapsed: Bool) // is the window collapsed?
-    @objc optional func setFullScreen(fullScreen: Bool) // is the window full screen?
-    @objc optional func setPosition(position: NSPoint) // the upper left position of the window
-    @objc optional func setVisible(visible: Bool) // is the window visible?
-    @objc optional func setZoomed(zoomed: Bool) // is the window zoomed?
+    @objc optional func setBounds(_ bounds: NSRect) // the boundary rectangle for the window
+    @objc optional func setCollapsed(_ collapsed: Bool) // is the window collapsed?
+    @objc optional func setFullScreen(_ fullScreen: Bool) // is the window full screen?
+    @objc optional func setPosition(_ position: NSPoint) // the upper left position of the window
+    @objc optional func setVisible(_ visible: Bool) // is the window visible?
+    @objc optional func setZoomed(_ zoomed: Bool) // is the window zoomed?
 }
 extension SBObject: iTunesWindow {}
 
@@ -607,7 +607,7 @@ extension SBObject: iTunesWindow {}
 @objc public protocol iTunesBrowserWindow: iTunesWindow {
     @objc optional var selection: SBObject { get } // the selected songs
     @objc optional var view: iTunesPlaylist { get } // the playlist currently displayed in the window
-    @objc optional func setView(view: iTunesPlaylist!) // the playlist currently displayed in the window
+    @objc optional func setView(_ view: iTunesPlaylist!) // the playlist currently displayed in the window
 }
 extension SBObject: iTunesBrowserWindow {}
 

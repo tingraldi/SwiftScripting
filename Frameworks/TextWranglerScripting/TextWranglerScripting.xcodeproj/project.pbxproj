@@ -9,20 +9,8 @@
 /* Begin PBXBuildFile section */
 		E64451B81A89BC430027F82A /* TextWrangler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BD71A8868AF002D55A2 /* TextWrangler.swift */; };
 		E6D5F2461A645481007ED52C /* TextWranglerScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D5F2451A645481007ED52C /* TextWranglerScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6D5F24C1A645481007ED52C /* TextWranglerScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D5F2401A645481007ED52C /* TextWranglerScripting.framework */; };
-		E6D5F2531A645481007ED52C /* TextWranglerScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6D5F2521A645481007ED52C /* TextWranglerScriptingTests.m */; };
 		E6D7AE871AABF6B900E8E744 /* TextWranglerScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE861AABF6B900E8E744 /* TextWranglerScripting.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E6D5F24D1A645481007ED52C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6D5F2371A645481007ED52C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6D5F23F1A645481007ED52C;
-			remoteInfo = TextWranglerScripting;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E6C82BD61A8868AF002D55A2 /* TextWrangler.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TextWrangler.sdef; sourceTree = "<group>"; };
@@ -30,9 +18,6 @@
 		E6D5F2401A645481007ED52C /* TextWranglerScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextWranglerScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6D5F2441A645481007ED52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6D5F2451A645481007ED52C /* TextWranglerScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextWranglerScripting.h; sourceTree = "<group>"; };
-		E6D5F24B1A645481007ED52C /* TextWranglerScriptingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TextWranglerScriptingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6D5F2511A645481007ED52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6D5F2521A645481007ED52C /* TextWranglerScriptingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextWranglerScriptingTests.m; sourceTree = "<group>"; };
 		E6D5F25C1A645491007ED52C /* TextWrangler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextWrangler.h; sourceTree = "<group>"; };
 		E6D7AE861AABF6B900E8E744 /* TextWranglerScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextWranglerScripting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -42,14 +27,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6D5F2481A645481007ED52C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6D5F24C1A645481007ED52C /* TextWranglerScripting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				E6D5F2421A645481007ED52C /* TextWranglerScripting */,
-				E6D5F24F1A645481007ED52C /* TextWranglerScriptingTests */,
 				E6D5F2411A645481007ED52C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				E6D5F2401A645481007ED52C /* TextWranglerScripting.framework */,
-				E6D5F24B1A645481007ED52C /* TextWranglerScriptingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,23 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				E6D5F2441A645481007ED52C /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E6D5F24F1A645481007ED52C /* TextWranglerScriptingTests */ = {
-			isa = PBXGroup;
-			children = (
-				E6D5F2521A645481007ED52C /* TextWranglerScriptingTests.m */,
-				E6D5F2501A645481007ED52C /* Supporting Files */,
-			);
-			path = TextWranglerScriptingTests;
-			sourceTree = "<group>";
-		};
-		E6D5F2501A645481007ED52C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E6D5F2511A645481007ED52C /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,24 +110,6 @@
 			productReference = E6D5F2401A645481007ED52C /* TextWranglerScripting.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E6D5F24A1A645481007ED52C /* TextWranglerScriptingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6D5F2591A645481007ED52C /* Build configuration list for PBXNativeTarget "TextWranglerScriptingTests" */;
-			buildPhases = (
-				E6D5F2471A645481007ED52C /* Sources */,
-				E6D5F2481A645481007ED52C /* Frameworks */,
-				E6D5F2491A645481007ED52C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E6D5F24E1A645481007ED52C /* PBXTargetDependency */,
-			);
-			name = TextWranglerScriptingTests;
-			productName = TextWranglerScriptingTests;
-			productReference = E6D5F24B1A645481007ED52C /* TextWranglerScriptingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -183,9 +123,6 @@
 					E6D5F23F1A645481007ED52C = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 0800;
-					};
-					E6D5F24A1A645481007ED52C = {
-						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
 			};
@@ -202,20 +139,12 @@
 			projectRoot = "";
 			targets = (
 				E6D5F23F1A645481007ED52C /* TextWranglerScripting */,
-				E6D5F24A1A645481007ED52C /* TextWranglerScriptingTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E6D5F23E1A645481007ED52C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6D5F2491A645481007ED52C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,23 +163,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6D5F2471A645481007ED52C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6D5F2531A645481007ED52C /* TextWranglerScriptingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E6D5F24E1A645481007ED52C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6D5F23F1A645481007ED52C /* TextWranglerScripting */;
-			targetProxy = E6D5F24D1A645481007ED52C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E6D5F2541A645481007ED52C /* Debug */ = {
@@ -351,7 +264,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -371,41 +284,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-			};
-			name = Release;
-		};
-		E6D5F25A1A645481007ED52C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TextWranglerScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		E6D5F25B1A645481007ED52C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TextWranglerScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -426,15 +305,6 @@
 			buildConfigurations = (
 				E6D5F2571A645481007ED52C /* Debug */,
 				E6D5F2581A645481007ED52C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E6D5F2591A645481007ED52C /* Build configuration list for PBXNativeTarget "TextWranglerScriptingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6D5F25A1A645481007ED52C /* Debug */,
-				E6D5F25B1A645481007ED52C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

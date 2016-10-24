@@ -21,28 +21,28 @@
 
 import Foundation
 
-public func runScript(script: String) {
-    NSTask.launchedTaskWithLaunchPath("/usr/bin/osascript", arguments: ["-e", script])
+public func runScript(_ script: String) {
+    Process.launchedProcess(launchPath: "/usr/bin/osascript", arguments: ["-e", script])
 }
 
-public func notifyUserWithMessage(message: String, title: String) {
+public func notifyUserWithMessage(_ message: String, title: String) {
     let script = "display notification \"\(message)\" with title \"\(title)\""
     runScript(script)
 }
 
-public func commandOutput(commandPath: String, withArguments arguments: [String]? = nil, currentDirectoryPath: String? = nil) -> String? {
-    let task = NSTask()
-    let pipe = NSPipe()
-    task.standardOutput = pipe.fileHandleForWriting
-    task.launchPath = commandPath
+public func commandOutput(_ commandPath: String, withArguments arguments: [String]? = nil, currentDirectoryPath: String? = nil) -> String? {
+    let process = Process()
+    let pipe = Pipe()
+    process.standardOutput = pipe.fileHandleForWriting
+    process.launchPath = commandPath
     if currentDirectoryPath != nil {
-        task.currentDirectoryPath = currentDirectoryPath!
+        process.currentDirectoryPath = currentDirectoryPath!
     }
     if arguments != nil {
-        task.arguments = arguments!
+        process.arguments = arguments!
     }
-    task.launch()
-    task.waitUntilExit()
+    process.launch()
+    process.waitUntilExit()
     pipe.fileHandleForWriting.closeFile()
-    return NSString(data: pipe.fileHandleForReading.availableData, encoding: NSUTF8StringEncoding) as String?
+    return NSString(data: pipe.fileHandleForReading.availableData, encoding: String.Encoding.utf8.rawValue) as String?
 }

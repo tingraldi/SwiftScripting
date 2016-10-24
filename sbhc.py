@@ -47,30 +47,33 @@ from clang.cindex import TypeKind
 
 Config.set_library_path("/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib")
 
-keywords = ['class', 'deinit', 'enum', 'extension', 'func', 'import', 'init', 'internal', 'let', 'operator', 'private',
-            'protocol', 'public', 'static', 'struct', 'subscript', 'typealias', 'var', 'break', 'case', 'continue',
-            'default', 'do', 'else', 'fallthrough', 'for', 'if', 'in', 'return', 'switch', 'where', 'while', 'as',
-            'dynamicType', 'false', 'is', 'nil', 'self', 'Self', 'super', 'true', 'associativity', 'convenience',
-            'dynamic', 'didSet', 'final', 'get', 'infix', 'inout', 'lazy', 'left', 'mutating', 'none', 'nonmutating',
-            'optional', 'override', 'postfix', 'precedence', 'prefix', 'Protocol', 'required', 'right', 'set', 'Type',
-            'unowned', 'weak', 'willSet']
+# See https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html
+parameter_keywords = ['let', 'var', 'inout']
+declaration_keywords = ['associatedtype', 'class', 'deinit', 'enum', 'extension', 'fileprivate', 'func', 'import',
+                        'init', 'inout', 'internal', 'let', 'open', 'operator', 'private', 'protocol', 'public',
+                        'static', 'struct', 'subscript', 'typealias', 'var']
 
-type_dict = {'BOOL': 'Bool',
-             'double': 'Double',
-             'long': 'Int64',
-             'int': 'Int',
-             'NSInteger': 'Int',
-             'NSString': 'String',
-             'id': 'AnyObject',
-             'NSArray': '[AnyObject]',
-             'NSDictionary': '[NSObject : AnyObject]',
-             'SEL': 'Selector'}
+type_dict = {
+    'BOOL': 'Bool',
+    'double': 'Double',
+    'long': 'Int64',
+    'int': 'Int',
+    'id': 'Any',
+    'SEL': 'Selector',
+    'NSArray': '[Any]',
+    'NSData': 'Data',
+    'NSDate': 'Date',
+    'NSDictionary': '[AnyHashable : Any]',
+    'NSInteger': 'Int',
+    'NSString': 'String',
+    'NSURL': 'URL',
+}
 
 object_kinds = [TypeKind.OBJCID, TypeKind.OBJCOBJECTPOINTER]
 
 base_protocols = """
 @objc public protocol SBObjectProtocol: NSObjectProtocol {
-    func get() -> AnyObject!
+    func get() -> Any!
 }
 
 @objc public protocol SBApplicationProtocol: SBObjectProtocol {
@@ -81,18 +84,25 @@ base_protocols = """
 """
 
 generic_pattern = re.compile(r'(.*)<(.*)>.*')
+all_caps_re = re.compile('([A-Z]+)($)')
+single_cap_re = re.compile('([A-Z])([^A-Z]+.*)')
+multiple_caps_re = re.compile('([A-Z]+)([A-Z]([^0-9]+.*))')
+caps_to_digit_re = re.compile('([A-Z]+)([0-9]+.*)')
 
 
-def safe_name(name):
+def safe_name(name, keywords=parameter_keywords):
     return '`{}`'.format(name) if name in keywords else name
 
 
 def arg_name(name, position=0):
-    if position > 0 and name.endswith('_'):
-        stripped_name = name.rstrip('_')
-        return '{} {}'.format(safe_name(stripped_name), name)
+    if position > 0:
+        if name.endswith('_'):
+            stripped_name = name.rstrip('_')
+            return '{} {}'.format(safe_name(stripped_name), name)
+        else:
+            return safe_name(name)
     else:
-        return safe_name(name)
+        return '_ ' + safe_name(name)
 
 
 def type_for_spelling(spelling):
@@ -131,6 +141,18 @@ def strip_prefix(prefix, a_string):
     return a_string
 
 
+def enum_case(prefix, enum_case):
+    stripped_case = strip_prefix(prefix, enum_case)
+    converted_enum_case = stripped_case
+    for regex in (all_caps_re, single_cap_re, caps_to_digit_re, multiple_caps_re):
+        match = regex.match(stripped_case)
+        if match:
+            groups = match.groups()
+            converted_enum_case = groups[0].lower() + groups[1]
+            break
+    return converted_enum_case
+
+
 def cursor_super_entity(cursor):
     tokens = [token.spelling for token in cursor.get_tokens()]
     if tokens[3] == ":" and len(tokens) > 4:
@@ -159,7 +181,7 @@ class SBHeaderProcessor(object):
             self.emit_line('@objc public enum {} : AEKeyword {{'.format(cursor.spelling))
             for decl in [child for child in cursor.get_children() if child.kind == CursorKind.ENUM_CONSTANT_DECL]:
                 self.emit_line('    case {} = {} /* {} */'.format(
-                    strip_prefix(cursor.spelling, decl.spelling),
+                    enum_case(cursor.spelling, decl.spelling),
                     hex(decl.enum_value),
                     repr(struct.pack('!i', decl.enum_value))))
             self.emit_line('}\n')
@@ -173,7 +195,7 @@ class SBHeaderProcessor(object):
                                                                     self.line_comment(cursor)))
 
     def emit_function(self, cursor):
-        func_name = safe_name(cursor.spelling.split(':')[0])
+        func_name = safe_name(cursor.spelling.split(':')[0], keywords=declaration_keywords)
         parameter_cursors = [child for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
         parameters = ['{}: {}'.format(arg_name(child.spelling, position=parameter_cursors.index(child)), type_for_type(child.type, as_arg=True))
                       for child in parameter_cursors]

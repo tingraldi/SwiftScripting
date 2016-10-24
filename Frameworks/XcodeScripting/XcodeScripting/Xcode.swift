@@ -2,7 +2,7 @@ import AppKit
 import ScriptingBridge
 
 @objc public protocol SBObjectProtocol: NSObjectProtocol {
-    func get() -> AnyObject!
+    func get() -> Any!
 }
 
 @objc public protocol SBApplicationProtocol: SBObjectProtocol {
@@ -13,122 +13,122 @@ import ScriptingBridge
 
 // MARK: XcodeSaveOptions
 @objc public enum XcodeSaveOptions : AEKeyword {
-    case Yes = 0x79657320 /* 'yes ' */
-    case No = 0x6e6f2020 /* 'no  ' */
-    case Ask = 0x61736b20 /* 'ask ' */
+    case yes = 0x79657320 /* 'yes ' */
+    case no = 0x6e6f2020 /* 'no  ' */
+    case ask = 0x61736b20 /* 'ask ' */
 }
 
 // MARK: XcodePrintingErrorHandling
 @objc public enum XcodePrintingErrorHandling : AEKeyword {
-    case Standard = 0x6c777374 /* 'lwst' */
-    case Detailed = 0x6c776474 /* 'lwdt' */
+    case standard = 0x6c777374 /* 'lwst' */
+    case detailed = 0x6c776474 /* 'lwdt' */
 }
 
 // MARK: XcodePwpa
 @objc public enum XcodePwpa : AEKeyword {
-    case ExecutablesDirectory = 0x70777065 /* 'pwpe' */
-    case Frameworks = 0x70777066 /* 'pwpf' */
-    case JavaResources = 0x7077706a /* 'pwpj' */
-    case PluginsDirectory = 0x7077706c /* 'pwpl' */
-    case ProductsDirectory = 0x70777070 /* 'pwpp' */
-    case Resources = 0x70777265 /* 'pwre' */
-    case RootVolume = 0x7077706e /* 'pwpn' */
-    case SharedFrameworks = 0x70777366 /* 'pwsf' */
-    case SharedSupport = 0x70777373 /* 'pwss' */
-    case Wrapper = 0x70777072 /* 'pwpr' */
+    case executablesDirectory = 0x70777065 /* 'pwpe' */
+    case frameworks = 0x70777066 /* 'pwpf' */
+    case javaResources = 0x7077706a /* 'pwpj' */
+    case pluginsDirectory = 0x7077706c /* 'pwpl' */
+    case productsDirectory = 0x70777070 /* 'pwpp' */
+    case resources = 0x70777265 /* 'pwre' */
+    case rootVolume = 0x7077706e /* 'pwpn' */
+    case sharedFrameworks = 0x70777366 /* 'pwsf' */
+    case sharedSupport = 0x70777373 /* 'pwss' */
+    case wrapper = 0x70777072 /* 'pwpr' */
 }
 
 // MARK: XcodeBmte
 @objc public enum XcodeBmte : AEKeyword {
-    case AnalyzerResult = 0x626d7461 /* 'bmta' */
-    case Error = 0x626d7465 /* 'bmte' */
-    case None = 0x626d746e /* 'bmtn' */
-    case Notice = 0x626d746f /* 'bmto' */
-    case Warning = 0x626d7477 /* 'bmtw' */
+    case analyzerResult = 0x626d7461 /* 'bmta' */
+    case error = 0x626d7465 /* 'bmte' */
+    case none = 0x626d746e /* 'bmtn' */
+    case notice = 0x626d746f /* 'bmto' */
+    case warning = 0x626d7477 /* 'bmtw' */
 }
 
 // MARK: XcodeLied
 @objc public enum XcodeLied : AEKeyword {
-    case CR = 0x63726c65 /* 'crle' */
-    case CRLF = 0x63726c66 /* 'crlf' */
-    case LF = 0x6c666c65 /* 'lfle' */
-    case PreserveExisting = 0x70656c65 /* 'pele' */
+    case cr = 0x63726c65 /* 'crle' */
+    case crlf = 0x63726c66 /* 'crlf' */
+    case lf = 0x6c666c65 /* 'lfle' */
+    case preserveExisting = 0x70656c65 /* 'pele' */
 }
 
 // MARK: XcodeFenc
 @objc public enum XcodeFenc : AEKeyword {
-    case Iso2022Japanese = 0x69736a70 /* 'isjp' */
-    case IsoLatin1 = 0x696c6131 /* 'ila1' */
-    case IsoLatin2 = 0x696c6132 /* 'ila2' */
-    case JapaneseEUC = 0x6a657563 /* 'jeuc' */
-    case MacosRoman = 0x6d6f7372 /* 'mosr' */
-    case Nextstep = 0x6e657874 /* 'next' */
-    case NonlossyAscii = 0x6e6c6173 /* 'nlas' */
-    case ShiftJisString = 0x736a6973 /* 'sjis' */
-    case SymbolString = 0x73796d73 /* 'syms' */
-    case Unicode = 0x756e6963 /* 'unic' */
-    case Utf8 = 0x75746638 /* 'utf8' */
-    case WindowsCyrillic = 0x77636f31 /* 'wco1' */
-    case WindowsGreek = 0x77637033 /* 'wcp3' */
-    case WindowsLatin1 = 0x77637032 /* 'wcp2' */
-    case WindowsLatin2 = 0x77637030 /* 'wcp0' */
-    case WindowsTurkish = 0x77637034 /* 'wcp4' */
+    case iso2022Japanese = 0x69736a70 /* 'isjp' */
+    case isoLatin1 = 0x696c6131 /* 'ila1' */
+    case isoLatin2 = 0x696c6132 /* 'ila2' */
+    case japaneseEUC = 0x6a657563 /* 'jeuc' */
+    case macosRoman = 0x6d6f7372 /* 'mosr' */
+    case nextstep = 0x6e657874 /* 'next' */
+    case nonlossyAscii = 0x6e6c6173 /* 'nlas' */
+    case shiftJisString = 0x736a6973 /* 'sjis' */
+    case symbolString = 0x73796d73 /* 'syms' */
+    case unicode = 0x756e6963 /* 'unic' */
+    case utf8 = 0x75746638 /* 'utf8' */
+    case windowsCyrillic = 0x77636f31 /* 'wco1' */
+    case windowsGreek = 0x77637033 /* 'wcp3' */
+    case windowsLatin1 = 0x77637032 /* 'wcp2' */
+    case windowsLatin2 = 0x77637030 /* 'wcp0' */
+    case windowsTurkish = 0x77637034 /* 'wcp4' */
 }
 
 // MARK: XcodeReft
 @objc public enum XcodeReft : AEKeyword {
-    case Absolute = 0x61737274 /* 'asrt' */
-    case BuildProductRelative = 0x62707274 /* 'bprt' */
-    case CurrentSDKRelative = 0x73647274 /* 'sdrt' */
-    case GroupRelative = 0x67727274 /* 'grrt' */
-    case Other = 0x6f726674 /* 'orft' */
-    case ProjectRelative = 0x70727274 /* 'prrt' */
-    case XcodeFolderRelative = 0x78727274 /* 'xrrt' */
+    case absolute = 0x61737274 /* 'asrt' */
+    case buildProductRelative = 0x62707274 /* 'bprt' */
+    case currentSDKRelative = 0x73647274 /* 'sdrt' */
+    case groupRelative = 0x67727274 /* 'grrt' */
+    case other = 0x6f726674 /* 'orft' */
+    case projectRelative = 0x70727274 /* 'prrt' */
+    case xcodeFolderRelative = 0x78727274 /* 'xrrt' */
 }
 
 // MARK: XcodeAsms
 @objc public enum XcodeAsms : AEKeyword {
-    case HasConflict = 0x73636373 /* 'sccs' */
-    case LocallyAdded = 0x736c6173 /* 'slas' */
-    case LocallyModified = 0x736c6d73 /* 'slms' */
-    case LocallyRemoved = 0x736c7273 /* 'slrs' */
-    case NeedsMerge = 0x736e6d73 /* 'snms' */
-    case NeedsUpdate = 0x736e6373 /* 'sncs' */
-    case Unknown = 0x73637573 /* 'scus' */
-    case UpToDate = 0x73756473 /* 'suds' */
+    case hasConflict = 0x73636373 /* 'sccs' */
+    case locallyAdded = 0x736c6173 /* 'slas' */
+    case locallyModified = 0x736c6d73 /* 'slms' */
+    case locallyRemoved = 0x736c7273 /* 'slrs' */
+    case needsMerge = 0x736e6d73 /* 'snms' */
+    case needsUpdate = 0x736e6373 /* 'sncs' */
+    case unknown = 0x73637573 /* 'scus' */
+    case upToDate = 0x73756473 /* 'suds' */
 }
 
 // MARK: XcodeSaveableFileFormat
 @objc public enum XcodeSaveableFileFormat : AEKeyword {
-    case Text = 0x63747874 /* 'ctxt' */
+    case text = 0x63747874 /* 'ctxt' */
 }
 
 // MARK: XcodeXdel
 @objc public enum XcodeXdel : AEKeyword {
-    case CPlusPlus = 0x78646570 /* 'xdep' */
-    case Java = 0x7864656a /* 'xdej' */
-    case ObjectiveC = 0x7864656f /* 'xdeo' */
+    case cPlusPlus = 0x78646570 /* 'xdep' */
+    case java = 0x7864656a /* 'xdej' */
+    case objectiveC = 0x7864656f /* 'xdeo' */
 }
 
 // MARK: XcodeXdeh
 @objc public enum XcodeXdeh : AEKeyword {
-    case AlwaysHide = 0x78646561 /* 'xdea' */
-    case AlwaysShow = 0x78646573 /* 'xdes' */
-    case HidePerFilter = 0x78646566 /* 'xdef' */
+    case alwaysHide = 0x78646561 /* 'xdea' */
+    case alwaysShow = 0x78646573 /* 'xdes' */
+    case hidePerFilter = 0x78646566 /* 'xdef' */
 }
 
 // MARK: XcodeGenericMethods
 @objc public protocol XcodeGenericMethods {
-    @objc optional func closeSaving(saving: XcodeSaveOptions, savingIn: NSURL!) // Close a document.
-    @objc optional func saveIn(in_: NSURL!, `as`: XcodeSaveableFileFormat) // Save a document.
-    @objc optional func printPrintDialog(printDialog: Bool) // Print a document.
+    @objc optional func closeSaving(_ saving: XcodeSaveOptions, savingIn: URL!) // Close a document.
+    @objc optional func saveIn(_ in_: URL!, as: XcodeSaveableFileFormat) // Save a document.
+    @objc optional func printPrintDialog(_ printDialog: Bool) // Print a document.
     @objc optional func delete() // Delete an object.
-    @objc optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    @objc optional func moveTo(to: SBObject!) // Move an object to a new location.
-    @objc optional func buildStaticAnalysis(staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
-    @objc optional func cleanRemovingPrecompiledHeaders(removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
-    @objc optional func addTo(to: SBObject!) // Adds an existing object to the container specified.
-    @objc optional func removeFrom(from: AnyObject!) // Removes the object from the designated container without deleting it.
+    @objc optional func duplicateTo(_ to: SBObject!, withProperties: [AnyHashable : Any]!) // Copy an object.
+    @objc optional func moveTo(_ to: SBObject!) // Move an object to a new location.
+    @objc optional func buildStaticAnalysis(_ staticAnalysis: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Build the indicated target or project in Xcode. If the project is asked to build, then the active target is built.
+    @objc optional func cleanRemovingPrecompiledHeaders(_ removingPrecompiledHeaders: Bool, transcript: Bool, using using_: XcodeBuildConfigurationType!) -> String // Clean the indicated target or project in Xcode. If the project is asked to build, then the active target is cleaned.
+    @objc optional func addTo(_ to: SBObject!) // Adds an existing object to the container specified.
+    @objc optional func removeFrom(_ from: Any!) // Removes the object from the designated container without deleting it.
 }
 
 // MARK: XcodeApplication
@@ -138,19 +138,19 @@ import ScriptingBridge
     @objc optional var name: String { get } // The name of the application.
     @objc optional var frontmost: Bool { get } // Is this the active application?
     @objc optional var version: String { get } // The version number of the application.
-    @objc optional func open(x: AnyObject!) -> AnyObject // Open a document.
-    @objc optional func print(x: AnyObject!, printDialog: Bool) // Print a document.
-    @objc optional func quitSaving(saving: XcodeSaveOptions) // Quit the application.
-    @objc optional func exists(x: AnyObject!) -> Bool // Verify that an object exists.
-    @objc optional func loadDocumentationSetWithPath(x: String!, display: Bool) -> Bool // Load documentation set at supplied path.
-    @objc optional func pathForApple_ref(x: String!) -> String // Return path of document containing apple_ref.
-    @objc optional func urlstringForDocumentWithUUID(x: String!) -> String // Return URL of document identified by UUID.
-    @objc optional func urlstringForDocumentWithApple_ref(x: String!) -> String // Return URL of document identified by apple_ref.
-    @objc optional func pathForDocumentWithUUID(x: String!) -> String // Return path of document identified by UUID.
-    @objc optional func select(x: AnyObject!) // Sets the selection to the object(s).
-    @objc optional func showDocumentWithApple_ref(x: String!) -> Bool // Show document containing supplied apple_ref in the documentation window.
-    @objc optional func showDocumentWithUUID(x: String!) -> Bool // Show document identified by supplied UUID in the documentation window.
-    @objc optional func upgradeProjectFile(x: NSURL!, `as`: String!) // Upgrade the given project file to the latest project file format. This will open the project if the upgrade succeeds.
+    @objc optional func `open`(_ x: Any!) -> Any // Open a document.
+    @objc optional func print(_ x: Any!, printDialog: Bool) // Print a document.
+    @objc optional func quitSaving(_ saving: XcodeSaveOptions) // Quit the application.
+    @objc optional func exists(_ x: Any!) -> Bool // Verify that an object exists.
+    @objc optional func loadDocumentationSetWithPath(_ x: String!, display: Bool) -> Bool // Load documentation set at supplied path.
+    @objc optional func pathForApple_ref(_ x: String!) -> String // Return path of document containing apple_ref.
+    @objc optional func urlstringForDocumentWithUUID(_ x: String!) -> String // Return URL of document identified by UUID.
+    @objc optional func urlstringForDocumentWithApple_ref(_ x: String!) -> String // Return URL of document identified by apple_ref.
+    @objc optional func pathForDocumentWithUUID(_ x: String!) -> String // Return path of document identified by UUID.
+    @objc optional func select(_ x: Any!) // Sets the selection to the object(s).
+    @objc optional func showDocumentWithApple_ref(_ x: String!) -> Bool // Show document containing supplied apple_ref in the documentation window.
+    @objc optional func showDocumentWithUUID(_ x: String!) -> Bool // Show document identified by supplied UUID in the documentation window.
+    @objc optional func upgradeProjectFile(_ x: URL!, as: String!) // Upgrade the given project file to the latest project file format. This will open the project if the upgrade succeeds.
     @objc optional func breakpoints() -> SBElementArray
     @objc optional func dataModelDocuments() -> SBElementArray
     @objc optional func fileBreakpoints() -> SBElementArray
@@ -161,7 +161,7 @@ import ScriptingBridge
     @objc optional func symbolicBreakpoints() -> SBElementArray
     @objc optional func workspaceDocuments() -> SBElementArray
     @objc optional var activeWorkspaceDocument: XcodeWorkspaceDocument { get } // The active workspace document in Xcode.
-    @objc optional func setActiveWorkspaceDocument(activeWorkspaceDocument: XcodeWorkspaceDocument!) // The active workspace document in Xcode.
+    @objc optional func setActiveWorkspaceDocument(_ activeWorkspaceDocument: XcodeWorkspaceDocument!) // The active workspace document in Xcode.
 }
 extension SBApplication: XcodeApplication {}
 
@@ -169,9 +169,9 @@ extension SBApplication: XcodeApplication {}
 @objc public protocol XcodeDocument: SBObjectProtocol, XcodeGenericMethods {
     @objc optional var name: String { get } // Its name.
     @objc optional var modified: Bool { get } // Has it been modified since the last save?
-    @objc optional var file: NSURL { get } // Its location on disk, if it has one.
+    @objc optional var file: URL { get } // Its location on disk, if it has one.
     @objc optional var path: String { get } // The document's path.
-    @objc optional func setPath(path: String!) // The document's path.
+    @objc optional func setPath(_ path: String!) // The document's path.
 }
 extension SBObject: XcodeDocument {}
 
@@ -189,11 +189,11 @@ extension SBObject: XcodeDocument {}
     @objc optional var zoomable: Bool { get } // Does the window have a zoom button?
     @objc optional var zoomed: Bool { get } // Is the window zoomed right now?
     @objc optional var document: XcodeDocument { get } // The document whose contents are displayed in the window.
-    @objc optional func setIndex(index: Int) // The index of the window, ordered front to back.
-    @objc optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
-    @objc optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
-    @objc optional func setVisible(visible: Bool) // Is the window visible right now?
-    @objc optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
+    @objc optional func setIndex(_ index: Int) // The index of the window, ordered front to back.
+    @objc optional func setBounds(_ bounds: NSRect) // The bounding rectangle of the window.
+    @objc optional func setMiniaturized(_ miniaturized: Bool) // Is the window minimized right now?
+    @objc optional func setVisible(_ visible: Bool) // Is the window visible right now?
+    @objc optional func setZoomed(_ zoomed: Bool) // Is the window zoomed right now?
 }
 extension SBObject: XcodeWindow {}
 
@@ -207,9 +207,9 @@ extension SBObject: XcodeWindow {}
     @objc optional var color: NSColor { get } // The color of the text's first character.
     @objc optional var font: String { get } // The name of the font of the text's first character.
     @objc optional var size: Int { get } // The size in points of the text's first character.
-    @objc optional func setColor(color: NSColor!) // The color of the text's first character.
-    @objc optional func setFont(font: String!) // The name of the font of the text's first character.
-    @objc optional func setSize(size: Int) // The size in points of the text's first character.
+    @objc optional func setColor(_ color: NSColor!) // The color of the text's first character.
+    @objc optional func setFont(_ font: String!) // The name of the font of the text's first character.
+    @objc optional func setSize(_ size: Int) // The size in points of the text's first character.
     @objc optional func richText() -> SBElementArray
     @objc optional func insertionPoints() -> SBElementArray
 }
@@ -225,9 +225,9 @@ extension SBObject: XcodeRichText {}
     @objc optional var color: NSColor { get } // Its color.
     @objc optional var font: String { get } // The name of its font.
     @objc optional var size: Int { get } // Its size, in points.
-    @objc optional func setColor(color: NSColor!) // Its color.
-    @objc optional func setFont(font: String!) // The name of its font.
-    @objc optional func setSize(size: Int) // Its size, in points.
+    @objc optional func setColor(_ color: NSColor!) // Its color.
+    @objc optional func setFont(_ font: String!) // The name of its font.
+    @objc optional func setSize(_ size: Int) // Its size, in points.
     @objc optional func richText() -> SBElementArray
     @objc optional func insertionPoints() -> SBElementArray
 }
@@ -243,9 +243,9 @@ extension SBObject: XcodeCharacter {}
     @objc optional var color: NSColor { get } // The color of the paragraph's first character.
     @objc optional var font: String { get } // The name of the font of the paragraph's first character.
     @objc optional var size: Int { get } // The size in points of the paragraph's first character.
-    @objc optional func setColor(color: NSColor!) // The color of the paragraph's first character.
-    @objc optional func setFont(font: String!) // The name of the font of the paragraph's first character.
-    @objc optional func setSize(size: Int) // The size in points of the paragraph's first character.
+    @objc optional func setColor(_ color: NSColor!) // The color of the paragraph's first character.
+    @objc optional func setFont(_ font: String!) // The name of the font of the paragraph's first character.
+    @objc optional func setSize(_ size: Int) // The size in points of the paragraph's first character.
     @objc optional func richText() -> SBElementArray
     @objc optional func insertionPoints() -> SBElementArray
 }
@@ -261,9 +261,9 @@ extension SBObject: XcodeParagraph {}
     @objc optional var color: NSColor { get } // The color of the word's first character.
     @objc optional var font: String { get } // The name of the font of the word's first character.
     @objc optional var size: Int { get } // The size in points of the word's first character.
-    @objc optional func setColor(color: NSColor!) // The color of the word's first character.
-    @objc optional func setFont(font: String!) // The name of the font of the word's first character.
-    @objc optional func setSize(size: Int) // The size in points of the word's first character.
+    @objc optional func setColor(_ color: NSColor!) // The color of the word's first character.
+    @objc optional func setFont(_ font: String!) // The name of the font of the word's first character.
+    @objc optional func setSize(_ size: Int) // The size in points of the word's first character.
     @objc optional func richText() -> SBElementArray
     @objc optional func insertionPoints() -> SBElementArray
 }
@@ -279,9 +279,9 @@ extension SBObject: XcodeWord {}
     @objc optional var color: NSColor { get } // Its color.
     @objc optional var font: String { get } // The name of its font.
     @objc optional var size: Int { get } // Its size, in points.
-    @objc optional func setColor(color: NSColor!) // Its color.
-    @objc optional func setFont(font: String!) // The name of its font.
-    @objc optional func setSize(size: Int) // Its size, in points.
+    @objc optional func setColor(_ color: NSColor!) // Its color.
+    @objc optional func setFont(_ font: String!) // The name of its font.
+    @objc optional func setSize(_ size: Int) // Its size, in points.
     @objc optional func richText() -> SBElementArray
     @objc optional func insertionPoints() -> SBElementArray
 }
@@ -290,7 +290,7 @@ extension SBObject: XcodeAttributeRun {}
 // MARK: XcodeAttachment
 @objc public protocol XcodeAttachment: XcodeRichText {
     @objc optional var fileName: String { get } // The path to the embedded file.
-    @objc optional func setFileName(fileName: String!) // The path to the embedded file.
+    @objc optional func setFileName(_ fileName: String!) // The path to the embedded file.
 }
 extension SBObject: XcodeAttachment {}
 
@@ -298,7 +298,7 @@ extension SBObject: XcodeAttachment {}
 @objc public protocol XcodeInputPath: SBObjectProtocol, XcodeGenericMethods {
     @objc optional var path: String { get } // The path of the input file.
     @objc optional var runScriptPhase: XcodeRunScriptPhase { get } // The run script phase that contains this input path.
-    @objc optional func setPath(path: String!) // The path of the input file.
+    @objc optional func setPath(_ path: String!) // The path of the input file.
 }
 extension SBObject: XcodeInputPath {}
 
@@ -306,7 +306,7 @@ extension SBObject: XcodeInputPath {}
 @objc public protocol XcodeOutputPath: SBObjectProtocol, XcodeGenericMethods {
     @objc optional var path: String { get } // The path of the output file.
     @objc optional var runScriptPhase: XcodeRunScriptPhase { get } // The run script phase that contains this output path.
-    @objc optional func setPath(path: String!) // The path of the output file.
+    @objc optional func setPath(_ path: String!) // The path of the output file.
 }
 extension SBObject: XcodeOutputPath {}
 
@@ -314,7 +314,7 @@ extension SBObject: XcodeOutputPath {}
 @objc public protocol XcodeBuildConfigurationType: SBObjectProtocol, XcodeGenericMethods {
     @objc optional func id() -> String // The unique identifier for the build configuration type.
     @objc optional var name: String { get } // The name of this build configuration type.
-    @objc optional func setName(name: String!) // The name of this build configuration type.
+    @objc optional func setName(_ name: String!) // The name of this build configuration type.
 }
 extension SBObject: XcodeBuildConfigurationType {}
 
@@ -325,11 +325,11 @@ extension SBObject: XcodeBuildConfigurationType {}
     @objc optional var location: Int { get } // The line number in the file that the build message corresponds to.
     @objc optional var message: String { get } // The text of the build message.
     @objc optional var path: String { get } // The absolute path to the file that the build message is referencing.
-    @objc optional func setBuildFile(buildFile: XcodeBuildFile!) // The build file that contains this build message
-    @objc optional func setKind(kind: XcodeBmte) // Indicates the kind of build message.
-    @objc optional func setLocation(location: Int) // The line number in the file that the build message corresponds to.
-    @objc optional func setMessage(message: String!) // The text of the build message.
-    @objc optional func setPath(path: String!) // The absolute path to the file that the build message is referencing.
+    @objc optional func setBuildFile(_ buildFile: XcodeBuildFile!) // The build file that contains this build message
+    @objc optional func setKind(_ kind: XcodeBmte) // Indicates the kind of build message.
+    @objc optional func setLocation(_ location: Int) // The line number in the file that the build message corresponds to.
+    @objc optional func setMessage(_ message: String!) // The text of the build message.
+    @objc optional func setPath(_ path: String!) // The absolute path to the file that the build message is referencing.
 }
 extension SBObject: XcodeBuildMessage {}
 
@@ -350,7 +350,7 @@ extension SBObject: XcodeContainer {}
     @objc optional var comments: String { get } // Comments about this project item.
     @objc optional var container: XcodeContainer { get } // The container for this item.
     @objc optional var project: XcodeProject { get } // The project that contains this item.
-    @objc optional func setComments(comments: String!) // Comments about this project item.
+    @objc optional func setComments(_ comments: String!) // Comments about this project item.
 }
 extension SBObject: XcodeContainerItem {}
 
@@ -371,15 +371,15 @@ extension SBObject: XcodeContainerItem {}
     @objc optional var projectDirectory: String { get } // The full path to the folder that contains the project file.
     @objc optional var projectFileReference: XcodeFileReference { get } // A file reference to the core project.pbxproj file itself.
     @objc optional var userFileReference: XcodeFileReference { get } // A file reference to the current user's pbxuser file.
-    @objc optional func setDefaultBuildConfigurationType(defaultBuildConfigurationType: XcodeBuildConfigurationType!) // The default build configuration type used when building with xcodebuild if no -configuration option is supplied.
-    @objc optional func setOrganizationName(organizationName: String!) // The name to use in the header file of new files created with project templates.  Defaults to Apple Inc.
+    @objc optional func setDefaultBuildConfigurationType(_ defaultBuildConfigurationType: XcodeBuildConfigurationType!) // The default build configuration type used when building with xcodebuild if no -configuration option is supplied.
+    @objc optional func setOrganizationName(_ organizationName: String!) // The name to use in the header file of new files created with project templates.  Defaults to Apple Inc.
 }
 extension SBObject: XcodeProject {}
 
 // MARK: XcodeProjectItem
 @objc public protocol XcodeProjectItem: XcodeContainerItem {
     @objc optional func id() -> String // The unique identifier for the project item.
-    @objc optional func moveTo(to: SBObject!) // Moves an existing object to the container specified.
+    @objc optional func moveTo(_ to: SBObject!) // Moves an existing object to the container specified.
 }
 extension SBObject: XcodeProjectItem {}
 
@@ -421,9 +421,9 @@ extension SBObject: XcodeCopyBundleResourcesPhase {}
     @objc optional var destinationDirectory: XcodePwpa { get } // The base location to copy items relative to. If "root volume" is chosen then "path" is an absolute path. Otherwise "path" is relative to the base location.
     @objc optional var path: String { get } // The path relative to the destination to copy items to
     @objc optional var runOnlyWhenInstalling: Bool { get } // Indicates if the build phase should only be run when performing an install build.
-    @objc optional func setDestinationDirectory(destinationDirectory: XcodePwpa) // The base location to copy items relative to. If "root volume" is chosen then "path" is an absolute path. Otherwise "path" is relative to the base location.
-    @objc optional func setPath(path: String!) // The path relative to the destination to copy items to
-    @objc optional func setRunOnlyWhenInstalling(runOnlyWhenInstalling: Bool) // Indicates if the build phase should only be run when performing an install build.
+    @objc optional func setDestinationDirectory(_ destinationDirectory: XcodePwpa) // The base location to copy items relative to. If "root volume" is chosen then "path" is an absolute path. Otherwise "path" is relative to the base location.
+    @objc optional func setPath(_ path: String!) // The path relative to the destination to copy items to
+    @objc optional func setRunOnlyWhenInstalling(_ runOnlyWhenInstalling: Bool) // Indicates if the build phase should only be run when performing an install build.
 }
 extension SBObject: XcodeCopyFilesPhase {}
 
@@ -445,10 +445,10 @@ extension SBObject: XcodeLinkBinaryWithLibrariesPhase {}
     @objc optional var shellPath: String { get } // The absolute path to the shell used by the shell script.
     @objc optional var shellScript: String { get } // The actual shell script to run during this build phase.
     @objc optional var showEnvironmentVariables: Bool { get } // Indicates if shell environment variables should be output to the build log.
-    @objc optional func setRunOnlyWhenInstalling(runOnlyWhenInstalling: Bool) // Indicates if the build phase should only be run when performing an install build.
-    @objc optional func setShellPath(shellPath: String!) // The absolute path to the shell used by the shell script.
-    @objc optional func setShellScript(shellScript: String!) // The actual shell script to run during this build phase.
-    @objc optional func setShowEnvironmentVariables(showEnvironmentVariables: Bool) // Indicates if shell environment variables should be output to the build log.
+    @objc optional func setRunOnlyWhenInstalling(_ runOnlyWhenInstalling: Bool) // Indicates if the build phase should only be run when performing an install build.
+    @objc optional func setShellPath(_ shellPath: String!) // The absolute path to the shell used by the shell script.
+    @objc optional func setShellScript(_ shellScript: String!) // The actual shell script to run during this build phase.
+    @objc optional func setShowEnvironmentVariables(_ showEnvironmentVariables: Bool) // Indicates if shell environment variables should be output to the build log.
 }
 extension SBObject: XcodeRunScriptPhase {}
 
@@ -458,9 +458,9 @@ extension SBObject: XcodeRunScriptPhase {}
     @objc optional var condition: String { get } // Condition in which breakpoint should stop.
     @objc optional var enabled: Bool { get } // Is the breakpoint enabled?
     @objc optional var name: String { get } // The name of this breakpoint.
-    @objc optional func setAutomaticallyContinue(automaticallyContinue: Bool) // Should the debugger automatically continue when it hits this breakpoint after performing any associated breakpoint actions?
-    @objc optional func setCondition(condition: String!) // Condition in which breakpoint should stop.
-    @objc optional func setEnabled(enabled: Bool) // Is the breakpoint enabled?
+    @objc optional func setAutomaticallyContinue(_ automaticallyContinue: Bool) // Should the debugger automatically continue when it hits this breakpoint after performing any associated breakpoint actions?
+    @objc optional func setCondition(_ condition: String!) // Condition in which breakpoint should stop.
+    @objc optional func setEnabled(_ enabled: Bool) // Is the breakpoint enabled?
 }
 extension SBObject: XcodeBreakpoint {}
 
@@ -472,7 +472,7 @@ extension SBObject: XcodeBreakpoint {}
     @objc optional var buildConfigurationType: XcodeBuildConfigurationType { get } // The associated build configuration type.
     @objc optional var configurationSettingsFile: XcodeFileReference { get } // The optional configuration settings file this configuration is based on. May be 'missing value'.
     @objc optional var name: String { get } // The name of the associated build configuration type.
-    @objc optional func setConfigurationSettingsFile(configurationSettingsFile: XcodeFileReference!) // The optional configuration settings file this configuration is based on. May be 'missing value'.
+    @objc optional func setConfigurationSettingsFile(_ configurationSettingsFile: XcodeFileReference!) // The optional configuration settings file this configuration is based on. May be 'missing value'.
 }
 extension SBObject: XcodeBuildConfiguration {}
 
@@ -491,8 +491,8 @@ extension SBObject: XcodeBuildFile {}
 @objc public protocol XcodeFileBreakpoint: XcodeBreakpoint {
     @objc optional var fileReference: XcodeFileReference { get } // A reference to the file that contains the breakpoint.
     @objc optional var lineNumber: Int { get } // The line number the breakpoint is set on.
-    @objc optional func setFileReference(fileReference: XcodeFileReference!) // A reference to the file that contains the breakpoint.
-    @objc optional func setLineNumber(lineNumber: Int) // The line number the breakpoint is set on.
+    @objc optional func setFileReference(_ fileReference: XcodeFileReference!) // A reference to the file that contains the breakpoint.
+    @objc optional func setLineNumber(_ lineNumber: Int) // The line number the breakpoint is set on.
 }
 extension SBObject: XcodeFileBreakpoint {}
 
@@ -511,7 +511,7 @@ extension SBObject: XcodeScheme {}
 // MARK: XcodeSymbolicBreakpoint
 @objc public protocol XcodeSymbolicBreakpoint: XcodeBreakpoint {
     @objc optional var symbolName: String { get } // The name of the symbol that the breakpoint stops at.
-    @objc optional func setSymbolName(symbolName: String!) // The name of the symbol that the breakpoint stops at.
+    @objc optional func setSymbolName(_ symbolName: String!) // The name of the symbol that the breakpoint stops at.
 }
 extension SBObject: XcodeSymbolicBreakpoint {}
 
@@ -534,13 +534,13 @@ extension SBObject: XcodeSymbolicBreakpoint {}
     @objc optional var realPath: String { get } // The fully resolved path to the item referenced. Specifically, all symlinks in the path have been resolved.
     @objc optional var tabWidth: Int { get } // The number of spaces to use for a tab for the referenced item. In the case of a group or folder reference, this value is used for any contained items.
     @objc optional var usesTabs: Bool { get } // Indicates if tabs characters should be used instead of spaces when entering tabs. In the case of a group or folder reference, this value is used for any contained items.
-    @objc optional func setFileEncoding(fileEncoding: XcodeFenc) // The file encoding used to display the contents of any text files referenced by this item. In the case of a group or folder reference, this encoding is used for the items contained by this item.
-    @objc optional func setIndentWidth(indentWidth: Int) // The number of spaces to indent wrapped lines in the referenced item. In the case of a group or folder reference, this indent width is used for any contained items.
-    @objc optional func setLineEnding(lineEnding: XcodeLied) // The style of line endings to use for the referenced item. In the case of a group or folder reference, this style is used for any contained items.
-    @objc optional func setName(name: String!) // The name of this item reference.
-    @objc optional func setPathType(pathType: XcodeReft) // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
-    @objc optional func setTabWidth(tabWidth: Int) // The number of spaces to use for a tab for the referenced item. In the case of a group or folder reference, this value is used for any contained items.
-    @objc optional func setUsesTabs(usesTabs: Bool) // Indicates if tabs characters should be used instead of spaces when entering tabs. In the case of a group or folder reference, this value is used for any contained items.
+    @objc optional func setFileEncoding(_ fileEncoding: XcodeFenc) // The file encoding used to display the contents of any text files referenced by this item. In the case of a group or folder reference, this encoding is used for the items contained by this item.
+    @objc optional func setIndentWidth(_ indentWidth: Int) // The number of spaces to indent wrapped lines in the referenced item. In the case of a group or folder reference, this indent width is used for any contained items.
+    @objc optional func setLineEnding(_ lineEnding: XcodeLied) // The style of line endings to use for the referenced item. In the case of a group or folder reference, this style is used for any contained items.
+    @objc optional func setName(_ name: String!) // The name of this item reference.
+    @objc optional func setPathType(_ pathType: XcodeReft) // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
+    @objc optional func setTabWidth(_ tabWidth: Int) // The number of spaces to use for a tab for the referenced item. In the case of a group or folder reference, this value is used for any contained items.
+    @objc optional func setUsesTabs(_ usesTabs: Bool) // Indicates if tabs characters should be used instead of spaces when entering tabs. In the case of a group or folder reference, this value is used for any contained items.
 }
 extension SBObject: XcodeItemReference {}
 
@@ -567,8 +567,8 @@ extension SBObject: XcodeGroup {}
     @objc optional func Xcode3FileReferences() -> SBElementArray
     @objc optional var path: String { get } // Returns the path to the item referenced. The format of this path depends on the path type.
     @objc optional var pathType: XcodeReft { get } // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
-    @objc optional func setPath(path: String!) // Returns the path to the item referenced. The format of this path depends on the path type.
-    @objc optional func setPathType(pathType: XcodeReft) // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
+    @objc optional func setPath(_ path: String!) // Returns the path to the item referenced. The format of this path depends on the path type.
+    @objc optional func setPathType(_ pathType: XcodeReft) // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
 }
 extension SBObject: XcodeXcode3FileReference {}
 
@@ -578,8 +578,8 @@ extension SBObject: XcodeXcode3FileReference {}
     @objc optional func Xcode3Groups() -> SBElementArray
     @objc optional var path: String { get } // Returns the path to the item referenced. The format of this path depends on the path type.
     @objc optional var pathType: XcodeReft { get } // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
-    @objc optional func setPath(path: String!) // Returns the path to the item referenced. The format of this path depends on the path type.
-    @objc optional func setPathType(pathType: XcodeReft) // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
+    @objc optional func setPath(_ path: String!) // Returns the path to the item referenced. The format of this path depends on the path type.
+    @objc optional func setPathType(_ pathType: XcodeReft) // Specifies how the reference tries to locate the item it refers to. Xcode does not provide full scripting support to user-defined source trees, and will report such reference types as "other".
 }
 extension SBObject: XcodeXcode3Group {}
 
@@ -588,8 +588,8 @@ extension SBObject: XcodeXcode3Group {}
     @objc optional var container: XcodeProjectItem { get } // The build configuration that contains this build setting.
     @objc optional var name: String { get } // The unlocalized build setting name (e.g. DSTROOT).
     @objc optional var value: String { get } // A string value for the build setting.
-    @objc optional func setName(name: String!) // The unlocalized build setting name (e.g. DSTROOT).
-    @objc optional func setValue(value: String!) // A string value for the build setting.
+    @objc optional func setName(_ name: String!) // The unlocalized build setting name (e.g. DSTROOT).
+    @objc optional func setValue(_ value: String!) // A string value for the build setting.
 }
 extension SBObject: XcodeBuildSetting {}
 
@@ -622,7 +622,7 @@ extension SBObject: XcodeFlattenedBuildSetting {}
     @objc optional var native: Bool { get } // Does this target use the native build system?
     @objc optional var productReference: XcodeFileReference { get } // An item reference to the generated product on disk.
     @objc optional var targetType: String { get } // The type of target. Usually this is related to the type of product the target produces.
-    @objc optional func setName(name: String!) // The name of this target.
+    @objc optional func setName(_ name: String!) // The name of this target.
 }
 extension SBObject: XcodeTarget {}
 
@@ -635,7 +635,7 @@ extension SBObject: XcodeTargetDependency {}
 // MARK: XcodeInsertionPoint
 @objc public protocol XcodeInsertionPoint: SBObjectProtocol, XcodeGenericMethods {
     @objc optional var contents: String { get } // The contents at the insertion point.
-    @objc optional func setContents(contents: String!) // The contents at the insertion point.
+    @objc optional func setContents(_ contents: String!) // The contents at the insertion point.
 }
 extension SBObject: XcodeInsertionPoint {}
 
@@ -652,19 +652,19 @@ extension SBObject: XcodeFileDocument {}
     @objc optional var selectedParagraphRange: [NSNumber] { get } // The first and last paragraph positions that contain the selection.
     @objc optional var selection: SBObject { get } // The current selection in the text document.
     @objc optional var text: String { get } // The text of the text file referenced.
-    @objc optional func setContents(contents: String!) // The contents of the text file.
-    @objc optional func setNotifiesWhenClosing(notifiesWhenClosing: Bool) // Should Xcode notify other apps when this document is closed?
-    @objc optional func setSelectedCharacterRange(selectedCharacterRange: [NSNumber]!) // The first and last character positions in the selection.
-    @objc optional func setSelectedParagraphRange(selectedParagraphRange: [NSNumber]!) // The first and last paragraph positions that contain the selection.
-    @objc optional func setSelection(selection: SBObject!) // The current selection in the text document.
-    @objc optional func setText(text: String!) // The text of the text file referenced.
+    @objc optional func setContents(_ contents: String!) // The contents of the text file.
+    @objc optional func setNotifiesWhenClosing(_ notifiesWhenClosing: Bool) // Should Xcode notify other apps when this document is closed?
+    @objc optional func setSelectedCharacterRange(_ selectedCharacterRange: [NSNumber]!) // The first and last character positions in the selection.
+    @objc optional func setSelectedParagraphRange(_ selectedParagraphRange: [NSNumber]!) // The first and last paragraph positions that contain the selection.
+    @objc optional func setSelection(_ selection: SBObject!) // The current selection in the text document.
+    @objc optional func setText(_ text: String!) // The text of the text file referenced.
 }
 extension SBObject: XcodeTextDocument {}
 
 // MARK: XcodeSourceDocument
 @objc public protocol XcodeSourceDocument: XcodeTextDocument {
-    @objc optional var editorSettings: [NSObject : AnyObject] { get } // A record of source editor settings and values.
-    @objc optional func setEditorSettings(editorSettings: [NSObject : AnyObject]!) // A record of source editor settings and values.
+    @objc optional var editorSettings: [AnyHashable : Any] { get } // A record of source editor settings and values.
+    @objc optional func setEditorSettings(_ editorSettings: [AnyHashable : Any]!) // A record of source editor settings and values.
 }
 extension SBObject: XcodeSourceDocument {}
 
@@ -684,9 +684,9 @@ extension SBObject: XcodeSourceDocument {}
     @objc optional var breakpointsEnabled: Bool { get } // Are breakpoints enabled in this workspace?
     @objc optional var intermediatesDirectory: String { get } // The full path to the folder that contains all intermediate files for the project.
     @objc optional var productDirectory: String { get } // The full path to the folder that contains any built products.
-    @objc optional func setBreakpointsEnabled(breakpointsEnabled: Bool) // Are breakpoints enabled in this workspace?
-    @objc optional func setIntermediatesDirectory(intermediatesDirectory: String!) // The full path to the folder that contains all intermediate files for the project.
-    @objc optional func setProductDirectory(productDirectory: String!) // The full path to the folder that contains any built products.
+    @objc optional func setBreakpointsEnabled(_ breakpointsEnabled: Bool) // Are breakpoints enabled in this workspace?
+    @objc optional func setIntermediatesDirectory(_ intermediatesDirectory: String!) // The full path to the folder that contains all intermediate files for the project.
+    @objc optional func setProductDirectory(_ productDirectory: String!) // The full path to the folder that contains any built products.
 }
 extension SBObject: XcodeWorkspaceDocument {}
 
@@ -697,11 +697,11 @@ extension SBObject: XcodeWorkspaceDocument {}
     @objc optional var name: String { get } // Attribute name
     @objc optional var optional: Bool { get } // Is the attribute optional?
     @objc optional var transient: Bool { get } // Is the attribute transient?
-    @objc optional var userInfo: [NSObject : AnyObject] { get } // User info dictionary for the attribute
-    @objc optional func setName(name: String!) // Attribute name
-    @objc optional func setOptional(`optional`: Bool) // Is the attribute optional?
-    @objc optional func setTransient(transient: Bool) // Is the attribute transient?
-    @objc optional func setUserInfo(userInfo: [NSObject : AnyObject]!) // User info dictionary for the attribute
+    @objc optional var userInfo: [AnyHashable : Any] { get } // User info dictionary for the attribute
+    @objc optional func setName(_ name: String!) // Attribute name
+    @objc optional func setOptional(_ optional: Bool) // Is the attribute optional?
+    @objc optional func setTransient(_ transient: Bool) // Is the attribute transient?
+    @objc optional func setUserInfo(_ userInfo: [AnyHashable : Any]!) // User info dictionary for the attribute
 }
 extension SBObject: XcodeAttribute {}
 
@@ -722,11 +722,11 @@ extension SBObject: XcodeDataModelDocument {}
     @objc optional var name: String { get } // Name of the entity
     @objc optional var objectClass: String { get } // The Objective C class of the object backing this entity
     @objc optional var parent: XcodeEntity { get } // Parent from which the entity inherits
-    @objc optional var userInfo: [NSObject : AnyObject] { get } // User info dictionary for the entity
-    @objc optional func setAbstract(abstract: Bool) // Is the entity abstract?
-    @objc optional func setName(name: String!) // Name of the entity
-    @objc optional func setObjectClass(objectClass: String!) // The Objective C class of the object backing this entity
-    @objc optional func setUserInfo(userInfo: [NSObject : AnyObject]!) // User info dictionary for the entity
+    @objc optional var userInfo: [AnyHashable : Any] { get } // User info dictionary for the entity
+    @objc optional func setAbstract(_ abstract: Bool) // Is the entity abstract?
+    @objc optional func setName(_ name: String!) // Name of the entity
+    @objc optional func setObjectClass(_ objectClass: String!) // The Objective C class of the object backing this entity
+    @objc optional func setUserInfo(_ userInfo: [AnyHashable : Any]!) // User info dictionary for the entity
 }
 extension SBObject: XcodeEntity {}
 
@@ -734,8 +734,8 @@ extension SBObject: XcodeEntity {}
 @objc public protocol XcodeFetchRequest: SBObjectProtocol, XcodeGenericMethods {
     @objc optional var name: String { get } // Fetch Request name
     @objc optional var predicate: String { get } // Text form of the predicate for the Fetch Request
-    @objc optional func setName(name: String!) // Fetch Request name
-    @objc optional func setPredicate(predicate: String!) // Text form of the predicate for the Fetch Request
+    @objc optional func setName(_ name: String!) // Fetch Request name
+    @objc optional func setPredicate(_ predicate: String!) // Text form of the predicate for the Fetch Request
 }
 extension SBObject: XcodeFetchRequest {}
 
@@ -746,13 +746,13 @@ extension SBObject: XcodeFetchRequest {}
     @objc optional var optional: Bool { get } // Is the attribute optional?
     @objc optional var predicate: String { get } // Text form of the predicate that selects the property
     @objc optional var transient: Bool { get } // Is the attribute transient?
-    @objc optional var userInfo: [NSObject : AnyObject] { get } // User info dictionary for the attribute
-    @objc optional func setDestination(destination: XcodeEntity!) // The destination entity of the fetched property
-    @objc optional func setName(name: String!) // Fetched Property attribute name
-    @objc optional func setOptional(`optional`: Bool) // Is the attribute optional?
-    @objc optional func setPredicate(predicate: String!) // Text form of the predicate that selects the property
-    @objc optional func setTransient(transient: Bool) // Is the attribute transient?
-    @objc optional func setUserInfo(userInfo: [NSObject : AnyObject]!) // User info dictionary for the attribute
+    @objc optional var userInfo: [AnyHashable : Any] { get } // User info dictionary for the attribute
+    @objc optional func setDestination(_ destination: XcodeEntity!) // The destination entity of the fetched property
+    @objc optional func setName(_ name: String!) // Fetched Property attribute name
+    @objc optional func setOptional(_ optional: Bool) // Is the attribute optional?
+    @objc optional func setPredicate(_ predicate: String!) // Text form of the predicate that selects the property
+    @objc optional func setTransient(_ transient: Bool) // Is the attribute transient?
+    @objc optional func setUserInfo(_ userInfo: [AnyHashable : Any]!) // User info dictionary for the attribute
 }
 extension SBObject: XcodeFetchedProperty {}
 
@@ -766,16 +766,16 @@ extension SBObject: XcodeFetchedProperty {}
     @objc optional var optional: Bool { get } // Is the relationship optional?
     @objc optional var toMany: Bool { get } // Is the relationship a “to-many” relationship?
     @objc optional var transient: Bool { get } // Is the relationship transient?
-    @objc optional var userInfo: [NSObject : AnyObject] { get } // User information dictionary for the relationship
-    @objc optional func setDestinationEntity(destinationEntity: XcodeEntity!) // The other entity related to this one.
-    @objc optional func setInverseRelationship(inverseRelationship: XcodeRelationship!) // The relationship that the related element has to this one.
-    @objc optional func setMaximumCount(maximumCount: Int) // Maximum number of related data objects
-    @objc optional func setMinimumCount(minimumCount: Int) // Minimum number of related data objects
-    @objc optional func setName(name: String!) // Name of the relationship
-    @objc optional func setOptional(`optional`: Bool) // Is the relationship optional?
-    @objc optional func setToMany(toMany: Bool) // Is the relationship a “to-many” relationship?
-    @objc optional func setTransient(transient: Bool) // Is the relationship transient?
-    @objc optional func setUserInfo(userInfo: [NSObject : AnyObject]!) // User information dictionary for the relationship
+    @objc optional var userInfo: [AnyHashable : Any] { get } // User information dictionary for the relationship
+    @objc optional func setDestinationEntity(_ destinationEntity: XcodeEntity!) // The other entity related to this one.
+    @objc optional func setInverseRelationship(_ inverseRelationship: XcodeRelationship!) // The relationship that the related element has to this one.
+    @objc optional func setMaximumCount(_ maximumCount: Int) // Maximum number of related data objects
+    @objc optional func setMinimumCount(_ minimumCount: Int) // Minimum number of related data objects
+    @objc optional func setName(_ name: String!) // Name of the relationship
+    @objc optional func setOptional(_ optional: Bool) // Is the relationship optional?
+    @objc optional func setToMany(_ toMany: Bool) // Is the relationship a “to-many” relationship?
+    @objc optional func setTransient(_ transient: Bool) // Is the relationship transient?
+    @objc optional func setUserInfo(_ userInfo: [AnyHashable : Any]!) // User information dictionary for the relationship
 }
 extension SBObject: XcodeRelationship {}
 

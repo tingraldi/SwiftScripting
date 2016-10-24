@@ -31,12 +31,14 @@
 import os
 import string
 import sys
+from sbhc import enum_case
 
 
 def transform(name_string):
     name_string = string.replace(name_string, '"', '')
     name_string = string.replace(name_string, '-', ' ')
-    return string.replace(string.capwords(name_string), ' ', '')
+    name_string = string.replace(string.capwords(name_string), ' ', '')
+    return enum_case('', name_string)
 
 
 def name_from_path(path):

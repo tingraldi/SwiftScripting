@@ -8,29 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		E6C82BF41A886B54002D55A2 /* MailScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C82BF31A886B54002D55A2 /* MailScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6C82BFA1A886B54002D55A2 /* MailScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6C82BEE1A886B54002D55A2 /* MailScripting.framework */; };
-		E6C82C011A886B54002D55A2 /* MailScriptingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82C001A886B54002D55A2 /* MailScriptingTests.swift */; };
 		E6C82C101A886BB9002D55A2 /* Mail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82C0C1A886BB9002D55A2 /* Mail.swift */; };
 		E6D7AE7D1AABF64500E8E744 /* MailScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE7C1AABF64500E8E744 /* MailScripting.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E6C82BFB1A886B54002D55A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6C82BE51A886B54002D55A2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6C82BED1A886B54002D55A2;
-			remoteInfo = MailScripting;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E6C82BEE1A886B54002D55A2 /* MailScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MailScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6C82BF21A886B54002D55A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6C82BF31A886B54002D55A2 /* MailScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MailScripting.h; sourceTree = "<group>"; };
-		E6C82BF91A886B54002D55A2 /* MailScriptingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MailScriptingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6C82BFF1A886B54002D55A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6C82C001A886B54002D55A2 /* MailScriptingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailScriptingTests.swift; sourceTree = "<group>"; };
 		E6C82C0A1A886BB9002D55A2 /* Mail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mail.h; sourceTree = "<group>"; };
 		E6C82C0B1A886BB9002D55A2 /* Mail.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Mail.sdef; sourceTree = "<group>"; };
 		E6C82C0C1A886BB9002D55A2 /* Mail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mail.swift; sourceTree = "<group>"; };
@@ -45,14 +30,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6C82BF61A886B54002D55A2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6C82BFA1A886B54002D55A2 /* MailScripting.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -60,7 +37,6 @@
 			isa = PBXGroup;
 			children = (
 				E6C82BF01A886B54002D55A2 /* MailScripting */,
-				E6C82BFD1A886B54002D55A2 /* MailScriptingTests */,
 				E6C82BEF1A886B54002D55A2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				E6C82BEE1A886B54002D55A2 /* MailScripting.framework */,
-				E6C82BF91A886B54002D55A2 /* MailScriptingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,23 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				E6C82BF21A886B54002D55A2 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E6C82BFD1A886B54002D55A2 /* MailScriptingTests */ = {
-			isa = PBXGroup;
-			children = (
-				E6C82C001A886B54002D55A2 /* MailScriptingTests.swift */,
-				E6C82BFE1A886B54002D55A2 /* Supporting Files */,
-			);
-			path = MailScriptingTests;
-			sourceTree = "<group>";
-		};
-		E6C82BFE1A886B54002D55A2 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E6C82BFF1A886B54002D55A2 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,24 +110,6 @@
 			productReference = E6C82BEE1A886B54002D55A2 /* MailScripting.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E6C82BF81A886B54002D55A2 /* MailScriptingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6C82C071A886B54002D55A2 /* Build configuration list for PBXNativeTarget "MailScriptingTests" */;
-			buildPhases = (
-				E6C82BF51A886B54002D55A2 /* Sources */,
-				E6C82BF61A886B54002D55A2 /* Frameworks */,
-				E6C82BF71A886B54002D55A2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E6C82BFC1A886B54002D55A2 /* PBXTargetDependency */,
-			);
-			name = MailScriptingTests;
-			productName = MailScriptingTests;
-			productReference = E6C82BF91A886B54002D55A2 /* MailScriptingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,10 +121,6 @@
 				ORGANIZATIONNAME = "Majesty Software";
 				TargetAttributes = {
 					E6C82BED1A886B54002D55A2 = {
-						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
-					};
-					E6C82BF81A886B54002D55A2 = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 0800;
 					};
@@ -203,20 +139,12 @@
 			projectRoot = "";
 			targets = (
 				E6C82BED1A886B54002D55A2 /* MailScripting */,
-				E6C82BF81A886B54002D55A2 /* MailScriptingTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E6C82BEC1A886B54002D55A2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6C82BF71A886B54002D55A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -235,23 +163,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6C82BF51A886B54002D55A2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6C82C011A886B54002D55A2 /* MailScriptingTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E6C82BFC1A886B54002D55A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6C82BED1A886B54002D55A2 /* MailScripting */;
-			targetProxy = E6C82BFB1A886B54002D55A2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E6C82C021A886B54002D55A2 /* Debug */ = {
@@ -351,7 +263,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -370,43 +282,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-			};
-			name = Release;
-		};
-		E6C82C081A886B54002D55A2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = MailScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
-			};
-			name = Debug;
-		};
-		E6C82C091A886B54002D55A2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = MailScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -427,15 +303,6 @@
 			buildConfigurations = (
 				E6C82C051A886B54002D55A2 /* Debug */,
 				E6C82C061A886B54002D55A2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E6C82C071A886B54002D55A2 /* Build configuration list for PBXNativeTarget "MailScriptingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6C82C081A886B54002D55A2 /* Debug */,
-				E6C82C091A886B54002D55A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,4 +1,4 @@
-#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
+#!/usr/bin/xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -38,27 +38,27 @@ import AcornScripting
 
 let acorn = application(name: "Acorn") as! AcornApplication
 
-let imageFolderURL = NSURL(fileURLWithPath:("~/Desktop/Images" as NSString).stringByExpandingTildeInPath)
+let imageFolderURL = URL(fileURLWithPath:("~/Desktop/Images" as NSString).expandingTildeInPath)
 
 do {
-    try NSFileManager.defaultManager().createDirectoryAtURL(imageFolderURL, 
+    try FileManager.default.createDirectory(at: imageFolderURL, 
                                     withIntermediateDirectories: true, 
                                     attributes: nil)
 } catch let error as NSError {
 }
 
-NSTask.launchedTaskWithLaunchPath("/usr/bin/open", arguments: [imageFolderURL.path!])
+Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [imageFolderURL.path])
 
-let document = acorn.documents!().objectAtLocation(0) as! AcornDocument
-let name = (document.name! as NSString).stringByDeletingPathExtension
+let document = acorn.documents!().object(atLocation: 0) as! AcornDocument
+let name = (document.name! as NSString).deletingPathExtension
 
 for (scale, suffix) in [1.0 : "@3x", 0.66 : "@2x", 0.33 : ""] {
     let fileName = "\(name)\(suffix).png"
-    let fileURL: NSURL! = imageFolderURL.URLByAppendingPathComponent(fileName)
+    let fileURL: URL! = imageFolderURL.appendingPathComponent(fileName)
     let scaledWidth = Int(scale * document.width!)
     let scaledHeight = Int(scale * document.height!)
     document.webExportIn!(fileURL, 
-              as: .PNG, 
+              as: .png, 
               quality: 100, 
               width: scaledWidth, 
               height: scaledHeight)

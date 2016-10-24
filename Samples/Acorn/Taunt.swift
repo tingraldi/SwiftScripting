@@ -1,4 +1,4 @@
-#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
+#!/usr/bin/xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -27,4 +27,4 @@
 import ScriptingUtilities
 import AcornScripting
 
-(application(name: "Acorn") as! AcornApplication).taunt!()
+let _ = (application(name: "Acorn") as! AcornApplication).taunt!()

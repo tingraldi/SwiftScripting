@@ -2,7 +2,7 @@ import AppKit
 import ScriptingBridge
 
 @objc public protocol SBObjectProtocol: NSObjectProtocol {
-    func get() -> AnyObject!
+    func get() -> Any!
 }
 
 @objc public protocol SBApplicationProtocol: SBObjectProtocol {
@@ -13,126 +13,126 @@ import ScriptingBridge
 
 // MARK: MessagesSaveOptions
 @objc public enum MessagesSaveOptions : AEKeyword {
-    case Yes = 0x79657320 /* 'yes ' */
-    case No = 0x6e6f2020 /* 'no  ' */
-    case Ask = 0x61736b20 /* 'ask ' */
+    case yes = 0x79657320 /* 'yes ' */
+    case no = 0x6e6f2020 /* 'no  ' */
+    case ask = 0x61736b20 /* 'ask ' */
 }
 
 // MARK: MessagesInviteType
 @objc public enum MessagesInviteType : AEKeyword {
-    case AudioInvitation = 0x61636f6e /* 'acon' */
-    case TextChatInvitation = 0x74636f6e /* 'tcon' */
-    case VideoInvitation = 0x76636f6e /* 'vcon' */
+    case audioInvitation = 0x61636f6e /* 'acon' */
+    case textChatInvitation = 0x74636f6e /* 'tcon' */
+    case videoInvitation = 0x76636f6e /* 'vcon' */
 }
 
 // MARK: MessagesAccountStatus
 @objc public enum MessagesAccountStatus : AEKeyword {
-    case Available = 0x6176616c /* 'aval' */
-    case Away = 0x61776179 /* 'away' */
-    case Offline = 0x6f66666c /* 'offl' */
-    case Invisible = 0x696e7673 /* 'invs' */
-    case Idle = 0x69646c65 /* 'idle' */
-    case Unknown = 0x756e6b6e /* 'unkn' */
+    case available = 0x6176616c /* 'aval' */
+    case away = 0x61776179 /* 'away' */
+    case offline = 0x6f66666c /* 'offl' */
+    case invisible = 0x696e7673 /* 'invs' */
+    case idle = 0x69646c65 /* 'idle' */
+    case unknown = 0x756e6b6e /* 'unkn' */
 }
 
 // MARK: MessagesMyStatus
 @objc public enum MessagesMyStatus : AEKeyword {
-    case Away = 0x61776179 /* 'away' */
-    case Available = 0x6176616c /* 'aval' */
-    case Offline = 0x6f66666c /* 'offl' */
-    case Invisible = 0x696e7673 /* 'invs' */
+    case away = 0x61776179 /* 'away' */
+    case available = 0x6176616c /* 'aval' */
+    case offline = 0x6f66666c /* 'offl' */
+    case invisible = 0x696e7673 /* 'invs' */
 }
 
 // MARK: MessagesConnectionStatus
 @objc public enum MessagesConnectionStatus : AEKeyword {
-    case Disconnecting = 0x64636e67 /* 'dcng' */
-    case Connected = 0x636f6e6e /* 'conn' */
-    case Connecting = 0x636f6e67 /* 'cong' */
-    case Disconnected = 0x64636f6e /* 'dcon' */
+    case disconnecting = 0x64636e67 /* 'dcng' */
+    case connected = 0x636f6e6e /* 'conn' */
+    case connecting = 0x636f6e67 /* 'cong' */
+    case disconnected = 0x64636f6e /* 'dcon' */
 }
 
 // MARK: MessagesCapabilities
 @objc public enum MessagesCapabilities : AEKeyword {
-    case VideoChat = 0x76636f6e /* 'vcon' */
-    case AudioChat = 0x61636f6e /* 'acon' */
-    case MultipersonVideo = 0x6d777663 /* 'mwvc' */
-    case MultipersonAudio = 0x6d776163 /* 'mwac' */
+    case videoChat = 0x76636f6e /* 'vcon' */
+    case audioChat = 0x61636f6e /* 'acon' */
+    case multipersonVideo = 0x6d777663 /* 'mwvc' */
+    case multipersonAudio = 0x6d776163 /* 'mwac' */
 }
 
 // MARK: MessagesScreenSharing
 @objc public enum MessagesScreenSharing : AEKeyword {
-    case None = 0x73736e73 /* 'ssns' */
-    case LocalScreen = 0x73736c73 /* 'ssls' */
-    case RemoteScreen = 0x73737273 /* 'ssrs' */
+    case none = 0x73736e73 /* 'ssns' */
+    case localScreen = 0x73736c73 /* 'ssls' */
+    case remoteScreen = 0x73737273 /* 'ssrs' */
 }
 
 // MARK: MessagesServiceType
 @objc public enum MessagesServiceType : AEKeyword {
-    case AIM = 0x7361696d /* 'saim' */
-    case Bonjour = 0x73737562 /* 'ssub' */
-    case Jabber = 0x736a6162 /* 'sjab' */
-    case IMessage = 0x73696d73 /* 'sims' */
+    case aim = 0x7361696d /* 'saim' */
+    case bonjour = 0x73737562 /* 'ssub' */
+    case jabber = 0x736a6162 /* 'sjab' */
+    case iMessage = 0x73696d73 /* 'sims' */
 }
 
 // MARK: MessagesDirection
 @objc public enum MessagesDirection : AEKeyword {
-    case Incoming = 0x46546963 /* 'FTic' */
-    case Outgoing = 0x46546f67 /* 'FTog' */
+    case incoming = 0x46546963 /* 'FTic' */
+    case outgoing = 0x46546f67 /* 'FTog' */
 }
 
 // MARK: MessagesTransferStatus
 @objc public enum MessagesTransferStatus : AEKeyword {
-    case Preparing = 0x46547370 /* 'FTsp' */
-    case Waiting = 0x46547377 /* 'FTsw' */
-    case Transferring = 0x46547367 /* 'FTsg' */
-    case Finalizing = 0x4654737a /* 'FTsz' */
-    case Finished = 0x46547366 /* 'FTsf' */
-    case Failed = 0x46547365 /* 'FTse' */
+    case preparing = 0x46547370 /* 'FTsp' */
+    case waiting = 0x46547377 /* 'FTsw' */
+    case transferring = 0x46547367 /* 'FTsg' */
+    case finalizing = 0x4654737a /* 'FTsz' */
+    case finished = 0x46547366 /* 'FTsf' */
+    case failed = 0x46547365 /* 'FTse' */
 }
 
 // MARK: MessagesAvType
 @objc public enum MessagesAvType : AEKeyword {
-    case Audio = 0x49434161 /* 'ICAa' */
-    case Video = 0x49434176 /* 'ICAv' */
+    case audio = 0x49434161 /* 'ICAa' */
+    case video = 0x49434176 /* 'ICAv' */
 }
 
 // MARK: MessagesChatType
 @objc public enum MessagesChatType : AEKeyword {
-    case InstantMessage = 0x4943696d /* 'ICim' */
-    case DirectInstantMessage = 0x49436469 /* 'ICdi' */
-    case ChatRoom = 0x49436372 /* 'ICcr' */
+    case instantMessage = 0x4943696d /* 'ICim' */
+    case directInstantMessage = 0x49436469 /* 'ICdi' */
+    case chatRoom = 0x49436372 /* 'ICcr' */
 }
 
 // MARK: MessagesJoinState
 @objc public enum MessagesJoinState : AEKeyword {
-    case NotJoined = 0x49434a63 /* 'ICJc' */
-    case Joining = 0x49434a67 /* 'ICJg' */
-    case Joined = 0x49434a6a /* 'ICJj' */
+    case notJoined = 0x49434a63 /* 'ICJc' */
+    case joining = 0x49434a67 /* 'ICJg' */
+    case joined = 0x49434a6a /* 'ICJj' */
 }
 
 // MARK: MessagesAvConnectionStatus
 @objc public enum MessagesAvConnectionStatus : AEKeyword {
-    case Invited = 0x49434169 /* 'ICAi' */
-    case Waiting = 0x49434177 /* 'ICAw' */
-    case Connecting = 0x49434178 /* 'ICAx' */
-    case Connected = 0x49434163 /* 'ICAc' */
-    case Ended = 0x4943416e /* 'ICAn' */
+    case invited = 0x49434169 /* 'ICAi' */
+    case waiting = 0x49434177 /* 'ICAw' */
+    case connecting = 0x49434178 /* 'ICAx' */
+    case connected = 0x49434163 /* 'ICAc' */
+    case ended = 0x4943416e /* 'ICAn' */
 }
 
 // MARK: MessagesGenericMethods
 @objc public protocol MessagesGenericMethods {
-    @objc optional func closeSaving(saving: MessagesSaveOptions, savingIn: NSURL!) // Close a document.
-    @objc optional func saveIn(in_: NSURL!, `as`: String!) // Save a document.
+    @objc optional func closeSaving(_ saving: MessagesSaveOptions, savingIn: URL!) // Close a document.
+    @objc optional func saveIn(_ in_: URL!, as: String!) // Save a document.
     @objc optional func delete() // Delete an object.
-    @objc optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) -> SBObject // Copy object(s) and put the copies at a new location.
+    @objc optional func duplicateTo(_ to: SBObject!, withProperties: [AnyHashable : Any]!) -> SBObject // Copy object(s) and put the copies at a new location.
     @objc optional func exists() -> Bool // Verify if an object exists.
-    @objc optional func moveTo(to: SBObject!) -> SBObject // Move object(s) to a new location.
+    @objc optional func moveTo(_ to: SBObject!) -> SBObject // Move object(s) to a new location.
 }
 
 // MARK: MessagesItem
 @objc public protocol MessagesItem: SBObjectProtocol, MessagesGenericMethods {
-    @objc optional var properties: [NSObject : AnyObject] { get } // All of the object's properties.
-    @objc optional func setProperties(properties: [NSObject : AnyObject]!) // All of the object's properties.
+    @objc optional var properties: [AnyHashable : Any] { get } // All of the object's properties.
+    @objc optional func setProperties(_ properties: [AnyHashable : Any]!) // All of the object's properties.
 }
 extension SBObject: MessagesItem {}
 
@@ -145,7 +145,7 @@ extension SBObject: MessagesColor {}
 @objc public protocol MessagesDocument: SBObjectProtocol, MessagesGenericMethods {
     @objc optional var name: String { get } // The document's name.
     @objc optional var modified: Bool { get } // Has the document been modified since the last save?
-    @objc optional var file: NSURL { get } // The document's location on disk.
+    @objc optional var file: URL { get } // The document's location on disk.
 }
 extension SBObject: MessagesDocument {}
 
@@ -163,11 +163,11 @@ extension SBObject: MessagesDocument {}
     @objc optional var zoomable: Bool { get } // Whether the window can be zoomed.
     @objc optional var zoomed: Bool { get } // Whether the window is currently zoomed.
     @objc optional var document: MessagesDocument { get } // The document whose contents are being displayed in the window.
-    @objc optional func setIndex(index: Int) // The index of the window, ordered front to back.
-    @objc optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
-    @objc optional func setMinimized(minimized: Bool) // Whether the window is currently minimized.
-    @objc optional func setVisible(visible: Bool) // Whether the window is currently visible.
-    @objc optional func setZoomed(zoomed: Bool) // Whether the window is currently zoomed.
+    @objc optional func setIndex(_ index: Int) // The index of the window, ordered front to back.
+    @objc optional func setBounds(_ bounds: NSRect) // The bounding rectangle of the window.
+    @objc optional func setMinimized(_ minimized: Bool) // Whether the window is currently minimized.
+    @objc optional func setVisible(_ visible: Bool) // Whether the window is currently visible.
+    @objc optional func setZoomed(_ zoomed: Bool) // Whether the window is currently zoomed.
 }
 extension SBObject: MessagesWindow {}
 
@@ -181,9 +181,9 @@ extension SBObject: MessagesWindow {}
     @objc optional var color: NSColor { get } // The color of the first character.
     @objc optional var font: String { get } // The name of the font of the first character.
     @objc optional var size: Double { get } // The size in points of the first character.
-    @objc optional func setColor(color: NSColor!) // The color of the first character.
-    @objc optional func setFont(font: String!) // The name of the font of the first character.
-    @objc optional func setSize(size: Double) // The size in points of the first character.
+    @objc optional func setColor(_ color: NSColor!) // The color of the first character.
+    @objc optional func setFont(_ font: String!) // The name of the font of the first character.
+    @objc optional func setSize(_ size: Double) // The size in points of the first character.
 }
 extension SBObject: MessagesRichText {}
 
@@ -197,9 +197,9 @@ extension SBObject: MessagesRichText {}
     @objc optional var color: NSColor { get } // The color of the first character.
     @objc optional var font: String { get } // The name of the font of the first character.
     @objc optional var size: Int { get } // The size in points of the first character.
-    @objc optional func setColor(color: NSColor!) // The color of the first character.
-    @objc optional func setFont(font: String!) // The name of the font of the first character.
-    @objc optional func setSize(size: Int) // The size in points of the first character.
+    @objc optional func setColor(_ color: NSColor!) // The color of the first character.
+    @objc optional func setFont(_ font: String!) // The name of the font of the first character.
+    @objc optional func setSize(_ size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesCharacter {}
 
@@ -213,9 +213,9 @@ extension SBObject: MessagesCharacter {}
     @objc optional var color: NSColor { get } // The color of the first character.
     @objc optional var font: String { get } // The name of the font of the first character.
     @objc optional var size: Int { get } // The size in points of the first character.
-    @objc optional func setColor(color: NSColor!) // The color of the first character.
-    @objc optional func setFont(font: String!) // The name of the font of the first character.
-    @objc optional func setSize(size: Int) // The size in points of the first character.
+    @objc optional func setColor(_ color: NSColor!) // The color of the first character.
+    @objc optional func setFont(_ font: String!) // The name of the font of the first character.
+    @objc optional func setSize(_ size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesParagraph {}
 
@@ -229,9 +229,9 @@ extension SBObject: MessagesParagraph {}
     @objc optional var color: NSColor { get } // The color of the first character.
     @objc optional var font: String { get } // The name of the font of the first character.
     @objc optional var size: Int { get } // The size in points of the first character.
-    @objc optional func setColor(color: NSColor!) // The color of the first character.
-    @objc optional func setFont(font: String!) // The name of the font of the first character.
-    @objc optional func setSize(size: Int) // The size in points of the first character.
+    @objc optional func setColor(_ color: NSColor!) // The color of the first character.
+    @objc optional func setFont(_ font: String!) // The name of the font of the first character.
+    @objc optional func setSize(_ size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesWord {}
 
@@ -245,15 +245,15 @@ extension SBObject: MessagesWord {}
     @objc optional var color: NSColor { get } // The color of the first character.
     @objc optional var font: String { get } // The name of the font of the first character.
     @objc optional var size: Int { get } // The size in points of the first character.
-    @objc optional func setColor(color: NSColor!) // The color of the first character.
-    @objc optional func setFont(font: String!) // The name of the font of the first character.
-    @objc optional func setSize(size: Int) // The size in points of the first character.
+    @objc optional func setColor(_ color: NSColor!) // The color of the first character.
+    @objc optional func setFont(_ font: String!) // The name of the font of the first character.
+    @objc optional func setSize(_ size: Int) // The size in points of the first character.
 }
 extension SBObject: MessagesAttributeRun {}
 
 // MARK: MessagesAttachment
 @objc public protocol MessagesAttachment: MessagesRichText {
-    @objc optional var file: NSURL { get } // The path to the file for the attachment
+    @objc optional var file: URL { get } // The path to the file for the attachment
 }
 extension SBObject: MessagesAttachment {}
 
@@ -277,19 +277,19 @@ extension SBObject: MessagesAttachment {}
     @objc optional var name: String { get } // The name of the application.
     @objc optional var frontmost: Bool { get } // Is this the frontmost (active) application?
     @objc optional var version: String { get } // The version of the application.
-    @objc optional func open(x: [NSURL]!) // Open a document.
-    @objc optional func print(x: NSURL!) // Print an object.
-    @objc optional func quitSaving(saving: MessagesSaveOptions) // Quit the application.
-    @objc optional func invite(x: [MessagesBuddy]!, to: AnyObject!, withMessage: String!) // Invites a buddy to join an existing chat.
+    @objc optional func `open`(_ x: [URL]!) // Open a document.
+    @objc optional func print(_ x: URL!) // Print an object.
+    @objc optional func quitSaving(_ saving: MessagesSaveOptions) // Quit the application.
+    @objc optional func invite(_ x: [MessagesBuddy]!, to: Any!, withMessage: String!) // Invites a buddy to join an existing chat.
     @objc optional func logIn() // Log in to the specified service, or all services if none is specified. If the account password is not in the keychain the user will be prompted to enter one.
     @objc optional func logOut() // Logs out of a service, or all services if none is specified.
-    @objc optional func send(x: AnyObject!, to: AnyObject!) // Sends a message or file to a buddy or to a chat.
+    @objc optional func send(_ x: Any!, to: Any!) // Sends a message or file to a buddy or to a chat.
     @objc optional func storeRecentPicture() // Stores the currently set buddy picture into your recent pictures.
-    @objc optional func showChatChooserFor(for_: MessagesBuddy!) // displays a dialog in Messages to start a new chat with the specified buddy
-    @objc optional func setImage(image: NSImage!) // My image as it appears in all services.
-    @objc optional func setStatus(status: MessagesMyStatus) // My status on all services.
-    @objc optional func setStatusMessage(statusMessage: String!) // My status message, visible to other people while I am online.
-    @objc optional func setActiveAvChat(activeAvChat: MessagesAudioChat!) // The currently active audio or video chat.
+    @objc optional func showChatChooserFor(_ for_: MessagesBuddy!) // displays a dialog in Messages to start a new chat with the specified buddy
+    @objc optional func setImage(_ image: NSImage!) // My image as it appears in all services.
+    @objc optional func setStatus(_ status: MessagesMyStatus) // My status on all services.
+    @objc optional func setStatusMessage(_ statusMessage: String!) // My status message, visible to other people while I am online.
+    @objc optional func setActiveAvChat(_ activeAvChat: MessagesAudioChat!) // The currently active audio or video chat.
 }
 extension SBApplication: MessagesApplication {}
 
@@ -323,10 +323,10 @@ extension SBObject: MessagesBuddy {}
     @objc optional var serviceType: MessagesServiceType { get } // The type of protocol for this service
     @objc optional func logIn() // Log in to the specified service, or all services if none is specified. If the account password is not in the keychain the user will be prompted to enter one.
     @objc optional func logOut() // Logs out of a service, or all services if none is specified.
-    @objc optional func setName(name: String!) // The name of this service as defined in Account preferences description field
-    @objc optional func setEnabled(enabled: Bool) // Is the service enabled?
-    @objc optional func setStatus(status: MessagesMyStatus) // My status on this service.
-    @objc optional func setStatusMessage(statusMessage: String!) // My status message, visible to other people on this service while I am online.
+    @objc optional func setName(_ name: String!) // The name of this service as defined in Account preferences description field
+    @objc optional func setEnabled(_ enabled: Bool) // Is the service enabled?
+    @objc optional func setStatus(_ status: MessagesMyStatus) // My status on this service.
+    @objc optional func setStatusMessage(_ statusMessage: String!) // My status message, visible to other people on this service while I am online.
 }
 extension SBObject: MessagesService {}
 
@@ -338,8 +338,8 @@ extension SBObject: MessagesService {}
     @objc optional var secure: Bool { get } // Is this chat secure?
     @objc optional var invitation: Bool { get } // Is this an invitation to a chat?
     @objc optional var active: Bool { get } // Is this chat currently active?
-    @objc optional var started: NSDate { get } // The date on which this chat started.
-    @objc optional var updated: NSDate { get } // The date when this chat was last updated.
+    @objc optional var started: Date { get } // The date on which this chat started.
+    @objc optional var updated: Date { get } // The date when this chat was last updated.
     @objc optional func accept() // Accepts an incoming text, audio, or video chat invitation, or file transfer
     @objc optional func decline() // Declines an incoming text, audio, or video chat invitation, or file transfer
 }
@@ -362,7 +362,7 @@ extension SBObject: MessagesTextChat {}
     @objc optional var avConnectionStatus: MessagesAvConnectionStatus { get } // The connection state for this av chat.
     @objc optional func requestRecording() // Sends a recording request to all participants of an audio or video chat. Recording will not start until all participants have agreed to allow recording.
     @objc optional func stopRecording() // Ends recording of an audio or video chat.
-    @objc optional func setMuted(muted: Bool) // Is the chat muted?
+    @objc optional func setMuted(_ muted: Bool) // Is the chat muted?
 }
 extension SBObject: MessagesAudioChat {}
 
@@ -372,9 +372,9 @@ extension SBObject: MessagesAudioChat {}
     @objc optional var showingFullScreen: Bool { get } // Is the chat being displayed in full screen mode?
     @objc optional var showingLocalVideo: Bool { get } // Is the local video preview being displayed?
     @objc optional func takeSnapshot() // Takes a snapshot of a video chat and saves it to a desktop.
-    @objc optional func setPaused(paused: Bool) // Is the chat paused?
-    @objc optional func setShowingFullScreen(showingFullScreen: Bool) // Is the chat being displayed in full screen mode?
-    @objc optional func setShowingLocalVideo(showingLocalVideo: Bool) // Is the local video preview being displayed?
+    @objc optional func setPaused(_ paused: Bool) // Is the chat paused?
+    @objc optional func setShowingFullScreen(_ showingFullScreen: Bool) // Is the chat being displayed in full screen mode?
+    @objc optional func setShowingLocalVideo(_ showingLocalVideo: Bool) // Is the local video preview being displayed?
 }
 extension SBObject: MessagesVideoChat {}
 
@@ -390,7 +390,7 @@ extension SBObject: MessagesAuthorizationRequest {}
 @objc public protocol MessagesFileTransfer: MessagesItem {
     @objc optional func id() -> String // The guid for this file transfer
     @objc optional var name: String { get } // The name of this file
-    @objc optional var file: NSURL { get } // The local path to this file transfer
+    @objc optional var file: URL { get } // The local path to this file transfer
     @objc optional var direction: MessagesDirection { get } // The direction in which this file is being sent
     @objc optional var service: MessagesService { get } // The service on which this file transfer is taking place
     @objc optional var buddy: MessagesBuddy { get } // The account participating in this file transfer
@@ -398,7 +398,7 @@ extension SBObject: MessagesAuthorizationRequest {}
     @objc optional var fileSize: Int { get } // The total size in bytes of the completed file transfer
     @objc optional var fileProgress: Int { get } // The number of bytes that have been transferred
     @objc optional var transferStatus: MessagesTransferStatus { get } // The current status of this file transfer
-    @objc optional var started: NSDate { get } // The date that this file transfer started
+    @objc optional var started: Date { get } // The date that this file transfer started
     @objc optional func accept() // Accepts an incoming text, audio, or video chat invitation, or file transfer
     @objc optional func decline() // Declines an incoming text, audio, or video chat invitation, or file transfer
 }

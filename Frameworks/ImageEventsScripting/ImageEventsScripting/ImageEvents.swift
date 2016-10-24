@@ -2,7 +2,7 @@ import AppKit
 import ScriptingBridge
 
 @objc public protocol SBObjectProtocol: NSObjectProtocol {
-    func get() -> AnyObject!
+    func get() -> Any!
 }
 
 @objc public protocol SBApplicationProtocol: SBObjectProtocol {
@@ -13,177 +13,177 @@ import ScriptingBridge
 
 // MARK: ImageEventsSaveOptions
 @objc public enum ImageEventsSaveOptions : AEKeyword {
-    case Yes = 0x79657320 /* 'yes ' */
-    case No = 0x6e6f2020 /* 'no  ' */
-    case Ask = 0x61736b20 /* 'ask ' */
+    case yes = 0x79657320 /* 'yes ' */
+    case no = 0x6e6f2020 /* 'no  ' */
+    case ask = 0x61736b20 /* 'ask ' */
 }
 
 // MARK: ImageEventsPrintingErrorHandling
 @objc public enum ImageEventsPrintingErrorHandling : AEKeyword {
-    case Standard = 0x6c777374 /* 'lwst' */
-    case Detailed = 0x6c776474 /* 'lwdt' */
+    case standard = 0x6c777374 /* 'lwst' */
+    case detailed = 0x6c776474 /* 'lwdt' */
 }
 
 // MARK: ImageEventsEdfm
 @objc public enum ImageEventsEdfm : AEKeyword {
-    case ApplePhotoFormat = 0x64667068 /* 'dfph' */
-    case AppleShareFormat = 0x64666173 /* 'dfas' */
-    case AudioFormat = 0x64666175 /* 'dfau' */
-    case HighSierraFormat = 0x64666873 /* 'dfhs' */
-    case ISO9660Format = 0x64663936 /* 'df96' */
-    case MacOSExtendedFormat = 0x6466682b /* 'dfh+' */
-    case MacOSFormat = 0x64666866 /* 'dfhf' */
-    case MSDOSFormat = 0x64666d73 /* 'dfms' */
-    case NFSFormat = 0x64666e66 /* 'dfnf' */
-    case ProDOSFormat = 0x64667072 /* 'dfpr' */
-    case QuickTakeFormat = 0x64667174 /* 'dfqt' */
-    case UDFFormat = 0x64667564 /* 'dfud' */
-    case UFSFormat = 0x64667566 /* 'dfuf' */
-    case UnknownFormat = 0x64662424 /* 'df$$' */
-    case WebDAVFormat = 0x64667764 /* 'dfwd' */
+    case applePhotoFormat = 0x64667068 /* 'dfph' */
+    case appleShareFormat = 0x64666173 /* 'dfas' */
+    case audioFormat = 0x64666175 /* 'dfau' */
+    case highSierraFormat = 0x64666873 /* 'dfhs' */
+    case iso9660Format = 0x64663936 /* 'df96' */
+    case macOSExtendedFormat = 0x6466682b /* 'dfh+' */
+    case macOSFormat = 0x64666866 /* 'dfhf' */
+    case msdosFormat = 0x64666d73 /* 'dfms' */
+    case nfsFormat = 0x64666e66 /* 'dfnf' */
+    case proDOSFormat = 0x64667072 /* 'dfpr' */
+    case quickTakeFormat = 0x64667174 /* 'dfqt' */
+    case udfFormat = 0x64667564 /* 'dfud' */
+    case ufsFormat = 0x64667566 /* 'dfuf' */
+    case unknownFormat = 0x64662424 /* 'df$$' */
+    case webDAVFormat = 0x64667764 /* 'dfwd' */
 }
 
 // MARK: ImageEventsBitz
 @objc public enum ImageEventsBitz : AEKeyword {
-    case Best = 0x62657374 /* 'best' */
-    case BlackWhite = 0x62267720 /* 'b&w ' */
-    case Color = 0x636f6c72 /* 'colr' */
-    case FourColors = 0x34636c72 /* '4clr' */
-    case FourGrays = 0x34677279 /* '4gry' */
-    case Grayscale = 0x67726179 /* 'gray' */
-    case MillionsOfColors = 0x6d696c6c /* 'mill' */
-    case MillionsOfColorsPlus = 0x6d696c2b /* 'mil+' */
-    case SixteenColors = 0x3136636c /* '16cl' */
-    case SixteenGrays = 0x31366772 /* '16gr' */
-    case ThousandsOfColors = 0x74686f75 /* 'thou' */
-    case TwoHundredFiftySixColors = 0x32353663 /* '256c' */
-    case TwoHundredFiftySixGrays = 0x32353667 /* '256g' */
+    case best = 0x62657374 /* 'best' */
+    case blackWhite = 0x62267720 /* 'b&w ' */
+    case color = 0x636f6c72 /* 'colr' */
+    case fourColors = 0x34636c72 /* '4clr' */
+    case fourGrays = 0x34677279 /* '4gry' */
+    case grayscale = 0x67726179 /* 'gray' */
+    case millionsOfColors = 0x6d696c6c /* 'mill' */
+    case millionsOfColorsPlus = 0x6d696c2b /* 'mil+' */
+    case sixteenColors = 0x3136636c /* '16cl' */
+    case sixteenGrays = 0x31366772 /* '16gr' */
+    case thousandsOfColors = 0x74686f75 /* 'thou' */
+    case twoHundredFiftySixColors = 0x32353663 /* '256c' */
+    case twoHundredFiftySixGrays = 0x32353667 /* '256g' */
 }
 
 // MARK: ImageEventsPCla
 @objc public enum ImageEventsPCla : AEKeyword {
-    case Abstract = 0x61627374 /* 'abst' */
-    case Colorspace = 0x73706163 /* 'spac' */
-    case Input = 0x73636e72 /* 'scnr' */
-    case Link = 0x6c696e6b /* 'link' */
-    case Monitor = 0x6d6e7472 /* 'mntr' */
-    case Named = 0x6e6d636c /* 'nmcl' */
-    case Output = 0x70727472 /* 'prtr' */
+    case abstract = 0x61627374 /* 'abst' */
+    case colorspace = 0x73706163 /* 'spac' */
+    case input = 0x73636e72 /* 'scnr' */
+    case link = 0x6c696e6b /* 'link' */
+    case monitor = 0x6d6e7472 /* 'mntr' */
+    case named = 0x6e6d636c /* 'nmcl' */
+    case output = 0x70727472 /* 'prtr' */
 }
 
 // MARK: ImageEventsPPCS
 @objc public enum ImageEventsPPCS : AEKeyword {
-    case Lab = 0x4c616220 /* 'Lab ' */
-    case XYZ = 0x58595a20 /* 'XYZ ' */
+    case lab = 0x4c616220 /* 'Lab ' */
+    case xyz = 0x58595a20 /* 'XYZ ' */
 }
 
 // MARK: ImageEventsCmlv
 @objc public enum ImageEventsCmlv : AEKeyword {
-    case High = 0x68696768 /* 'high' */
-    case Low = 0x6c6f7720 /* 'low ' */
-    case Medium = 0x6d656469 /* 'medi' */
+    case high = 0x68696768 /* 'high' */
+    case low = 0x6c6f7720 /* 'low ' */
+    case medium = 0x6d656469 /* 'medi' */
 }
 
 // MARK: ImageEventsTypz
 @objc public enum ImageEventsTypz : AEKeyword {
-    case BMP = 0x424d5066 /* 'BMPf' */
-    case GIF = 0x47494620 /* 'GIF ' */
-    case JPEG = 0x4a504547 /* 'JPEG' */
-    case JPEG2 = 0x6a706732 /* 'jpg2' */
-    case MacPaint = 0x504e5447 /* 'PNTG' */
-    case PDF = 0x50444620 /* 'PDF ' */
-    case Photoshop = 0x38425053 /* '8BPS' */
-    case PICT = 0x50494354 /* 'PICT' */
-    case PNG = 0x504e4766 /* 'PNGf' */
-    case PSD = 0x70736420 /* 'psd ' */
-    case QuickTimeImage = 0x71746966 /* 'qtif' */
-    case SGI = 0x2e534749 /* '.SGI' */
-    case Text = 0x54455854 /* 'TEXT' */
-    case TGA = 0x74676120 /* 'tga ' */
-    case TIFF = 0x54494646 /* 'TIFF' */
+    case bmp = 0x424d5066 /* 'BMPf' */
+    case gif = 0x47494620 /* 'GIF ' */
+    case jpeg = 0x4a504547 /* 'JPEG' */
+    case jpeg2 = 0x6a706732 /* 'jpg2' */
+    case macPaint = 0x504e5447 /* 'PNTG' */
+    case pdf = 0x50444620 /* 'PDF ' */
+    case photoshop = 0x38425053 /* '8BPS' */
+    case pict = 0x50494354 /* 'PICT' */
+    case png = 0x504e4766 /* 'PNGf' */
+    case psd = 0x70736420 /* 'psd ' */
+    case quickTimeImage = 0x71746966 /* 'qtif' */
+    case sgi = 0x2e534749 /* '.SGI' */
+    case text = 0x54455854 /* 'TEXT' */
+    case tga = 0x74676120 /* 'tga ' */
+    case tiff = 0x54494646 /* 'TIFF' */
 }
 
 // MARK: ImageEventsPQua
 @objc public enum ImageEventsPQua : AEKeyword {
-    case Best = 0x51756132 /* 'Qua2' */
-    case Draft = 0x51756131 /* 'Qua1' */
-    case Normal = 0x51756130 /* 'Qua0' */
+    case best = 0x51756132 /* 'Qua2' */
+    case draft = 0x51756131 /* 'Qua1' */
+    case normal = 0x51756130 /* 'Qua0' */
 }
 
 // MARK: ImageEventsPSpc
 @objc public enum ImageEventsPSpc : AEKeyword {
-    case CMYK = 0x434d594b /* 'CMYK' */
-    case EightChannel = 0x4d434838 /* 'MCH8' */
-    case EightColor = 0x38434c52 /* '8CLR' */
-    case FiveChannel = 0x4d434835 /* 'MCH5' */
-    case FiveColor = 0x35434c52 /* '5CLR' */
-    case Gray = 0x47524159 /* 'GRAY' */
-    case Lab = 0x4c616220 /* 'Lab ' */
-    case Named = 0x4e414d45 /* 'NAME' */
-    case RGB = 0x52474220 /* 'RGB ' */
-    case SevenChannel = 0x4d434837 /* 'MCH7' */
-    case SevenColor = 0x37434c52 /* '7CLR' */
-    case SixChannel = 0x4d434836 /* 'MCH6' */
-    case SixColor = 0x36434c52 /* '6CLR' */
-    case XYZ = 0x58595a20 /* 'XYZ ' */
+    case cmyk = 0x434d594b /* 'CMYK' */
+    case eightChannel = 0x4d434838 /* 'MCH8' */
+    case eightColor = 0x38434c52 /* '8CLR' */
+    case fiveChannel = 0x4d434835 /* 'MCH5' */
+    case fiveColor = 0x35434c52 /* '5CLR' */
+    case gray = 0x47524159 /* 'GRAY' */
+    case lab = 0x4c616220 /* 'Lab ' */
+    case named = 0x4e414d45 /* 'NAME' */
+    case rgb = 0x52474220 /* 'RGB ' */
+    case sevenChannel = 0x4d434837 /* 'MCH7' */
+    case sevenColor = 0x37434c52 /* '7CLR' */
+    case sixChannel = 0x4d434836 /* 'MCH6' */
+    case sixColor = 0x36434c52 /* '6CLR' */
+    case xyz = 0x58595a20 /* 'XYZ ' */
 }
 
 // MARK: ImageEventsPRdr
 @objc public enum ImageEventsPRdr : AEKeyword {
-    case AbsoluteColorimetricIntent = 0x52647233 /* 'Rdr3' */
-    case PerceptualIntent = 0x52647230 /* 'Rdr0' */
-    case RelativeColorimetricIntent = 0x52647231 /* 'Rdr1' */
-    case SaturationIntent = 0x52647232 /* 'Rdr2' */
+    case absoluteColorimetricIntent = 0x52647233 /* 'Rdr3' */
+    case perceptualIntent = 0x52647230 /* 'Rdr0' */
+    case relativeColorimetricIntent = 0x52647231 /* 'Rdr1' */
+    case saturationIntent = 0x52647232 /* 'Rdr2' */
 }
 
 // MARK: ImageEventsSavo
 @objc public enum ImageEventsSavo : AEKeyword {
-    case No = 0x6e6f2020 /* 'no  ' */
-    case Yes = 0x79657320 /* 'yes ' */
+    case no = 0x6e6f2020 /* 'no  ' */
+    case yes = 0x79657320 /* 'yes ' */
 }
 
 // MARK: ImageEventsQual
 @objc public enum ImageEventsQual : AEKeyword {
-    case Best = 0x62657374 /* 'best' */
-    case High = 0x68696768 /* 'high' */
-    case Least = 0x6c656173 /* 'leas' */
-    case Low = 0x6c6f7720 /* 'low ' */
-    case Medium = 0x6d656469 /* 'medi' */
+    case best = 0x62657374 /* 'best' */
+    case high = 0x68696768 /* 'high' */
+    case least = 0x6c656173 /* 'leas' */
+    case low = 0x6c6f7720 /* 'low ' */
+    case medium = 0x6d656469 /* 'medi' */
 }
 
 // MARK: ImageEventsTypv
 @objc public enum ImageEventsTypv : AEKeyword {
-    case BMP = 0x424d5066 /* 'BMPf' */
-    case JPEG = 0x4a504547 /* 'JPEG' */
-    case JPEG2 = 0x6a706732 /* 'jpg2' */
-    case PICT = 0x50494354 /* 'PICT' */
-    case PNG = 0x504e4766 /* 'PNGf' */
-    case PSD = 0x70736420 /* 'psd ' */
-    case QuickTimeImage = 0x71746966 /* 'qtif' */
-    case TIFF = 0x54494646 /* 'TIFF' */
+    case bmp = 0x424d5066 /* 'BMPf' */
+    case jpeg = 0x4a504547 /* 'JPEG' */
+    case jpeg2 = 0x6a706732 /* 'jpg2' */
+    case pict = 0x50494354 /* 'PICT' */
+    case png = 0x504e4766 /* 'PNGf' */
+    case psd = 0x70736420 /* 'psd ' */
+    case quickTimeImage = 0x71746966 /* 'qtif' */
+    case tiff = 0x54494646 /* 'TIFF' */
 }
 
 // MARK: ImageEventsSaveableFileFormat
 @objc public enum ImageEventsSaveableFileFormat : AEKeyword {
-    case Text = 0x63747874 /* 'ctxt' */
+    case text = 0x63747874 /* 'ctxt' */
 }
 
 // MARK: ImageEventsGenericMethods
 @objc public protocol ImageEventsGenericMethods {
-    @objc optional func saveIn(in_: ImageEventsFile!, `as`: ImageEventsSaveableFileFormat) // Save a document.
-    @objc optional func printWithProperties(withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
+    @objc optional func saveIn(_ in_: ImageEventsFile!, as: ImageEventsSaveableFileFormat) // Save a document.
+    @objc optional func printWithProperties(_ withProperties: [AnyHashable : Any]!, printDialog: Bool) // Print a document.
     @objc optional func delete() // Delete an object.
-    @objc optional func duplicateTo(to: SBObject!, withProperties: [NSObject : AnyObject]!) // Copy an object.
-    @objc optional func moveTo(to: SBObject!) // Move an object to a new location.
-    @objc optional func closeSaving(saving: ImageEventsSavo, savingIn: String!) // Close an image
-    @objc optional func cropToDimensions(toDimensions: [NSNumber]!) // Crop an image
-    @objc optional func embedWithSource(withSource: ImageEventsProfile!) // Embed an image with an ICC profile
-    @objc optional func flipHorizontal(horizontal: Bool, vertical: Bool) // Flip an image
-    @objc optional func matchToDestination(toDestination: ImageEventsProfile!) // Match an image
-    @objc optional func padToDimensions(toDimensions: [NSNumber]!, withPadColor: [NSNumber]!) // Pad an image
-    @objc optional func rotateToAngle(toAngle: Double) // Rotate an image
-    @objc optional func saveAs(`as`: ImageEventsTypv, icon: Bool, `in` in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
-    @objc optional func scaleByFactor(byFactor: Double, toSize: Int) // Scale an image
+    @objc optional func duplicateTo(_ to: SBObject!, withProperties: [AnyHashable : Any]!) // Copy an object.
+    @objc optional func moveTo(_ to: SBObject!) // Move an object to a new location.
+    @objc optional func closeSaving(_ saving: ImageEventsSavo, savingIn: String!) // Close an image
+    @objc optional func cropToDimensions(_ toDimensions: [NSNumber]!) // Crop an image
+    @objc optional func embedWithSource(_ withSource: ImageEventsProfile!) // Embed an image with an ICC profile
+    @objc optional func flipHorizontal(_ horizontal: Bool, vertical: Bool) // Flip an image
+    @objc optional func matchToDestination(_ toDestination: ImageEventsProfile!) // Match an image
+    @objc optional func padToDimensions(_ toDimensions: [NSNumber]!, withPadColor: [NSNumber]!) // Pad an image
+    @objc optional func rotateToAngle(_ toAngle: Double) // Rotate an image
+    @objc optional func saveAs(_ as: ImageEventsTypv, icon: Bool, in in_: String!, PackBits: Bool, withCompressionLevel: ImageEventsCmlv) -> ImageEventsAlias // Save an image to a file in one of various formats
+    @objc optional func scaleByFactor(_ byFactor: Double, toSize: Int) // Scale an image
     @objc optional func unembed() // Remove any embedded ICC profiles from an image
 }
 
@@ -194,11 +194,11 @@ import ScriptingBridge
     @objc optional var name: String { get } // The name of the application.
     @objc optional var frontmost: Bool { get } // Is this the active application?
     @objc optional var version: String { get } // The version number of the application.
-    @objc optional func open(x: AnyObject!) -> AnyObject // Open a document.
-    @objc optional func print(x: AnyObject!, withProperties: [NSObject : AnyObject]!, printDialog: Bool) // Print a document.
-    @objc optional func quitSaving(saving: ImageEventsSaveOptions) // Quit the application.
-    @objc optional func exists(x: AnyObject!) -> Bool // Verify that an object exists.
-    @objc optional func move(x: AnyObject!, to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
+    @objc optional func `open`(_ x: Any!) -> Any // Open a document.
+    @objc optional func print(_ x: Any!, withProperties: [AnyHashable : Any]!, printDialog: Bool) // Print a document.
+    @objc optional func quitSaving(_ saving: ImageEventsSaveOptions) // Quit the application.
+    @objc optional func exists(_ x: Any!) -> Bool // Verify that an object exists.
+    @objc optional func move(_ x: Any!, to: Any!) -> Any // Move disk item(s) to a new location.
     @objc optional func aliases() -> SBElementArray
     @objc optional func disks() -> SBElementArray
     @objc optional func diskItems() -> SBElementArray
@@ -251,24 +251,24 @@ import ScriptingBridge
     @objc optional var defaultXYZProfile: ImageEventsProfile { get } // the default XYZ profile
     @objc optional var defaultXYZProfileLocation: ImageEventsFile { get } // the default XYZ profile location
     @objc optional var preferredCMM: String { get } // specifies preferred Color Management Module to use, or "automatic"
-    @objc optional var profileFolder: AnyObject { get } // the ColorSync profile folder
+    @objc optional var profileFolder: Any { get } // the ColorSync profile folder
     @objc optional var quitDelay: Int { get } // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
     @objc optional var systemProfile: ImageEventsProfile { get } // the default system profile
     @objc optional var systemProfileLocation: ImageEventsFile { get } // the default system profile location
-    @objc optional func setDefaultCMYKProfile(defaultCMYKProfile: ImageEventsProfile!) // the default CMYK profile
-    @objc optional func setDefaultCMYKProfileLocation(defaultCMYKProfileLocation: ImageEventsFile!) // the default CMYK profile location
-    @objc optional func setDefaultGrayProfile(defaultGrayProfile: ImageEventsProfile!) // the default Gray profile
-    @objc optional func setDefaultGrayProfileLocation(defaultGrayProfileLocation: ImageEventsFile!) // the default Gray profile location
-    @objc optional func setDefaultLabProfile(defaultLabProfile: ImageEventsProfile!) // the default Lab profile
-    @objc optional func setDefaultLabProfileLocation(defaultLabProfileLocation: ImageEventsFile!) // the default Lab profile location
-    @objc optional func setDefaultRGBProfile(defaultRGBProfile: ImageEventsProfile!) // the default RGB profile
-    @objc optional func setDefaultRGBProfileLocation(defaultRGBProfileLocation: ImageEventsFile!) // the default RGB profile location
-    @objc optional func setDefaultXYZProfile(defaultXYZProfile: ImageEventsProfile!) // the default XYZ profile
-    @objc optional func setDefaultXYZProfileLocation(defaultXYZProfileLocation: ImageEventsFile!) // the default XYZ profile location
-    @objc optional func setPreferredCMM(preferredCMM: String!) // specifies preferred Color Management Module to use, or "automatic"
-    @objc optional func setQuitDelay(quitDelay: Int) // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
-    @objc optional func setSystemProfile(systemProfile: ImageEventsProfile!) // the default system profile
-    @objc optional func setSystemProfileLocation(systemProfileLocation: ImageEventsFile!) // the default system profile location
+    @objc optional func setDefaultCMYKProfile(_ defaultCMYKProfile: ImageEventsProfile!) // the default CMYK profile
+    @objc optional func setDefaultCMYKProfileLocation(_ defaultCMYKProfileLocation: ImageEventsFile!) // the default CMYK profile location
+    @objc optional func setDefaultGrayProfile(_ defaultGrayProfile: ImageEventsProfile!) // the default Gray profile
+    @objc optional func setDefaultGrayProfileLocation(_ defaultGrayProfileLocation: ImageEventsFile!) // the default Gray profile location
+    @objc optional func setDefaultLabProfile(_ defaultLabProfile: ImageEventsProfile!) // the default Lab profile
+    @objc optional func setDefaultLabProfileLocation(_ defaultLabProfileLocation: ImageEventsFile!) // the default Lab profile location
+    @objc optional func setDefaultRGBProfile(_ defaultRGBProfile: ImageEventsProfile!) // the default RGB profile
+    @objc optional func setDefaultRGBProfileLocation(_ defaultRGBProfileLocation: ImageEventsFile!) // the default RGB profile location
+    @objc optional func setDefaultXYZProfile(_ defaultXYZProfile: ImageEventsProfile!) // the default XYZ profile
+    @objc optional func setDefaultXYZProfileLocation(_ defaultXYZProfileLocation: ImageEventsFile!) // the default XYZ profile location
+    @objc optional func setPreferredCMM(_ preferredCMM: String!) // specifies preferred Color Management Module to use, or "automatic"
+    @objc optional func setQuitDelay(_ quitDelay: Int) // the time in seconds the application will idle before quitting; if set to zero, idle time will not cause the application to quit
+    @objc optional func setSystemProfile(_ systemProfile: ImageEventsProfile!) // the default system profile
+    @objc optional func setSystemProfileLocation(_ systemProfileLocation: ImageEventsFile!) // the default system profile location
 }
 extension SBApplication: ImageEventsApplication {}
 
@@ -294,11 +294,11 @@ extension SBObject: ImageEventsDocument {}
     @objc optional var zoomable: Bool { get } // Does the window have a zoom button?
     @objc optional var zoomed: Bool { get } // Is the window zoomed right now?
     @objc optional var document: ImageEventsDocument { get } // The document whose contents are displayed in the window.
-    @objc optional func setIndex(index: Int) // The index of the window, ordered front to back.
-    @objc optional func setBounds(bounds: NSRect) // The bounding rectangle of the window.
-    @objc optional func setMiniaturized(miniaturized: Bool) // Is the window minimized right now?
-    @objc optional func setVisible(visible: Bool) // Is the window visible right now?
-    @objc optional func setZoomed(zoomed: Bool) // Is the window zoomed right now?
+    @objc optional func setIndex(_ index: Int) // The index of the window, ordered front to back.
+    @objc optional func setBounds(_ bounds: NSRect) // The bounding rectangle of the window.
+    @objc optional func setMiniaturized(_ miniaturized: Bool) // Is the window minimized right now?
+    @objc optional func setVisible(_ visible: Bool) // Is the window visible right now?
+    @objc optional func setZoomed(_ zoomed: Bool) // Is the window zoomed right now?
 }
 extension SBObject: ImageEventsWindow {}
 
@@ -306,10 +306,10 @@ extension SBObject: ImageEventsWindow {}
 @objc public protocol ImageEventsDiskItem: SBObjectProtocol, ImageEventsGenericMethods {
     @objc optional var busyStatus: Bool { get } // Is the disk item busy?
     @objc optional var container: ImageEventsDiskItem { get } // the folder or disk which has this disk item as an element
-    @objc optional var creationDate: NSDate { get } // the date on which the disk item was created
+    @objc optional var creationDate: Date { get } // the date on which the disk item was created
     @objc optional var displayedName: String { get } // the name of the disk item as displayed in the User Interface
     @objc optional func id() -> String // the unique ID of the disk item
-    @objc optional var modificationDate: NSDate { get } // the date on which the disk item was last modified
+    @objc optional var modificationDate: Date { get } // the date on which the disk item was last modified
     @objc optional var name: String { get } // the name of the disk item
     @objc optional var nameExtension: String { get } // the extension portion of the name
     @objc optional var packageFolder: Bool { get } // Is the disk item a package?
@@ -321,10 +321,10 @@ extension SBObject: ImageEventsWindow {}
     @objc optional var visible: Bool { get } // Is the disk item visible?
     @objc optional var volume: String { get } // the volume on which the disk item resides
     @objc optional func delete() // Delete disk item(s).
-    @objc optional func moveTo(to: AnyObject!) -> AnyObject // Move disk item(s) to a new location.
-    @objc optional func setModificationDate(modificationDate: NSDate!) // the date on which the disk item was last modified
-    @objc optional func setName(name: String!) // the name of the disk item
-    @objc optional func setVisible(visible: Bool) // Is the disk item visible?
+    @objc optional func moveTo(_ to: Any!) -> Any // Move disk item(s) to a new location.
+    @objc optional func setModificationDate(_ modificationDate: Date!) // the date on which the disk item was last modified
+    @objc optional func setName(_ name: String!) // the name of the disk item
+    @objc optional func setVisible(_ visible: Bool) // Is the disk item visible?
 }
 extension SBObject: ImageEventsDiskItem {}
 
@@ -335,19 +335,19 @@ extension SBObject: ImageEventsDiskItem {}
     @objc optional func files() -> SBElementArray
     @objc optional func filePackages() -> SBElementArray
     @objc optional func folders() -> SBElementArray
-    @objc optional var creatorType: AnyObject { get } // the OSType identifying the application that created the alias
-    @objc optional var defaultApplication: AnyObject { get } // the application that will launch if the alias is opened
-    @objc optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the alias
+    @objc optional var creatorType: Any { get } // the OSType identifying the application that created the alias
+    @objc optional var defaultApplication: Any { get } // the application that will launch if the alias is opened
+    @objc optional var fileType: Any { get } // the OSType identifying the type of data contained in the alias
     @objc optional var kind: String { get } // The kind of alias, as shown in Finder
     @objc optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
     @objc optional var shortVersion: String { get } // the short version of the application bundle referenced by the alias
     @objc optional var stationery: Bool { get } // Is the alias a stationery pad?
     @objc optional var typeIdentifier: String { get } // The type identifier of the alias
     @objc optional var version: String { get } // the version of the application bundle referenced by the alias (visible at the bottom of the "Get Info" window)
-    @objc optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the alias
-    @objc optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the alias is opened
-    @objc optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the alias
-    @objc optional func setStationery(stationery: Bool) // Is the alias a stationery pad?
+    @objc optional func setCreatorType(_ creatorType: Any!) // the OSType identifying the application that created the alias
+    @objc optional func setDefaultApplication(_ defaultApplication: Any!) // the application that will launch if the alias is opened
+    @objc optional func setFileType(_ fileType: Any!) // the OSType identifying the type of data contained in the alias
+    @objc optional func setStationery(_ stationery: Bool) // Is the alias a stationery pad?
 }
 extension SBObject: ImageEventsAlias {}
 
@@ -364,10 +364,10 @@ extension SBObject: ImageEventsAlias {}
     @objc optional var freeSpace: NSNumber { get } // the number of free bytes left on the disk
     @objc optional var ignorePrivileges: Bool { get } // Ignore permissions on this disk?
     @objc optional var localVolume: Bool { get } // Is the media a local volume (as opposed to a file server)?
-    @objc optional var server: AnyObject { get } // the server on which the disk resides, AFP volumes only
+    @objc optional var server: Any { get } // the server on which the disk resides, AFP volumes only
     @objc optional var startup: Bool { get } // Is this disk the boot disk?
-    @objc optional var zone: AnyObject { get } // the zone in which the disk's server resides, AFP volumes only
-    @objc optional func setIgnorePrivileges(ignorePrivileges: Bool) // Ignore permissions on this disk?
+    @objc optional var zone: Any { get } // the zone in which the disk's server resides, AFP volumes only
+    @objc optional func setIgnorePrivileges(_ ignorePrivileges: Bool) // Ignore permissions on this disk?
 }
 extension SBObject: ImageEventsDisk {}
 
@@ -411,20 +411,20 @@ extension SBObject: ImageEventsClassicDomainObject {}
 
 // MARK: ImageEventsFile
 @objc public protocol ImageEventsFile: ImageEventsDiskItem {
-    @objc optional var creatorType: AnyObject { get } // the OSType identifying the application that created the file
-    @objc optional var defaultApplication: AnyObject { get } // the application that will launch if the file is opened
-    @objc optional var fileType: AnyObject { get } // the OSType identifying the type of data contained in the file
+    @objc optional var creatorType: Any { get } // the OSType identifying the application that created the file
+    @objc optional var defaultApplication: Any { get } // the application that will launch if the file is opened
+    @objc optional var fileType: Any { get } // the OSType identifying the type of data contained in the file
     @objc optional var kind: String { get } // The kind of file, as shown in Finder
     @objc optional var productVersion: String { get } // the version of the product (visible at the top of the "Get Info" window)
     @objc optional var shortVersion: String { get } // the short version of the file
     @objc optional var stationery: Bool { get } // Is the file a stationery pad?
     @objc optional var typeIdentifier: String { get } // The type identifier of the file
     @objc optional var version: String { get } // the version of the file (visible at the bottom of the "Get Info" window)
-    @objc optional func open() -> AnyObject // Open a document.
-    @objc optional func setCreatorType(creatorType: AnyObject!) // the OSType identifying the application that created the file
-    @objc optional func setDefaultApplication(defaultApplication: AnyObject!) // the application that will launch if the file is opened
-    @objc optional func setFileType(fileType: AnyObject!) // the OSType identifying the type of data contained in the file
-    @objc optional func setStationery(stationery: Bool) // Is the file a stationery pad?
+    @objc optional func `open`() -> Any // Open a document.
+    @objc optional func setCreatorType(_ creatorType: Any!) // the OSType identifying the application that created the file
+    @objc optional func setDefaultApplication(_ defaultApplication: Any!) // the application that will launch if the file is opened
+    @objc optional func setFileType(_ fileType: Any!) // the OSType identifying the type of data contained in the file
+    @objc optional func setStationery(_ stationery: Bool) // Is the file a stationery pad?
 }
 extension SBObject: ImageEventsFile {}
 
@@ -499,7 +499,7 @@ extension SBObject: ImageEventsDisplay {}
     @objc optional var colorSpace: ImageEventsPSpc { get } // color space of the image's color representation
     @objc optional var dimensions: [NSNumber] { get } // the width and height of the image, respectively, in pixels
     @objc optional var embeddedProfile: ImageEventsProfile { get } // the profile, if any, embedded in the image
-    @objc optional var fileType: AnyObject { get } // file type of the image's file
+    @objc optional var fileType: Any { get } // file type of the image's file
     @objc optional var imageFile: ImageEventsFile { get } // the file that contains the image
     @objc optional var location: ImageEventsDiskItem { get } // the folder or disk that encloses the file that contains the image
     @objc optional var name: String { get } // the name of the image
@@ -510,7 +510,7 @@ extension SBObject: ImageEventsImage {}
 // MARK: ImageEventsMetadataTag
 @objc public protocol ImageEventsMetadataTag: SBObjectProtocol, ImageEventsGenericMethods {
     @objc optional var name: String { get } // the name of the tag
-    @objc optional var value: AnyObject { get } // the current setting of the tag
+    @objc optional var value: Any { get } // the current setting of the tag
 }
 extension SBObject: ImageEventsMetadataTag {}
 
@@ -518,12 +518,12 @@ extension SBObject: ImageEventsMetadataTag {}
 @objc public protocol ImageEventsProfile: SBObjectProtocol, ImageEventsGenericMethods {
     @objc optional var colorSpace: ImageEventsPSpc { get } // the color space of the profile
     @objc optional var connectionSpace: ImageEventsPPCS { get } // the connection space of the profile
-    @objc optional var creationDate: NSDate { get } // the creation date of the profile
+    @objc optional var creationDate: Date { get } // the creation date of the profile
     @objc optional var creator: String { get } // the creator type of the profile
     @objc optional var deviceClass: ImageEventsPCla { get } // the device class of the profile
     @objc optional var deviceManufacturer: String { get } // the device manufacturer of the profile
     @objc optional var deviceModel: Int { get } // the device model of the profile
-    @objc optional var location: AnyObject { get } // the file location of the profile
+    @objc optional var location: Any { get } // the file location of the profile
     @objc optional var name: String { get } // the description text of the profile
     @objc optional var platform: String { get } // the intended platform of the profile
     @objc optional var preferredCMM: String { get } // the preferred CMM of the profile

@@ -10,19 +10,7 @@
 		E6D7AE771AABF5D200E8E744 /* AcornScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE761AABF5D200E8E744 /* AcornScripting.swift */; };
 		E6EC965F1A8718A900A2ED4F /* Acorn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EC965D1A8718A900A2ED4F /* Acorn.swift */; };
 		E6F29BD81A619A5B003F1552 /* AcornScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6F29BD71A619A5B003F1552 /* AcornScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6F29BDE1A619A5B003F1552 /* AcornScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F29BD21A619A5A003F1552 /* AcornScripting.framework */; };
-		E6F29BE51A619A5B003F1552 /* AcornScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F29BE41A619A5B003F1552 /* AcornScriptingTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E6F29BDF1A619A5B003F1552 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6F29BC91A619A5A003F1552 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6F29BD11A619A5A003F1552;
-			remoteInfo = AcornScripting;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E695E5D21A8846480066C0EF /* Acorn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Acorn.h; sourceTree = "<group>"; };
@@ -32,9 +20,6 @@
 		E6F29BD21A619A5A003F1552 /* AcornScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AcornScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6F29BD61A619A5B003F1552 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6F29BD71A619A5B003F1552 /* AcornScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcornScripting.h; sourceTree = "<group>"; };
-		E6F29BDD1A619A5B003F1552 /* AcornScriptingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcornScriptingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6F29BE31A619A5B003F1552 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6F29BE41A619A5B003F1552 /* AcornScriptingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcornScriptingTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,14 +27,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6F29BDA1A619A5B003F1552 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6F29BDE1A619A5B003F1552 /* AcornScripting.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				E6F29BD41A619A5A003F1552 /* AcornScripting */,
-				E6F29BE11A619A5B003F1552 /* AcornScriptingTests */,
 				E6F29BD31A619A5A003F1552 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				E6F29BD21A619A5A003F1552 /* AcornScripting.framework */,
-				E6F29BDD1A619A5B003F1552 /* AcornScriptingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,23 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				E6F29BD61A619A5B003F1552 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E6F29BE11A619A5B003F1552 /* AcornScriptingTests */ = {
-			isa = PBXGroup;
-			children = (
-				E6F29BE41A619A5B003F1552 /* AcornScriptingTests.m */,
-				E6F29BE21A619A5B003F1552 /* Supporting Files */,
-			);
-			path = AcornScriptingTests;
-			sourceTree = "<group>";
-		};
-		E6F29BE21A619A5B003F1552 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E6F29BE31A619A5B003F1552 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,24 +110,6 @@
 			productReference = E6F29BD21A619A5A003F1552 /* AcornScripting.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E6F29BDC1A619A5B003F1552 /* AcornScriptingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6F29BEB1A619A5B003F1552 /* Build configuration list for PBXNativeTarget "AcornScriptingTests" */;
-			buildPhases = (
-				E6F29BD91A619A5B003F1552 /* Sources */,
-				E6F29BDA1A619A5B003F1552 /* Frameworks */,
-				E6F29BDB1A619A5B003F1552 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E6F29BE01A619A5B003F1552 /* PBXTargetDependency */,
-			);
-			name = AcornScriptingTests;
-			productName = AcornScriptingTests;
-			productReference = E6F29BDD1A619A5B003F1552 /* AcornScriptingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -183,9 +123,6 @@
 					E6F29BD11A619A5A003F1552 = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 0800;
-					};
-					E6F29BDC1A619A5B003F1552 = {
-						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
 			};
@@ -202,20 +139,12 @@
 			projectRoot = "";
 			targets = (
 				E6F29BD11A619A5A003F1552 /* AcornScripting */,
-				E6F29BDC1A619A5B003F1552 /* AcornScriptingTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E6F29BD01A619A5A003F1552 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6F29BDB1A619A5B003F1552 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,23 +163,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6F29BD91A619A5B003F1552 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6F29BE51A619A5B003F1552 /* AcornScriptingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E6F29BE01A619A5B003F1552 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6F29BD11A619A5A003F1552 /* AcornScripting */;
-			targetProxy = E6F29BDF1A619A5B003F1552 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E6F29BE61A619A5B003F1552 /* Debug */ = {
@@ -351,7 +264,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -371,41 +284,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-			};
-			name = Release;
-		};
-		E6F29BEC1A619A5B003F1552 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AcornScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		E6F29BED1A619A5B003F1552 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = AcornScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -426,15 +305,6 @@
 			buildConfigurations = (
 				E6F29BE91A619A5B003F1552 /* Debug */,
 				E6F29BEA1A619A5B003F1552 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E6F29BEB1A619A5B003F1552 /* Build configuration list for PBXNativeTarget "AcornScriptingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6F29BEC1A619A5B003F1552 /* Debug */,
-				E6F29BED1A619A5B003F1552 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

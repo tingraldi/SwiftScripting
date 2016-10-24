@@ -1,4 +1,4 @@
-#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
+#!/usr/bin/xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -39,19 +39,19 @@ import XcodeScripting
 let xcode = application(name: "Xcode") as! XcodeApplication
 
 let workspace = xcode.activeWorkspaceDocument!
-let pathComponents = workspace.file!.pathComponents!.filter {
+let pathComponents = workspace.file!.pathComponents.filter {
     !$0.hasSuffix(".xcodeproj") && !$0.hasSuffix(".xcworkspace")
 }
 
 if let URLString = commandOutput("/usr/bin/git", 
                                  withArguments: ["config", "--get", "remote.origin.url"], 
-                                 currentDirectoryPath: NSString.pathWithComponents(pathComponents)) 
-                                 where URLString.characters.count > 0 {
-    let parts = URLString.componentsSeparatedByString("@")
+                                 currentDirectoryPath: NSString.path(withComponents: pathComponents)), 
+                                URLString.characters.count > 0 {
+    let parts = (URLString as NSString).components(separatedBy: "@")
     if parts.count == 2 {
-        let partOne: NSString = parts[1]
-        var location = partOne.stringByDeletingPathExtension
-        location = location.stringByReplacingOccurrencesOfString(":", withString:"/")
-        NSTask.launchedTaskWithLaunchPath("/usr/bin/open", arguments: ["https://\(location)"])
+        let partOne = parts[1]
+        var location = (partOne as NSString).deletingPathExtension
+        location = (location as NSString).replacingOccurrences(of: ":", with:"/")
+        Process.launchedProcess(launchPath: "/usr/bin/open", arguments: ["https://\(location)"])
     }
 }

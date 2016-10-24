@@ -1,6 +1,6 @@
 public enum TerminalScripting: String {
-    case Application = "application"
-    case Window = "window"
-    case SettingsSet = "settings set"
-    case Tab = "tab"
+    case application = "application"
+    case window = "window"
+    case settingsSet = "settings set"
+    case tab = "tab"
 }

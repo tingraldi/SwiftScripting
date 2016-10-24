@@ -1,4 +1,4 @@
-#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
+#!/usr/bin/xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -33,19 +33,19 @@ let xcode = application(name: "Xcode") as! XcodeApplication
 let terminal = application(name: "Terminal") as! TerminalApplication
 
 let workspace = xcode.activeWorkspaceDocument!
-let pathComponents = workspace.file!.pathComponents!.filter {
+let pathComponents = workspace.file!.pathComponents.filter {
     !$0.hasSuffix(".xcodeproj") && !$0.hasSuffix(".xcworkspace")
 }
-let path = NSString.pathWithComponents(pathComponents)
+let path = NSString.path(withComponents: pathComponents)
 let script = "cd '\(path)'; clear;"
 
 terminal.activate()
-let terminalWindow = terminal.windows!().objectAtLocation(1) as! TerminalWindow
+let terminalWindow = terminal.windows!().object(atLocation: 1) as! TerminalWindow
 let tab = terminalWindow.selectedTab! as TerminalTab
 
 if !terminalWindow.frontmost! || tab.busy! {
-    terminal.doScript!(script, in:nil)
+    let _ = terminal.doScript!(script, in:nil)
 } else {
-    terminal.doScript!(script, in:terminalWindow)
+    let _ = terminal.doScript!(script, in:terminalWindow)
 }
 

@@ -28,12 +28,12 @@ let defaultAppLocations = [
     "/System/Library/CoreServices"
 ]
 
-public func appPathForName(name: String, locations: [String] = defaultAppLocations) -> String? {
+public func appPathForName(_ name: String, locations: [String] = defaultAppLocations) -> String? {
     var path: String?
     for location in locations {
         let possiblePath = "\(location)/\(name).app"
         var isDirectory = ObjCBool(false)
-        if NSFileManager.defaultManager().fileExistsAtPath(possiblePath, isDirectory: &isDirectory) && isDirectory.boolValue {
+        if FileManager.default.fileExists(atPath: possiblePath, isDirectory: &isDirectory) && isDirectory.boolValue {
             path = possiblePath
             break
         }
@@ -42,20 +42,20 @@ public func appPathForName(name: String, locations: [String] = defaultAppLocatio
     return path
 }
 
-public func application(bundleIdentifier bundleIdentifier: String) -> AnyObject? {
+public func application(bundleIdentifier: String) -> AnyObject? {
     return SBApplication(bundleIdentifier: bundleIdentifier)
 }
 
-public func application(path path: String) -> AnyObject? {
+public func application(path: String) -> AnyObject? {
     var app: AnyObject?
-    if let bundle = NSBundle(path: path) {
+    if let bundle = Bundle(path: path) {
         app = application(bundleIdentifier: bundle.bundleIdentifier!)
     }
 
     return app
 }
 
-public func application(name name: String, locations: [String] = defaultAppLocations) -> AnyObject? {
+public func application(name: String, locations: [String] = defaultAppLocations) -> AnyObject? {
     var app: AnyObject?
     if let path = appPathForName(name, locations: locations) {
         app = application(path: path)
@@ -64,11 +64,11 @@ public func application(name name: String, locations: [String] = defaultAppLocat
     return app
 }
 
-public func objectWithApplication(application: AnyObject, scriptingClass: String, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
-    let theClass = (application as! SBApplication).classForScriptingClass(scriptingClass) as! SBObject.Type
+public func objectWithApplication(_ application: AnyObject, scriptingClass: String, properties: [AnyHashable: Any] = [:]) -> SBObject! {
+    let theClass = (application as! SBApplication).class(forScriptingClass: scriptingClass) as! SBObject.Type
     return theClass.init(properties: properties)
 }
 
-public func objectWithApplication<T: RawRepresentable>(application: AnyObject, scriptingClass: T, properties: [NSObject : AnyObject] = [:]) -> SBObject! {
+public func objectWithApplication<T: RawRepresentable>(_ application: AnyObject, scriptingClass: T, properties: [AnyHashable: Any] = [:]) -> SBObject! {
     return objectWithApplication(application, scriptingClass: (scriptingClass.rawValue as! String), properties: properties)
 }

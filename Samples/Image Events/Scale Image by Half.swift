@@ -1,4 +1,4 @@
-#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
+#!/usr/bin/xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -37,17 +37,17 @@ let imageEvents = application(name: "Image Events") as! ImageEventsApplication
 
 for item in (finder.selection!.get() as! NSArray) {
     if let file = item as? FinderFile {
-        let fileExtension = file.nameExtension!.lowercaseString
+        let fileExtension = file.nameExtension!.lowercased()
         if imageExtensions.contains(fileExtension) {
-            let fileURL = NSURL(string: file.URL!)
-            let outputDirectory = fileURL!.URLByDeletingLastPathComponent!
-            let outputFilename = "\((file.name! as NSString).stringByDeletingPathExtension) (half-scale).\(fileExtension)"
-            let outputURL: NSURL! = outputDirectory.URLByAppendingPathComponent(outputFilename)
+            let fileURL: URL! = URL(string: file.URL!)
+            let outputLocation: URL! = fileURL.deletingLastPathComponent()
+            let outputFilename = "\((file.name! as NSString).deletingPathExtension) (half-scale).\(fileExtension)"
+            let outputURL: URL! = outputLocation.appendingPathComponent(outputFilename)
             
             let image = imageEvents.open!(fileURL!) as! ImageEventsImage
             image.scaleByFactor!(0.5, toSize: 0)
             
-            image.closeSaving!(.Yes, savingIn: outputURL.path!)
+            image.closeSaving!(.yes, savingIn: outputURL.path)
         }
     }
 }

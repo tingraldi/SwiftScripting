@@ -8,29 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		E65365F51A61C0B500BA00AB /* FinderScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E65365F41A61C0B500BA00AB /* FinderScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E65365FB1A61C0B500BA00AB /* FinderScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65365EF1A61C0B500BA00AB /* FinderScripting.framework */; };
-		E65366021A61C0B500BA00AB /* FinderScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E65366011A61C0B500BA00AB /* FinderScriptingTests.m */; };
 		E6D7AE791AABF60400E8E744 /* FinderScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE781AABF60400E8E744 /* FinderScripting.swift */; };
 		E6EC96631A871A9F00A2ED4F /* Finder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EC96611A871A9F00A2ED4F /* Finder.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E65365FC1A61C0B500BA00AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E65365E61A61C0B500BA00AB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E65365EE1A61C0B500BA00AB;
-			remoteInfo = FinderScripting;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E65365EF1A61C0B500BA00AB /* FinderScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FinderScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E65365F31A61C0B500BA00AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E65365F41A61C0B500BA00AB /* FinderScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinderScripting.h; sourceTree = "<group>"; };
-		E65365FA1A61C0B500BA00AB /* FinderScriptingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinderScriptingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E65366001A61C0B500BA00AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E65366011A61C0B500BA00AB /* FinderScriptingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinderScriptingTests.m; sourceTree = "<group>"; };
 		E653660B1A61C0C500BA00AB /* Finder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Finder.h; sourceTree = "<group>"; };
 		E6C82BB81A884936002D55A2 /* Finder.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Finder.sdef; sourceTree = "<group>"; };
 		E6D7AE781AABF60400E8E744 /* FinderScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinderScripting.swift; sourceTree = "<group>"; };
@@ -45,14 +30,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E65365F71A61C0B500BA00AB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E65365FB1A61C0B500BA00AB /* FinderScripting.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -60,7 +37,6 @@
 			isa = PBXGroup;
 			children = (
 				E65365F11A61C0B500BA00AB /* FinderScripting */,
-				E65365FE1A61C0B500BA00AB /* FinderScriptingTests */,
 				E65365F01A61C0B500BA00AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				E65365EF1A61C0B500BA00AB /* FinderScripting.framework */,
-				E65365FA1A61C0B500BA00AB /* FinderScriptingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,23 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				E65365F31A61C0B500BA00AB /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E65365FE1A61C0B500BA00AB /* FinderScriptingTests */ = {
-			isa = PBXGroup;
-			children = (
-				E65366011A61C0B500BA00AB /* FinderScriptingTests.m */,
-				E65365FF1A61C0B500BA00AB /* Supporting Files */,
-			);
-			path = FinderScriptingTests;
-			sourceTree = "<group>";
-		};
-		E65365FF1A61C0B500BA00AB /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E65366001A61C0B500BA00AB /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,24 +110,6 @@
 			productReference = E65365EF1A61C0B500BA00AB /* FinderScripting.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E65365F91A61C0B500BA00AB /* FinderScriptingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E65366081A61C0B500BA00AB /* Build configuration list for PBXNativeTarget "FinderScriptingTests" */;
-			buildPhases = (
-				E65365F61A61C0B500BA00AB /* Sources */,
-				E65365F71A61C0B500BA00AB /* Frameworks */,
-				E65365F81A61C0B500BA00AB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E65365FD1A61C0B500BA00AB /* PBXTargetDependency */,
-			);
-			name = FinderScriptingTests;
-			productName = FinderScriptingTests;
-			productReference = E65365FA1A61C0B500BA00AB /* FinderScriptingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -183,9 +123,6 @@
 					E65365EE1A61C0B500BA00AB = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 0800;
-					};
-					E65365F91A61C0B500BA00AB = {
-						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
 			};
@@ -202,20 +139,12 @@
 			projectRoot = "";
 			targets = (
 				E65365EE1A61C0B500BA00AB /* FinderScripting */,
-				E65365F91A61C0B500BA00AB /* FinderScriptingTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E65365ED1A61C0B500BA00AB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E65365F81A61C0B500BA00AB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,23 +163,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E65365F61A61C0B500BA00AB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E65366021A61C0B500BA00AB /* FinderScriptingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E65365FD1A61C0B500BA00AB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E65365EE1A61C0B500BA00AB /* FinderScripting */;
-			targetProxy = E65365FC1A61C0B500BA00AB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E65366031A61C0B500BA00AB /* Debug */ = {
@@ -349,7 +262,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -368,41 +281,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-			};
-			name = Release;
-		};
-		E65366091A61C0B500BA00AB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = FinderScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		E653660A1A61C0B500BA00AB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = FinderScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -423,15 +302,6 @@
 			buildConfigurations = (
 				E65366061A61C0B500BA00AB /* Debug */,
 				E65366071A61C0B500BA00AB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E65366081A61C0B500BA00AB /* Build configuration list for PBXNativeTarget "FinderScriptingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E65366091A61C0B500BA00AB /* Debug */,
-				E653660A1A61C0B500BA00AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

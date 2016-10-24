@@ -1,4 +1,4 @@
-#!/usr/bin/env TOOLCHAINS=com.apple.dt.toolchain.Swift_2_3 xcrun swift -F /Library/Frameworks
+#!/usr/bin/xcrun swift -F /Library/Frameworks
 
 //  Copyright (c) 2015 Majesty Software.
 //
@@ -31,8 +31,8 @@ import XcodeScripting
 let xcode = application(name: "Xcode") as! XcodeApplication
 
 let workspace = xcode.activeWorkspaceDocument!
-let pathComponents = workspace.file!.pathComponents!.filter {
+let pathComponents = workspace.file!.pathComponents.filter {
     !$0.hasSuffix(".xcodeproj") && !$0.hasSuffix(".xcworkspace")
 }
-let path = NSString.pathWithComponents(pathComponents)
-NSTask.launchedTaskWithLaunchPath("/usr/bin/open", arguments: [path])
+let path = NSString.path(withComponents: pathComponents)
+Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [path])

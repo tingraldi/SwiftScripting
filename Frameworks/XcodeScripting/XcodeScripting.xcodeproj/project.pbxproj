@@ -8,29 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		E691CDAF1A65564B005FF12F /* XcodeScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E691CDAE1A65564B005FF12F /* XcodeScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E691CDB51A65564B005FF12F /* XcodeScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E691CDA91A65564B005FF12F /* XcodeScripting.framework */; };
-		E691CDBC1A65564B005FF12F /* XcodeScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E691CDBB1A65564B005FF12F /* XcodeScriptingTests.m */; };
 		E6C82BE11A886A8B002D55A2 /* Xcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C82BDE1A886A8B002D55A2 /* Xcode.swift */; };
 		E6D7AE891AABF6CE00E8E744 /* XcodeScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE881AABF6CE00E8E744 /* XcodeScripting.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E691CDB61A65564B005FF12F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E691CDA01A65564B005FF12F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E691CDA81A65564B005FF12F;
-			remoteInfo = XcodeScripting;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E691CDA91A65564B005FF12F /* XcodeScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XcodeScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E691CDAD1A65564B005FF12F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E691CDAE1A65564B005FF12F /* XcodeScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XcodeScripting.h; sourceTree = "<group>"; };
-		E691CDB41A65564B005FF12F /* XcodeScriptingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeScriptingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E691CDBA1A65564B005FF12F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E691CDBB1A65564B005FF12F /* XcodeScriptingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XcodeScriptingTests.m; sourceTree = "<group>"; };
 		E691CDC51A65565A005FF12F /* Xcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Xcode.h; sourceTree = "<group>"; };
 		E6C82BDD1A886A8B002D55A2 /* Xcode.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Xcode.sdef; sourceTree = "<group>"; };
 		E6C82BDE1A886A8B002D55A2 /* Xcode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Xcode.swift; sourceTree = "<group>"; };
@@ -45,14 +30,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E691CDB11A65564B005FF12F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E691CDB51A65564B005FF12F /* XcodeScripting.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -60,7 +37,6 @@
 			isa = PBXGroup;
 			children = (
 				E691CDAB1A65564B005FF12F /* XcodeScripting */,
-				E691CDB81A65564B005FF12F /* XcodeScriptingTests */,
 				E691CDAA1A65564B005FF12F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				E691CDA91A65564B005FF12F /* XcodeScripting.framework */,
-				E691CDB41A65564B005FF12F /* XcodeScriptingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,23 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				E691CDAD1A65564B005FF12F /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E691CDB81A65564B005FF12F /* XcodeScriptingTests */ = {
-			isa = PBXGroup;
-			children = (
-				E691CDBB1A65564B005FF12F /* XcodeScriptingTests.m */,
-				E691CDB91A65564B005FF12F /* Supporting Files */,
-			);
-			path = XcodeScriptingTests;
-			sourceTree = "<group>";
-		};
-		E691CDB91A65564B005FF12F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E691CDBA1A65564B005FF12F /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,24 +110,6 @@
 			productReference = E691CDA91A65564B005FF12F /* XcodeScripting.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E691CDB31A65564B005FF12F /* XcodeScriptingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E691CDC21A65564B005FF12F /* Build configuration list for PBXNativeTarget "XcodeScriptingTests" */;
-			buildPhases = (
-				E691CDB01A65564B005FF12F /* Sources */,
-				E691CDB11A65564B005FF12F /* Frameworks */,
-				E691CDB21A65564B005FF12F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E691CDB71A65564B005FF12F /* PBXTargetDependency */,
-			);
-			name = XcodeScriptingTests;
-			productName = XcodeScriptingTests;
-			productReference = E691CDB41A65564B005FF12F /* XcodeScriptingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -183,9 +123,6 @@
 					E691CDA81A65564B005FF12F = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 0800;
-					};
-					E691CDB31A65564B005FF12F = {
-						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
 			};
@@ -202,20 +139,12 @@
 			projectRoot = "";
 			targets = (
 				E691CDA81A65564B005FF12F /* XcodeScripting */,
-				E691CDB31A65564B005FF12F /* XcodeScriptingTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E691CDA71A65564B005FF12F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E691CDB21A65564B005FF12F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,23 +163,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E691CDB01A65564B005FF12F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E691CDBC1A65564B005FF12F /* XcodeScriptingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E691CDB71A65564B005FF12F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E691CDA81A65564B005FF12F /* XcodeScripting */;
-			targetProxy = E691CDB61A65564B005FF12F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E691CDBD1A65564B005FF12F /* Debug */ = {
@@ -349,7 +262,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -368,41 +281,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-			};
-			name = Release;
-		};
-		E691CDC31A65564B005FF12F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = XcodeScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		E691CDC41A65564B005FF12F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = XcodeScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -423,15 +302,6 @@
 			buildConfigurations = (
 				E691CDC01A65564B005FF12F /* Debug */,
 				E691CDC11A65564B005FF12F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E691CDC21A65564B005FF12F /* Build configuration list for PBXNativeTarget "XcodeScriptingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E691CDC31A65564B005FF12F /* Debug */,
-				E691CDC41A65564B005FF12F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

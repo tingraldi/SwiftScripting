@@ -9,29 +9,14 @@
 /* Begin PBXBuildFile section */
 		E6D7AE7B1AABF62300E8E744 /* ImageEventsScripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7AE7A1AABF62300E8E744 /* ImageEventsScripting.swift */; };
 		E6D9BB7B1A93E16300C5D908 /* ImageEventsScripting.h in Headers */ = {isa = PBXBuildFile; fileRef = E6D9BB7A1A93E16300C5D908 /* ImageEventsScripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6D9BB811A93E16300C5D908 /* ImageEventsScripting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D9BB751A93E16300C5D908 /* ImageEventsScripting.framework */; };
-		E6D9BB881A93E16300C5D908 /* ImageEventsScriptingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BB871A93E16300C5D908 /* ImageEventsScriptingTests.swift */; };
 		E6D9BB981A93E20900C5D908 /* ImageEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D9BB961A93E20900C5D908 /* ImageEvents.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E6D9BB821A93E16300C5D908 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6D9BB6C1A93E16300C5D908 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6D9BB741A93E16300C5D908;
-			remoteInfo = ImageEventsScripting;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E6D7AE7A1AABF62300E8E744 /* ImageEventsScripting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEventsScripting.swift; sourceTree = "<group>"; };
 		E6D9BB751A93E16300C5D908 /* ImageEventsScripting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ImageEventsScripting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6D9BB791A93E16300C5D908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6D9BB7A1A93E16300C5D908 /* ImageEventsScripting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageEventsScripting.h; sourceTree = "<group>"; };
-		E6D9BB801A93E16300C5D908 /* ImageEventsScriptingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageEventsScriptingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6D9BB861A93E16300C5D908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6D9BB871A93E16300C5D908 /* ImageEventsScriptingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEventsScriptingTests.swift; sourceTree = "<group>"; };
 		E6D9BB921A93E1F900C5D908 /* ImageEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEvents.h; sourceTree = "<group>"; };
 		E6D9BB931A93E1F900C5D908 /* ImageEvents.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ImageEvents.sdef; sourceTree = "<group>"; };
 		E6D9BB961A93E20900C5D908 /* ImageEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEvents.swift; sourceTree = "<group>"; };
@@ -45,14 +30,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6D9BB7D1A93E16300C5D908 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6D9BB811A93E16300C5D908 /* ImageEventsScripting.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -60,7 +37,6 @@
 			isa = PBXGroup;
 			children = (
 				E6D9BB771A93E16300C5D908 /* ImageEventsScripting */,
-				E6D9BB841A93E16300C5D908 /* ImageEventsScriptingTests */,
 				E6D9BB761A93E16300C5D908 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				E6D9BB751A93E16300C5D908 /* ImageEventsScripting.framework */,
-				E6D9BB801A93E16300C5D908 /* ImageEventsScriptingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,23 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				E6D9BB791A93E16300C5D908 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E6D9BB841A93E16300C5D908 /* ImageEventsScriptingTests */ = {
-			isa = PBXGroup;
-			children = (
-				E6D9BB871A93E16300C5D908 /* ImageEventsScriptingTests.swift */,
-				E6D9BB851A93E16300C5D908 /* Supporting Files */,
-			);
-			path = ImageEventsScriptingTests;
-			sourceTree = "<group>";
-		};
-		E6D9BB851A93E16300C5D908 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E6D9BB861A93E16300C5D908 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,24 +110,6 @@
 			productReference = E6D9BB751A93E16300C5D908 /* ImageEventsScripting.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E6D9BB7F1A93E16300C5D908 /* ImageEventsScriptingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6D9BB8E1A93E16300C5D908 /* Build configuration list for PBXNativeTarget "ImageEventsScriptingTests" */;
-			buildPhases = (
-				E6D9BB7C1A93E16300C5D908 /* Sources */,
-				E6D9BB7D1A93E16300C5D908 /* Frameworks */,
-				E6D9BB7E1A93E16300C5D908 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E6D9BB831A93E16300C5D908 /* PBXTargetDependency */,
-			);
-			name = ImageEventsScriptingTests;
-			productName = ImageEventsScriptingTests;
-			productReference = E6D9BB801A93E16300C5D908 /* ImageEventsScriptingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,10 +121,6 @@
 				ORGANIZATIONNAME = "Majesty Software";
 				TargetAttributes = {
 					E6D9BB741A93E16300C5D908 = {
-						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
-					};
-					E6D9BB7F1A93E16300C5D908 = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 0800;
 					};
@@ -203,20 +139,12 @@
 			projectRoot = "";
 			targets = (
 				E6D9BB741A93E16300C5D908 /* ImageEventsScripting */,
-				E6D9BB7F1A93E16300C5D908 /* ImageEventsScriptingTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E6D9BB731A93E16300C5D908 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6D9BB7E1A93E16300C5D908 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -235,23 +163,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6D9BB7C1A93E16300C5D908 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E6D9BB881A93E16300C5D908 /* ImageEventsScriptingTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E6D9BB831A93E16300C5D908 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6D9BB741A93E16300C5D908 /* ImageEventsScripting */;
-			targetProxy = E6D9BB821A93E16300C5D908 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E6D9BB891A93E16300C5D908 /* Debug */ = {
@@ -351,7 +263,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -370,43 +282,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-			};
-			name = Release;
-		};
-		E6D9BB8F1A93E16300C5D908 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ImageEventsScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
-			};
-			name = Debug;
-		};
-		E6D9BB901A93E16300C5D908 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ImageEventsScriptingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.majestysoftware.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -427,15 +303,6 @@
 			buildConfigurations = (
 				E6D9BB8C1A93E16300C5D908 /* Debug */,
 				E6D9BB8D1A93E16300C5D908 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E6D9BB8E1A93E16300C5D908 /* Build configuration list for PBXNativeTarget "ImageEventsScriptingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6D9BB8F1A93E16300C5D908 /* Debug */,
-				E6D9BB901A93E16300C5D908 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
