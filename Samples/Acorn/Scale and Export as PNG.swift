@@ -52,7 +52,7 @@ Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [imageFolderURL.
 let document = acorn.documents!().object(atLocation: 0) as! AcornDocument
 let name = (document.name! as NSString).deletingPathExtension
 
-for (scale, suffix) in [1.0 : "@3x", 0.66 : "@2x", 0.33 : ""] {
+for (scale, suffix) in [1.0 : "@3x", 2.0 / 3.0 : "@2x", 1.0 / 3.0 : ""] {
     let fileName = "\(name)\(suffix).png"
     let fileURL: URL! = imageFolderURL.appendingPathComponent(fileName)
     let scaledWidth = Int(scale * document.width!)
