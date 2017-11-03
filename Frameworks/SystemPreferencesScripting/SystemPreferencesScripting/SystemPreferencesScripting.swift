@@ -1,4 +1,5 @@
 public enum SystemPreferencesScripting: String {
-    case pane = "pane"
     case anchor = "anchor"
+    case application = "application"
+    case pane = "pane"
 }

@@ -46,20 +46,30 @@ def name_from_path(path):
     return last_part.split('.')[0]
 
 
-command_template = "xmllint --xpath '//suite/class/@name' {}"
-
-pipe = os.popen(command_template.format(sys.argv[1]))
-raw_names = pipe.read()
-pipe.close()
+def extract_cases(xpath, keyword):
+    command_template = "xmllint --xpath '" + xpath + "' {} 2>/dev/null"
+    pipe = os.popen(command_template.format(sys.argv[1]))
+    raw_names = pipe.read()
+    pipe.close()
+    separator = keyword + "="
+    names = set()
+    for raw_name in raw_names.strip().split(separator):
+        if len(raw_name.strip()):
+            names.add(raw_name.strip())
+    return names
 
 enum_name = '{}Scripting'.format(name_from_path(sys.argv[1]))
 out_file = open('{}.swift'.format(enum_name), 'w')
 
 out_file.write('public enum {}: String {{\n'.format(enum_name))
 
-for raw_name in raw_names.strip().split("name="):
-    if len(raw_name.strip()):
-        out_file.write('    case {} = {}\n'.format(transform(raw_name), raw_name.strip()))
+names = extract_cases("//suite/class/@name", "name")
+names = names.union(extract_cases("//suite/class-extension/@extends", "extends"))
+names = list(names)
+names.sort()
+
+for name in names:
+    out_file.write('    case {} = {}\n'.format(transform(name), name))
 
 out_file.write('}\n')
 out_file.close()
