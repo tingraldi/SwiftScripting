@@ -46,7 +46,7 @@ let pathComponents = workspace.file!.pathComponents.filter {
 if let URLString = commandOutput("/usr/bin/git", 
                                  withArguments: ["config", "--get", "remote.origin.url"], 
                                  currentDirectoryPath: NSString.path(withComponents: pathComponents)), 
-                                URLString.characters.count > 0 {
+                                URLString.count > 0 {
     let parts = (URLString as NSString).components(separatedBy: "@")
     if parts.count == 2 {
         let partOne = parts[1]
