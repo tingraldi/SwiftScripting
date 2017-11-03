@@ -22,7 +22,7 @@
 import Foundation
 import ScriptingBridge
 
-let defaultAppLocations = [
+public let defaultAppLocations = [
     "/Applications",
     "/Applications/Utilities",
     "/System/Library/CoreServices"

@@ -43,7 +43,7 @@ document.exportTo!(pdfURL, as: .pdf, withProperties: nil)
 
 let futureMessage = objectWithApplication(mail, scriptingClass: MailScripting.outgoingMessage)
 mail.outgoingMessages!().add(futureMessage!)
-let message = futureMessage as! MailOutgoingMessage
+let message = futureMessage! as MailOutgoingMessage
 
 let futureAttachment = objectWithApplication(mail, scriptingClass: MailScripting.attachment, properties: ["fileName": pdfURL])
 message.content!.attachments!().add(futureAttachment!)

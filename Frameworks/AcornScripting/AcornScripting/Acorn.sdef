@@ -69,15 +69,6 @@
 			<responds-to command="quit">
 				<cocoa method="handleQuitScriptCommand:"/>
 			</responds-to>
-			<responds-to command="taunt">
-				<cocoa method="handleTauntScriptCommand:"/>
-			</responds-to>
-			<responds-to command="do JavaScript">
-				<cocoa method="scriptingDoJavaScript:"/>
-			</responds-to>
-			<responds-to command="set preference">
-				<cocoa method="scriptingSetPref:"/>
-			</responds-to>
 		</class>
 		<class name="window" code="cwin" description="A window.">
 			<cocoa class="NSWindow"/>
@@ -519,10 +510,13 @@
 			</responds-to>
 			<responds-to command="save">
 				<cocoa method="handleSaveScriptCommand:"/>
-			</responds-to>
-			<responds-to command="crop">
-				<cocoa method="handleCropScriptCommand:"/>
-			</responds-to>
+            </responds-to>
+            <responds-to command="crop">
+                <cocoa method="handleCropScriptCommand:"/>
+            </responds-to>
+            <responds-to command="replace">
+                <cocoa method="scriptingReplaceTextWith:"/>
+            </responds-to>
 			<responds-to command="undo">
 				<cocoa method="handleUndoScriptCommand:"/>
 			</responds-to>
@@ -598,6 +592,9 @@
 			<responds-to command="rotate canvas">
 				<cocoa method="scriptingRotateCanvas:"/>
 			</responds-to>
+			<responds-to command="add image">
+				<cocoa method="scriptingInsertImageAtIndex:"/>
+			</responds-to>
 		</class>
 		<class hidden="yes" name="graphic" code="grph" description="An vector object in a Acorn shape layer. There are subclasses for each kind of graphic.">
 			<cocoa class="TSGraphic"/>
@@ -620,21 +617,21 @@
 				<type type="real"/>
 				<type type="missing value"/>
 			</property>
-		</class>
-		<class hidden="yes" name="box" code="d2rc" description="A rectangular graphic." plural="boxes" inherits="graphic">
-			<cocoa class="TSRectangle"/>
-		</class>
-		<class hidden="yes" name="circle" code="d2cr" description="an ellipsoidal graphic, actually." inherits="graphic">
-			<cocoa class="TSCircle"/>
-		</class>
+        </class>
+        <class hidden="yes" name="path" code="d2pa" description="A path graphic." plural="paths" inherits="graphic">
+            <cocoa class="TSBezierShape"/>
+        </class>
+        <class hidden="yes" name="box" code="d2rc" description="A rectangular graphic." plural="boxes" inherits="graphic">
+            <cocoa class="TSRectangle"/>
+        </class>
+        <class hidden="yes" name="circle" code="d2cr" description="an ellipsoidal graphic, actually." inherits="graphic">
+            <cocoa class="TSCircle"/>
+        </class>
 		<class hidden="yes" name="image" code="d2im" description="A placed image." inherits="graphic">
 			<cocoa class="TSImage"/>
 			<property name="imagefile" code="imgf" description="The path to the file containing the image. This is just for use when creating a new placed image using the make command." type="text" access="w">
 				<cocoa key="filePath"/>
 			</property>
-		</class>
-		<class hidden="yes" name="line" code="d2ln" description="A line graphic." inherits="graphic">
-			<cocoa class="TSLine"/>
 		</class>
 		<class hidden="yes" name="text area" code="d2ta" description="A text graphic." inherits="graphic">
 			<contents name="text contents" code="tact" description="Its contents." type="rich text">
@@ -643,6 +640,24 @@
 			<cocoa class="TSText"/>
 		</class>
 		<!-- need to inherit from NSCoreSuite.NSApplication so that we can get quit events and such.. -->
+		<class name="application" code="capp" description="The application&apos;s top-level scripting object." inherits="application">
+			<cocoa class="NSApplication"/>
+			<responds-to command="taunt">
+				<cocoa method="handleTauntScriptCommand:"/>
+			</responds-to>
+			<responds-to command="do JavaScript">
+				<cocoa method="scriptingDoJavaScript:"/>
+			</responds-to>
+			<responds-to command="set preference">
+				<cocoa method="scriptingSetPref:"/>
+            </responds-to>
+            <responds-to command="sandopen">
+                <cocoa method="handleSandOpenScriptCommand:"/>
+            </responds-to>
+            <responds-to command="relaunch">
+                <cocoa method="handleRelaunchCommand:"/>
+            </responds-to>
+		</class>
 		<class name="layer" code="layr" description="An Acorn layer.">
 			<cocoa class="TSLayer"/>
 			<element type="layer">
@@ -692,6 +707,11 @@
 		</class>
 		<class name="group layer" code="glyr" description="An Group of other layers" inherits="layer">
 			<cocoa class="TSGroupLayer"/>
+            
+            <responds-to command="add image">
+                <cocoa method="scriptingInsertImageAtIndex:"/>
+            </responds-to>
+            
 		</class>
 		<class name="shape layer" code="slyr" description="A Shape / Text layer" inherits="layer">
 			<cocoa class="TSShapeLayer"/>
@@ -701,12 +721,37 @@
 			</element>
 			<element hidden="yes" type="circle"/>
 			<element hidden="yes" type="image"/>
-			<element hidden="yes" type="line"/>
+			<element hidden="yes" type="path"/>
 			<element hidden="yes" type="text area"/>
-		</class>
-		<command name="taunt" code="Taunttau" description="Have Acorn taunt you.">
-			<result type="text"/>
-		</command>
+        </class>
+        <command name="taunt" code="Taunttau" description="Have Acorn taunt you.">
+            <result type="text"/>
+        </command>
+        
+        <command name="relaunch" code="Relaunch" description="Relaunch Acorn.">
+            
+        </command>
+        
+        
+        
+        <command name="replace" code="Repltext" description="Search for all occurances of a string in the document, and replacing them with another string">
+            <direct-parameter type="document"/>
+            <parameter name="text" code="stxt" description="The search text" type="text">
+                <cocoa key="searchText"/>
+            </parameter>
+            <parameter name="with" code="rtxt" description="The replacement text" type="text">
+                <cocoa key="replaceText"/>
+            </parameter>
+        </command>
+        
+        
+        <command name="sandopen" code="Sevtodoc" description="Prepare a location for writing or exporting via AppleScript, for the App Store version">
+            <direct-parameter description="The file to be work with, as a file Alias or String">
+                <type type="file"/>
+            </direct-parameter>
+        </command>
+        
+        
 		<command name="crop" code="Cropzors" description="Crop an image">
 			<direct-parameter type="document"/>
 			<parameter name="rect" code="rect" description="The bounds of the crop area as 4 integers in a list.  The first two represent the lower left corner of the rect (x,y) and the second two represent the width and height.">
@@ -882,6 +927,19 @@
 		</command>
 		<command name="auto levels" code="Acrnatlv" description="Perform autolevels for the layer or document">
 			<direct-parameter type="document"/>
+		</command>
+		<command name="add image" code="Acrnadim" description="Insert an image from a path at a specified index to the base group layer">
+			<direct-parameter type="document"/>
+            
+            <parameter name="from" code="kfil" description="The image to open" type="file">
+                <cocoa key="file"/>
+            </parameter>
+            
+            
+            <parameter name="at index" code="aidx" description="The the index to insert the image at. Must be a positive number, and not greater than the number of layers in the group." type="integer">
+                <cocoa key="index"/>
+            </parameter>
+            
 		</command>
 	</suite>
 </dictionary>

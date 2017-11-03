@@ -44,7 +44,7 @@ do {
     try FileManager.default.createDirectory(at: imageFolderURL, 
                                     withIntermediateDirectories: true, 
                                     attributes: nil)
-} catch let error as NSError {
+} catch let _ as NSError {
 }
 
 Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [imageFolderURL.path])

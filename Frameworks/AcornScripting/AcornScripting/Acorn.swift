@@ -8,7 +8,7 @@ import ScriptingBridge
 @objc public protocol SBApplicationProtocol: SBObjectProtocol {
     func activate()
     var delegate: SBApplicationDelegate! { get set }
-    var running: Bool { @objc(isRunning) get }
+    var isRunning: Bool { get }
 }
 
 // MARK: AcornSaveOptions
@@ -109,6 +109,8 @@ import ScriptingBridge
     @objc optional func quitSaving(_ saving: AcornSaveOptions) // Quit the application.
     @objc optional func exists(_ x: Any!) -> Bool // Verify that an object exists.
     @objc optional func taunt() -> String // Have Acorn taunt you.
+    @objc optional func relaunch() // Relaunch Acorn.
+    @objc optional func sandopen(_ x: URL!) // Prepare a location for writing or exporting via AppleScript, for the App Store version
     @objc optional func doJavaScript(_ x: String!) -> Any // Applies a string of JavaScript (or JSTalk) code to a document.
     @objc optional func setPreferenceKey(_ key: String!, value: String!) // Set a preference, using it's defaults name and value.
 }
@@ -233,6 +235,7 @@ extension SBObject: AcornAttachment {}
     @objc optional var height: Double { get } // The height of the image in pixels.
     @objc optional var width: Double { get } // The width of the image in pixels.
     @objc optional var currentLayer: AcornLayer { get } // The Current layer
+    @objc optional func replaceText(_ text: String!, with: String!) // Search for all occurances of a string in the document, and replacing them with another string
     @objc optional func cropRect(_ rect: [NSNumber]!) // Crop an image
     @objc optional func undo() // Undo the last operation
     @objc optional func redo() // Redo the last undone operation.
@@ -258,6 +261,7 @@ extension SBObject: AcornAttachment {}
     @objc optional func addLayerMask() // Add a layer mask to the layer
     @objc optional func rotateCanvasAngle(_ angle: Double) // Rotates the canvas
     @objc optional func autoLevels() // Perform autolevels for the layer or document
+    @objc optional func addImageFrom(_ from: URL!, atIndex: Int) // Insert an image from a path at a specified index to the base group layer
     @objc optional func setHeight(_ height: Double) // The height of the image in pixels.
     @objc optional func setWidth(_ width: Double) // The width of the image in pixels.
     @objc optional func setCurrentLayer(_ currentLayer: AcornLayer!) // The Current layer

@@ -120,6 +120,8 @@ typedef enum AcornDirection AcornDirection;
 - (void) quitSaving:(AcornSaveOptions)saving;  // Quit the application.
 - (BOOL) exists:(id)x;  // Verify that an object exists.
 - (NSString *) taunt;  // Have Acorn taunt you.
+- (void) relaunch;  // Relaunch Acorn.
+- (void) sandopen:(NSURL *)x;  // Prepare a location for writing or exporting via AppleScript, for the App Store version
 - (id) doJavaScript:(NSString *)x;  // Applies a string of JavaScript (or JSTalk) code to a document.
 - (void) setPreferenceKey:(NSString *)key value:(NSString *)value;  // Set a preference, using it's defaults name and value.
 
@@ -258,6 +260,7 @@ typedef enum AcornDirection AcornDirection;
 @property double width;  // The width of the image in pixels.
 @property (copy) AcornLayer *currentLayer;  // The Current layer
 
+- (void) replaceText:(NSString *)text with:(NSString *)with;  // Search for all occurances of a string in the document, and replacing them with another string
 - (void) cropRect:(NSArray<NSNumber *> *)rect;  // Crop an image
 - (void) undo;  // Undo the last operation
 - (void) redo;  // Redo the last undone operation.
@@ -283,6 +286,7 @@ typedef enum AcornDirection AcornDirection;
 - (void) addLayerMask;  // Add a layer mask to the layer
 - (void) rotateCanvasAngle:(double)angle;  // Rotates the canvas
 - (void) autoLevels;  // Perform autolevels for the layer or document
+- (void) addImageFrom:(NSURL *)from atIndex:(NSInteger)atIndex;  // Insert an image from a path at a specified index to the base group layer
 
 @end
 
