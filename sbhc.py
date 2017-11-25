@@ -49,9 +49,13 @@ Config.set_library_path("/Applications/Xcode.app/Contents/Developer/Toolchains/X
 
 # See https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html
 parameter_keywords = ['let', 'var', 'inout']
-declaration_keywords = ['associatedtype', 'class', 'deinit', 'enum', 'extension', 'fileprivate', 'func', 'import',
-                        'init', 'inout', 'internal', 'let', 'open', 'operator', 'private', 'protocol', 'public',
-                        'static', 'struct', 'subscript', 'typealias', 'var']
+general_keywords = ['associatedtype', 'class', 'deinit', 'enum', 'extension',
+                    'fileprivate', 'func', 'import', 'init', 'inout', 'internal', 'let', 'open',
+                    'operator', 'private', 'protocol', 'public', 'static', 'struct', 'subscript',
+                    'typealias', 'var', 'break', 'case', 'continue', 'default', 'defer', 'do', 'else',
+                    'fallthrough', 'for', 'guard', 'if', 'in', 'repeat', 'return', 'switch', 'where',
+                    'while', 'as', 'Any', 'catch', 'false', 'is', 'nil', 'rethrows', 'super', 'self',
+                    'Self', 'throw', 'throws', 'true', 'try', '_']
 
 type_dict = {
     'BOOL': 'Bool',
@@ -150,7 +154,7 @@ def enum_case(prefix, enum_case):
             groups = match.groups()
             converted_enum_case = groups[0].lower() + groups[1]
             break
-    return converted_enum_case
+    return safe_name(converted_enum_case, keywords=general_keywords)
 
 
 def cursor_super_entity(cursor):
@@ -191,11 +195,12 @@ class SBHeaderProcessor(object):
 
     def emit_property(self, cursor):
         swift_type = type_for_type(cursor.type)
-        self.emit_line('    @objc optional var {}: {} {{ get }}{}'.format(cursor.spelling, swift_type,
+        name = safe_name(cursor.spelling, keywords=general_keywords)
+        self.emit_line('    @objc optional var {}: {} {{ get }}{}'.format(name, swift_type,
                                                                     self.line_comment(cursor)))
 
     def emit_function(self, cursor):
-        func_name = safe_name(cursor.spelling.split(':')[0], keywords=declaration_keywords)
+        func_name = safe_name(cursor.spelling.split(':')[0], keywords=general_keywords)
         parameter_cursors = [child for child in cursor.get_children() if child.kind == CursorKind.PARM_DECL]
         parameters = ['{}: {}'.format(arg_name(child.spelling, position=parameter_cursors.index(child)), type_for_type(child.type, as_arg=True))
                       for child in parameter_cursors]
