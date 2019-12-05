@@ -1,6 +1,6 @@
 # NOTE
 
-SwiftScripting is known to be broken on macOS 13 or later. A solution is being pursued.
+SwiftScripting is known to be broken on macOS 13 or later.
 
 
 # SwiftScripting
