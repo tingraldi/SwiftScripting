@@ -259,11 +259,10 @@ class SBHeaderProcessor(object):
 
     def emit_swift(self):
         cmakeArgs = ["-ObjC"]
-        if platform.system() == "Darwin":                                        # is Mac
-            macOsVersion = float('.'.join(platform.mac_ver()[0].split('.')[:2])) # poor man's version fetch
-            if macOsVersion >= 10.13:
-                cmakeArgs.append("-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/")
-                cmakeArgs.append("-F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/")
+        macOsVersion = float('.'.join(platform.mac_ver()[0].split('.')[:2])) # poor man's version fetch
+        if macOsVersion >= 10.13:
+            cmakeArgs.append("-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/")
+            cmakeArgs.append("-F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/")
 
         translation_unit = TranslationUnit.from_source(self.file_path, args=cmakeArgs)
         self.swift_file = open('{}.swift'.format(self.app_name), 'w')
