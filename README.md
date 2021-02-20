@@ -1,8 +1,3 @@
-# NOTE
-
-SwiftScripting is known to be broken on macOS 13 or later.
-
-
 # SwiftScripting
 Utilities and samples to aid in using Swift with the Scripting Bridge
 
