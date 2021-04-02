@@ -25,7 +25,9 @@ import ScriptingBridge
 public let defaultAppLocations = [
     "/Applications",
     "/Applications/Utilities",
-    "/System/Library/CoreServices"
+    "/System/Library/CoreServices",
+    "/System/Applications",
+    "/System/Applications/Utilities"
 ]
 
 public func appPathForName(_ name: String, locations: [String] = defaultAppLocations) -> String? {
