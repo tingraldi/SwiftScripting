@@ -31,6 +31,6 @@ Step 1 will create the `App.sdef` file in the current directory. Step 2 will cre
 directory. Step 3 will create `App.swift` in the current directory. This is the primary file describing the scripting interface. The final step will create the file `AppScripting.swift` which contains an enum with values appropriate for class creation.
 
 Note that the sbhc.py script leverages the [Python bindings](https://pypi.python.org/pypi/clang/3.5) for libclang.
-You must install these bindings before running the script. You'll also need to install the Xcode command line tools (`xcode-select --install`.)
+You must install these bindings before running the script. (`pip install 'clang<=16'` for macOS 14 Sonoma). You'll also need to install the Xcode command line tools (`xcode-select --install`.)
 
 See [https://majestysoftware.wordpress.com/2015/03/31/swift-scripting-part-1/](https://majestysoftware.wordpress.com/2015/03/31/swift-scripting-part-1/) for part one of a four-part series that gives a bit of explanation related to SwiftScripting.

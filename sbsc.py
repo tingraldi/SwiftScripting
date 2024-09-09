@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 
 #  Copyright (c) 2015 Majesty Software.
 #
@@ -35,9 +35,9 @@ from sbhc import enum_case
 
 
 def transform(name_string):
-    name_string = string.replace(name_string, '"', '')
-    name_string = string.replace(name_string, '-', ' ')
-    name_string = string.replace(string.capwords(name_string), ' ', '')
+    name_string = name_string.replace('"', '')
+    name_string = name_string.replace('-', ' ')
+    name_string = string.capwords(name_string.replace(' ', ''))
     return enum_case('', name_string)
 
 
